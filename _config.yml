@@ -1,5 +1,8 @@
 title: Jakub Zalas
-permalink: /zalas.eu/:title
+permalink: /:title
+url:
+    main: http://jakzal.github.io/zalas.eu
+    assets: http://jakzal.github.io/zalas.eu
 author:
     name: Jakub Zalas
 pygments: true

@@ -1,5 +1,5 @@
 {% if image.target %}<a href="{{ image.target }}">{% endif %}
-    <img src="{{ image.src }}"
+    <img src="{{ site.url.assets }}{{ image.src }}"
         {% if image.class %}class="{{ image.class }}"{% endif %}
         {% if image.title %}title="{{ image.title }}"{% endif %}
         {% if image.alt %}alt="{{ image.title }}"{% endif %}
