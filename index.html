@@ -1,0 +1,23 @@
+---
+layout: default
+title: Blog
+---
+
+<h1>Jakub Zalas</h1>
+<div class="row-fluid">
+    {% for post in site.posts limit:5 %}
+        {% if forloop.first %}
+            <div class="span12">
+                {% include postExcerpt.html %}
+            </div>
+        {% else %}
+            {% capture thecycle %}{% cycle 'odd', 'even' %}{% endcapture %}
+            {% if thecycle == 'odd' %}<div class="row-fluid">{% endif %}
+            <div class="span6">
+                {% include postExcerpt.html %}
+            </div>
+            {% if thecycle == 'even' %}</div>{% endif %}
+        {% endif %}
+    {% endfor %}
+</div>
+

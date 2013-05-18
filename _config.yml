@@ -1,1 +1,5 @@
 title: Jakub Zalas
+permalink: /:title
+author:
+    name: Jakub Zalas
+pygments: true
