@@ -1,0 +1,36 @@
+---
+layout: post
+title: Viewing svn diff result in colors
+tags:
+- installation
+- linux
+- svn
+- ubuntu
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  description: svn diff allows us to see the changes made on the files in the subversion
+    repository. However, its output is not always clear. We can improve our experience
+    a bit by installing colordiff which wraps diff command and produces coloured output.
+  keywords: colordiff,svn,diff,install,ubuntu,linux
+---
+<em>svn diff</em> allows us to see the changes made on the files in the subversion repository. However, its output  is not always clear. New lines are just marked with '+' and removed ones with '-'.
+<p style="text-align: center;"><a href="/uploads/wp/2009/06/svn-diff-before.png"><img class="size-medium wp-image-136 aligncenter" title="svn diff in black and white" src="/uploads/wp/2009/06/svn-diff-before-399x183.png" alt="svn diff in black and white" width="399" height="183" /></a></p>
+
+We can improve our experience a bit by installing <a title="colordiff homepage" href="http://colordiff.sourceforge.net/">colordiff</a>. It wraps <em>diff</em> command and produces the same output but coloured.
+<p style="text-align: center;"><a href="/uploads/wp/2009/06/svn-diff-after.png"><img class="size-medium wp-image-137 aligncenter" title="svn diff in colors" src="/uploads/wp/2009/06/svn-diff-after-400x183.png" alt="svn diff in colors" width="400" height="183" /></a></p>
+
+In ubuntu it's as simple as running:
+<pre>sudo aptitude install colordiff</pre>
+Once doing that we should be able to redirect the output of commands like <em>diff</em> and <em>svn diff</em> to colordiff and view it in colors:
+<pre>svn diff plugins/zMobyPicturePlugin/lib/zMobyPictureClient.class.php | colordiff</pre>
+To improve it even more we can declare simple function in <em>~/.bashrc</em> file (using it requires re-login):
+<pre>svndiff()
+{
+  svn diff "${@}" | colordiff
+}</pre>
+Function will make the command shorter:
+<pre>svndiff plugins/zMobyPicturePlugin/lib/zMobyPictureClient.class.php</pre>
+<strong>Note</strong>: You can achieve pretty much the same with vim. To learn about it read: "<a title="Viewing svn diff result in vim" href="/viewing-svn-diff-result-in-vim">Viewing svn diff result in vim</a>".

@@ -1,0 +1,145 @@
+---
+layout: post
+title: Creating parametrized command line scripts in PHP with Symfony2 Console component
+tags:
+- cli
+- components
+- Console
+- php
+- Symfony2
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  description: Symfony Console component enables us to create commands in PHP. It
+    does all the nasty work of handling input and output.
+  keywords: Symfony2,console,cli,command,php,shell,components
+---
+<a href="/uploads/wp/2011/07/console.png"><img class="alignleft size-thumbnail wp-image-808" title="Symfony2 Console Component" src="/uploads/wp/2011/07/console-150x150.png" alt="" width="150" height="150" /></a>Symfony <a title="Console Component" href="https://github.com/symfony/Console">Console component</a> enables us to create commands in PHP. It does all the nasty work of handling input and output.
+
+<strong>Note</strong>: Code used in this post is available on github: <a href="https://github.com/jakzal/SymfonyComponentsExamples">https://github.com/jakzal/SymfonyComponentsExamples</a>
+<h2>Installation</h2>
+You can either install it from the <a title="Symfony PEAR Channel" href="http://pear.symfony.com/">Symfony PEAR channel</a> or grab it <a title="Symfony2 Console on github" href="https://github.com/symfony/Console">directly from github</a>. For the purpose of this article we'll clone the sources to the <em>vendor/</em> directory of the project.
+<pre>git clone https://github.com/symfony/Console.git vendor/Symfony/Component/Console</pre>
+We'll let Symfony ClassLoader component to take care of the class autoloading. Read more about it in the "<a title="Autoloading classes in an any PHP project with Symfony2 ClassLoader component" href="http://www.zalas.eu/autoloading-classes-in-any-php-project-with-symfony2-classloader-component">Autoloading classes in an any PHP project with Symfony2 ClassLoader component</a>".
+
+Following code is sufficient to load classes from any Symfony component (assuming components are put into the <em>vendor/Symfony/Component</em> directory):
+<pre>&lt;?php
+// src/autoload.php
+require_once __DIR__.'/../vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+
+$loader = new Symfony\Component\ClassLoader\UniversalClassLoader();
+$loader-&gt;registerNamespaces(array(
+    'Symfony' =&gt; __DIR__.'/../vendor',
+    'PSS'     =&gt; __DIR__
+));
+$loader-&gt;register();</pre>
+PSS namespace is there for our classes.
+<h2>Creating console application</h2>
+Console application will help us to manage commands:
+<pre>&lt;?php
+// console.php
+require_once __DIR__.'/src/autoload.php';
+
+use Symfony\Component\Console as Console;
+
+$application = new Console\Application('Demo', '1.0.0');
+$application-&gt;run();</pre>
+If we run the script in command line without arguments, we'll get a nice overview of options and commands available by default.
+
+<a href="/uploads/wp/2011/06/console-options.png"><img class="aligncenter size-medium wp-image-792" title="Symfony2 Console component" src="/uploads/wp/2011/06/console-options-400x241.png" alt="" width="400" height="241" /></a>
+
+There are two built in commands: help and list.
+<h2>Creating a command</h2>
+To create a command we have to extend base Command class and implement its <em>execute()</em> method.
+<pre>&lt;?php
+// src/PSS/Command/HelloWorldCommand.php
+namespace PSS\Command;
+
+use Symfony\Component\Console as Console;
+
+class HelloWorldCommand extends Console\Command\Command
+{
+    protected function execute(Console\Input\InputInterface $input, Console\Output\OutputInterface $output)
+    {
+        $output-&gt;writeln('Hello World!');
+    }
+}</pre>
+Method takes input and output as its parameters. We'll use input to get options and arguments passed to the script. Output is handy whenever we want to print something out.
+
+Each command has to be registered in the application:
+<pre>&lt;?php
+// console.php
+require_once __DIR__.'/src/autoload.php';
+
+use Symfony\Component\Console as Console;
+
+$application = new Console\Application('Demo', '1.0.0');
+<strong>$application-&gt;add(new PSS\Command\HelloWorldCommand('hello-world'));</strong>
+$application-&gt;run();</pre>
+If we run the script without parameters our command will be listed among default ones now.
+
+We need to pass a command name to the script as a first argument to run it:
+<pre>php console.php hello-world</pre>
+As a result we should see "<em>Hello World!</em>" printed out to the screen.
+<h2>Adding arguments and options</h2>
+Arguments and options are used to parametrize and alter behavior of commands.
+
+We'll modify our simple HelloWorld command to accept name as an argument. We'll output it to the screen.  "-<em>-more</em>" option will make that additional message is displayed.
+
+Arguments and options can be declared with the <em>addArgument()</em> and <em>addOption()</em> Command methods. We can make them optional or required, give description and default values.
+
+Parameters given in the command line can be later taken from <em>$input</em> parameter which is passed to the <em>execute()</em> method (Application takes care of the details).
+<pre>&lt;?php
+// src/PSS/Command/HelloWorldCommand.php
+namespace PSS\Command;
+
+use Symfony\Component\Console as Console;
+
+class HelloWorldCommand extends Console\Command\Command
+{
+    public function __construct($name = null)
+    {
+        parent::__construct($name);
+
+        $this-&gt;setDescription('Outputs welcome message');
+        $this-&gt;setHelp('Outputs welcome message.');
+        $this-&gt;addArgument('name', Console\Input\InputArgument::OPTIONAL, 'The name to output to the screen', 'World');
+        $this-&gt;addOption('more', 'm', Console\Input\InputOption::VALUE_NONE, 'Tell me more');
+    }
+
+    protected function execute(Console\Input\InputInterface $input, Console\Output\OutputInterface $output)
+    {
+        $name = $input-&gt;getArgument('name');
+
+        $output-&gt;writeln(sprintf('Hello %s!', $name));
+
+        if ($input-&gt;getOption('more')) {
+            $output-&gt;writeln('It is really nice to meet you!');
+        }
+    }
+}</pre>
+Now we can use new argument and option in the command line:
+<pre>php console.php hello-world -m Kuba</pre>
+Additional calls to <em>setDescription()</em> and <em>setHelp()</em> in the constructor set the command description and help. It's handy when we distribute our script. End user can now get help with:
+<pre>php console.php help hello-world</pre>
+<strong>Note</strong>: Built in help command is responsible for printing out the message.
+
+<a href="/uploads/wp/2011/06/console-help.png"><img class="aligncenter size-medium wp-image-795" title="Console help" src="/uploads/wp/2011/06/console-help-400x158.png" alt="" width="400" height="158" /></a>
+<h2>Interactive shell</h2>
+By wrapping an application into a Shell object we can easily gain functionality of interactive shell.
+<pre>&lt;?php
+// consoleshell.php
+require_once __DIR__.'/src/autoload.php';
+
+use Symfony\Component\Console as Console;
+
+$application = new Console\Application('Demo', '1.0.0');
+$application-&gt;add(new PSS\Command\HelloWorldCommand('hello-world'));
+
+$shell = new Console\Shell($application);
+$shell-&gt;run();</pre>
+The script won't terminate but will wait for our commands:
+<pre>php consoleshell.php</pre>
+<a href="/uploads/wp/2011/06/console-shell.png"><img class="aligncenter size-medium wp-image-796" title="Console Shell" src="/uploads/wp/2011/06/console-shell-363x400.png" alt="" width="363" height="400" /></a>

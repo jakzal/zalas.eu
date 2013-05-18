@@ -1,0 +1,71 @@
+---
+layout: post
+title: Jumping to a class, function and variable definitions in vim with exuberant
+  ctags
+tags:
+- ctags
+- php
+- vim
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  description: Exuberant ctags make it possible to jump to the definition of a class,
+    method, variable and any other language object in vim. Tool is able to generate
+    an index file (a.k.a tag file) for one of 41 supported programming languages.
+    Index can be used by editors like vim to quickly find related keyword.
+  keywords: vim,ctags,exuberant,php
+---
+<a title="Exuberant Ctags Homepage" href="http://ctags.sourceforge.net/">Exuberant ctags</a> make it possible to jump to the definition of a class, method, variable and any other language object in <strong>vim</strong>. Tool is  able to generate an index file (a.k.a tag file) for one of <a title="Programming Languages Supported By Exuberant Ctags" href="http://ctags.sourceforge.net/languages.html">41 supported programming languages</a>. Index can be used by     editors like vim to quickly find related keyword.
+<h2>Installation</h2>
+Installation shouldn't be hard on any Linux based operating system. In Ubuntu <strong>exuberant ctags</strong> are in the default package repository. To install it you can use Ubuntu Software Center or open a terminal and write:
+<pre>sudo aptitude install exuberant-ctags</pre>
+<h2>Generating an index file</h2>
+Before taking advantage of <strong>ctags</strong> in <strong>vim</strong> you need to generate an index file. <strong>ctags</strong> command is made for that (it's an alias for ctags-exuberant).
+
+To generate an index first change the working directory to the main directory of your project. After that tell ctags to recursively index the current directory:
+<pre>cd ~/workspace/projects/sympal
+ctags -R --languages=php .</pre>
+<strong>Note</strong>: Read '<em>man ctags</em>' for more options.
+
+<strong>Note</strong>: Long time ago <a title="Matthew Weier O'Phinney on Twitter" href="http://twitter.com/weierophinney">Matthew Weier O'Phinney</a> wrote a blog post about <a title="Exuberant ctags with PHP in vim" href="http://weierophinney.net/matthew/archives/134-exuberant-ctags- with-PHP-in-Vim.html">exuberant ctags with PHP in vim</a>. He used several options which look like no longer needed. I think ctags support for PHP has been improved over the time.
+<h2>Basic Usage</h2>
+Basic usage boils down to the two commands:
+<ul>
+	<li><strong>ctrl-]</strong> takes you to the declaration of a keyword your cursor is currently over. Jump is made so it doesn't matter in which file it is defined. Keyword is put on the tag stack.</li>
+	<li><strong>ctrl-t</strong> takes you a step back in the tag stack.</li>
+</ul>
+Notice that you can precede the command with a number to invoke it several times. It's useful when you have several definitions of the same tag and you don't want to jump to the first one      (<strong>2ctrl-]</strong>). From time to time you'll also need to jump back several tags (<strong>4ctrl-t</strong>).
+
+You can make that vim directly opens a chosen keyword with <strong>-t</strong> option:
+<pre>vim -t sfGuardUser</pre>
+<h2>Advanced Usage</h2>
+Some of the <strong>tag stack</strong> commands:
+<ul>
+	<li><strong>pop</strong> jumps backward in the tag stack</li>
+	<li><strong>tag</strong> jumps forward in the tag stack</li>
+	<li><strong>tags</strong> displays a tag stack</li>
+</ul>
+Some of the <strong>tag match list</strong> commands:
+<ul>
+	<li><strong>tselelect</strong> lists the tags that match its argument or keyword under the cursor</li>
+	<li><strong>g]</strong> works like the <strong>ctrl-]</strong> but lets you to choose the tag occurrence</li>
+	<li><strong>:tnext</strong>, <strong>:tprevious</strong>, <strong>:tfirst</strong> and <strong>:tlast</strong> jump through the tag occurrences</li>
+</ul>
+Some of the <strong>search</strong> commands:
+<ul>
+	<li><strong>[i</strong> and <strong>]i</strong> display the first line containing the keyword under and after the cursor</li>
+	<li><strong>[I</strong> and <strong>]I</strong> display all lines containing the keyword under and after the cursor</li>
+	<li><strong>[ ctrl-i</strong> and <strong>] ctr-i</strong> jumps to the first line that contains the keyword under and after the cursor</li>
+</ul>
+<strong>Note</strong>: Write <strong>:help tags-and-searches</strong> in vim to get total overview of features offered by tags.
+<h2>Useful links</h2>
+<ul>
+	<li><a title="Patching exuberant-ctags for better PHP5 support in vim" href="http://www.jejik.com/articles/2008/11/patching_exuberant-ctags_for_better_php5_support_in_vim/">Patching exuberant-ctags for better PHP5 support in vim</a></li>
+	<li><a title="exuberant ctags with PHP in Vim" href="http://weierophinney.net/matthew/archives/134-exuberant-ctags-with-PHP-in-Vim.html">exuberant ctags with PHP in Vim</a><a title="Patching exuberant-ctags for better PHP5 support in vim" href="http://www.jejik.com/articles/2008/11/patching_exuberant-ctags_for_better_php5_support_in_vim/"></a></li>
+</ul>
+
+<h2>Video</h2>
+
+<object width="480" height="385" data="http://www.youtube.com/v/8yjxaBrmiJI&amp;hl=en_US&amp;fs=1&amp;color1=0x3a3a3a&amp;color2=0x999999" type="application/x-shockwave-flash"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/8yjxaBrmiJI&amp;hl=en_US&amp;fs=1&amp;color1=0x3a3a3a&amp;color2=0x999999" /><param name="allowfullscreen" value="true" /></object>

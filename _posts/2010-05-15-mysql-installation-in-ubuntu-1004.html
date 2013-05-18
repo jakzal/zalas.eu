@@ -1,0 +1,33 @@
+---
+layout: post
+title: MySQL installation in Ubuntu 10.04
+tags:
+- installation
+- mysql
+- php
+- ubuntu
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  description: MySQL is one of the most popular relational database systems which
+    is widely used with PHP applications. It's relatively easy to set up and use.
+    Here's a quick guide of how to install and configure MySQL in the newest release
+    of Ubuntu.
+  keywords: mysql,install,configure,ubuntu,php
+---
+<img class="size-full wp-image-466 alignright" title="MySQL" src="/uploads/wp/2010/05/logo-mysql-110x57.png" alt="MySQL" width="110" height="57" /><a title="MySQL homepage" href="http://www.mysql.com/">MySQL</a> is one of the most popular relational database systems which is widely used with PHP applications. It's relatively easy to set up and use. Here's a quick guide of how to install and configure MySQL in the newest release of Ubuntu.
+
+First install the MySQL server:
+<pre>sudo aptitude install mysql-server</pre>
+The installer will ask you for a root password. Using root user, however, is    not the best practice. It's way better to give yourself permissions to create   and use databases.
+
+First open MySQL console:
+<pre>mysql -p -u root</pre>
+Next, grant yourself all priviledges for localhost connections (replace 'kuba'  with your user name and password with password of your preference):
+<pre>GRANT ALL PRIVILEGES ON *.* TO kuba@'localhost' IDENTIFIED BY 'my$ecret';
+\q</pre>
+Now you can create MySQL databases without the need of using root account:
+<pre>mysqladmin -p create wordpress</pre>
+<strong>Note</strong>: Read about PostgreSQL in my another post: <a title="PostgreSQL installation in Ubuntu 10.04" href="/postgresql-installation-in-ubuntu-1004">PostgreSQL installation in Ubuntu 10.04</a>.

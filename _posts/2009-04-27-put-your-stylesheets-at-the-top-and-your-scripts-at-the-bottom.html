@@ -1,0 +1,77 @@
+---
+layout: post
+title: Put your stylesheets at the top and your scripts at the bottom
+tags:
+- best practices
+- filter
+- html
+- symfony
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  keywords: best,practices,symfony,filter,html,stylesheet,css,javascript,top,bottom,page
+  description: Put your css stylesheets at the top and your javascript scripts at
+    the bottom.
+---
+Putting the CSS stylesheets at the top of your web page and moving the scripts to the bottom are only two of thirty four rules described in <a title="Best Practices for Speeding Up Your Website" href="http://developer.yahoo.com/performance/rules.html">Best Practices for Speeding Up Your Website</a> (by Yahoo). Following these two rules, however, can really decrease visible time of page rendering. I will present a simple solution to achieve this in <a title="symfony project" href="http://www.symfony-project.org/">symfony</a> framework.
+
+Whenever you invoke <em>use_javascript</em> and <em>use_stylesheet</em> helpers your JavaScripts and stylesheets are not directly put into the content. This task is given to <em>sfCommonFilter</em> which is responsible for injecting JavaScript and stylesheet includes right before <em>&lt;/head&gt;</em> tag. Thanks to that we can safely request inclusion of the same file multiple of times and it's pasted into the content only once. It's nice but can be slightly improved by following the earlier mentioned Yahoo rules.
+
+Stylesheets are already at the top. The only thing left is to move JavaScripts right before the <em>&lt;/body&gt;</em> tag.  To do that we will have to overwrite the <em>sfCommonFilter</em> class. Thankfully it's just a matter of small changes in the original class. I used the original code and changed the way the scripts are injected.
+<pre>class zCommonFilter extends sfFilter
+{
+  public function execute($filterChain)
+  {
+    $filterChain-&gt;execute();
+
+    $response = $this-&gt;context-&gt;getResponse();
+
+    // include stylesheets
+    $content = $response-&gt;getContent();
+    if (false !== ($pos = strpos($content, '&lt;/head&gt;')))
+    {
+      $this-&gt;context-&gt;getConfiguration()-&gt;loadHelpers(array('Tag', 'Asset'));
+      $html = '';
+      if (!sfConfig::get('symfony.asset.stylesheets_included', false))
+      {
+        $html.= get_stylesheets($response);
+
+        if ($html)
+        {
+          $response-&gt;setContent(substr($content, 0, $pos) . $html . substr($content, $pos));
+        }
+      }
+    }
+
+    // include javascripts
+    $content = $response-&gt;getContent();
+    if (false !== ($pos = strpos($content, '&lt;/body&gt;')))
+    {
+      $this-&gt;context-&gt;getConfiguration()-&gt;loadHelpers(array('Tag', 'Asset'));
+      $html = '';
+      if (!sfConfig::get('symfony.asset.javascripts_included', false))
+      {
+        $html.= get_javascripts($response);
+
+        if ($html)
+        {
+          $response-&gt;setContent(substr($content, 0, $pos) . $html . substr($content, $pos));
+        }
+      }
+    }
+
+    sfConfig::set('symfony.asset.javascripts_included', false);
+    sfConfig::set('symfony.asset.stylesheets_included', false);
+  }
+}</pre>
+Now we just need to tell symfony to use our version of the common filter instead of the default one. As always we do it in <em>filters.yml</em> file of chosen application:
+<pre>rendering: ~
+security:  ~
+cache:     ~
+
+common:
+  class: zCommonFilter
+
+execution: ~</pre>

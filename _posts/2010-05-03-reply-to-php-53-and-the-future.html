@@ -1,0 +1,47 @@
+---
+layout: post
+title: Reply to PHP 5.3 and the Future
+tags:
+- php
+- symfony
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  description: PHP 5.3 and the Future. I guess main concern here is similar we used
+    to have with PHP4 to PHP5 migration (GoPHP5 campaign). How can the migration path
+    for shared hosting companies be made easier? If you were writing a new open-source
+    application would you go purely 5.3+? Do you know of any other open-source applications
+    requiring 5.3+?
+  keywords: php,5.3,migration,hosting,shared,frameworks,support,open,source
+---
+<a href="/uploads/wp/2010/05/php-med-trans-light.gif"><img class="alignleft size-full wp-image-450" title="PHP" src="/uploads/wp/2010/05/php-med-trans-light.gif" alt="PHP" width="95" height="51" /></a>Mark Evans wrote on his blog interesting post about <a title="PHP 5.3 and the Future" href="http://www.freelancephp.co.uk/2010/05/02/php-5-3-and-the-future/">PHP 5.3 and the Future</a>. I guess the main concern   here is similar we used to have with <strong>PHP4</strong> to <strong>PHP5</strong> migration (<a title="GoPHP5 Campaign" href="http://www.gophp5.org/">GoPHP5 campaign</a>).
+
+Mark raised three questions to the community which I'd like to reply to.
+<h2>How can the migration path for shared hosting companies be made easier?</h2>
+For some time <strong>PHP 5.2</strong> will still be in use. Therefore hosting companies simply cannot afford dropping support for it. There are many popular PHP applications which   are not yet ready for <strong>PHP 5.3</strong> (consider Drupal).
+
+However, it's not a big deal to install both PHP 5.2 and 5.3 on the same server and let the customers choose. I've seen it working with PHP 4 and 5. It's even easier with PHP 5.2 and 5.3. It's possible and it's simple.
+
+Furthermore, migrating <a title="PHP 5.2 to 5.3 migration" href="http://www.php.net/manual/en/migration53.php">PHP 5.2 application to 5.3</a> is not as hard as one would think. Most of PHP frameworks are already updated. <strong>In my opinion adaptation will be a lot faster than in case PHP 4 to 5</strong>.
+
+However, you should remember that PHP 5.3 applications will be designed differently. With PHP 5.3 you get a number of <a title="PHP 5.3 new features" href="http://php.net/manual/en/migration53.new-features.php">new features</a> which give a lot of power and affect the application's architecture (like <a title="PHP namespaces" href="http://php.net/manual/en/language.namespaces.php">namespaces</a>). Even if you can run old applications on PHP 5.3 sooner or later they will become a legacy you want to get rid of.
+<h2>If you were writing a new open-source application would you go purely 5.3+?</h2>
+Definitely yes. Starting a new Open Source project in the PHP 5.2 now, when 5.3 release is more than ready, will make the project live shorter. While all the future  applications will head for clear, namespaced structure, yours will still have old-school design.
+
+<strong>Someday you'll have to either migrate or rewrite it.</strong>
+
+Besides, I don't want to stick to the technology which is headed for extinction. Web development is a very dynamic word. <strong>If you cannot adapt to the new trends you're moving     backwards.</strong> Starting a new Open Source project is a great way<strong> </strong>to learn all the new features of PHP 5.3.
+
+You could be concerned that application written in PHP 5.3 wouldn't gain a lot of users because of slow adaptation of PHP 5.3 by hosting companies. Well, if the            application is good enough users want to have it no matter what. <strong>They will go to the early adapting hosting companies</strong>. Sooner or later others will be forced to       upgrade their servers as well. And as I wrote before it's not a hard task so it should go rather fast.
+<h2>Do you know of any other open-source applications requiring 5.3+?</h2>
+There are plans to <a title="phpBB4 on Symfony 2" href="http://area51.phpbb.com/phpBB/viewtopic.php?f=78&amp;t=32433">build phpBB4 based on Symfony 2</a>. This is actually the only application requiring PHP 5.3 I know.
+
+However, there are some frameworks which will support PHP 5.3+ only:
+<ul>
+	<li><a title="Symfony 2" href="http://symfony-reloaded.org/">Symfony 2</a></li>
+	<li><a title="Doctrine" href="http://www.doctrine-project.org/">Doctrine 2</a></li>
+	<li><a title="Zend Framework 2 Roadmap" href="http://framework.zend.com/wiki/display/ZFDEV2/Zend+Framework+2.0+Roadmap">Zend 2</a></li>
+	<li><a title="Lithium Framework" href="http://rad-dev.org/lithium">Lithium</a></li>
+</ul>

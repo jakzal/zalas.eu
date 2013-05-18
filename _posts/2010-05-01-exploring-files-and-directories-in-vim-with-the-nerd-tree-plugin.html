@@ -1,0 +1,41 @@
+---
+layout: post
+title: Exploring files and directories in vim with the NERD tree plugin
+tags:
+- nerdtree
+- plugin
+- vim
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  description: Exploring, opening, switching, renaming, moving files and directories
+    are common tasks performed during coding. In IDEs it is usually achieved with
+    some kind of filesystem explorer. In vim I preffer to use the NERD tree plugin.
+  keywords: vim,vi,nerdtree,file,directory,explorer,bookmark,nerd,tree
+---
+Exploring, opening, switching, renaming, moving files and directories are common tasks performed during coding. In IDEs it is usually achieved with some kind of filesystem explorer. In vim I preffer to use the <a title="NERD tree plugin for vim" href="http://www.vim.org/scripts/script.php?script_id=1658">NERD tree plugin</a>.
+
+<a href="/uploads/wp/2010/05/nerdtree.png"><img class="aligncenter size-medium wp-image-415" title="NERD tree plugin for vim" src="/uploads/wp/2010/05/nerdtree-400x275.png" alt="NERD tree plugin for vim" width="400" height="275" /></a>
+<h2>NERD Tree features</h2>
+<strong>NERD tree</strong> enables you to:
+<ul>
+	<li><strong>Navigate</strong> and <strong>jump</strong> through the directory tree</li>
+	<li><strong>Open</strong> files in the current window, tab, split view (horizontal and vertical)</li>
+	<li><strong>Change</strong> the current working directory</li>
+	<li><strong>Add</strong>, <strong>move</strong>, <strong>copy</strong> and <strong>remove</strong> files and directories</li>
+	<li><strong>Filter</strong> the tree</li>
+	<li><strong>Create the bookmarks</strong></li>
+</ul>
+<h2>Installation</h2>
+Get the source from <a title="NERD tree plugin for vim" href="http://www.vim.org/scripts/script.php?script_id=1658">the plugin website</a> and unzip it into your <em>~/.vim</em> directory.
+
+To make   using <strong>NERD tree</strong> more convenient it's best to create a shortcut mapping. To use ctrl+n add the following line to your <em>~/.vimrc</em> file:
+<pre>nmap &lt;silent&gt; &lt;c-n&gt; :NERDTreeToggle&lt;CR&gt;</pre>
+<h2>Usage</h2>
+Run vim and type <em>:NERDTreeToggle</em> or <em>ctrl+n</em>. The later will work only if you've created a   mapping. <strong>NERD tree</strong> should open and present you the directory structure.
+
+I'd suggest you to start with pressing the <em>?</em> to read a quick help and learn about the plugin features.
+<p style="text-align: center;"><object width="425" height="344" data="http://www.youtube.com/v/8jWL3wZSOkY&amp;hl=en&amp;fs=1" type="application/x-shockwave-flash"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/8jWL3wZSOkY&amp;hl=en&amp;fs=1" /><param name="allowfullscreen" value="true" /></object>
+</p>

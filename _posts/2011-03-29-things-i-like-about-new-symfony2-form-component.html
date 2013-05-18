@@ -1,0 +1,125 @@
+---
+layout: post
+title: Things I like about the new Symfony2 Form Component
+tags:
+- doctrine2
+- form
+- onTheEdge
+- php
+- Symfony2
+- twig
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  description: Refactoring is mainly about a proper usage of the dependency injection
+    and decoupling parts of the component. It mostly affects the way we'll create
+    the form and its related objects.
+  keywords: Symfony2,doctrine2,form,component,refactoring,dependency,injection,twig,symfony
+---
+<img class="alignleft size-full wp-image-622" title="Symfony Logo" src="/uploads/wp/2011/03/sflogo.png" alt="" width="60" height="60" />Forms Refactoring, the last big change and recently <a title="Symfony Form Component Refactoring (Pull Request)" href="https://github.com/symfony/symfony/pull/399">most awaited pull request</a> for Symfony2, was finally finished last Sunday. The work is not fully done but it's ready for merge. Request is still waiting for approval and as soon as it's accepted (or rejected) we can expect a beta release.
+
+So what is it about?
+
+Refactoring is mainly about a proper usage of the dependency injection and decoupling parts of the component. It mostly affects the way we'll create the form and related objects. We can already see it in action in<a title="AcmePizzaBundle demonstrating refactored forms" href="https://github.com/beberlei/AcmePizzaBundle"> an example project</a> or <a title="Gist snippets demonstrating refactored forms" href="https://gist.github.com/883293">Gist snippets</a>.
+
+It's not guaranteed that the pull request will be accepted in its current state. Things might change but I already took a deeper look into the component. There are several things I really like about it. Most of it will get into the final release of the framework anyway. Only object construction is under the question.
+<h2>Configuration</h2>
+Forms will no longer be composed of widget objects like they used to be in symfony 1.x. Future process of defining a form looks more like a configuration:
+<pre>$form = $this-&gt;get('form.factory')
+    -&gt;createBuilder('form')
+    -&gt;add('name', 'text')
+    -&gt;add('price', 'money', array('currency' =&gt; 'USD'))
+    -&gt;getForm();</pre>
+As you can notice we retrieve a form factory service from the service container, create a builder and use it to define the form. This is one of the biggest changes made in the pull request. Notice no new object is explicitly created with a constructor. It not only delays object creation until it's really needed but also lets us to change injected type by modifying service definitions.
+<h2>POPO</h2>
+Forms don't expect any specific data object but can effectively work with any Plain Old PHP Object:
+<pre>class Pizza
+{
+    private $name = null;
+
+    private $price = null;
+
+    public function setName($name)
+    {
+        $this-&gt;name = $name;
+    }
+
+    public function getName()
+    {
+        return $this-&gt;name;
+    }
+
+    public function setPrice($price)
+    {
+        $this-&gt;price = $price;
+    }
+
+    public function getPrice()
+    {
+        return $this-&gt;price;
+    }
+}</pre>
+All we need to do is to pass an object to the form:
+<pre>$pizza = new Pizza();
+$pizza-&gt;setName('Capriciosa');
+$pizza-&gt;setPrice(35.00);
+
+$form-&gt;setData($pizza);</pre>
+<h2>Guessing the field types</h2>
+Although forms might work with any object we can take advantage of an ORM as well. For example, forms are able to determine the field types when used with Doctrine entities:
+<pre>$form = $this-&gt;get('form.factory')
+    -&gt;createBuilder('form', 'product', array('data_class' =&gt; 'Acme\PizzeriaBundle\Entity\Pizza'))
+    -&gt;add('name')
+    -&gt;add('price');</pre>
+Defining <em>data_class</em> enables form to look at the type definitions for given class:
+<pre>namespace Acme\PizzeriaBundle\Entity;
+
+/**
+ * @orm:Entity
+ * @orm:Table(name="pizzas")
+ */
+class Pizza
+{
+    /**
+     * @orm:Column(type="string", length="255")
+     */
+    private $name = null;
+
+    /**
+     * @orm:Column(type="decimal", precision=2)
+     */
+    private $price = null;
+
+    // ...
+}</pre>
+<h2>Validation</h2>
+Validation is no longer a form responsibility. It's finally back to where it belongs; in the model.
+<pre>class Pizza
+{
+    /**
+     * @assert:NotBlank(message="Name cannot be left blank")
+     */
+    private $name = null;
+
+    /**
+     * @assert:NotBlank(message="You have to give a price")
+     * @assert:Min(0)
+     */
+    private $price = null;
+}</pre>
+Form knows nothing about the validation. It just asks the related entity whether it has a valid data.
+<h2>Form Templates</h2>
+In symfony 1.x form widgets are rendered by the widget class itself. Clearly it's not the right place for a template in an MVC framework.
+
+In Symfony 2 it was fixed by introducing a special template for widgets. All the widgets are defined in its own block. This way we can easily extend chosen widgets or even add new ones.
+
+Here's an example of twig template taken from the <a title="Form View" href="http://symfony.com/doc/2.0/book/forms/view.html#defining-the-html-representation">Symfony documentation</a>:
+<pre>{% block textarea_field %}
+    &lt;textarea {% display field_attributes %}&gt;{{ field.displayedData }}&lt;/textarea&gt;
+{% endblock textarea_field %}</pre>
+<div id="_mcePaste" class="mcePaste" style="position: absolute; left: -10000px; top: 1714px; width: 1px; height: 1px; overflow: hidden;">
+<pre>assert</pre>
+</div>
+<strong>Edit</strong> (<em>30.03.2011</em>): changed validation into assert as @<a title="webmozart on twitter" href="http://twitter.com/webmozart">webmozart</a> suggested. Added examples of validation messages.

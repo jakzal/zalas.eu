@@ -1,0 +1,86 @@
+---
+layout: post
+title: Autoloading classes in an any PHP project with Symfony2 ClassLoader component
+tags:
+- autoloader
+- ClassLoader
+- components
+- php
+- Symfony2
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  description: Symfony ClassLoader component is a PSR-0 standard compliant PHP class
+    autoloader. It's not only able to load namespaced code but also supports old-school
+    PEAR standards (also used by Zend Framework). It's a perfect class loading tool
+    for most of PHP projects.
+  keywords: Symfony,Symfony2,ClassLoader,component,psr-0,autoloader,php
+---
+Symfony <a title="Symfony ClassLoader component" href="https://github.com/symfony/ClassLoader">ClassLoader component</a> is a <a title="PSR-0 Standard" href="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PSR-0 standard</a> compliant PHP class autoloader. It's not only able to load namespaced code but also supports old-school <a title="PEAR Naming Standards" href="http://pear.php.net/manual/en/standards.naming.php">PEAR standards</a> (also used by Zend Framework). It's a perfect class loading tool for most of PHP projects.
+
+<strong>Note</strong>: Code used in this post is available on github: <a href="https://github.com/jakzal/SymfonyComponentsExamples">https://github.com/jakzal/SymfonyComponentsExamples</a>
+<h2>Installation</h2>
+You can either install it from the <a title="Symfony PEAR Channel" href="http://pear.symfony.com/">Symfony PEAR channel</a> or grab it <a title="Symfony2 ClassLoader on github" href="https://github.com/symfony/ClassLoader">directly from github</a>. For the purpose of this article we'll clone the sources to the <em>vendor/</em> directory of the project.
+
+<strong>Note</strong>: ClassLoader component uses <em>Symfony\Component\ClassLoader</em> namespace. Therefore we'll put it into <em>Symfony/Component/ClassLoader</em> subdirectory of <em>vendor</em> (see <a title="PSR-0 Standard" href="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PSR-0 standard</a>).
+<pre>git clone https://github.com/symfony/ClassLoader.git vendor/Symfony/Component/ClassLoader</pre>
+<h2>Basic Usage</h2>
+Let's say we have two Acme libraries.
+
+First one is located in the  <em>src/Acme/Tools</em>. <em>HelloWorld</em> class uses <em>Acme\Tools </em>namespace and is declared in the <em>src/Acme/Tools/HelloWorld.php</em> file:
+<pre>&lt;?php
+// src/Acme/Tools/HelloWorld.php
+
+namespace Acme\Tools;
+
+class HelloWorld
+{
+    public function __construct()
+    {
+        echo __METHOD__."\n";
+    }
+}</pre>
+Second library is stored in the <em>src/Legacy/Acme/Tools</em>. It follows old but well known PEAR naming standards. <em>Legacy_Acme_Tools_HelloWorld</em> class is defined in the <em>src/Legacy/Acme/Tools/HelloWorld.php</em> file:
+<pre>&lt;?php
+// src/Legacy/Acme/Tools/HelloWorld.php
+
+class Legacy_Acme_Tools_HelloWorld
+{
+    public function __construct()
+    {
+           echo __METHOD__."\n";
+    }
+}</pre>
+To make that our classes are automatically loaded we have to register <em>Acme</em> namespace and <em>Legacy_</em> prefix:
+<pre>&lt;?php
+// classloader.php
+
+require_once __DIR__.'/vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+$loader = new Symfony\Component\ClassLoader\UniversalClassLoader();
+$loader-&gt;registerNamespaces(array('Acme' =&gt; __DIR__ . '/src'));
+$loader-&gt;registerPrefixes(array('Legacy_' =&gt; __DIR__ . '/src'));
+$loader-&gt;register();
+
+$helloWorld = new Acme\Tools\HelloWorld();
+$legacyHelloWorld = new Legacy_Acme_Tools_HelloWorld();</pre>
+Of course classes are only loaded when needed. Requiring <em>UniversalClassLoader.php</em> file should be the only <em>require</em> statement used in our code. Other classes should be loaded by the class loader.
+
+<strong>Note</strong>: There's also a way to define paths with <em>registerNamespaceFallbacks()</em> and <em>registerPrefixFallbacks()</em>. Class loader will use them with namespaces or prefixes which weren't listed explicitly.
+<h2>Increasing performance</h2>
+Number of class files in a real-world project is rather big. Class loader might have some impact on performance as it checks for file existence before requiring it. To avoid disk operations we can cache results in APC with <em>ApcUniversalClassLoader</em>:
+<pre>&lt;?php
+// classloadercached.php
+
+require_once __DIR__.'/vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+require_once __DIR__.'/vendor/Symfony/Component/ClassLoader/ApcUniversalClassLoader.php';
+
+$loader = new Symfony\Component\ClassLoader\ApcUniversalClassLoader('ClassLoader');
+$loader-&gt;registerNamespaces(array('Acme' =&gt; __DIR__ . '/src'));
+$loader-&gt;registerPrefixes(array('Legacy_' =&gt; __DIR__ . '/src'));
+$loader-&gt;register();
+
+$helloWorld = new Acme\Tools\HelloWorld();
+$legacyHelloWorld = new Legacy_Acme_Tools_HelloWorld();</pre>
+<strong>Note</strong>: Examples are run in a command line. Therefore there's no performance gain from using APC. In fact it can hurt performance as cache is initialized every time our script is run in cli. This is a limitation of APC.

@@ -1,0 +1,88 @@
+---
+layout: post
+title: Fixing failing Behat scenarios in large suites
+tags:
+- bdd
+- behat
+- doctrine2
+- mysql
+- php
+- Symfony2
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  keywords: Symfony2,bdd,behat,mysql,scenario,feature,CommonContexts
+  description: In one of my Symfony2 projects I ended up with quite a lot of Behat
+    features and scenarios which one day started failing on the integration server.
+    The problem was in MySQL returning "too many connections" response.
+---
+<img class="alignleft size-full wp-image-898" title="Behat" src="/uploads/wp/2011/12/behat-logo.png" alt="" width="168" height="57" />In projects I currently work on I'm taking the <strong>BDD</strong> approach really seriously. In one of my <strong>Symfony2</strong> projects I ended up with quite a lot of <strong>Behat</strong> features and scenarios which one day started failing on the integration server.
+
+The problem was in MySQL returning "<em>too many connections</em>" response. To investigate it I logged into the MySQL console and checked running connections with <em>show full processlist</em> command.
+
+<a href="/uploads/wp/2011/12/mysql-processlist.png"><img class="aligncenter size-medium wp-image-887" title="Process list in MySQL" src="/uploads/wp/2011/12/mysql-processlist-400x97.png" alt="" width="400" height="97" /></a>
+
+I noticed more and more connections being <strong>created</strong> and <strong>left in a sleep state</strong> while the scenarios are executed. At some point the number of connections reached the <strong>MySQL limit</strong> which was rejecting any new attempts to connect.
+
+My first idea was to increase the limit (<em><a title="max_connections configuration option" href="http://dev.mysql.com/doc/refman/5.5/en/server-system-variables.html#sysvar_max_connections">max_connections</a></em> configuration option). Unfortunately it'd only hide the issue. In future it could come back as I'm constantly working on the project and still adding new scenarios.
+
+Better solution would be to explicitly close the connections.
+
+<strong>Doctrine2</strong> ORM uses PDO and <a title="PDO connections" href="http://php.net/manual/en/pdo.connections.php">PDO connections</a> are closed when last reference to the object is destroyed. Since Behat scenarios are all run in one process the destruction is postponed till all scenarios are executed.
+
+Also, we have to remember that there are two types of connections:
+<ul>
+	<li>connections created by Behat to build schema or load fixtures (Behat boots its own Symfony kernel)</li>
+	<li>connections created by the SymfonyDriver (client connections).</li>
+</ul>
+<strong>Note</strong>: Using other drivers (like Goutte) might limit total number of created connections as client would use a separate process. Unfortunately it's not enough in some cases (as Behat would still create its connections).
+
+We might use AfterScenario hook to close all client connections (put it into subcontext):
+<pre>/**
+ * @param \Behat\Behat\Event\ScenarioEvent|\Behat\Behat\Event\OutlineExampleEvent $event
+ *
+ * @AfterScenario
+ *
+ * @return null
+ */
+public function closeDBALConnections($event)
+{
+    $this-&gt;getEntityManager()-&gt;clear();
+
+    foreach ($this-&gt;getClientConnections() as $connection) {
+        $connection-&gt;close();
+    }
+}
+
+/**
+ * @return array
+ */
+protected function getClientConnections()
+{
+    $driver = $this-&gt;getMainContext()-&gt;getSession()-&gt;getDriver();
+
+    if ($driver instanceof \Behat\MinkBundle\Driver\SymfonyDriver) {
+        return $driver-&gt;getClient()-&gt;getContainer()-&gt;get('doctrine')-&gt;getConnections();
+    }
+
+    return array();
+}</pre>
+I tried doing the same with Behat connections but they're not being closed. Luckily, the number of active connections decreased enough to make my scenarios pass again.
+
+<strong>Note</strong>: If you're using <a title="CommonContexts" href="https://github.com/Behat/CommonContexts">CommonContexts</a> (and you should!) than this fix is now included in the <a title="SymfonyDoctrineContext on github" href="https://github.com/Behat/CommonContexts/blob/master/Behat/CommonContext/SymfonyDoctrineContext.php">SymfonyDoctrineContext</a>.
+
+To improve the situation even better I limited amount of time MySQL waits before it closes connections automatically (<em><a title="wait_timeout configuration option" href="http://dev.mysql.com/doc/refman/5.5/en/server-system-variables.html#sysvar_wait_timeout">wait_timeout</a></em> configuration option). I didn't want to do it in the server configuration as I'd have to propagate it to all the machines scenarios are run on. Therefore I used <em>PDO::MYSQL_ATTR_INIT_COMMAND</em> attribute available in <a title="MySQL PDO driver" href="http://php.net/manual/en/ref.pdo-mysql.php">MySQL's PDO driver</a> to set a session variable in the test environment.
+
+In Symfony it can be easily done on a configuration level:
+<pre># app/config/config_test.yml
+doctrine:
+    dbal:
+        dbname: testdb
+        options:
+            # 1002 == PDO::MYSQL_ATTR_INIT_COMMAND
+            1002: 'SET SESSION wait_timeout=30;'</pre>
+In combination with closing client connections this gave me the best results.
+
+The only trick is to choose the timeout properly. We have to close the connections <strong>early enough</strong> to prevent exceeding the limit but <strong>late enough</strong> to make them available to the client for its whole execution time.

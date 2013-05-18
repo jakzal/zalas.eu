@@ -1,0 +1,71 @@
+---
+layout: post
+title: Multistage deployment of Symfony applications with capifony
+tags:
+- capifony
+- capistrano
+- deployment
+- php
+- symfony
+- Symfony2
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  description: Capifony is a collection of Capistrano deployment recipes for both
+    symfony and Symfony2 applications. Multistage is an extension for Capistrano which
+    enables deployments to multiple servers with varying configurations or deployment
+    procedures.
+  keywords: capistrano,capifony,deploy,symfony,Symfony2,php
+---
+<a href="/uploads/wp/2011/04/Symfony2-capistrano-multistage-files.png"><img class="size-medium wp-image-709 alignright" title="Capistrano files in Symfony2 project" src="/uploads/wp/2011/04/Symfony2-capistrano-multistage-files-227x400.png" alt="" width="227" height="400" /></a><strong>Capifony</strong> is a collection of <strong>Capistrano</strong> deployment recipes for both <strong>symfony</strong> and <strong>Symfony2</strong> applications. <strong>Multistage</strong> is an extension for Capistrano which enables deployments to multiple servers with varying configurations or deployment procedures.
+
+<strong>Note</strong>: If you're new to <a title="Capistrano" href="https://github.com/capistrano/capistrano/wiki">capistrano</a> or <a title="Capifony" href="http://capifony.org/">capifony</a> visit the project webistes to learn more about the automated deployment.
+<h2>Why multistage?</h2>
+<a title="Staging" href="http://en.wikipedia.org/wiki/Staging_%28websites%29">Staging</a> is a popular practice of testing software before it reaches the production environment. It's common to test a web application on a testing server before it's deployed to production. Even before code reaches the testing stage it's often tested by developers on their development machine.
+
+Although all the environments should be similar as much as possible we often need them to vary in some aspects. Most often we want to configure the deployment procedure a little bit different on development, testing and production servers. Running Google Analytics on our test server isn't a good idea but it has to be running on production (<em>varying configuration</em>). Enabling development controllers might be handy on development but we definitely don't want it on production (<em>varying procedure</em>).
+
+All such differences can be easily handled by Capistrano with <a title="Capistrano Mutlistage" href="https://github.com/capistrano/capistrano/wiki/2.x-Multistage-Extension">multistage extension</a>.
+<h2>Installation</h2>
+<pre>gem install capifony capistrano-ext</pre>
+<h2>Capifying a project</h2>
+<pre>cd /path/to/myproject
+capifony .</pre>
+<h2>Multistage example</h2>
+To use multistage with Capistrano we need to require the extension and define our stages. We'll replace the contents of <em>app/config/deploy.rb</em> with the following:
+<pre>set :stage_dir, 'app/config/deploy' # needed for Symfony2 only
+require 'capistrano/ext/multistage'
+set :stages, %w(production testing development)
+
+set :application, "MyApp"
+
+set :repository,  "mycompany.com:/var/repos/#{application}.git"
+set :scm,         :git
+
+set  :keep_releases,  3</pre>
+<strong>Note</strong>: For symfony 1.x application we need to remove '<em>app/</em>' from the path to the config files used in this article.
+
+Production, testing and development are our deployment stages. For each stage we have to create a separate file in <em>app/config/deploy</em> directory. Here's an example of a production stage (<em>app/config/deploy/production.rb</em>):
+<pre>server 'myapp.com', :app, :web, :primary =&gt; true
+set :deploy_to, "/var/www/myapp.com/"
+
+after 'deploy:finalize_update', 'symfony:project:clear_controllers'</pre>
+Test server settings might be a little different (<em>app/config/deploy/testing.rb</em>):
+<pre>server 'test.myapp.mycompany.com', :app, :web, :primary =&gt; true
+set :deploy_to, "/var/www/test/myapp.mycompany.com/"
+set :symfony_env_prod, "test"</pre>
+While deploying our application we have to specify the target server:
+<pre>cap production deploy</pre>
+Of course we can do much more than just changing the configuration options. It is also possible to:
+<ul>
+	<li>add hooks to alter the deployment procedure for a specific stage</li>
+	<li>change the behavior of existing tasks</li>
+	<li>extend existing namespace with new tasks</li>
+	<li>create a new namespace with custom tasks</li>
+</ul>
+In practice tasks or namespaces hardly vary between stages. In most cases we'll need to have different configuration or hooks.
+<div id="_mcePaste" class="mcePaste" style="position: absolute; left: -10000px; top: 496px; width: 1px; height: 1px; overflow: hidden;">
+<pre>set :symfony_env_prod, "new_prod_env"</pre>
+</div>

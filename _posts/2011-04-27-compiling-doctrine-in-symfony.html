@@ -1,0 +1,39 @@
+---
+layout: post
+title: Compiling doctrine in symfony 1.4
+tags:
+- doctrine
+- performance
+- symfony
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  _wp_old_slug: compiling-doctrine-in-symfony-1-4
+---
+<img class="alignleft size-full wp-image-725" title="Doctrine" src="/uploads/wp/2011/04/doctrine.png" alt="" width="50" height="56" />When profiling symfony 1.x applications hydrating Doctrine objects occurs to be one of the most time consuming operations. Recently I experienced something different. Loading ORM classes was one of the most expensive tasks. Usually such operations don't even show up during profiling.
+
+Fortunately Doctrine comes with a special task which merges all its classes into one file. This way number of <em>require</em> statements is significantly reduced.
+
+<a title="sfTaskExtraPlugin" href="http://www.symfony-project.org/plugins/sfTaskExtraPlugin">sfTaskExtraPlugin</a> comes with <em>doctrine:compile</em> task for symfony (which is really a wrapper for doctrine script).
+
+<strong>Note</strong>: mentioned application was deployed to the server suffering from several issues (i.e. invalid APC configuration). Those issues made class loading problem more visible. Nevertheless compilation played a role in improving overall performance.
+<h2>sfTaskExtraPlugin installation</h2>
+<pre>./symfony plugin:install sfTaskExtraPlugin</pre>
+<h2>Doctrine Compilation</h2>
+Following command will compile Doctrine classes into <em>lib/doctrine.compiled.php </em>file with only mySQL support:
+<pre>./symfony doctrine:compile --driver=mysql lib/doctrine.compiled.php</pre>
+Just like the output message will suggest we need to alter <em>ProjectConfiguration</em> class:
+<pre>public function setup()
+{
+  // ...
+
+  if ($this instanceof sfApplicationConfiguration &amp;&amp; !$this-&gt;isDebug())
+  {
+    require_once sfConfig::get('sf_lib_dir') . '/doctrine.compiled.php';
+  }
+}</pre>
+To make it all work we have to use the <em>Doctrine_Core</em> class and not <em>Doctrine</em>. The later will not be compiled.
+
+Task works with the latest versions of symfony 1.3 and 1.4.

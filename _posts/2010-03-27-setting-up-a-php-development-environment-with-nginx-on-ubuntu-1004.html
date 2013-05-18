@@ -1,0 +1,175 @@
+---
+layout: post
+title: Setting up a PHP development environment with nginx on Ubuntu 10.04
+tags:
+- configuration
+- installation
+- nginx
+- php
+- ubuntu
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  description: Nginx is a lightweight http, proxy and load balancing server. Here's
+    a guide how to quickly prepare PHP development environment with nginx on Ubuntu
+    10.04 (Lucid Lynx).
+  keywords: nginx,php,configure,install,ubuntu,cgi,fastcgi,spawn
+---
+<img class="alignleft size-full wp-image-389" title="Nginx Logo" src="/uploads/wp/2010/03/nginx-logo.png" alt="Nginx Logo" width="250" height="64" /><a title="nginx wiki" href="http://wiki.nginx.org/">Nginx</a> is a lightweight http, proxy and load balancing server. It's a <strong>serious alternative</strong> for a widely used <strong>apache</strong>. Most important advantages of nginx on a production environments are <strong>speed</strong> and small amount of <strong>memory</strong> it uses. In a development environment I really like the simple and flexible <strong>configuration</strong>.
+
+Here's a guide how to quickly prepare <strong>PHP development environment</strong> with <strong>nginx</strong> on <strong>Ubuntu</strong> 10.04 (Lucid Lynx).
+
+<strong>Note:</strong> I updated this article for Ubuntu 11.04. Read "<a title="Setting up a PHP development environment with Nginx on Ubuntu 11.04" href="../../../setting-up-a-php-development-environment-with-nginx-on-ubuntu-1104">Setting up a PHP development environment with Nginx on Ubuntu 11.04</a>" if you're using a new release of Ubuntu.
+<h2>PHP</h2>
+Install PHP with chosen modules:
+<pre>sudo aptitude install php5-cgi php5-cli php5-common php5-curl php5-gd \
+  php5-imagick php5-json php5-mcrypt php5-mysql php5-pgsql php5-sqlite \
+  php5-xmlrpc php5-xsl php5-xdebug php-apc</pre>
+<h2>Spawn FCGI</h2>
+Install spawn-fcgi script:
+<pre>sudo aptitude install spawn-fcgi</pre>
+Copy the <a title="Ubuntu init script for php-cgi" href="http://github.com/jakzal/php-cgi/raw/master/etc/init.d/php-cgi">init script</a> to <em>/etc/init.d/php-cgi</em>:
+<pre>#! /bin/sh
+
+### BEGIN INIT INFO
+# Provides:          php-cgi
+# Required-Start:    $local_fs $remote_fs $network $syslog
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: spawns the php-cgi
+# Description:       spawns the php-cgi
+### END INIT INFO
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+NAME=php-cgi
+DESC=php-cgi
+
+test -x $DAEMON || exit 0
+
+PIDFILE="/var/run/$NAME.pid"
+DAEMON="/usr/bin/php-cgi"
+SPAWN_FCGI="/usr/bin/spawn-fcgi"
+FCGI_PORT=9000
+FCGI_USER="www-data"
+FCGI_GROUP="www-data"
+FCGI_CHILDREN=0
+
+# Include php-cgi defaults if available
+if [ -f /etc/default/php-cgi ] ; then
+        . /etc/default/php-cgi
+fi
+
+SPAWN_FCGI_OPTS="-f $DAEMON -a 127.0.0.1 -p $FCGI_PORT -u $FCGI_USER -g $FCGI_GROUP -C $FCGI_CHILDREN -P $PIDFILE"
+
+set -e
+
+. /lib/lsb/init-functions
+
+case "$1" in
+  start)
+        echo -n "Starting $DESC: "
+        start-stop-daemon --start --quiet --pidfile $PIDFILE --exec "$SPAWN_FCGI" -- $SPAWN_FCGI_OPTS || true
+        echo "$NAME."
+        ;;
+  stop)
+        echo -n "Stopping $DESC: "
+        start-stop-daemon --stop --quiet --pidfile $PIDFILE --exec "$DAEMON" || true
+        echo "$NAME."
+        ;;
+  restart)
+        echo -n "Restarting $DESC: "
+        start-stop-daemon --stop --quiet --pidfile $PIDFILE --exec "$DAEMON" || true
+        sleep 1
+        start-stop-daemon --start --quiet --pidfile $PIDFILE --exec "$SPAWN_FCGI" -- $SPAWN_FCGI_OPTS || true
+        echo "$NAME."
+        ;;
+  status)
+        status_of_proc -p $PIDFILE "$DAEMON" php-cgi &amp;&amp; exit 0 || exit $?
+        ;;
+  *)
+        echo "Usage: $NAME {start|stop|restart|status}" &gt;&amp;2
+        exit 1
+        ;;
+esac
+
+exit 0</pre>
+And allow to execute it:
+<pre>sudo chmod +x /etc/init.d/php-cgi</pre>
+Put the <a title="Ubuntu php-cgi init script configuration" href="http://github.com/jakzal/php-cgi/raw/master/etc/default/php-cgi">configuration</a> to <em>/etc/default/php-cgi</em>:
+<pre>PIDFILE="/var/run/php-cgi.pid"
+DAEMON="/usr/bin/php-cgi"
+SPAWN_FCGI="/usr/bin/spawn-fcgi"
+FCGI_PORT=9000
+FCGI_USER="www-data"
+FCGI_GROUP="www-data"
+FCGI_CHILDREN=0</pre>
+<strong>Note</strong>: You will find most recent version of my init scripts on github: <a title="Jakub Zalas' php-cgi Ubuntu init scripts on github" href="http://github.com/jakzal/php-cgi">http://github.com/jakzal/php-cgi</a>.
+<h2>Nginx</h2>
+Install the nginx:
+<pre>sudo aptitude install nginx</pre>
+Save the following configuration file as a <em>/etc/nginx/sites-available/dev.conf</em>:
+<pre>server {
+  listen 80;
+  server_name *.dev;
+  root /var/www/$host/web;
+
+  access_log /var/log/nginx/$host.access.log;
+  error_log /var/log/nginx/error.log error;
+
+  location / {
+    root   /var/www/$host/web/;
+    index  index.php;
+
+    # serve static files directly
+    if (-f $request_filename) {
+      access_log        off;
+      expires           30d;
+      break;
+    }
+
+    rewrite ^(.*) /index.php last;
+  }
+
+  location ~ \.php {
+    fastcgi_index  index.php;
+
+    set  $script     $uri;
+    set  $path_info  "";
+    if ($uri ~ "^(.+\.php)(/.*)") {
+      set  $script     $1;
+      set  $path_info  $2;
+    }
+    fastcgi_pass   127.0.0.1:9000;
+    include /etc/nginx/fastcgi_params;
+    fastcgi_param  SCRIPT_FILENAME  /var/www/$host/web$script;
+    fastcgi_param  PATH_INFO        $path_info;
+    fastcgi_param  SCRIPT_NAME $script;
+  }
+
+  location ~ /\.ht {
+    deny  all;
+  }
+}</pre>
+And make it available for nginx:
+<pre>sudo ln -s /etc/nginx/sites-available/dev.conf /etc/nginx/sites-enabled/dev.conf</pre>
+<h2>System configuration</h2>
+Add yourself to <em>www-data</em> group and relogin:
+<pre>sudo usermod -a -G www-data kuba
+sudo su kuba</pre>
+Allow everyone in <em>www-data</em> group to edit websites:
+<pre>sudo chown -R www-data:www-data /var/www
+sudo chmod -R 775 /var/www</pre>
+Define your domains in <em>/etc/hosts </em>(this can be done much better with a <a title="dnsmasq" href="http://http://www.thekelleys.org.uk/dnsmasq/doc.html">dnsmasq</a> but for now it should be sufficient):
+<pre>127.0.0.1 localhost info.dev myproject.dev</pre>
+Create your first website:
+<pre>mkdir /var/www/info.dev/web -p
+echo "&lt;?php echo phpinfo(); ?&gt;" &gt; /var/www/info.dev/web/index.php
+chown -R :www-data /var/www/info.dev
+chmod -R 775 /var/www/info.dev</pre>
+Start php-cgi and nginx services:
+<pre>sudo service php-cgi start
+sudo service nginx start</pre>
+Open http://info.dev in your browser. We've just configured PHP to work with nginx.

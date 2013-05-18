@@ -1,0 +1,65 @@
+---
+layout: post
+title: Using SimpleXML with sfWebBrowser to parse html documents
+tags:
+- parsers
+- php
+- sfWebBrowser
+- SimpleXML
+- symfony
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  keywords: sfWebBrowser,SimpleXML,xpath,html,parsers,parse,symfony,php
+  description: sfWebBrowser is a class that emulates browser calls. Response can be
+    returned as SimpleXML which enables us to use xpath queries on the document being
+    parsed.
+---
+<a title="sfWebBrowser symfony plugin" href="http://www.symfony-project.org/plugins/sfWebBrowserPlugin">sfWebBrowser</a> is a class that emulates web browser calls. It gives us nice object oriented interface to navigate through document structure in a programmed way. It can return response as <a title="SimpleXML on php.net" href="http://pl2.php.net/simplexml">SimpleXML</a> which enables us to use xpath queries on the document being parsed. We can easily get part of the page we need with a simple statement:
+<pre>$xml-&gt;xpath('//table[@class="main"]//tr[@class="odd" or @class="even"]');</pre>
+Unfortunately html pages are hardly ever XML valid documents. That's why sfWebBrowser''s <em>getResponseXML()</em> method rather throws an exception than returns SimpleXMLElement. Luckily there's a workaround for it. We can overwrite <em>getResponseXML</em> method to create <em>SimpleXMLElement</em> from <em>DOMDocument</em> in case the original method fails.
+<pre>&lt;?php
+/*
+ * (c) 2008 Jakub Zalas
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+/**
+ * Web browser
+ *
+ * @package    zToolsPlugin
+ * @subpackage lib
+ * @author     Jakub Zalas &lt;jakub@zalas.pl&gt;
+ * @version    SVN: $Id$
+ */
+class zWebBrowser extends sfWebBrowser
+{
+  /**
+   * Returns response as XML
+   *
+   * If reponse is not a valid XML it is being created from
+   * a DOM document which is being created from a text response
+   * (this is the case for not valid HTML documents).
+   *
+   * @return SimpleXMLElement
+   */
+  public function getResponseXML()
+  {
+    try
+    {
+      $this-&gt;responseXml = parent::getResponseXML();
+    }
+    catch (Exception $exception)
+    {
+      $doc = new DOMDocument();
+      $doc-&gt;loadHTML($this-&gt;getResponseText());
+      $this-&gt;responseXml = simplexml_import_dom($doc);
+    }
+
+    return $this-&gt;responseXml;
+  }
+}</pre>

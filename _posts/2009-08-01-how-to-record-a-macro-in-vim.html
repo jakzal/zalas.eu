@@ -1,0 +1,82 @@
+---
+layout: post
+title: How to record a macro in vim?
+tags:
+- best practices
+- productivity
+- vim
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  description: Macro is a sequence of instructions performed as a one step. In programming
+    it helps automating the repeatable tasks which makes them less boring and less
+    error-prone. Vim as a one of most powerful editors has macro support built in.
+  keywords: vim,macro,editor,record,example
+---
+<a title="Macro definition on wiki" href="http://en.wikipedia.org/wiki/Macro_(computer_science)">Macro</a> is a sequence of instructions performed as a one step. In programming it helps automating the repeatable tasks which makes them less boring and less error-prone. Instead of performing the same actions over and over again, it's better to record them as a macro. Once macro is saved it can be run as many times as needed. <a title="vim website" href="http://www.vim.org/">Vim</a> as a one of most powerful editors has macro support built in.
+
+<object width="425" height="344" data="http://www.youtube.com/v/6d4tZqqQm6s&amp;hl=en&amp;fs=1" type="application/x-shockwave-flash"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/6d4tZqqQm6s&amp;hl=en&amp;fs=1" /><param name="allowfullscreen" value="true" /></object>
+
+To record a macro in vim you need to:
+<ul>
+	<li>start macro recording: <em>qa</em></li>
+	<li>perform chain of repeatable actions: <em>(regular vim commands)</em></li>
+	<li>stop recording process: <em>q</em></li>
+</ul>
+
+<h2>Defining the automation</h2>
+First, it's good to think what actually should be recorded. For purpose of this example let's say you have a file with a list of songs and artists you want to put on your website. Each row should be shown as a separate list item and song title has to be formatted as an italic text. The file contents is as below:
+<pre>"All Along the Watchtower", Jimi Hendrix
+"Smells Like Teen Spirit", Nirvana
+"Oops!... I did it again", Britney Spears
+"A Hard Day's Night", The Beatles
+"One", Metallica
+"Lasy Pomorza", Behemoth</pre>
+To format first line of file in vim you could perform the following commands:
+<ul>
+	<li>Go to the beginning of line by pressing <em>^</em>
+<pre>"All Along the Watchtower", Jimi Hendrix</pre>
+</li>
+	<li>Turn on insert mode (<em>i</em>) , add two spaces and opening html tags:   <em>&lt;li&gt;&lt;i&gt;</em>
+<pre>  &lt;li&gt;&lt;i&gt;<span style="text-decoration: underline;">"</span>All Along the Watchtower", Jimi Hendrix</pre>
+</li>
+	<li>Exit insert mode (<em>ESC</em>), move the cursor to the next comma location: <em>f,</em></li>
+	<li>Turn on insert mode (<em>i</em>) and add italics ending tag: <em>&lt;/i&gt;</em>
+<pre>  &lt;li&gt;&lt;i&gt;"All Along the Watchtower"&lt;/i&gt;, Jimi Hendrix</pre>
+</li>
+	<li>Exit insert mode (<em>ESC</em>), go to the end of line in insert mode (<em>A</em>) and add list closing tag <em>&lt;/li&gt;</em>
+<pre>  &lt;li&gt;&lt;i&gt;"All Along the Watchtower"&lt;/i&gt;, Jimi Hendrix&lt;/li&gt;</pre>
+</li>
+	<li>Leave insert mode (<em>ESC</em>) and go to the next line</li>
+</ul>
+The rest of lines can be formatted the same way. As you can see it could be quite a big and tedious job, especially with a large file. It's better when computer does it for us.
+<h2>Entering the macro recording process</h2>
+To start macro recording process press
+<pre>qa</pre>
+in normal mode. '<em>a</em>' is a register where your macro will be saved. You can choose any letter you want.
+<h2>Recording the macro</h2>
+Now, perform the steps explained before to format the first line. It's only needed to do it once. It's important that we end up in a state that allows us running next iteration.
+<h2>Saving the macro</h2>
+To save the macro press
+<pre>q</pre>
+This will exit macro recording process.
+<h2>Running the macro</h2>
+While recording the macro we have formatted the first line. Assuming that macro was saved in 'a' register we can process next line by pressing:
+<pre>@a</pre>
+To proceed with remaining four lines of file it's possible to specify number of times macro has to be run:
+<pre>4@a</pre>
+Result will look like following:
+<pre>  &lt;li&gt;&lt;i&gt;"All Along the Watchtower"&lt;/i&gt;, Jimi Hendrix&lt;/li&gt;
+  &lt;li&gt;&lt;i&gt;"Smells Like Teen Spirit"&lt;/i&gt;, Nirvana&lt;/li&gt;
+  &lt;li&gt;&lt;i&gt;"Oops!... I did it again"&lt;/i&gt;, Britney Spears&lt;/li&gt;
+  &lt;li&gt;&lt;i&gt;"A Hard Day's Night"&lt;/i&gt;, The Beatles&lt;/li&gt;
+  &lt;li&gt;&lt;i&gt;"One"&lt;/i&gt;, Metallica&lt;/li&gt;
+  &lt;li&gt;&lt;i&gt;"Lasy Pomorza"&lt;/i&gt;, Behemoth&lt;/li&gt;</pre>
+<h2>Summary</h2>
+Programmer's job is to write programs. By performing repeatable tasks manually we are doing a bad job, because it's a computer's job. Such actions make us numb as there's not much thinking involved. Furthermore we make mistakes and computer repeats the operations with a deadly precision. Incorporating macros in your development skill set will improve your productivity.
+
+If you don't use vim there are macro recorders for most of popular IDEs available. If your editor doesn't support it than still it's possible to use standalone desktop applications which can be easily integrated with tools of your preference.
+
+Other way of performing similar tasks in vim is using regular expressions but it's a subject for another post.

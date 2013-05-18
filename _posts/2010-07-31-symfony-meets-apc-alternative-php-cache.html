@@ -1,0 +1,85 @@
+---
+layout: post
+title: Symfony meets APC (Alternative PHP Cache)
+tags:
+- apc
+- cache
+- doctrine
+- performance
+- php
+- symfony
+- xcache
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  description: Up to last week I was exclusively an XCache user if we talk about PHP
+    accelerators. Recently I needed to use APC with a symfony application. As symfony
+    offers nice APC integration it went quite smooth.
+  keywords: symfony,apc,xcache,performance,doctrine,cache,query,result,routing,view,i18n
+---
+Up to last week I was exclusively an <a title="XCache" href="http://xcache.lighttpd.net/">XCache</a> user if we talk about PHP accelerators. Recently I needed to use <a title="APC" href="http://php.net/apc">APC</a> with a symfony application. As symfony offers nice APC integration it went quite smooth.
+
+Note that just enabling PHP accelerator (any) improves performance because of the opcode caching. That's why it should always be used on the production environment. Most of accelerators also offer API which enables us to cache anything.
+<h2>PHP Accelerators in symfony</h2>
+Taking advantage of the most popular accelerators is really easy in symfony. We are able to change caching strategies for several factories (view, internationalization, routing). We can also cache Doctrine's DQL queries and results.
+
+Symfony not only offers <strong>APC</strong> support with <em>sfAPCCache</em> class but there are also drivers for <strong>XCache</strong> (<em>sfXCacheCache</em>), <strong>EAccelerator</strong> (<em>sfEacceleratorCache</em>), <strong>memcache</strong> (<em>sfMemcacheCache</em>) and <strong>SQLite</strong> (<em>sfSQLiteCache</em>). We can also quite easily implement our own driver by extending sfCache class.
+
+This short tutorial could be also used for any other accelerator. It's just a matter of replacing <em>sfAPCCache</em>/<em>Doctrine_Query_Cache</em> with appropriate classes.
+<h2>Enabling APC in Factories</h2>
+All caching strategies are set to <em>sfFileCache</em> by default. We are able to change the settings for routing, view and i18n in a factory file (i.e. <em>apps/frontend/config/factories.yml</em>):
+<pre>all:
+  routing:
+    class: sfPatternRouting
+    param:
+      generate_shortest_url:            true
+      extra_parameters_as_query_string: true
+      cache:
+        class: sfAPCCache
+        param:
+          automatic_cleaning_factor: 0
+          lifetime:                  31556926
+
+  view_cache:
+    class: sfAPCCache
+
+  i18n:
+    param:
+      cache:
+        class: sfAPCCache
+        param:
+          automatic_cleaning_factor: 0
+          lifetime:                  31556926</pre>
+From now on our routing, view cache and translations will be stored in a memory instead of a hard drive. This way symfony makes a lot less disk operations (which are slow).
+<h2>Enabling DQL and Result Cache in Doctrine</h2>
+Enabling query cache in Doctrine is a quite safe operation. As long as we use prepared statements and don't create queries by string concatenation we don't have to worry. I think query cache can be enabled in most well written projects.
+
+In symfony Doctrine is configured in <em>configureDoctrine()</em> method of the project configuration class (<em>config/ProjectConfiguration.class.php</em>). Enabling query cache is a matter of setting <em>ATTR_QUERY_CACHE</em> attribute:
+<pre>/**
+ * @param Doctrine_Manager $manager
+ * @return null
+ */
+public function configureDoctrine(Doctrine_Manager $manager)
+{
+  $manager-&gt;setAttribute(Doctrine_Core::ATTR_QUERY_CACHE, new Doctrine_Cache_Apc());
+}</pre>
+Enabling result cache might be tricky. It really depends on the project. Various result sets could have different life times. Also, result cannot be cached if we work with quickly changing data ("once it's retrieved it's outdated" kind of thing). Enabling result cache for everything in most situations won't be the best solution:
+<pre>$manager-&gt;setAttribute(Doctrine_Core::ATTR_RESULT_CACHE, new Doctrine_Cache_Apc());</pre>
+It's worth to mention that both query and result caches can be enabled not only on a manager level but also on the connection and query levels:
+<pre>// Connection level result cache
+$connection-&gt;setAttribute(Doctrine_Core::ATTR_RESULT_CACHE, new Doctrine_Cache_Apc());
+
+// Query level query cache
+$query = Doctrine_Query::create()
+  -&gt;useQueryCache(new Doctrine_Cache_Apc());
+
+// Query level result cache
+$query = Doctrine_Query::create()
+  -&gt;useResultCache(new Doctrine_Cache_Apc());</pre>
+Doctrine's documentation offers detailed description of both query and result caches: <a title="Query Cache &amp; Result Cache" href="http://www.doctrine-project.org/documentation/manual/1_2/en/caching:query-cache-&amp;-result-cache">Query Cache &amp; Result Cache</a>.
+<h2>The Future of APC</h2>
+Long time ago I chose XCache because at that time it was better maintained and there was no performance difference. Now that APC is actively developed and there are plans to include it in PHP core I have to reconsider my decision.
+
+What do you use? Why? Did you run any benchmarks?

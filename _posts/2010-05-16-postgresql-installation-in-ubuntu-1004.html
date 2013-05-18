@@ -1,0 +1,29 @@
+---
+layout: post
+title: PostgreSQL installation in Ubuntu 10.04
+tags:
+- installation
+- php
+- postgresql
+- ubuntu
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  description: PostgreSQL is a powerful and reliable object-relational database system.
+    It's a great alternative for MySQL. It is as easy to set up, performs better and
+    offers far more features.
+  keywords: postgresql,ubuntu,installation,php,configuration
+---
+<img class="size-full wp-image-471 alignright" title="PostgreSQL" src="/uploads/wp/2010/05/postgresql.png" alt="PostgreSQL" width="74" height="73" /><a title="PostgreSQL Homepage" href="http://www.postgresql.org/">PostgreSQL</a> is a powerful and reliable object-relational database system. It's a great alternative for MySQL. It is as easy to set up, performs better and offers far more features.
+
+To install PostgreSQL server run:
+<pre>sudo aptitude install postgresql</pre>
+Database users can be created in command line with <em>createuser</em> tool.        Running the following command will create user 'kuba' who is not a superuser, can  create databases, cannot create new roles and his password is stored encrypted. You will be asked to give new user's password as '-P' option is passed.
+<pre>sudo su postgres -c 'createuser -S -d -R -E -P kuba'</pre>
+<strong>Note</strong>: Run <em>createuser</em> with <em>--help</em> switch to get an overview of available options.
+
+There is a similar tool for database creation called createdb:
+<pre>createdb mydatabase</pre>
+<strong>Note</strong>: Read about MySQL in my another post: <a title="MySQL installation in Ubuntu 10.04" href="/mysql-installation-in-ubuntu-1004">MySQL installation in Ubuntu 10.04</a>.

@@ -1,0 +1,49 @@
+---
+layout: post
+title: Setting up a bleeding edge Symfony2 project
+tags:
+- git
+- onTheEdge
+- php
+- Symfony2
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  description: Symfony2 is not ready yet. While playing with it it's good to be always
+    up to date. When you love to know all those nitty-gritty details it's also good
+    to skip the sandbox and generate a fresh project.
+  keywords: Symfony2,bootstrapper,generate,project,git,submodule
+---
+<a title="Symfony2" href="http://symfony-reloaded.org/">Symfony2</a> is not ready yet. Since the release is planned for March this year and I just can't wait any longer I started to play with it more seriously.
+
+I also want to know all those nitty-gritty details. Therefore I didn't go for sandbox and decided to generate a fresh project.
+
+<strong>Warning:</strong> symfony-bootstrapper described in this article is deprecated and not mainained anymore.
+
+There are already several articles describing the process using the <a title="Symfony Bootstrapper on github" href="https://github.com/symfony/symfony-bootstrapper">symfony-bootstrapper</a>:
+<ul>
+	<li><a title="Make your own Symfony2 sandbox (the easy way)" href="http://www.webpragmatist.com/2010/11/make-your-own-symfony2-sandbox.html">Make your own Symfony2 sandbox (the easy way)</a> (by <a title="Chris LeBlanc on twitter" href="http://twitter.com/webPragmatist">@webPragmatist</a>)</li>
+	<li><a title="Symfony2 project initialization" href="http://blog.bearwoods.dk/symfony2-project-initilization">Symfony2 project initialization</a> (by <a title="Henrik Bjørnskov on twitter" href="http://twitter.com/henrikbjorn">@henrikbjorn</a>)</li>
+	<li><a title="Symfony2 project from scratch" href="http://www.fizyk.net.pl/blog/symony2-project-from-scratch">Symfony2 project from scratch</a></li>
+</ul>
+Symfony2 internals are being changed every day. For someone who wants to be always up to date I think it's better to utilize <a title="Git submodules in progit" href="http://progit.org/book/ch6-6.html">git submodules</a> for vendor libraries. Here is slightly modified process of generating your own Symfony2 project.
+
+Let's start with getting the Symfony2 bootstrapper:
+<pre>git clone git://github.com/symfony/symfony-bootstrapper.git ~/workspace/lib/Symfony2-bootstrapper</pre>
+We'll need a project directory and a git repository as well:
+<pre>mkdir ~/workspace/projects/FooBar
+cd ~/workspace/projects/FooBar
+git init .</pre>
+Finally we can initialize a Symfony2 project so the basic directory structure is in place:
+<pre>cd ~/workspace/projects/FooBar
+php ~/workspace/lib/Symfony2-bootstrapper/symfony.phar init --name 'FooBar' --format="yml"
+git add app/ src/ web/
+git commit -m 'Bootstrapped Symfony2 application.'</pre>
+Last but not least we'll install Symfony2 and other vendor libraries as a git submodules:
+<pre>cd ~/workspace/projects/FooBar
+git submodule add git://github.com/symfony/symfony.git src/vendor/symfony
+cat src/vendor/symfony/install_vendors.sh | grep "git clone" | awk '{print "git submodule add "$3" src/vendor/"$4}' | while read line; do $line; done
+git commit -m 'Added vendor submodules.'</pre>
+<strong>Note</strong>: At the moment of writing this there's a <a title="Symfony2 bootstrapper autoloader bug" href="https://github.com/symfony/symfony-bootstrapper/issues#issue/10">small bug in the bootstrapper</a>.  Recently the <a title="UniversalClassLoader moved to its own component" href="https://github.com/symfony/symfony/commit/42f9c556a35af616d3239df64f42c15b98602472">UniversalClassLoader was moved to its own component</a> and it's not yet changed in the bootstrapper (both in the source code and the phar archive). I committed <a title="Fix for UniversalClassLoader path" href="https://github.com/jakzal/symfony-bootstrapper/commit/61abd3eb571b238783218b6f675f4baf59cbcf66">a fix</a> but my <a title="Pull request for UniversalClassLoader fix" href="https://github.com/symfony/symfony-bootstrapper/pull/10">pull request</a> is not yet merged. By the time it happens you can simply modify a path in the <em>src/autoload.php</em> of generated project (replace <em>HttpFoundation </em>with <em>ClassLoader</em> in a path to UniversalClassLoader.php).

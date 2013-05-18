@@ -1,0 +1,102 @@
+---
+layout: post
+title: How to use TextMate like snippets in vim?
+tags:
+- best practices
+- productivity
+- vim
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  description: Snippet is a piece of text which can be pasted into the document. Snippets
+    can increase your productivity by letting you to write common parts of code faster
+    and without mistakes. In vim we have snippet features bundled in snipMate script.
+  keywords: vim,snipMate,snippet,textmate,snippets,productivity
+---
+Snippet is a piece of text which can be pasted into the document. Parts of it can be parametrized or calculated while pasting. Snippets can increase your productivity by letting you to write common chunks of code faster and without mistakes. One of the most famous snippet implementations is included in <a title="TextMate editor" href="http://macromates.com/">TextMate editor</a>. In vim we have some of TextMate's snippet features bundled in <a title="snipMate" href="http://www.vim.org/scripts/script.php?script_id=2540">snipMate script</a>.
+<object width="425" height="344" data="http://www.youtube.com/v/gsMjQP4yxYw&amp;hl=pl&amp;fs=1&amp;" type="application/x-shockwave-flash"><param name="allowFullScreen" value="true" /><param name="allowscriptaccess" value="always" /><param name="src" value="http://www.youtube.com/v/gsMjQP4yxYw&amp;hl=pl&amp;fs=1&amp;" /><param name="allowfullscreen" value="true" /></object>
+<h2>Installation</h2>
+Get snipMate from <a title="snipMate" href="http://www.vim.org/scripts/script.php?script_id=2540">vim website</a> and unpack it to your <em>~/.vim</em> directory.
+<h2>How does it work?</h2>
+Basically you need to write a keyword (called trigger) and press the <em>&lt;TAB&gt;</em> key to replace it with full snippet. For example typing '<em>for</em> ' and pressing <em>&lt;TAB&gt;</em> while editing a PHP file:
+<pre>for&lt;TAB&gt;</pre>
+expands to:
+<pre>for ($i=0; $i &lt; count; $i++)
+{
+}</pre>
+Pressing <em>&lt;TAB&gt;</em> key continuously moves you to the next defined tab stop. In this case you are able to adapt all expressions in 'for' loop and the last <em>&lt;TAB&gt;</em> moves you to the position inside it.
+<h2>Creating custom snippets</h2>
+SnipMate comes with many predefined snippets but once you start using it, you need more. Fortunately it's easy to extend. Snippets are stored in <em>~/.vim/snippets</em> directory. I started with reviewing the existing ones and adapted them to my coding standards. While doing this I got the idea about the snippets' structure and started with creating my own ones.
+<a href="/uploads/wp/2009/08/vim-html-snippets.png"><img class="size-medium wp-image-255 alignright" style="margin-top: 30px;" title="vim html snippets" src="/uploads/wp/2009/08/vim-html-snippets-400x172.png" alt="vim html snippets" width="400" height="172" /></a>
+Snippets are grouped by the file type. It is specified by a prefix in the snippet file name or a directory it was placed in (<em>php.snippets</em> vs <em>php/foreach.snippet</em>). The first version lets you to keep all file type related snippets in one place. The later is used to split your snippets into separate files. Format is slightly different between these two, so to make it simple I'll stick to the first one.
+
+To define a new PHP snippet which expands 'get' keyword into a getter method put the code below into your <em>~/.vim/snippets/php.snippets</em> file:
+<pre>snippet get
+  $this-&gt;get${1}();${2}</pre>
+<strong>Note</strong>: Snippets are indented with hard tabs. First tab is not expanded in the actual snippet.
+
+Our snippet is run by '<em>get</em>' trigger and has two tab stops defined. Firstly cursor is placed after '$this-&gt;get' to let you fill the getter's name. Second tab moves the cursor after the completed statement.
+<h2>Tab stops and placeholders</h2>
+Tab stop is a place where cursor goes next after pressing <em>&lt;TAB&gt;</em> key. The format is:
+<pre>${1}</pre>
+The number defines the order of navigation through the snippet.
+
+<strong>Note</strong>: It's possible to go back to the previous position with <em>&lt;Shift&gt;</em>+<em>&lt;TAB&gt;</em>.
+
+Tab stop can have a placeholder with default value:
+<pre>${2:default}</pre>
+Default value is pasted into the snippet. You can either change it or leave it by moving to the next position.
+
+Placeholder's value can be copied throughout the snippet:
+<pre>Value of ${1:value} is copied here: $1 and here: $1 and snippet ends here: ${2}</pre>
+All occurrences of  the <em>$1</em> variable will be replaced by the provided value. It's also possible to use a variable in an another variable:
+<pre>&lt;div id="${1:id}" name="${2:$1}"&gt;${3}&lt;/div&gt;</pre>
+Once you fill in the <em>id</em> value, it is copied to the <em>name</em> attribute. However, you can still change it if you want.
+<h2>Multiple matches</h2>
+Sometimes its needed to have few versions of the snippet. Good example here is the PHP's foreach statement which I use at least in two variations:
+<ul>
+	<li>in regular PHP code:
+<pre>foreach ($values as $key =&gt; $value)
+{
+  // code here
+}</pre>
+</li>
+	<li>in templates:
+<pre>&lt;?php foreach ($values as $key =&gt; $value): ?&gt;
+  // code here
+&lt;?php endforeach ?&gt;</pre>
+</li>
+</ul>
+Taking into account that <em>$key</em> variable can be omitted, in fact I use four different variations of foreach statement. So I defined all four of them:
+<pre>snippet fore value
+  foreach ($${1:variable} as $${2:value})
+  {
+    ${3}
+  }
+
+snippet fore key =&gt; value
+  foreach ($${1:variable} as $${2:key} =&gt; $${3:value})
+  {
+    ${4}
+  }
+
+snippet fore value (template)
+  &lt;?php foreach ($${1:variable} as $${2:value}): ?&gt;
+    ${3}
+  &lt;?php endforeach ?&gt;
+
+snippet fore key =&gt; value (template)
+  &lt;?php foreach ($${1:variable} as $${2:key} =&gt; $${3:value}): ?&gt;
+    ${4}
+  &lt;?php endforeach ?&gt;</pre>
+Once I run 'fore' trigger vim lets me to choose which version of snippet I would like to use.
+
+<a href="/uploads/wp/2009/08/vim-multisnippet.png"><img class="size-medium wp-image-252 aligncenter" title="vim multi choice snippet" src="/uploads/wp/2009/08/vim-multisnippet-400x176.png" alt="vim multi choice snippet" width="400" height="176" /></a>
+<p style="text-align: center"></p>
+
+<h2>Learn it</h2>
+There are some things about snipMate I didn't mention. For more knowledge visit its <a title="snipMate homepage" href="http://www.vim.org/scripts/script.php?script_id=2540">homepage</a> and read the documentation in <em>~/.vim/doc/snipMate.txt</em>. There are also many snippets available on the Internet which are a good reference.
+<h2>Make it your habit</h2>
+Making usage of snippets a habit for sure will boost your productivity. To take full advantage of it you need to extend your snippet library. I think it's best to create a new snippet once you feel one is missing and directly start using it. Waiting till "next time" lasts through the eternity.

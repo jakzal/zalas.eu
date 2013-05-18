@@ -1,0 +1,34 @@
+---
+layout: post
+title: Heard in the Community (2010.08.01)
+tags:
+- oop
+- php
+- symfony
+- Symfony2
+- wrap up
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  description: Symfony2 development moves forward quickly. Build symfony application
+    in 26 minutes. OOP in scripting languages. Array dereferencing.
+  keywords: symfony,Symfony2,php,oop,array,dereferencing
+---
+<h2>Symfony2</h2>
+Symfony2 development moves forward quickly. Last week the <a title="Symfony2 API Documentation" href="http://api.symfony-reloaded.org/PR2/">API documentation</a> was generated and put online by <a title="Fabien Potencier on twitter" href="http://twitter.com/fabpot">Fabien Potencier</a>. Also, the <a title="Symfony2 Translation Guidelines" href="http://docs.symfony-reloaded.org/contributing/documentation/translations.html">translation process</a> is now described so translators can start contributing.
+
+<a title="Kris Wallsmith" href="http://twitter.com/kriswallsmith">Kris Wallsmith</a> wrote a short introduction to Symfony2 helpers: <a title="How to create a Symfony2 templating helper" href="http://kriswallsmith.net/post/878278731/how-to-create-a-symfony2-templating-helper">How to create a Symfony2 templating helper</a>. Finally helpers are implemented as classes!
+<h2>symfony application in 26 minutes</h2>
+Want to see an application built in 26 minutes? <a title="Tommy Boutell on twitter" href="http://twitter.com/tommybgoode">Tom Boutell</a> posted <a title="Symfony Almost Live" href="http://window.punkave.com/2010/07/30/symfony-almost-live/">Symfony Almost Live</a> screencast on punk'd avenue window showing just that. It's a good introduction for newbies in a symfony framework.
+<h2>OOP in scripting languages</h2>
+I accidentally came across a blog post titled <a title="Do Web-Scripting Languages Really Need OOP?" href="http://iamlearningphp.blogspot.com/2010/07/do-web-scripting-languages-really-need.html">Do Web-Scripting Languages Really Need OOP?</a> I also found an answer to that question on <a title="Invisible to the eye" href="http://giorgiosironi.blogspot.com">Invisible to the eye</a> blog: <a title="Missing the point (OOP in scripting languages)" href="http://giorgiosironi.blogspot.com/2010/07/missing-point-oop-in-scripting.html">Missing the point (OOP in scripting languages)</a>. I totally agree with the later.
+<h2>Features in PHP trunk: Array dereferencing</h2>
+<a title="Features in PHP trunk: Array dereferencing" href="http://schlueters.de/blog/archives/138-Features-in-PHP-trunk-Array-dereferencing.html">Array dereferencing </a>is a new feature which just got into the PHP trunk. It allows you to do stuff like:
+<pre>function getData() {
+  return array(1, 2, 3);
+}
+
+echo getData()[1];</pre>
+Hopefully it'll also work with native PHP functions.
