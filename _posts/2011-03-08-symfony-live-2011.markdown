@@ -1,0 +1,98 @@
+---
+author: admin
+comments: true
+date: 2011-03-08 02:18:39
+layout: post
+slug: symfony-live-2011
+title: Symfony Live 2011
+wordpress_id: 618
+tags:
+- conference
+- php
+- sflive2011
+- Symfony2
+---
+
+![Symfony Live 2011 in Paris](/uploads/wp/2011/03/symfony-live-2011-paris.png)I'm writing this post on a way back from the second international [Symfony Live conference](http://www.symfony-live.com/paris). Nearly 500 developers arrived to Paris from all over the world to participate in this great event.
+
+
+## Presentations
+
+
+Quality of both the main sessions and unconference talks was really good.  There were some glitches but in general they didn't influence my perception of the whole conference.  Symfony attracts great developers (or **makes** them great developers).
+
+During the two main sessions and one unconference track we could listen to an excellent talks about the best tools and practices. I really enjoyed them and learned a lot.
+
+I won't dig into the details as [Christian](http://twitter.com/caefer) and [Tom](http://twitter.com/boutell) already did it:
+
+
+
+	
+  * [My resume of Symfony Live Paris 2011 (including slides)](http://test.ical.ly/2011/03/07/my-resume-of-symfony-live-paris-2011-including-slides/comment-page-1/)
+
+	
+  * [Symfony Live 2011 in Paris – Day 1 – (almost) live](http://test.ical.ly/2011/03/03/symfony-live-2011-in-paris-day-1-almost-live/)
+
+	
+  * [Symfony Live 2011 in Paris – Day 2 – (almost) live](http://test.ical.ly/2011/03/04/symfony-live-2011-in-paris-%E2%80%93-day-2-%E2%80%93-almost-live/)
+
+	
+  * [Liveblogging Symfony Live Paris](http://window.punkave.com/2011/03/03/liveblogging-symfony-live-paris/)
+
+	
+  * [Liveblogging Symfony Live Paris: Unconference Day](http://window.punkave.com/2011/03/04/liveblogging-symfony-live-paris-unconference-day/)
+
+
+It's worth to take a look at [attendee's feedback](http://joind.in/event/view/561) as well (leave your comments if you attended the conference!).
+
+
+## Networking
+
+
+[![ElePHPant playing near the Eiffel Tower](/uploads/wp/2011/03/elephpant-eiffel-tower-300x400.jpg)](/uploads/wp/2011/03/elephpant-eiffel-tower.jpg)I have to admit that main sessions are not enough for a regular attendee of conferences. Luckily there's plenty of time to talk with the speakers and other attendees. I really enjoyed chatting with others both during the conference and later in the pub.
+
+On Friday the [Github Meetup](http://symfony.com/blog/we-re-cheering-again-for-github) was held again in the Patrick's Irish Pub. It's open for everyone and many people outside of the Symfony community showed up. Weka Entertainment sponsored Thursday evening.
+
+Apart from organized events there were some more spontaneous ones. Twitter proved itself to be a great tool for communication and localization.
+
+
+## One more thing...
+
+
+![](/uploads/wp/2011/03/sflogo.png)During the last keynote big news were announced. Symfony got a brand new logo and a new website in [symfony.com](http://symfony.com) domain. Listening to the keynote was a great experience.
+
+[Fabien](http://twitter.com/fabpot) built a remarkable atmosphere starting with [Symfony2 Source Code Evolution](http://www.youtube.com/watch?v=w1C0TjCr76I).
+
+Music created a special vibes lasting till the end of the conference.
+
+Fabien summarized years of work on both Symfony versions, presented some statistics and thanked all the contributors.
+
+Community shares a big part of contributions since Symfony is hosted on Github.  Fabien joked that from the **Lead Developer** he became a **Lead Merger**.
+
+Giving feedback and applying patches is way easier with Github. People are testing the framework really early in the development process and the API evolves into more user friendly one. This way it's not only **designed** but also **used**.
+
+Amount of ideas coming from the community is one of the reasons of delayed release. API should remain unchanged for a several years. Core developers are working hard to freeze it now. I think it's better to wait and have it right than hurry and struggle with it later.
+
+One of the basic principles of Symfony is to be **simple for beginners** and **powerful for advanced** users. That's why an idea of various Symfony distributions was born. Beginners will be happy with kitchen sink distribution containing a web installer and all the bundles required to start (without too much additional actions). Advanced users will get a minimal distribution with only basic bundles required to run the framework. Potentially more specialized distributions will be created (like CMS Distribution). Of course we shouldn't forget about the [Hello World Distribution](https://github.com/symfony/symfony-hello-world) optimized for the Hello World Benchmarks ;)
+
+Also, with newcomers in mind a special documentation will be created covering basic knowledge required to start with Symfony.
+
+
+## Hacking Day
+
+
+Hacking Day was opened for everyone and quite some group of people showed up. We worked on the documentation and writing tests for Symfony2. Some of us were digging into the Symfony Components with a help of several core developers.
+
+I managed to write several simple tests. I noticed that it's a great way to learn about the Symfony internals. Writing a test requires analyzing an existing tests and than digging into the code under the test. You can learn a lot while doing that.
+
+
+## What's next?
+
+
+I'm really inspired and my head is full of new ideas. I can't wait until I'm back in the office so I could bring them to life ;)
+
+Until that happens I'm planning to fill the gaps in HTTP protocol knowledge by reading [HTTP specification](http://www.w3.org/Protocols/rfc2616/rfc2616.html) finally. Also, I want to have a closer look at queues with [RabbitMQ](http://www.rabbitmq.com/), HTTP caching and [Varnish](http://www.varnish-cache.org/). I'm putting "[High Performance Web Sites: Essential Knowledge for Front-End Engineers](http://www.goodreads.com/book/show/1681559.High_Performance_Web_Sites)" book on the "[to read](http://www.goodreads.com/review/list/2402977-jakub-zalas?shelf=to-read)" shelf.
+
+
+
+[Symfony Live 2011 Photos](https://picasaweb.google.com/jzalas/SymfonyLive2011?feat=directlink#)
