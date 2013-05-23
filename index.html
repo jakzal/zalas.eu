@@ -4,20 +4,21 @@ title: Blog
 ---
 
 <h1>Jakub Zalas</h1>
+
 <div class="row-fluid">
-    {% for post in site.posts limit:5 %}
-        {% if forloop.first %}
-            <div class="span12">
-                {% include postExcerpt.html %}
-            </div>
-        {% else %}
-            {% capture thecycle %}{% cycle 'odd', 'even' %}{% endcapture %}
-            {% if thecycle == 'odd' %}<div class="row-fluid">{% endif %}
-            <div class="span6">
-                {% include postExcerpt.html %}
-            </div>
-            {% if thecycle == 'even' %}</div>{% endif %}
-        {% endif %}
+    {% for post in site.posts limit:1 %}
+        <div class="span12">
+            {% include postExcerpt.html %}
+        </div>
     {% endfor %}
+    <div class="row-fluid">
+        <div class="span8">
+            <ul class="posts unstyled">
+                {% for post in site.posts limit:10 offset:1 %}
+                    <li>{% include postListItem.html %}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
 </div>
 

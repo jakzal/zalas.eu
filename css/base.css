@@ -6,3 +6,26 @@ a, a:hover, a:visited {
 img {
 }
 
+ul.posts li {
+    font-size: 20px;
+    margin-bottom: 10px;
+    line-height: 1.2em;
+}
+
+ul.posts li time {
+    font-family:monospace;
+    color: #efefef;
+}
+
+.tag-cloud {
+    font-size: 22px;
+    vertical-align: center;
+}
+
+.tag-cloud li {
+    margin: 5px 5px 10px 5px;
+}
+
+.tag-cloud li .icon-tag, .tag-cloud li .label {
+    vertical-align: middle;
+}
