@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2009-04-27 15:33:16
 layout: post
@@ -13,69 +13,88 @@ tags:
 - symfony
 ---
 
-Putting the CSS stylesheets at the top of your web page and moving the scripts to the bottom are only two of thirty four rules described in [Best Practices for Speeding Up Your Website](http://developer.yahoo.com/performance/rules.html) (by Yahoo). Following these two rules, however, can really decrease visible time of page rendering. I will present a simple solution to achieve this in [symfony](http://www.symfony-project.org/) framework.
+Putting the CSS stylesheets at the top of your web page and moving the scripts
+to the bottom are only two of thirty four rules described in
+[Best Practices for Speeding Up Your Website](http://developer.yahoo.com/performance/rules.html)
+(by Yahoo).
+Following these two rules, however, can really decrease visible time of page
+rendering. I will present a simple solution to achieve this in
+[symfony](http://www.symfony-project.org/) framework.
 
-Whenever you invoke _use_javascript_ and _use_stylesheet_ helpers your JavaScripts and stylesheets are not directly put into the content. This task is given to _sfCommonFilter_ which is responsible for injecting JavaScript and stylesheet includes right before _</head>_ tag. Thanks to that we can safely request inclusion of the same file multiple of times and it's pasted into the content only once. It's nice but can be slightly improved by following the earlier mentioned Yahoo rules.
+Whenever you invoke *use_javascript* and *use_stylesheet* helpers your
+JavaScripts and stylesheets are not directly put into the content. This task is
+given to *sfCommonFilter* which is responsible for injecting JavaScript and
+stylesheet includes right before *</head>* tag. Thanks to that we can safely
+request inclusion of the same file multiple of times and it's pasted into the
+content only once. It's nice but can be slightly improved by following the
+earlier mentioned Yahoo rules.
 
-Stylesheets are already at the top. The only thing left is to move JavaScripts right before the _</body>_ tag.  To do that we will have to overwrite the _sfCommonFilter_ class. Thankfully it's just a matter of small changes in the original class. I used the original code and changed the way the scripts are injected.
+Stylesheets are already at the top. The only thing left is to move JavaScripts
+right before the *</body>* tag.  To do that we will have to overwrite the
+*sfCommonFilter* class. Thankfully it's just a matter of small changes in the
+original class. I used the original code and changed the way the scripts are
+injected.
 
-    
-    class zCommonFilter extends sfFilter
+{% highlight php startinline %}
+class zCommonFilter extends sfFilter
+{
+  public function execute($filterChain)
+  {
+    $filterChain->execute();
+
+    $response = $this->context->getResponse();
+
+    // include stylesheets
+    $content = $response->getContent();
+    if (false !== ($pos = strpos($content, '</head>')))
     {
-      public function execute($filterChain)
+      $this->context->getConfiguration()->loadHelpers(array('Tag', 'Asset'));
+      $html = '';
+      if (!sfConfig::get('symfony.asset.stylesheets_included', false))
       {
-        $filterChain->execute();
-    
-        $response = $this->context->getResponse();
-    
-        // include stylesheets
-        $content = $response->getContent();
-        if (false !== ($pos = strpos($content, '</head>')))
+        $html.= get_stylesheets($response);
+
+        if ($html)
         {
-          $this->context->getConfiguration()->loadHelpers(array('Tag', 'Asset'));
-          $html = '';
-          if (!sfConfig::get('symfony.asset.stylesheets_included', false))
-          {
-            $html.= get_stylesheets($response);
-    
-            if ($html)
-            {
-              $response->setContent(substr($content, 0, $pos) . $html . substr($content, $pos));
-            }
-          }
+          $response->setContent(substr($content, 0, $pos) . $html . substr($content, $pos));
         }
-    
-        // include javascripts
-        $content = $response->getContent();
-        if (false !== ($pos = strpos($content, '</body>')))
-        {
-          $this->context->getConfiguration()->loadHelpers(array('Tag', 'Asset'));
-          $html = '';
-          if (!sfConfig::get('symfony.asset.javascripts_included', false))
-          {
-            $html.= get_javascripts($response);
-    
-            if ($html)
-            {
-              $response->setContent(substr($content, 0, $pos) . $html . substr($content, $pos));
-            }
-          }
-        }
-    
-        sfConfig::set('symfony.asset.javascripts_included', false);
-        sfConfig::set('symfony.asset.stylesheets_included', false);
       }
     }
 
+    // include javascripts
+    $content = $response->getContent();
+    if (false !== ($pos = strpos($content, '</body>')))
+    {
+      $this->context->getConfiguration()->loadHelpers(array('Tag', 'Asset'));
+      $html = '';
+      if (!sfConfig::get('symfony.asset.javascripts_included', false))
+      {
+        $html.= get_javascripts($response);
 
-Now we just need to tell symfony to use our version of the common filter instead of the default one. As always we do it in _filters.yml_ file of chosen application:
+        if ($html)
+        {
+          $response->setContent(substr($content, 0, $pos) . $html . substr($content, $pos));
+        }
+      }
+    }
 
-    
-    rendering: ~
-    security:  ~
-    cache:     ~
-    
-    common:
-      class: zCommonFilter
-    
-    execution: ~
+    sfConfig::set('symfony.asset.javascripts_included', false);
+    sfConfig::set('symfony.asset.stylesheets_included', false);
+  }
+}
+{% endhighlight %}
+
+Now we just need to tell symfony to use our version of the common filter instead
+of the default one. As always we do it in _filters.yml_ file of chosen
+application:
+
+{% highlight yaml %}
+rendering: ~
+security:  ~
+cache:     ~
+
+common:
+  class: zCommonFilter
+
+execution: ~
+{% endhighlight %}
