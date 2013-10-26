@@ -3,8 +3,12 @@ layout: default
 ---
 
 <h1>{{ page.title }}</h1>
-<ul class="posts unstyled">
+
+<div class="posts list-group">
     {% for post in site.tags[page.tag] %}
-        <li>{% include postListItem.html %}</li>
+    <a href="{{ site.url.main }}{{ post.url }}" class="list-group-item">
+        <span class="pull-right post-date">{% include postDate.html %}</span>
+        <h2 class="list-group-item-heading">{{ post.title }}</h2>
+    </a>
     {% endfor %}
-</ul>
+</div>

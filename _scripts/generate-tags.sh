@@ -5,7 +5,7 @@ tags_dir="tag"
 tag_file=$(cat <<EOF
 ---
 layout: tags
-title: Pages tagged with "%TAG%"
+title: Pages labeled with "%TAG%"
 tag: %TAG%
 ---
 EOF

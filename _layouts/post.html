@@ -3,12 +3,14 @@ layout: default
 ---
 
 <h1>{{ page.title }}</h1>
-<div class="post-date">{% include postDate.html %}</div>
-<ul class="inline tag-cloud post-tag-cloud">
+<div class="post-date pull-right">{% include postDate.html %}</div>
+<ul class="list-unstyled list-inline tag-cloud post-tag-cloud">
     {% for tag in page.tags %}
         <li>
-            <i class="icon-tag"></i>
-            <a href="{{ site.url.main }}/tag/{{ tag | slugize }}">{{ tag }}</a>
+            <span class="glyphicon glyphicon-tag"></span>
+            <a href="{{ site.url.main }}/tag/{{ tag | slugize }}">
+                <span class="list-group-item-heading">{{ tag }}</span>
+            </a>
         </li>
     {% endfor %}
 </ul>

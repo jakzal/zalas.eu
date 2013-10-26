@@ -5,10 +5,34 @@ hideNavigation: yes
 ---
 
 <div class="posts list-group">
-    {% for post in site.posts limit:10 %}
+    {% for post in paginator.posts %}
     <a href="{{ site.url.main }}{{ post.url }}" class="list-group-item">
-        <span class="badge">{% include postDate.html %}</span>
+        <span class="pull-right post-date">{% include postDate.html %}</span>
         <h2 class="list-group-item-heading">{{ post.title }}</h2>
     </a>
     {% endfor %}
+    <ul class="pager">
+        {% if paginator.previous_page %}
+            <li class="previous">
+                {% if paginator.previous_page == 1 %}
+                    <a href="/">Previous</a>
+                {% else %}
+                    <a href="{{ paginator.previous_page_path }}">Previous</a>
+                {% endif %}
+            </li>
+        {% else %}
+            <li class="previous disabled">
+                <a href="#">Previous</a>
+            </li>
+        {% endif %}
+        {% if paginator.next_page %}
+            <li class="next">
+                <a href="{{ paginator.next_page_path }}">Next</a>
+            </li>
+        {% else %}
+            <li class="next disabled">
+                <a href="#">Next</a>
+            </li>
+        {% endif %}
+    </ul>
 </div>

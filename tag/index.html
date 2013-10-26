@@ -1,8 +1,8 @@
 ---
 layout: default
-title: Blog post tags
+title: Blog post labels
 ---
-<h1>Blog post tags</h1>
+<h1>Blog post labels</h1>
 
 {% assign tags_max = 0 %}
 {% for tag in site.tags %}
@@ -11,7 +11,7 @@ title: Blog post tags
     {% endif %}
 {% endfor %}
 
-<ul class="unstyled inline tag-cloud">
+<ul class="tag-cloud row list-unstyled">
     {% for i in (1..tags_max) reversed %}
         {% for tag in site.tags %}
             {% if tag[1].size == i %}
@@ -25,10 +25,14 @@ title: Blog post tags
                 {% else %}
                     {% assign style = '' %}
                 {% endif %}
-                <li>
-                    <i class="icon-tag"></i>
-                    <a href="{{ site.url.main }}/tag/{{ tag | first | slugize }}">{{ tag | first }}</a>
-                    <span class="label{{ style }}">{{ tag | last | size }}</span>
+                <li class="col-md-3 col-sm-4 col-xs-12">
+                    <span class="glyphicon glyphicon-tag"></span>
+                    <a href="{{ site.url.main }}/tag/{{ tag | first | slugize }}">
+                        <span>{{ tag | first }}</span>
+                        {% if style != '' %}
+                            <span class="label{{ style }} pull-right">{{ tag | last | size }}</span>
+                        {% endif %}
+                    </a>
                 </li>
             {% endif %}
         {% endfor %}
