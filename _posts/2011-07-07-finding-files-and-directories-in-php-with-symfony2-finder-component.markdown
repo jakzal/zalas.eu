@@ -32,16 +32,18 @@ We'll let Symfony ClassLoader component to take care of the class autoloading. R
 Following code is sufficient to load classes from any Symfony component (assuming components are put into the _vendor/Symfony/Component_ directory):
 
     
-    <?php
-    // src/autoload.php
-    require_once __DIR__.'/../vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
-    
-    $loader = new Symfony\Component\ClassLoader\UniversalClassLoader();
-    $loader->registerNamespaces(array(
-        'Symfony' => __DIR__.'/../vendor',
-        'PSS'     => __DIR__
-    ));
-    $loader->register();
+{% highlight php %}
+<?php
+// src/autoload.php
+require_once __DIR__.'/../vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+
+$loader = new Symfony\Component\ClassLoader\UniversalClassLoader();
+$loader->registerNamespaces(array(
+    'Symfony' => __DIR__.'/../vendor',
+    'PSS'     => __DIR__
+));
+$loader->register();
+{% endhighlight %}
 
 
 
@@ -54,44 +56,48 @@ Basically all we'll ever need is to create a Finder object with _create()_ metho
 For example, to list all Symfony components installed in _vendor/Symfony/Component_ directory we could write the following script:
 
     
-    <?php
-    // finderdir.php
-    require_once __DIR__.'/src/autoload.php';
-    
-    use Symfony\Component\Finder as Finder;
-    
-    $components = Finder\Finder::create()
-        ->directories()
-        ->depth(0)
-        ->in('vendor/Symfony/Component');
-    
-    echo "Installed Symfony components:\n";
-    foreach ($components as $dir) {
-        printf("* %s \n", $dir->getFilename());
-    }
+{% highlight php %}
+<?php
+// finderdir.php
+require_once __DIR__.'/src/autoload.php';
+
+use Symfony\Component\Finder as Finder;
+
+$components = Finder\Finder::create()
+    ->directories()
+    ->depth(0)
+    ->in('vendor/Symfony/Component');
+
+echo "Installed Symfony components:\n";
+foreach ($components as $dir) {
+    printf("* %s \n", $dir->getFilename());
+}
+{% endhighlight %}
 
 
 To show more sophisticated example, here's how we'd search for files matching the _/^He.+Command.php$/_ pattern, which are smaller than _4kb_ and were modified _till yesterday_. Results will be sorted by _file name_ and we'll look for them in the _current directory_:
 
     
-    <?php
-    // finder.php
-    require_once __DIR__.'/src/autoload.php';
-    
-    use Symfony\Component\Finder as Finder;
-    
-    $files = Finder\Finder::create()
-        ->files()
-        ->name('/^He.+Command.php$/')
-        ->size('<4k')
-        ->date('until yesterday')
-        ->sortByName()
-        ->in('.');
-    
-    echo "Command files starting with 'He' below 4k modified untill yesterday:\n";
-    foreach ($files as $file) {
-        printf("* %s %s\n", $file->getFilename(), date('Y-m-d H:i', $file->getMTime()));
-    }
+{% highlight php %}
+<?php
+// finder.php
+require_once __DIR__.'/src/autoload.php';
+
+use Symfony\Component\Finder as Finder;
+
+$files = Finder\Finder::create()
+    ->files()
+    ->name('/^He.+Command.php$/')
+    ->size('<4k')
+    ->date('until yesterday')
+    ->sortByName()
+    ->in('.');
+
+echo "Command files starting with 'He' below 4k modified untill yesterday:\n";
+foreach ($files as $file) {
+    printf("* %s %s\n", $file->getFilename(), date('Y-m-d H:i', $file->getMTime()));
+}
+{% endhighlight %}
 
 
 Easy, isn't it?

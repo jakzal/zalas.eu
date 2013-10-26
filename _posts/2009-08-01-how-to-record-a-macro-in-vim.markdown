@@ -49,49 +49,25 @@ First, it's good to think what actually should be recorded. For purpose of this 
 
 To format first line of file in vim you could perform the following commands:
 
+* Go to the beginning of line by pressing _^_
 
+  ```"All Along the Watchtower", Jimi Hendrix```
 
-	
-  * Go to the beginning of line by pressing _^_
+* Turn on insert mode (_i_), add two spaces and opening html tags: `<li><i>`
 
-    
-    "All Along the Watchtower", Jimi Hendrix
+  ```<li><i>"All Along the Watchtower", Jimi Hendrix```
 
+* Exit insert mode (_ESC_), move the cursor to the next comma location: _f,_
 
+* Turn on insert mode (_i_) and add italics ending tag: _</i>_
 
+  ```<li><i>"All Along the Watchtower"</i>, Jimi Hendrix```
 
-	
-  * Turn on insert mode (_i_) , add two spaces and opening html tags:   `<li><i>`
+* Exit insert mode (_ESC_), go to the end of line in insert mode (_A_) and add list closing tag _</li>_
 
-    
-      <li><i><span style="text-decoration: underline;">"</span>All Along the Watchtower", Jimi Hendrix
+  ```<li><i>"All Along the Watchtower"</i>, Jimi Hendrix</li>```
 
-
-
-
-	
-  * Exit insert mode (_ESC_), move the cursor to the next comma location: _f,_
-
-	
-  * Turn on insert mode (_i_) and add italics ending tag: _</i>_
-
-    
-      <li><i>"All Along the Watchtower"</i>, Jimi Hendrix
-
-
-
-
-	
-  * Exit insert mode (_ESC_), go to the end of line in insert mode (_A_) and add list closing tag _</li>_
-
-    
-      <li><i>"All Along the Watchtower"</i>, Jimi Hendrix</li>
-
-
-
-
-	
-  * Leave insert mode (_ESC_) and go to the next line
+* Leave insert mode (_ESC_) and go to the next line
 
 
 The rest of lines can be formatted the same way. As you can see it could be quite a big and tedious job, especially with a large file. It's better when computer does it for us.
@@ -102,7 +78,7 @@ The rest of lines can be formatted the same way. As you can see it could be quit
 
 To start macro recording process press
 
-    
+
     qa
 
 
@@ -120,7 +96,7 @@ Now, perform the steps explained before to format the first line. It's only need
 
 To save the macro press
 
-    
+
     q
 
 
@@ -132,19 +108,19 @@ This will exit macro recording process.
 
 While recording the macro we have formatted the first line. Assuming that macro was saved in 'a' register we can process next line by pressing:
 
-    
+
     @a
 
 
 To proceed with remaining four lines of file it's possible to specify number of times macro has to be run:
 
-    
+
     4@a
 
 
 Result will look like following:
 
-    
+
       <li><i>"All Along the Watchtower"</i>, Jimi Hendrix</li>
       <li><i>"Smells Like Teen Spirit"</i>, Nirvana</li>
       <li><i>"Oops!... I did it again"</i>, Britney Spears</li>

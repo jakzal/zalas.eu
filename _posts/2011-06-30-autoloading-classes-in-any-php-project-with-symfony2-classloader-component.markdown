@@ -40,49 +40,55 @@ Let's say we have two Acme libraries.
 First one is located in the  _src/Acme/Tools_. _HelloWorld_ class uses _Acme\Tools _namespace and is declared in the _src/Acme/Tools/HelloWorld.php_ file:
 
     
-    <?php
-    // src/Acme/Tools/HelloWorld.php
-    
-    namespace Acme\Tools;
-    
-    class HelloWorld
+{% highlight php %}
+<?php
+// src/Acme/Tools/HelloWorld.php
+
+namespace Acme\Tools;
+
+class HelloWorld
+{
+    public function __construct()
     {
-        public function __construct()
-        {
-            echo __METHOD__."\n";
-        }
+        echo __METHOD__."\n";
     }
+}
+{% endhighlight %}
 
 
 Second library is stored in the _src/Legacy/Acme/Tools_. It follows old but well known PEAR naming standards. _Legacy_Acme_Tools_HelloWorld_ class is defined in the _src/Legacy/Acme/Tools/HelloWorld.php_ file:
 
     
-    <?php
-    // src/Legacy/Acme/Tools/HelloWorld.php
-    
-    class Legacy_Acme_Tools_HelloWorld
+{% highlight php %}
+<?php
+// src/Legacy/Acme/Tools/HelloWorld.php
+
+class Legacy_Acme_Tools_HelloWorld
+{
+    public function __construct()
     {
-        public function __construct()
-        {
-               echo __METHOD__."\n";
-        }
+           echo __METHOD__."\n";
     }
+}
+{% endhighlight %}
 
 
 To make that our classes are automatically loaded we have to register _Acme_ namespace and _Legacy__ prefix:
 
     
-    <?php
-    // classloader.php
-    
-    require_once __DIR__.'/vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
-    $loader = new Symfony\Component\ClassLoader\UniversalClassLoader();
-    $loader->registerNamespaces(array('Acme' => __DIR__ . '/src'));
-    $loader->registerPrefixes(array('Legacy_' => __DIR__ . '/src'));
-    $loader->register();
-    
-    $helloWorld = new Acme\Tools\HelloWorld();
-    $legacyHelloWorld = new Legacy_Acme_Tools_HelloWorld();
+{% highlight php %}
+<?php
+// classloader.php
+
+require_once __DIR__.'/vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+$loader = new Symfony\Component\ClassLoader\UniversalClassLoader();
+$loader->registerNamespaces(array('Acme' => __DIR__ . '/src'));
+$loader->registerPrefixes(array('Legacy_' => __DIR__ . '/src'));
+$loader->register();
+
+$helloWorld = new Acme\Tools\HelloWorld();
+$legacyHelloWorld = new Legacy_Acme_Tools_HelloWorld();
+{% endhighlight %}
 
 
 Of course classes are only loaded when needed. Requiring _UniversalClassLoader.php_ file should be the only _require_ statement used in our code. Other classes should be loaded by the class loader.
@@ -96,19 +102,21 @@ Of course classes are only loaded when needed. Requiring _UniversalClassLoader.p
 Number of class files in a real-world project is rather big. Class loader might have some impact on performance as it checks for file existence before requiring it. To avoid disk operations we can cache results in APC with _ApcUniversalClassLoader_:
 
     
-    <?php
-    // classloadercached.php
-    
-    require_once __DIR__.'/vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
-    require_once __DIR__.'/vendor/Symfony/Component/ClassLoader/ApcUniversalClassLoader.php';
-    
-    $loader = new Symfony\Component\ClassLoader\ApcUniversalClassLoader('ClassLoader');
-    $loader->registerNamespaces(array('Acme' => __DIR__ . '/src'));
-    $loader->registerPrefixes(array('Legacy_' => __DIR__ . '/src'));
-    $loader->register();
-    
-    $helloWorld = new Acme\Tools\HelloWorld();
-    $legacyHelloWorld = new Legacy_Acme_Tools_HelloWorld();
+{% highlight php %}
+<?php
+// classloadercached.php
+
+require_once __DIR__.'/vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+require_once __DIR__.'/vendor/Symfony/Component/ClassLoader/ApcUniversalClassLoader.php';
+
+$loader = new Symfony\Component\ClassLoader\ApcUniversalClassLoader('ClassLoader');
+$loader->registerNamespaces(array('Acme' => __DIR__ . '/src'));
+$loader->registerPrefixes(array('Legacy_' => __DIR__ . '/src'));
+$loader->register();
+
+$helloWorld = new Acme\Tools\HelloWorld();
+$legacyHelloWorld = new Legacy_Acme_Tools_HelloWorld();
+{% endhighlight %}
 
 
 **Note**: Examples are run in a command line. Therefore there's no performance gain from using APC. In fact it can hurt performance as cache is initialized every time our script is run in cli. This is a limitation of APC.

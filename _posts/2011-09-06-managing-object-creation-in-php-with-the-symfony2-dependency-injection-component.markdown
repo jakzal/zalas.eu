@@ -46,17 +46,19 @@ Symfony _ClassLoader_ component will take care of the class autoloading (_read m
 Following code is sufficient to load classes from an any Symfony component (assuming components are put into the _vendor/Symfony/Component_ directory):
 
     
-    <?php
-    // src/autoload.php
-    require_once __DIR__.'/../vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
-    
-    $loader = new Symfony\Component\ClassLoader\UniversalClassLoader();
-    $loader->registerNamespaces(array(
-        'Symfony' => __DIR__.'/../vendor',
-        'Buzz'    => __DIR__.'/../vendor/Buzz/lib',
-        'PSS'     => __DIR__
-    ));
-    $loader->register();
+{% highlight php %}
+<?php
+// src/autoload.php
+require_once __DIR__.'/../vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+
+$loader = new Symfony\Component\ClassLoader\UniversalClassLoader();
+$loader->registerNamespaces(array(
+    'Symfony' => __DIR__.'/../vendor',
+    'Buzz'    => __DIR__.'/../vendor/Buzz/lib',
+    'PSS'     => __DIR__
+));
+$loader->register();
+{% endhighlight %}
 
 
 
@@ -105,18 +107,20 @@ One of the solutions is to **centralize the object creation**. Dependency Inject
 Instead of creating Browser object explicitly, we'll just **tell the container how to do it**:
 
     
-    <?php
-    // dependencyinjection.php
-    
-    require_once __DIR__.'/src/autoload.php';
-    
-    use Symfony\Component\DependencyInjection\ContainerBuilder;
-    use Symfony\Component\DependencyInjection\Definition;
-    
-    $serviceContainer = new ContainerBuilder();
-    
-    $browserDefinition = new Definition('Buzz\Browser');
-    $serviceContainer->setDefinition('browser', $browserDefinition);
+{% highlight php %}
+<?php
+// dependencyinjection.php
+
+require_once __DIR__.'/src/autoload.php';
+
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
+
+$serviceContainer = new ContainerBuilder();
+
+$browserDefinition = new Definition('Buzz\Browser');
+$serviceContainer->setDefinition('browser', $browserDefinition);
+{% endhighlight %}
 
 
 And then **ask it for the service**:
@@ -129,19 +133,21 @@ And then **ask it for the service**:
 To replace the default HTTP client with Curl we might define another service and pass it to the browser as a reference:
 
     
-    <?php
-    // dependencyinjection.php
-    
-    // ...
-    
-    $serviceContainer = new ContainerBuilder();
-    
-    $clientDefinition = new Definition('Buzz\Client\Curl');
-    $clientDefinition->addMethodCall('setTimeout', array(15));
-    $serviceContainer->setDefinition('browser.client', $clientDefinition);
-    
-    $browserDefinition = new Definition('Buzz\Browser', array(new Reference('browser.client')));
-    $serviceContainer->setDefinition('browser', $browserDefinition);
+{% highlight php %}
+<?php
+// dependencyinjection.php
+
+// ...
+
+$serviceContainer = new ContainerBuilder();
+
+$clientDefinition = new Definition('Buzz\Client\Curl');
+$clientDefinition->addMethodCall('setTimeout', array(15));
+$serviceContainer->setDefinition('browser.client', $clientDefinition);
+
+$browserDefinition = new Definition('Buzz\Browser', array(new Reference('browser.client')));
+$serviceContainer->setDefinition('browser', $browserDefinition);
+{% endhighlight %}
 
 
 Notice that even though object creation becomes more and more complicated we **manage it in one place**.
@@ -192,43 +198,47 @@ Following XML file describes the same services we defined in PHP before:
 Loading the service definitions into the container is fairly simple. We need to create a _CotnainerBuilder_ and pass it to an _XmlFileLoader_ which will do all the work for us:
 
     
-    <?php
-    // dependencyinjectionloader.php
-    
-    require_once __DIR__.'/src/autoload.php';
-    
-    use Symfony\Component\DependencyInjection\ContainerBuilder;
-    use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-    use Symfony\Component\Config\FileLocator;
-    
-    /**
-     * Loading services
-     */
-    
-    $serviceContainer = new ContainerBuilder();
-    $loader = new XmlFileLoader($serviceContainer, new FileLocator(__DIR__.'/config'));
-    $loader->load('buzz.xml');
-    
-    /**
-     * Using services
-     */
-    
-    $browser = $serviceContainer->get('browser');
-    $response = $browser->get('http://www.google.com/');
+{% highlight php %}
+<?php
+// dependencyinjectionloader.php
+
+require_once __DIR__.'/src/autoload.php';
+
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\Config\FileLocator;
+
+/**
+ * Loading services
+ */
+
+$serviceContainer = new ContainerBuilder();
+$loader = new XmlFileLoader($serviceContainer, new FileLocator(__DIR__.'/config'));
+$loader->load('buzz.xml');
+
+/**
+ * Using services
+ */
+
+$browser = $serviceContainer->get('browser');
+$response = $browser->get('http://www.google.com/');
+{% endhighlight %}
 
 
 The opposite works equally well. To dump service definitions into an _XML_ we need to pass _ContainerBuilder_ instance to the _XmlDumper_:
 
     
-    <?php
-    // dependencyinjection.php
-    
-    // ...
-    
-    use Symfony\Component\DependencyInjection\Dumper\XmlDumper;
-    
-    $dumper = new XmlDumper($serviceContainer);
-    echo $dumper->dump();
+{% highlight php %}
+<?php
+// dependencyinjection.php
+
+// ...
+
+use Symfony\Component\DependencyInjection\Dumper\XmlDumper;
+
+$dumper = new XmlDumper($serviceContainer);
+echo $dumper->dump();
+{% endhighlight %}
 
 
 **Note**: In a real life scenario we'd probably maintain our service definitions in XML or YML file(s) but dump them to PHP with _PhpDumper_ for **performance** reasons.
@@ -240,22 +250,24 @@ The opposite works equally well. To dump service definitions into an _XML_ we ne
 In complex application services and relations between them might become, well... complex. GraphvizDumper might be handy in such situations as it lets us to present the services on a graph.
 
     
-    <?php
-    // dependencyinjectiongraphviz.php
-    
-    require_once __DIR__.'/src/autoload.php';
-    
-    use Symfony\Component\DependencyInjection\ContainerBuilder;
-    use Symfony\Component\DependencyInjection\Dumper\GraphvizDumper;
-    use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-    use Symfony\Component\Config\FileLocator;
-    
-    $serviceContainer = new ContainerBuilder();
-    $loader = new XmlFileLoader($serviceContainer, new FileLocator(__DIR__.'/config'));
-    $loader->load('buzz.xml');
-    
-    $dumper = new GraphvizDumper($serviceContainer);
-    echo $dumper->dump();
+{% highlight php %}
+<?php
+// dependencyinjectiongraphviz.php
+
+require_once __DIR__.'/src/autoload.php';
+
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Dumper\GraphvizDumper;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\Config\FileLocator;
+
+$serviceContainer = new ContainerBuilder();
+$loader = new XmlFileLoader($serviceContainer, new FileLocator(__DIR__.'/config'));
+$loader->load('buzz.xml');
+
+$dumper = new GraphvizDumper($serviceContainer);
+echo $dumper->dump();
+{% endhighlight %}
 
 
 To actually generate a graph we will need a dot program (from graphviz). Once we dump the result of our script into a _services.dot_ file we can easily convert it to an image:
