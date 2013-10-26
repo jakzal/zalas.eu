@@ -8,12 +8,12 @@ title: Heard in the Community (2010.08.08)
 wordpress_id: 539
 tags:
 - apostrophe
-- best practices
+- best-practices
 - community
 - doctrine2
 - php
 - symfony
-- wrap up
+- wrap-up
 ---
 
 ## Doctrine Annotations Library

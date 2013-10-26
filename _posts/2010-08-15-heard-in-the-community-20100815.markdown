@@ -7,10 +7,10 @@ slug: heard-in-the-community-20100815
 title: Heard in the Community (2010.08.15)
 wordpress_id: 551
 tags:
-- best practices
+- best-practices
 - php
 - tdd
-- wrap up
+- wrap-up
 ---
 
 ## Munchkin – Walking Skeleton and the initial stories

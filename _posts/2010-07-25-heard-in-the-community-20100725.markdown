@@ -7,11 +7,11 @@ slug: heard-in-the-community-20100725
 title: Heard in the Community (2010.07.25)
 wordpress_id: 490
 tags:
-- best practices
+- best-practices
 - php
 - Symfony2
 - WordPress
-- wrap up
+- wrap-up
 ---
 
 "Heard in the Community" series aims to wrap up news from the PHP, symfony and other communities I find interesting and follow.

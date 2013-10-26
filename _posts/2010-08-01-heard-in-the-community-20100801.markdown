@@ -11,7 +11,7 @@ tags:
 - php
 - symfony
 - Symfony2
-- wrap up
+- wrap-up
 ---
 
 ## Symfony2
