@@ -1,5 +1,7 @@
 title: Jakub Zalas
 permalink: /:title
+paginate: 5
+paginate_path: "blog/page:num"
 url:
     main: http://jakzal.github.io/zalas.eu
     assets: http://jakzal.github.io/zalas.eu

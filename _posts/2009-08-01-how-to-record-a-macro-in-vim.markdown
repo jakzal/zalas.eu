@@ -7,7 +7,7 @@ slug: how-to-record-a-macro-in-vim
 title: How to record a macro in vim?
 wordpress_id: 200
 tags:
-- best practices
+- best-practices
 - productivity
 - vim
 ---

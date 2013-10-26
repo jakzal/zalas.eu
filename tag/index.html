@@ -4,10 +4,17 @@ title: Blog post tags
 ---
 <h1>Blog post tags</h1>
 
-<div class="row-fluid">
-    <div class="span12">
-        <ul class="inline tag-cloud">
-            {% for tag in site.tags %}
+{% assign tags_max = 0 %}
+{% for tag in site.tags %}
+    {% if tag[1].size > tags_max %}
+        {% assign tags_max = tag[1].size %}
+    {% endif %}
+{% endfor %}
+
+<ul class="unstyled inline tag-cloud">
+    {% for i in (1..tags_max) reversed %}
+        {% for tag in site.tags %}
+            {% if tag[1].size == i %}
                 {% assign weight = tag | last | size | times:100 | divided_by:site.tags.size %}
                 {% if weight >= 20 %}
                     {% assign style = ' label-success' %}
@@ -23,7 +30,7 @@ title: Blog post tags
                     <a href="{{ site.url.main }}/tag/{{ tag | first | slugize }}">{{ tag | first }}</a>
                     <span class="label{{ style }}">{{ tag | last | size }}</span>
                 </li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+</ul>

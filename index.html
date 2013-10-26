@@ -1,24 +1,14 @@
 ---
 layout: default
 title: Blog
+hideNavigation: yes
 ---
 
-<h1>Jakub Zalas</h1>
-
-<div class="row-fluid">
-    {% for post in site.posts limit:1 %}
-        <div class="span12">
-            {% include postExcerpt.html %}
-        </div>
+<div class="posts list-group">
+    {% for post in site.posts limit:10 %}
+    <a href="{{ site.url.main }}{{ post.url }}" class="list-group-item">
+        <span class="badge">{% include postDate.html %}</span>
+        <h2 class="list-group-item-heading">{{ post.title }}</h2>
+    </a>
     {% endfor %}
-    <div class="row-fluid">
-        <div class="span8">
-            <ul class="posts unstyled">
-                {% for post in site.posts limit:10 offset:1 %}
-                    <li>{% include postListItem.html %}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
 </div>
-

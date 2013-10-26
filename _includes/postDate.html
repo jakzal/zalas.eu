@@ -1,4 +1,4 @@
-<time datetime="{{ post.date | date: "%Y-%m-%d" }}" class="label">
-    <i class="icon-calendar icon-white"></i>
+{% unless post %}{% assign post = page %}{% endunless %}
+<time datetime="{{ post.date | date: "%Y-%m-%d" }}">
     {{ post.date | date_to_string }}
 </time>

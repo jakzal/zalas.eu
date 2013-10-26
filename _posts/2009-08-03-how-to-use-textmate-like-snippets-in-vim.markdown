@@ -7,7 +7,7 @@ slug: how-to-use-textmate-like-snippets-in-vim
 title: How to use TextMate like snippets in vim?
 wordpress_id: 238
 tags:
-- best practices
+- best-practices
 - productivity
 - vim
 ---

@@ -7,7 +7,7 @@ slug: put-your-stylesheets-at-the-top-and-your-scripts-at-the-bottom
 title: Put your stylesheets at the top and your scripts at the bottom
 wordpress_id: 36
 tags:
-- best practices
+- best-practices
 - filter
 - html
 - symfony

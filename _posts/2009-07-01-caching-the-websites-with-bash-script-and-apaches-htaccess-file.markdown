@@ -9,7 +9,7 @@ wordpress_id: 143
 tags:
 - apache
 - bash
-- best practices
+- best-practices
 - cache
 - htaccess
 - script
