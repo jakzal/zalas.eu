@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2009-07-01 23:47:13
 layout: post
@@ -22,55 +22,58 @@ Main cause of high load on the server was too many additional requests made by a
 The script analyses webserver's log files (in this case apache) and looks for URLs which are supposed to be cached. Once URL is found it's stored on the disk. Next requests get the file directly without any calculations. Here is the full code:
 
     
-    #!/bin/bash
-    
-    # CONFIG
-    base_path="/var/www/heavyloadedapp.com/web"
-    xml_path="/var/www/heavyloadedapp.com/web/cache-xml"
-    url="http://heavyloadedapp.com"
-    paths=$(cat /var/log/httpd/heavyloadedapp.com.log | grep XML | less | awk '{print $7}' | sort | uniq)
-    user="apache"
-    rights="755"
-    # CONFIG END
-    
-    if [ ! -d $xml_path ]; then
-      mkdir $xml_path
+{% highlight bash %}
+#!/bin/bash
+
+# CONFIG
+base_path="/var/www/heavyloadedapp.com/web"
+xml_path="/var/www/heavyloadedapp.com/web/cache-xml"
+url="http://heavyloadedapp.com"
+paths=$(cat /var/log/httpd/heavyloadedapp.com.log | grep XML | less | awk '{print $7}' | sort | uniq)
+user="apache"
+rights="755"
+# CONFIG END
+
+if [ ! -d $xml_path ]; then
+  mkdir $xml_path
+fi
+
+cd $xml_path
+
+for path in $paths; do
+  rel_path=$(echo $path | sed -e 's/^\///' | sed -e 's/^\(.*\)?\(.*\)$/\1/')
+  if [ ! -f $rel_path ]; then
+    if [ $(echo "$rel_path" | grep -E '\/') ]; then
+      dir=$(echo $rel_path | sed -e 's/\(.*\)\/.*/\1/')
+      mkdir -p $dir
     fi
-    
-    cd $xml_path
-    
-    for path in $paths; do
-      rel_path=$(echo $path | sed -e 's/^\///' | sed -e 's/^\(.*\)?\(.*\)$/\1/')
-      if [ ! -f $rel_path ]; then
-        if [ $(echo "$rel_path" | grep -E '\/') ]; then
-          dir=$(echo $rel_path | sed -e 's/\(.*\)\/.*/\1/')
-          mkdir -p $dir
-        fi
-        /usr/bin/wget -U "CacheBrowser" -nv $url/$rel_path -O $rel_path
-      fi
-    done
-    
-    chown -R $user $xml_path
-    chmod -R $rights $xml_path
-    
-    cd -
+    /usr/bin/wget -U "CacheBrowser" -nv $url/$rel_path -O $rel_path
+  fi
+done
+
+chown -R $user $xml_path
+chmod -R $rights $xml_path
+
+cd -
+{% endhighlight %}
 
 
 At the top of it you can find configuration options. It's needed to set path to the application's code, cache directory and the base URL. _$paths_ variable stores the list of paths found in the log file. I used grep to get all paths with 'XML' in it, then sorted it and filtered to get every path only once. This part has to be adapted to the problem that needs to be solved. Grep should only catch pages or documents you want to be cached.
 
-Later the script loops through found URLs (paths) and checks if they are not yet saved. New documents are stored in the cache directory (_cache-xml_ in this case). It's as simple as that. Second time given URL is requested following rules in _.htaccess_ file are responsible for rewriting the URL to the location of physical file:
+Later the script loops through found URLs (paths) and checks if they are not yet saved. New documents are stored in the cache directory (*cache-xml* in this case). It's as simple as that. Second time given URL is requested following rules in _.htaccess_ file are responsible for rewriting the URL to the location of physical file:
 
-    
-    RewriteEngine On
-    RewriteBase /
-    
-    ### XML Caching ###
-    RewriteCond %{REQUEST_URI} ^(.*XML.*)$
-    RewriteCond %{REQUEST_URI} !^.*cache-xml(.*)$
-    RewriteCond %{DOCUMENT_ROOT}/cache-xml%1 -f
-    RewriteCond %{HTTP_USER_AGENT} !CacheBrowser
-    RewriteRule .* cache-xml%1 [L]
-    ### XML Caching END ###
+{% highlight apache %}
+RewriteEngine On
+RewriteBase /
+
+### XML Caching ###
+RewriteCond %{REQUEST_URI} ^(.*XML.*)$
+RewriteCond %{REQUEST_URI} !^.*cache-xml(.*)$
+RewriteCond %{DOCUMENT_ROOT}/cache-xml%1 -f
+RewriteCond %{HTTP_USER_AGENT} !CacheBrowser
+RewriteRule .* cache-xml%1 [L]
+### XML Caching END ###
+{% endhighlight %}
 
 
 In the script, while using wget, I change the User Agent to _CacheBrowser_. Thanks to that I can recognize its requests in _.htaccess_ file and treat it in a different way than usual requests.

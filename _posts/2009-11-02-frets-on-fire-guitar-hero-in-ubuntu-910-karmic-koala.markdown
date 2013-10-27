@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2009-11-02 14:30:55
 layout: post
@@ -24,4 +24,6 @@ You should start with funny tutorial included in the game. Playing is really abs
 
 Once you become a master who plays all the songs flawlessly you might want to try out the song editor. I didn't use it yet. It looks like you can not only edit existing songs but also import it from external files and Guitar Hero itself.
 
-[![Frets on Fire](/uploads/wp/2009/11/frets-on-fire-04-400x300.png)](/uploads/wp/2009/11/frets-on-fire-04.png)
+<div class="text-center">
+    <a href="/uploads/wp/2009/11/frets-on-fire-04.png"><img src="/uploads/wp/2009/11/frets-on-fire-04-400x300.png" title="Frets on Fire" alt="Frets on Fire" class="img-responsive" /></a>
+</div>

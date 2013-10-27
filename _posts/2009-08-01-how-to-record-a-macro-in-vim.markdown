@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2009-08-01 02:26:48
 layout: post
@@ -12,22 +12,22 @@ tags:
 - vim
 ---
 
-[Macro](http://en.wikipedia.org/wiki/Macro_(computer_science)) is a sequence of instructions performed as a one step. In programming it helps automating the repeatable tasks which makes them less boring and less error-prone. Instead of performing the same actions over and over again, it's better to record them as a macro. Once macro is saved it can be run as many times as needed. [Vim](http://www.vim.org/) as a one of most powerful editors has macro support built in.
+[Macro](http://en.wikipedia.org/wiki/Macro_%28computer_science%29) is a sequence of instructions performed as a one step. In programming it helps automating the repeatable tasks which makes them less boring and less error-prone. Instead of performing the same actions over and over again, it's better to record them as a macro. Once macro is saved it can be run as many times as needed. [Vim](http://www.vim.org/) as a one of most powerful editors has macro support built in.
 
-
+<div class="text-center">
+    <object width="425" height="344" data="http://www.youtube.com/v/6d4tZqqQm6s&amp;hl=en&amp;fs=1" type="application/x-shockwave-flash">
+        <param name="allowFullScreen" value="true" />
+        <param name="allowscriptaccess" value="always" />
+        <param name="src" value="http://www.youtube.com/v/6d4tZqqQm6s&amp;hl=en&amp;fs=1" />
+        <param name="allowfullscreen" value="true" />
+    </object>
+</div>
 
 To record a macro in vim you need to:
 
-
-
-	
-  * start macro recording: _qa_
-
-	
-  * perform chain of repeatable actions: _(regular vim commands)_
-
-	
-  * stop recording process: _q_
+* start macro recording: _qa_
+* perform chain of repeatable actions: _(regular vim commands)_
+* stop recording process: _q_
 
 
 
@@ -53,21 +53,21 @@ To format first line of file in vim you could perform the following commands:
 
   ```"All Along the Watchtower", Jimi Hendrix```
 
-* Turn on insert mode (_i_), add two spaces and opening html tags: `<li><i>`
+* Turn on insert mode (*i*), add two spaces and opening html tags: `<li><i>`
 
   ```<li><i>"All Along the Watchtower", Jimi Hendrix```
 
-* Exit insert mode (_ESC_), move the cursor to the next comma location: _f,_
+* Exit insert mode (*ESC*), move the cursor to the next comma location: _f,_
 
-* Turn on insert mode (_i_) and add italics ending tag: _</i>_
+* Turn on insert mode (*i*) and add italics ending tag: `</i>`
 
   ```<li><i>"All Along the Watchtower"</i>, Jimi Hendrix```
 
-* Exit insert mode (_ESC_), go to the end of line in insert mode (_A_) and add list closing tag _</li>_
+* Exit insert mode (*ESC*), go to the end of line in insert mode (*A*) and add list closing tag `</li>`
 
   ```<li><i>"All Along the Watchtower"</i>, Jimi Hendrix</li>```
 
-* Leave insert mode (_ESC_) and go to the next line
+* Leave insert mode (*ESC*) and go to the next line
 
 
 The rest of lines can be formatted the same way. As you can see it could be quite a big and tedious job, especially with a large file. It's better when computer does it for us.
@@ -82,7 +82,7 @@ To start macro recording process press
     qa
 
 
-in normal mode. '_a_' is a register where your macro will be saved. You can choose any letter you want.
+in normal mode. '*a*' is a register where your macro will be saved. You can choose any letter you want.
 
 
 ## Recording the macro
@@ -139,3 +139,4 @@ Programmer's job is to write programs. By performing repeatable tasks manually w
 If you don't use vim there are macro recorders for most of popular IDEs available. If your editor doesn't support it than still it's possible to use standalone desktop applications which can be easily integrated with tools of your preference.
 
 Other way of performing similar tasks in vim is using regular expressions but it's a subject for another post.
+

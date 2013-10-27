@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2009-08-03 15:47:41
 layout: post
@@ -14,6 +14,14 @@ tags:
 
 Snippet is a piece of text which can be pasted into the document. Parts of it can be parametrized or calculated while pasting. Snippets can increase your productivity by letting you to write common chunks of code faster and without mistakes. One of the most famous snippet implementations is included in [TextMate editor](http://macromates.com/). In vim we have some of TextMate's snippet features bundled in [snipMate script](http://www.vim.org/scripts/script.php?script_id=2540).
 
+<div class="text-center">
+    <object width="425" height="344" data="http://www.youtube.com/v/gsMjQP4yxYw&amp;hl=pl&amp;fs=1&amp;" type="application/x-shockwave-flash">
+        <param name="allowFullScreen" value="true" />
+        <param name="allowscriptaccess" value="always" />
+        <param name="src" value="http://www.youtube.com/v/gsMjQP4yxYw&amp;hl=pl&amp;fs=1&amp;" />
+        <param name="allowfullscreen" value="true" />
+    </object>
+</div>
 
 
 ## Installation
@@ -25,7 +33,7 @@ Get snipMate from [vim website](http://www.vim.org/scripts/script.php?script_id=
 ## How does it work?
 
 
-Basically you need to write a keyword (called trigger) and press the `<TAB>` key to replace it with full snippet. For example typing '_for_ ' and pressing `<TAB>` while editing a PHP file:
+Basically you need to write a keyword (called trigger) and press the `<TAB>` key to replace it with full snippet. For example typing '*for*' and pressing `<TAB>` while editing a PHP file:
 
     
     for<TAB>
@@ -46,8 +54,12 @@ Pressing `<TAB>` key continuously moves you to the next defined tab stop. In thi
 
 
 SnipMate comes with many predefined snippets but once you start using it, you need more. Fortunately it's easy to extend. Snippets are stored in _~/.vim/snippets_ directory. I started with reviewing the existing ones and adapted them to my coding standards. While doing this I got the idea about the snippets' structure and started with creating my own ones.
-[![vim html snippets](/uploads/wp/2009/08/vim-html-snippets-400x172.png)](/uploads/wp/2009/08/vim-html-snippets.png)
-Snippets are grouped by the file type. It is specified by a prefix in the snippet file name or a directory it was placed in (_php.snippets_ vs _php/foreach.snippet_). The first version lets you to keep all file type related snippets in one place. The later is used to split your snippets into separate files. Format is slightly different between these two, so to make it simple I'll stick to the first one.
+
+<div class="pull-right">
+    <a href="/uploads/wp/2009/08/vim-html-snippets.png"><img src="/uploads/wp/2009/08/vim-html-snippets-400x172.png" title="vim html snippets" class="img-responsive" /></a>
+</div>
+
+Snippets are grouped by the file type. It is specified by a prefix in the snippet file name or a directory it was placed in (*php.snippets* vs *php/foreach.snippet*). The first version lets you to keep all file type related snippets in one place. The later is used to split your snippets into separate files. Format is slightly different between these two, so to make it simple I'll stick to the first one.
 
 To define a new PHP snippet which expands 'get' keyword into a getter method put the code below into your _~/.vim/snippets/php.snippets_ file:
 
@@ -58,7 +70,7 @@ To define a new PHP snippet which expands 'get' keyword into a getter method put
 
 **Note**: Snippets are indented with hard tabs. First tab is not expanded in the actual snippet.
 
-Our snippet is run by '_get_' trigger and has two tab stops defined. Firstly cursor is placed after '$this->get' to let you fill the getter's name. Second tab moves the cursor after the completed statement.
+Our snippet is run by '*get*' trigger and has two tab stops defined. Firstly cursor is placed after '$this->get' to let you fill the getter's name. Second tab moves the cursor after the completed statement.
 
 
 ## Tab stops and placeholders
@@ -105,24 +117,22 @@ Sometimes its needed to have few versions of the snippet. Good example here is t
 
 
 	
-  * in regular PHP code:
+* in regular PHP code:
 
-    
-    foreach ($values as $key => $value)
-    {
-      // code here
-    }
+  {% highlight php startinline %}
+  foreach ($values as $key => $value)
+  {
+    // code here
+  }
+  {% endhighlight %}
 
+* in templates:
 
-
-
-	
-  * in templates:
-
-    
-    <?php foreach ($values as $key => $value): ?>
-      // code here
-    <?php endforeach ?>
+  {% highlight php startinline %}
+  <?php foreach ($values as $key => $value): ?>
+    // code here
+  <?php endforeach ?>
+  {% endhighlight %}
 
 
 
@@ -131,32 +141,36 @@ Sometimes its needed to have few versions of the snippet. Good example here is t
 Taking into account that _$key_ variable can be omitted, in fact I use four different variations of foreach statement. So I defined all four of them:
 
     
-    snippet fore value
-      foreach ($${1:variable} as $${2:value})
-      {
-        ${3}
-      }
-    
-    snippet fore key => value
-      foreach ($${1:variable} as $${2:key} => $${3:value})
-      {
-        ${4}
-      }
-    
-    snippet fore value (template)
-      <?php foreach ($${1:variable} as $${2:value}): ?>
-        ${3}
-      <?php endforeach ?>
-    
-    snippet fore key => value (template)
-      <?php foreach ($${1:variable} as $${2:key} => $${3:value}): ?>
-        ${4}
-      <?php endforeach ?>
+{% highlight php %}
+snippet fore value
+  foreach ($${1:variable} as $${2:value})
+  {
+    ${3}
+  }
+
+snippet fore key => value
+  foreach ($${1:variable} as $${2:key} => $${3:value})
+  {
+    ${4}
+  }
+
+snippet fore value (template)
+  <?php foreach ($${1:variable} as $${2:value}): ?>
+    ${3}
+  <?php endforeach ?>
+
+snippet fore key => value (template)
+  <?php foreach ($${1:variable} as $${2:key} => $${3:value}): ?>
+    ${4}
+  <?php endforeach ?>
+{% endhighlight %}
 
 
 Once I run 'fore' trigger vim lets me to choose which version of snippet I would like to use.
 
-[![vim multi choice snippet](/uploads/wp/2009/08/vim-multisnippet-400x176.png)](/uploads/wp/2009/08/vim-multisnippet.png)
+<div class="text-center">
+    <a href="/uploads/wp/2009/08/vim-multisnippet.png"><img src="/uploads/wp/2009/08/vim-multisnippet-400x176.png" title="vim multi choice snippet" class="img-responsive" /></a>
+</div>
 
 
 
