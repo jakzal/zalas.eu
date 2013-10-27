@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2010-05-03 04:16:43
 layout: post
@@ -11,7 +11,11 @@ tags:
 - symfony
 ---
 
-[![PHP](/uploads/wp/2010/05/php-med-trans-light.gif)](/uploads/wp/2010/05/php-med-trans-light.gif)Mark Evans wrote on his blog interesting post about [PHP 5.3 and the Future](http://www.freelancephp.co.uk/2010/05/02/php-5-3-and-the-future/). I guess the main concern   here is similar we used to have with **PHP4** to **PHP5** migration ([GoPHP5 campaign](http://www.gophp5.org/)).
+<div class="pull-left">
+    <a href="/uploads/wp/2010/05/php-med-trans-light.gif"><img src="/uploads/wp/2010/05/php-med-trans-light.gif" title="PHP" alt="PHP" class="img-responsive" /></a>
+</div>
+
+Mark Evans wrote on his blog interesting post about [PHP 5.3 and the Future](http://www.freelancephp.co.uk/2010/05/02/php-5-3-and-the-future/). I guess the main concern   here is similar we used to have with **PHP4** to **PHP5** migration ([GoPHP5 campaign](http://www.gophp5.org/)).
 
 Mark raised three questions to the community which I'd like to reply to.
 

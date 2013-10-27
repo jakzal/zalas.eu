@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2010-03-21 23:09:24
 layout: post
@@ -12,11 +12,13 @@ tags:
 - vim
 ---
 
-[Textile](http://en.wikipedia.org/wiki/Textile_(markup_language)) is a simple markup language. It's used in CMS and wiki implementations (i.e. Redmine). I also like to use it while making notes in a plain text files.
+[Textile](http://en.wikipedia.org/wiki/Textile_%28markup_language%29) is a simple markup language. It's used in CMS and wiki implementations (i.e. Redmine). I also like to use it while making notes in a plain text files.
 
 [Textile plugin for vim](http://www.vim.org/scripts/script.php?script_id=2305) adds support for syntax highlighting, preview and html conversion of Textile documents.
 
-[![Textile plugin in vim](/uploads/wp/2010/03/vim-textile-400x375.png)](/uploads/wp/2010/03/vim-textile.png)
+<div class="text-center">
+    <a href="/uploads/wp/2010/03/vim-textile.png"><img src="/uploads/wp/2010/03/vim-textile-400x375.png" title="Textile plugin in vim" alt="Textile plugin in vim" class="img-responsive" /></a>
+</div>
 
 
 ## Requirements
@@ -39,4 +41,6 @@ Get the source and unpack it to your _~/.vim_ directory. Detailed installation i
 I prefer to use textile with txt files. To tell vim that it should treat txt files as Textile add the following line to your _~/.vim/ftdetect/txt.vim_:
 
     
-    au BufRead,BufNewFile *.txt     set filetype=textile
+{% highlight vim %}
+au BufRead,BufNewFile *.txt     set filetype=textile
+{% endhighlight %}

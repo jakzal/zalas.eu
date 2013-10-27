@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2010-01-02 04:15:16
 layout: post

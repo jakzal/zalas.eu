@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2010-05-02 23:29:05
 layout: post
@@ -22,7 +22,9 @@ tags:
 Installation shouldn't be hard on any Linux based operating system. In Ubuntu **exuberant ctags** are in the default package repository. To install it you can use Ubuntu Software Center or open a terminal and write:
 
     
-    sudo aptitude install exuberant-ctags
+{% highlight bash %}
+sudo aptitude install exuberant-ctags
+{% endhighlight %}
 
 
 
@@ -35,13 +37,15 @@ Before taking advantage of **ctags** in **vim** you need to generate an index fi
 To generate an index first change the working directory to the main directory of your project. After that tell ctags to recursively index the current directory:
 
     
-    cd ~/workspace/projects/sympal
-    ctags -R --languages=php .
+{% highlight bash %}
+cd ~/workspace/projects/sympal
+ctags -R --languages=php .
+{% endhighlight %}
 
 
-**Note**: Read '_man ctags_' for more options.
+<div class="alert alert-warning" markdown="1">**Note**: Read '*man ctags*' for more options.</div>
 
-**Note**: Long time ago [Matthew Weier O'Phinney](http://twitter.com/weierophinney) wrote a blog post about [exuberant ctags with PHP in vim](http://weierophinney.net/matthew/archives/134-exuberant-ctags-with-PHP-in-Vim.html). He used several options which look like no longer needed. I think ctags support for PHP has been improved over the time.
+<div class="alert alert-warning" markdown="1">**Note**: Long time ago [Matthew Weier O'Phinney](http://twitter.com/weierophinney) wrote a blog post about [exuberant ctags with PHP in vim](http://weierophinney.net/matthew/archives/134-exuberant-ctags-with-PHP-in-Vim.html). He used several options which look like no longer needed. I think ctags support for PHP has been improved over the time.</div>
 
 
 ## Basic Usage
@@ -63,7 +67,9 @@ Notice that you can precede the command with a number to invoke it several times
 You can make that vim directly opens a chosen keyword with **-t** option:
 
     
-    vim -t sfGuardUser
+{% highlight bash %}
+vim -t sfGuardUser
+{% endhighlight %}
 
 
 
@@ -113,7 +119,7 @@ Some of the **search** commands:
   * **\[ ctrl-i** and **] ctr-i** jumps to the first line that contains the keyword under and after the cursor
 
 
-**Note**: Write **:help tags-and-searches** in vim to get total overview of features offered by tags.
+<div class="alert alert-warning" markdown="1">**Note**: Write **:help tags-and-searches** in vim to get total overview of features offered by tags.</div>
 
 
 ## Useful links
@@ -136,4 +142,12 @@ Some of the **search** commands:
 
 
 
+<div class="text-center">
+    <object width="480" height="385" data="http://www.youtube.com/v/8yjxaBrmiJI&amp;hl=en_US&amp;fs=1&amp;color1=0x3a3a3a&amp;color2=0x999999" type="application/x-shockwave-flash">
+        <param name="allowFullScreen" value="true" />
+        <param name="allowscriptaccess" value="always" />
+        <param name="src" value="http://www.youtube.com/v/8yjxaBrmiJI&amp;hl=en_US&amp;fs=1&amp;color1=0x3a3a3a&amp;color2=0x999999" />
+        <param name="allowfullscreen" value="true" />
+    </object>
+</div>
 

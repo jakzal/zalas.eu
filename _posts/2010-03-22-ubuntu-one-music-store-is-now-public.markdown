@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2010-03-22 15:26:57
 layout: post
@@ -16,16 +16,31 @@ I'm writing this blog post while listening to the first song I bought just few m
 
 It is so simple and easy. I'm really impressed.
 
-[![Ubuntu One Music Store](/uploads/wp/2010/03/ubuntu-one-music-store-01-400x250.png)](/uploads/wp/2010/03/ubuntu-one-music-store-01.png)
+<div class="text-center">
+    <a href="/uploads/wp/2010/03/ubuntu-one-music-store-01.png"><img src="/uploads/wp/2010/03/ubuntu-one-music-store-01-400x250.png" title="Ubuntu One Music Store" alt="Ubuntu One Music Store" class="img-responsive" /></a>
+</div>
 
-[![Ubuntu One Music Store Album List](/uploads/wp/2010/03/ubuntu-one-music-store-02-400x250.png)](/uploads/wp/2010/03/ubuntu-one-music-store-02.png)
+<div class="text-center">
+    <a href="/uploads/wp/2010/03/ubuntu-one-music-store-02.png"><img src="/uploads/wp/2010/03/ubuntu-one-music-store-02-400x250.png" title="Ubuntu One Music Store Album List" alt="Ubuntu One Music Store Album List" class="img-responsive" /></a>
+</div>
 
-[![Ubuntu One Music Store Album Preview](/uploads/wp/2010/03/ubuntu-one-music-store-03-400x250.png)](/uploads/wp/2010/03/ubuntu-one-music-store-03.png)
+<div class="text-center">
+    <a href="/uploads/wp/2010/03/ubuntu-one-music-store-03.png"><img src="/uploads/wp/2010/03/ubuntu-one-music-store-03-400x250.png" title="Ubuntu One Music Store Album Preview" alt="Ubuntu One Music Store Album Preview" class="img-responsive" /></a>
+</div>
 
-[![Ubuntu One Music Store Basket](/uploads/wp/2010/03/ubuntu-one-music-store-04-400x250.png)](/uploads/wp/2010/03/ubuntu-one-music-store-04.png)
+<div class="text-center">
+    <a href="/uploads/wp/2010/03/ubuntu-one-music-store-04.png"><img src="/uploads/wp/2010/03/ubuntu-one-music-store-04-400x250.png" title="Ubuntu One Music Store Basket" alt="Ubuntu One Music Store Basket" class="img-responsive" /></a>
+</div>
 
-[![Ubuntu One Music Store Payment](/uploads/wp/2010/03/ubuntu-one-music-store-05-400x250.png)](/uploads/wp/2010/03/ubuntu-one-music-store-05.png)
+<div class="text-center">
+    <a href="/uploads/wp/2010/03/ubuntu-one-music-store-05.png"><img src="/uploads/wp/2010/03/ubuntu-one-music-store-05-400x250.png" title="Ubuntu One Music Store Payment" alt="Ubuntu One Music Store Payment" class="img-responsive" /></a>
+</div>
 
-[![Ubuntu One Music Store Download](/uploads/wp/2010/03/ubuntu-one-music-store-06-400x250.png)](/uploads/wp/2010/03/ubuntu-one-music-store-06.png)
+<div class="text-center">
+    <a href="/uploads/wp/2010/03/ubuntu-one-music-store-06.png"><img src="/uploads/wp/2010/03/ubuntu-one-music-store-06-400x250.png" title="Ubuntu One Music Store Download" alt="Ubuntu One Music Store Download" class="img-responsive" /></a>
+</div>
 
-[![Rhythmbox Playing song downloaded from Ubuntu One Music Store](/uploads/wp/2010/03/ubuntu-one-music-store-07-400x250.png)](/uploads/wp/2010/03/ubuntu-one-music-store-07.png)
+<div class="text-center">
+    <a href="/uploads/wp/2010/03/ubuntu-one-music-store-07.png"><img src="/uploads/wp/2010/03/ubuntu-one-music-store-07-400x250.png" title="Rhythmbox Playing song downloaded from Ubuntu One Music Store" alt="Rhythmbox Playing song downloaded from Ubuntu One Music Store" class="img-responsive" /></a>
+</div>
+

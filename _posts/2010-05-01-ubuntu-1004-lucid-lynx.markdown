@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2010-05-01 00:44:27
 layout: post
@@ -11,7 +11,11 @@ tags:
 - ubuntu
 ---
 
-![Ubuntu Loo](/uploads/wp/2010/05/ubuntulogo-circle.png)Ubuntu 10.04 Lucid Lynx was released two days ago. Yesterday I've installed it on my laptop. As [I used beta](/ubuntu-1004-lucid-lynx-is-just-around-the-corner) before I wasn't surprised with a stable release. I'm also not disappointed. It's just great!
+<div class="pull-left">
+    <img src="/uploads/wp/2010/05/ubuntulogo-circle.png" title="Ubuntu Logo" alt="Ubuntu Logo" class="img-responsive" />
+</div>
+
+Ubuntu 10.04 Lucid Lynx was released two days ago. Yesterday I've installed it on my laptop. As [I used beta](/ubuntu-1004-lucid-lynx-is-just-around-the-corner) before I wasn't surprised with a stable release. I'm also not disappointed. It's just great!
 
 
 ## Look and Feel
@@ -40,18 +44,13 @@ I got surprised by the fact that Chromium is from now on available in the main U
 
 ## Read More
 
-
-
-
-
-	
-  * [Take the Ubuntu Tour](http://www.ubuntu.com/products/whatisubuntu/1004features)
-
-	
-  * [Download Ubuntu](http://www.ubuntu.com/getubuntu/download)
+* [Take the Ubuntu Tour](http://www.ubuntu.com/products/whatisubuntu/1004features)
+* [Download Ubuntu](http://www.ubuntu.com/getubuntu/download)
 
 
 If it happens that you're a PHP programmer you might be interested in reading: [Setting up a PHP development environment with nginx on Ubuntu 10.04](/setting-up-a-php-development-environment-with-nginx-on-ubuntu-1004).
 
+<div class="text-center">
+    <a href="/uploads/wp/2010/05/ubuntu1004-02.png"><img src="/uploads/wp/2010/05/ubuntu1004-02-400x250.png" title="Ubuntu 10.04 Lucid Lynx" alt="Ubuntu 10.04 Lucid Lynx" class="img-responsive" /></a>
+</div>
 
-[](/uploads/wp/2010/05/ubuntu1004-02.png)[![Ubuntu 10.04 Lucid Lynx](/uploads/wp/2010/05/ubuntu1004-02-400x250.png)](/uploads/wp/2010/05/ubuntu1004-02.png)

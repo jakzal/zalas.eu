@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2010-03-20 11:55:37
 layout: post
@@ -13,11 +13,12 @@ tags:
 - ubuntu
 ---
 
-[![Ubuntu Logo](/uploads/wp/2010/03/blackeubuntulogo-400x105.png)](/uploads/wp/2010/03/blackeubuntulogo.png)
+<div class="text-center">
+    <a href="/uploads/wp/2010/03/blackeubuntulogo.png"><img src="/uploads/wp/2010/03/blackeubuntulogo-400x105.png" title="Ubuntu Logo" alt="Ubuntu Logo" class="img-responsive" /></a>
+</div>
 
 
-
-Yesterday [first ](http://fridge.ubuntu.com/node/1998)**[beta of Ubuntu 10.04 ](http://fridge.ubuntu.com/node/1998)[was released](http://fridge.ubuntu.com/node/1998). Its code name is **_Lucid Lynx_.
+Yesterday [beta of Ubuntu 10.04 was released](http://fridge.ubuntu.com/node/1998). Its code name is **Lucid Lynx**.
 
 I decided to give it a try even if it's unstable. I upgraded my old desktop computer which was still running Ubuntu 9.04.
 
@@ -25,7 +26,7 @@ I decided to give it a try even if it's unstable. I upgraded my old desktop comp
 ## Upgrade
 
 
-I didn't install it from scratch with CD but I upgraded it with update manager instead. I needed to run it with a '_-d_' switch:
+I didn't install it from scratch with CD but I upgraded it with update manager instead. I needed to run it with a '*-d*' switch:
 
     
     update-manager -d
@@ -54,8 +55,15 @@ I didn't manage to test the two other hot features yet. Firstly Ubuntu got a bet
 
 Ubuntu 10.04  is in beta state now. It's a version for people who like living on the edge and testing the new things. It's better to NOT install it on your workstations. Stable release is planned for the end of April.
 
-[![Gnome in Ubuntu 10.04](/uploads/wp/2010/03/ubuntu-10-04-beta1-gnome-400x250.png)](/uploads/wp/2010/03/ubuntu-10-04-beta1-gnome.png)
+<div class="text-center">
+    <a href="/uploads/wp/2010/03/ubuntu-10-04-beta1-gnome.png"><img src="/uploads/wp/2010/03/ubuntu-10-04-beta1-gnome-400x250.png" title="Gnome in Ubuntu 10.04" alt="Gnome in Ubuntu 10.04" class="img-responsive" /></a>
+</div>
 
-[![KDE in Ubuntu 10.04](/uploads/wp/2010/03/ubuntu-10-04-beta1-kde-400x250.png)](/uploads/wp/2010/03/ubuntu-10-04-beta1-kde.png)
+<div class="text-center">
+    <a href="/uploads/wp/2010/03/ubuntu-10-04-beta1-kde.png"><img src="/uploads/wp/2010/03/ubuntu-10-04-beta1-kde-400x250.png" title="KDE in Ubuntu 10.04" alt="KDE in Ubuntu 10.04" class="img-responsive" /></a>
+</div>
 
-[![Ubuntu 10.04 and Social Media](/uploads/wp/2010/03/ubuntu-1004-social-400x250.png)](/uploads/wp/2010/03/ubuntu-1004-social.png)
+<div class="text-center">
+    <a href="/uploads/wp/2010/03/ubuntu-1004-social.png"><img src="/uploads/wp/2010/03/ubuntu-1004-social-400x250.png" title="Ubuntu 10.04 and Social Media" alt="Ubuntu 10.04 and Social Media" class="img-responsive" /></a>
+</div>
+
