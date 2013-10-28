@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2011-07-04 04:00:50
 layout: post
@@ -14,9 +14,12 @@ tags:
 - Symfony2
 ---
 
-[![](/uploads/wp/2011/07/console-150x150.png)](/uploads/wp/2011/07/console.png)Symfony [Console component](https://github.com/symfony/Console) enables us to create commands in PHP. It does all the nasty work of handling input and output.
+<div class="pull-left">
+    <a href="/uploads/wp/2011/07/console.png"><img src="/uploads/wp/2011/07/console-150x150.png" title="Symfony Console" alt="Symfony Console" class="img-responsive" /></a>
+</div>
+Symfony [Console component](https://github.com/symfony/Console) enables us to create commands in PHP. It does all the nasty work of handling input and output.
 
-**Note**: Code used in this post is available on github: [https://github.com/jakzal/SymfonyComponentsExamples](https://github.com/jakzal/SymfonyComponentsExamples)
+<div class="alert alert-warning" markdown="1">**Note**: Code used in this post is available on github: [https://github.com/jakzal/SymfonyComponentsExamples](https://github.com/jakzal/SymfonyComponentsExamples)</div>
 
 
 ## Installation
@@ -24,8 +27,9 @@ tags:
 
 You can either install it from the [Symfony PEAR channel](http://pear.symfony.com/) or grab it [directly from github](https://github.com/symfony/Console). For the purpose of this article we'll clone the sources to the _vendor/_ directory of the project.
 
-    
-    git clone https://github.com/symfony/Console.git vendor/Symfony/Component/Console
+{% highlight bash %}
+git clone https://github.com/symfony/Console.git vendor/Symfony/Component/Console
+{% endhighlight %}
 
 
 We'll let Symfony ClassLoader component to take care of the class autoloading. Read more about it in the "[Autoloading classes in an any PHP project with Symfony2 ClassLoader component](http://www.zalas.eu/autoloading-classes-in-any-php-project-with-symfony2-classloader-component)".
@@ -70,7 +74,9 @@ $application->run();
 
 If we run the script in command line without arguments, we'll get a nice overview of options and commands available by default.
 
-[![](/uploads/wp/2011/06/console-options-400x241.png)](/uploads/wp/2011/06/console-options.png)
+<div class="text-center">
+    <a href="/uploads/wp/2011/06/console-options.png"><img src="/uploads/wp/2011/06/console-options-400x241.png" title="Symfony Console options" alt="Symfony Console options" class="img-responsive" /></a>
+</div>
 
 There are two built in commands: help and list.
 
@@ -111,7 +117,7 @@ require_once __DIR__.'/src/autoload.php';
 use Symfony\Component\Console as Console;
 
 $application = new Console\Application('Demo', '1.0.0');
-<strong>$application->add(new PSS\Command\HelloWorldCommand('hello-world'));</strong>
+$application->add(new PSS\Command\HelloWorldCommand('hello-world'));
 $application->run();
 {% endhighlight %}
 
@@ -121,10 +127,12 @@ If we run the script without parameters our command will be listed among default
 We need to pass a command name to the script as a first argument to run it:
 
     
-    php console.php hello-world
+{% highlight bash %}
+php console.php hello-world
+{% endhighlight %}
 
 
-As a result we should see "_Hello World!_" printed out to the screen.
+As a result we should see "*Hello World!*" printed out to the screen.
 
 
 ## Adding arguments and options
@@ -132,7 +140,7 @@ As a result we should see "_Hello World!_" printed out to the screen.
 
 Arguments and options are used to parametrize and alter behavior of commands.
 
-We'll modify our simple HelloWorld command to accept name as an argument. We'll output it to the screen.  "-_-more_" option will make that additional message is displayed.
+We'll modify our simple HelloWorld command to accept name as an argument. We'll output it to the screen.  "--more" option will make that additional message is displayed.
 
 Arguments and options can be declared with the _addArgument()_ and _addOption()_ Command methods. We can make them optional or required, give description and default values.
 
@@ -175,18 +183,24 @@ class HelloWorldCommand extends Console\Command\Command
 Now we can use new argument and option in the command line:
 
     
-    php console.php hello-world -m Kuba
+{% highlight bash %}
+php console.php hello-world -m Kuba
+{% endhighlight %}
 
 
 Additional calls to _setDescription()_ and _setHelp()_ in the constructor set the command description and help. It's handy when we distribute our script. End user can now get help with:
 
     
-    php console.php help hello-world
+{% highlight bash %}
+php console.php help hello-world
+{% endhighlight %}
 
 
-**Note**: Built in help command is responsible for printing out the message.
+<div class="alert alert-warning" markdown="1">**Note**: Built in help command is responsible for printing out the message.</div>
 
-[![](/uploads/wp/2011/06/console-help-400x158.png)](/uploads/wp/2011/06/console-help.png)
+<div class="text-center">
+    <a href="/uploads/wp/2011/06/console-help.png"><img src="/uploads/wp/2011/06/console-help-400x158.png" title="Symfony Console help" alt="Symfony Console help" class="img-responsive" /></a>
+</div>
 
 
 ## Interactive shell
@@ -213,7 +227,11 @@ $shell->run();
 The script won't terminate but will wait for our commands:
 
     
-    php consoleshell.php
+{% highlight bash %}
+php consoleshell.php
+{% endhighlight %}
 
+<div class="text-center">
+    <a href="/uploads/wp/2011/06/console-shell.png"><img src="/uploads/wp/2011/06/console-shell-363x400.png" title="Symfony Console Shell" alt="Symfony Console Shell" class="img-responsive" /></a>
+</div>
 
-[![](/uploads/wp/2011/06/console-shell-363x400.png)](/uploads/wp/2011/06/console-shell.png)

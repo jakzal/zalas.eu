@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2011-06-30 11:33:37
 layout: post
@@ -16,7 +16,7 @@ tags:
 
 Symfony [ClassLoader component](https://github.com/symfony/ClassLoader) is a [PSR-0 standard](http://groups.google.com/group/php-standards/web/psr-0-final-proposal) compliant PHP class autoloader. It's not only able to load namespaced code but also supports old-school [PEAR standards](http://pear.php.net/manual/en/standards.naming.php) (also used by Zend Framework). It's a perfect class loading tool for most of PHP projects.
 
-**Note**: Code used in this post is available on github: [https://github.com/jakzal/SymfonyComponentsExamples](https://github.com/jakzal/SymfonyComponentsExamples)
+<div class="alert alert-warning" markdown="1">**Note**: Code used in this post is available on github: [https://github.com/jakzal/SymfonyComponentsExamples](https://github.com/jakzal/SymfonyComponentsExamples)</div>
 
 
 ## Installation
@@ -24,10 +24,12 @@ Symfony [ClassLoader component](https://github.com/symfony/ClassLoader) is a [PS
 
 You can either install it from the [Symfony PEAR channel](http://pear.symfony.com/) or grab it [directly from github](https://github.com/symfony/ClassLoader). For the purpose of this article we'll clone the sources to the _vendor/_ directory of the project.
 
-**Note**: ClassLoader component uses _Symfony\Component\ClassLoader_ namespace. Therefore we'll put it into _Symfony/Component/ClassLoader_ subdirectory of _vendor_ (see [PSR-0 standard](http://groups.google.com/group/php-standards/web/psr-0-final-proposal)).
+<div class="alert alert-warning" markdown="1">**Note**: ClassLoader component uses _Symfony\Component\ClassLoader_ namespace. Therefore we'll put it into _Symfony/Component/ClassLoader_ subdirectory of _vendor_ (see [PSR-0 standard](http://groups.google.com/group/php-standards/web/psr-0-final-proposal)).</div>
 
     
-    git clone https://github.com/symfony/ClassLoader.git vendor/Symfony/Component/ClassLoader
+{% highlight bash %}
+git clone https://github.com/symfony/ClassLoader.git vendor/Symfony/Component/ClassLoader
+{% endhighlight %}
 
 
 
@@ -56,7 +58,7 @@ class HelloWorld
 {% endhighlight %}
 
 
-Second library is stored in the _src/Legacy/Acme/Tools_. It follows old but well known PEAR naming standards. _Legacy_Acme_Tools_HelloWorld_ class is defined in the _src/Legacy/Acme/Tools/HelloWorld.php_ file:
+Second library is stored in the _src/Legacy/Acme/Tools_. It follows old but well known PEAR naming standards. *Legacy_Acme_Tools_HelloWorld* class is defined in the _src/Legacy/Acme/Tools/HelloWorld.php_ file:
 
     
 {% highlight php %}
@@ -67,7 +69,7 @@ class Legacy_Acme_Tools_HelloWorld
 {
     public function __construct()
     {
-           echo __METHOD__."\n";
+        echo __METHOD__."\n";
     }
 }
 {% endhighlight %}
@@ -93,7 +95,7 @@ $legacyHelloWorld = new Legacy_Acme_Tools_HelloWorld();
 
 Of course classes are only loaded when needed. Requiring _UniversalClassLoader.php_ file should be the only _require_ statement used in our code. Other classes should be loaded by the class loader.
 
-**Note**: There's also a way to define paths with _registerNamespaceFallbacks()_ and _registerPrefixFallbacks()_. Class loader will use them with namespaces or prefixes which weren't listed explicitly.
+<div class="alert alert-warning" markdown="1">**Note**: There's also a way to define paths with _registerNamespaceFallbacks()_ and _registerPrefixFallbacks()_. Class loader will use them with namespaces or prefixes which weren't listed explicitly.</div>
 
 
 ## Increasing performance
@@ -119,4 +121,4 @@ $legacyHelloWorld = new Legacy_Acme_Tools_HelloWorld();
 {% endhighlight %}
 
 
-**Note**: Examples are run in a command line. Therefore there's no performance gain from using APC. In fact it can hurt performance as cache is initialized every time our script is run in cli. This is a limitation of APC.
+<div class="alert alert-warning" markdown="1">**Note**: Examples are run in a command line. Therefore there's no performance gain from using APC. In fact it can hurt performance as cache is initialized every time our script is run in cli. This is a limitation of APC.</div>

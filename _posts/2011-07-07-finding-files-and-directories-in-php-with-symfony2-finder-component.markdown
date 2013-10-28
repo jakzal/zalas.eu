@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2011-07-07 18:32:11
 layout: post
@@ -13,9 +13,12 @@ tags:
 - Symfony2
 ---
 
-![Photo by Paul Watson: http://flic.kr/p/9HpBfj](/uploads/wp/2011/07/sieve-150x150.jpg)Symfony [Finder component](https://github.com/symfony/Finder) makes the task of finding files and directories less tedious. It supports filtering by name, pattern, size, date of modification and few other criteria. As a result we get objects of class [SplFileInfo](http://php.net/splfileinfo) which offers convenient way of retrieving file and directory details.
+<div class="pull-right">
+    <img src="/uploads/wp/2011/07/sieve-150x150.jpg" title="Photo by Paul Watson: http://flic.kr/p/9HpBfj" alt="Photo by Paul Watson: http://flic.kr/p/9HpBfj" class="img-responsive" />
+</div>
+Symfony [Finder component](https://github.com/symfony/Finder) makes the task of finding files and directories less tedious. It supports filtering by name, pattern, size, date of modification and few other criteria. As a result we get objects of class [SplFileInfo](http://php.net/splfileinfo) which offers convenient way of retrieving file and directory details.
 
-**Note**: Code used in this post is available on github: [https://github.com/jakzal/SymfonyComponentsExamples](https://github.com/jakzal/SymfonyComponentsExamples)
+<div class="alert alert-warning" markdown="1">**Note**: Code used in this post is available on github: [https://github.com/jakzal/SymfonyComponentsExamples](https://github.com/jakzal/SymfonyComponentsExamples)</div>
 
 
 ## Installation
@@ -24,7 +27,9 @@ tags:
 You can either install it from the [Symfony PEAR channel](http://pear.symfony.com/) or grab it [directly from github](https://github.com/symfony/Finder). For the purpose of this article we'll clone the sources to the _vendor/_ directory of the project.
 
     
-    git clone https://github.com/symfony/Finder.git vendor/Symfony/Component/Finder
+{% highlight bash %}
+git clone https://github.com/symfony/Finder.git vendor/Symfony/Component/Finder
+{% endhighlight %}
 
 
 We'll let Symfony ClassLoader component to take care of the class autoloading. Read more about it in the "[Autoloading classes in an any PHP project with Symfony2 ClassLoader component](http://www.zalas.eu/autoloading-classes-in-any-php-project-with-symfony2-classloader-component)".
