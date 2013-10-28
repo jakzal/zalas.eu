@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2010-08-15 09:34:48
 layout: post
@@ -16,7 +16,7 @@ tags:
 ## Munchkin – Walking Skeleton and the initial stories
 
 
-Munchkin is a [series of tutorials](http://alternateillusion.com/category/munchkin/) showing how to build a PHP project with the best programming practices in mind. As Author says: "_If you consider the average PHP world and average RPG, where the players are coders, then doing agile and TDD would definitely make you a power player who gets all the loot._".
+Munchkin is a [series of tutorials](http://alternateillusion.com/category/munchkin/) showing how to build a PHP project with the best programming practices in mind. As Author says: "*If you consider the average PHP world and average RPG, where the players are coders, then doing agile and TDD would definitely make you a power player who gets all the loot.*".
 
 Not in all cases I would use the same tools but it's not about copying the author. Tools doesn't matter as much as the proper approach he tries to teach us.
 

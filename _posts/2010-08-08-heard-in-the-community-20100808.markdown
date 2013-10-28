@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2010-08-08 04:43:19
 layout: post
@@ -32,6 +32,13 @@ Read more about it in [Doctrine2 annotations](http://www.doctrine-project.org/pr
 [Cal Evans](http://twitter.com/calevans) published [ideas for building User Groups](http://blog.calevans.com/2010/08/06/php-community-and-user-groups/). He gathered them from PHP User Group leaders. There's also a video from TEKX conference where the topic is discussed with four people who are experienced in building such groups.
 
 
+<div class="text-center">
+    <object width="400" height="327" data="http://vimeo.com/moogaloop.swf?clip_id=13944907&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=1&amp;color=ffffff&amp;fullscreen=1&amp;autoplay=0&amp;loop=0" type="application/x-shockwave-flash">
+        <param name="allowfullscreen" value="true" />
+        <param name="allowscriptaccess" value="always" />
+        <param name="src" value="http://vimeo.com/moogaloop.swf?clip_id=13944907&amp;server=vimeo.com&amp;show_title=1&amp;show_byline=1&amp;show_portrait=1&amp;color=ffffff&amp;fullscreen=1&amp;autoplay=0&amp;loop=0" />
+    </object>
+</div>
 
 [TEKX Community Round Table](http://vimeo.com/13944907) from [Cal Evans](http://vimeo.com/user1859634) on [Vimeo](http://vimeo.com).
 
@@ -59,6 +66,16 @@ Symfony2 will power phpBB4 but for now [phpBB powers symfony forum](http://twitt
 
 [PHP finally has an anthem]( http://shiflett.org/blog/2010/aug/php-anthem). It's not really my preferred music style but it's fun anyway.
 
-Sing along! "_Oh yeah, I'm so PHP this year. Got a mic in the left, and 'n the right, cold beer._"
+Sing along! "*Oh yeah, I'm so PHP this year. Got a mic in the left, and 'n the right, cold beer.*"
+
+
+<div class="text-center">
+    <object width="400" height="250">
+        <param name="movie" value="http://www.youtube.com/v/S8zhmiS-1kw&amp;hl=en_US&amp;fs=1?rel=0" />
+        <param name="allowFullScreen" value="true" />
+        <param name="allowscriptaccess" value="always" />
+        <embed src="http://www.youtube.com/v/S8zhmiS-1kw&amp;hl=en_US&amp;fs=1?rel=0" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="400" height="250" />
+    </object>
+</div>
 
 

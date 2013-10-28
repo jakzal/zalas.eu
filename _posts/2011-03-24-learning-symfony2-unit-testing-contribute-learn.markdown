@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2011-03-24 15:49:49
 layout: post
@@ -14,7 +14,9 @@ tags:
 - testing
 ---
 
-![](/uploads/wp/2011/03/unit-testing.png)
+<div class="text-center">
+    <img src="/uploads/wp/2011/03/unit-testing.png" title="Paris" alt="Paris" class="img-responsive" />
+</div>
 
 
 
@@ -48,7 +50,7 @@ Next stop is the [patches](http://symfony.com/doc/2.0/contributing/code/patches.
 
 Finally, [Running Symfony2 Tests](http://symfony.com/doc/2.0/contributing/code/tests.html) will show you how to run the test suite and code coverage.
 
-After reading these docs you should be able to fork the[ Symfony repository on github](http://github.com/symfony/symfony), clone it locally and run the tests:
+After reading these docs you should be able to fork the [Symfony repository on github](http://github.com/symfony/symfony), clone it locally and run the tests:
 
     
     phpunit
@@ -56,7 +58,9 @@ After reading these docs you should be able to fork the[ Symfony repository on g
 
 
 
-[![](/uploads/wp/2011/03/phpunit-output-400x128.png)](/uploads/wp/2011/03/phpunit-output.png)
+<div class="text-center">
+    <a href="/uploads/wp/2011/03/phpunit-output.png"><img src="/uploads/wp/2011/03/phpunit-output-400x128.png" title="PhpUnit output" alt="PhpUnit output" class="img-responsive" /></a>
+</div>
 
 
 
@@ -71,17 +75,23 @@ Code Coverage tells us what parts of the code base are covered by tests. We can 
     phpunit --coverage-html=cov
 
 
-[![](/uploads/wp/2011/03/symfony2-test-coverage-400x114.png)](/uploads/wp/2011/03/symfony2-test-coverage.png)
+<div class="text-center">
+    <a href="/uploads/wp/2011/03/symfony2-test-coverage.png"><img src="/uploads/wp/2011/03/symfony2-test-coverage-400x114.png" title="Symfony2 test coverage" alt="Symfony2 test coverage" class="img-responsive" /></a>
+</div>
 
-[](/uploads/wp/2011/03/symfony2-test-coverage.png)The report not only shows us which classes or methods are tested. We can also see which lines were invoked while running the tests (and how many times). This makes the report a perfect tool for finding parts of code which are not fully tested yet.
+The report not only shows us which classes or methods are tested. We can also see which lines were invoked while running the tests (and how many times). This makes the report a perfect tool for finding parts of code which are not fully tested yet.
 
-[![](/uploads/wp/2011/03/symfony2-class-test-coverage-400x104.png)](/uploads/wp/2011/03/symfony2-class-test-coverage.png)
+<div class="text-center">
+    <a href="/uploads/wp/2011/03/symfony2-class-test-coverage.png"><img src="/uploads/wp/2011/03/symfony2-class-test-coverage-400x104.png" title="Symfony2 class test coverage" alt="Symfony2 class test coverage" class="img-responsive" /></a>
+</div>
 
-[](/uploads/wp/2011/03/symfony2-class-test-coverage.png)Unfortunately it won't show us if all the execution paths were run.
+Unfortunately it won't show us if all the execution paths were run.
 
 I also noticed that to get a real test coverage of a given component it's better to run the coverage report for that component only. It's because some components use other components. **The fact that code is executed while running the test doesn't mean its behavior is verified.**
 
-**[![](/uploads/wp/2011/03/symfony2-components-test-coverage-400x266.png)](/uploads/wp/2011/03/symfony2-components-test-coverage.png)
-**
+<div class="text-center">
+    <a href="/uploads/wp/2011/03/symfony2-components-test-coverage.png"><img src="/uploads/wp/2011/03/symfony2-components-test-coverage-400x266.png" title="Symfony2 component test coverage" alt="Symfony2 component test coverage" class="img-responsive" /></a>
+</div>
+
 
 

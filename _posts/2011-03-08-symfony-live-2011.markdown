@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2011-03-08 02:18:39
 layout: post
@@ -13,7 +13,10 @@ tags:
 - Symfony2
 ---
 
-![Symfony Live 2011 in Paris](/uploads/wp/2011/03/symfony-live-2011-paris.png)I'm writing this post on a way back from the second international [Symfony Live conference](http://www.symfony-live.com/paris). Nearly 500 developers arrived to Paris from all over the world to participate in this great event.
+<div class="pull-left">
+    <img src="/uploads/wp/2011/03/symfony-live-2011-paris.png" title="Symfony Live 2011 in Paris" alt="Symfony Live 2011 in Paris" class="img-responsive" />
+</div>
+I'm writing this post on a way back from the second international [Symfony Live conference](http://www.symfony-live.com/paris). Nearly 500 developers arrived to Paris from all over the world to participate in this great event.
 
 
 ## Presentations
@@ -49,7 +52,10 @@ It's worth to take a look at [attendee's feedback](http://joind.in/event/view/56
 ## Networking
 
 
-[![ElePHPant playing near the Eiffel Tower](/uploads/wp/2011/03/elephpant-eiffel-tower-300x400.jpg)](/uploads/wp/2011/03/elephpant-eiffel-tower.jpg)I have to admit that main sessions are not enough for a regular attendee of conferences. Luckily there's plenty of time to talk with the speakers and other attendees. I really enjoyed chatting with others both during the conference and later in the pub.
+<div class="pull-right">
+    <a href="/uploads/wp/2011/03/elephpant-eiffel-tower.jpg"><img src="/uploads/wp/2011/03/elephpant-eiffel-tower-300x400.jpg" title="ElePHPant playing near the Eiffel Tower" alt="ElePHPant playing near the Eiffel Tower" class="img-responsive" /></a>
+</div>
+I have to admit that main sessions are not enough for a regular attendee of conferences. Luckily there's plenty of time to talk with the speakers and other attendees. I really enjoyed chatting with others both during the conference and later in the pub.
 
 On Friday the [Github Meetup](http://symfony.com/blog/we-re-cheering-again-for-github) was held again in the Patrick's Irish Pub. It's open for everyone and many people outside of the Symfony community showed up. Weka Entertainment sponsored Thursday evening.
 
@@ -59,7 +65,10 @@ Apart from organized events there were some more spontaneous ones. Twitter prove
 ## One more thing...
 
 
-![](/uploads/wp/2011/03/sflogo.png)During the last keynote big news were announced. Symfony got a brand new logo and a new website in [symfony.com](http://symfony.com) domain. Listening to the keynote was a great experience.
+<div class="pull-left">
+    <img src="/uploads/wp/2011/03/sflogo.png" title="Symfony logo" alt="Symfony logo" class="img-responsive" />
+</div>
+During the last keynote big news were announced. Symfony got a brand new logo and a new website in [symfony.com](http://symfony.com) domain. Listening to the keynote was a great experience.
 
 [Fabien](http://twitter.com/fabpot) built a remarkable atmosphere starting with [Symfony2 Source Code Evolution](http://www.youtube.com/watch?v=w1C0TjCr76I).
 
@@ -94,5 +103,12 @@ I'm really inspired and my head is full of new ideas. I can't wait until I'm bac
 Until that happens I'm planning to fill the gaps in HTTP protocol knowledge by reading [HTTP specification](http://www.w3.org/Protocols/rfc2616/rfc2616.html) finally. Also, I want to have a closer look at queues with [RabbitMQ](http://www.rabbitmq.com/), HTTP caching and [Varnish](http://www.varnish-cache.org/). I'm putting "[High Performance Web Sites: Essential Knowledge for Front-End Engineers](http://www.goodreads.com/book/show/1681559.High_Performance_Web_Sites)" book on the "[to read](http://www.goodreads.com/review/list/2402977-jakub-zalas?shelf=to-read)" shelf.
 
 
+
+<div class="text-center">
+    <object width="400" height="267" type="application/x-shockwave-flash" data="https://picasaweb.google.com/s/c/bin/slideshow.swf">
+        <param name="flashvars" value="host=picasaweb.google.com&amp;captions=1&amp;hl=en_US&amp;feat=flashalbum&amp;RGB=0x000000&amp;feed=https%3A%2F%2Fpicasaweb.google.com%2Fdata%2Ffeed%2Fapi%2Fuser%2Fjzalas%2Falbumid%2F5581407011755907281%3Falt%3Drss%26kind%3Dphoto%26hl%3Den_US" />
+        <param name="src" value="https://picasaweb.google.com/s/c/bin/slideshow.swf" />
+    </object>
+</div>
 
 [Symfony Live 2011 Photos](https://picasaweb.google.com/jzalas/SymfonyLive2011?feat=directlink#)

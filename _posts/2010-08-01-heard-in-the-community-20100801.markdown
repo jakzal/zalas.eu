@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2010-08-01 13:39:58
 layout: post
@@ -40,11 +40,12 @@ I accidentally came across a blog post titled [Do Web-Scripting Languages Really
 [Array dereferencing ](http://schlueters.de/blog/archives/138-Features-in-PHP-trunk-Array-dereferencing.html)is a new feature which just got into the PHP trunk. It allows you to do stuff like:
 
     
-    function getData() {
-      return array(1, 2, 3);
-    }
-    
-    echo getData()[1];
+{% highlight php startinline %}
+function getData() {
+  return array(1, 2, 3);
+}
 
+echo getData()[1];
+{% endhighlight %}
 
 Hopefully it'll also work with native PHP functions.

@@ -1,5 +1,5 @@
 ---
-author: admin
+author: Jakub Zalas
 comments: true
 date: 2010-07-25 13:04:29
 layout: post
@@ -22,7 +22,11 @@ Here's the first post.
 ## Protect your privates
 
 
-![Symfony2](/uploads/wp/2010/07/mini_logo.png)[Symfony2 coding standards](http://symfony-reloaded.org/contributing/Code/Standards) favor public and protected access modifiers over private. Blog post by Lukas started hot discussion on this subject in the community (on twitter and blogs):
+<div class="pull-right">
+    <img src="/uploads/wp/2010/07/mini_logo.png" title="Symfony2" alt="Symfony2" class="img-responsive" />
+</div>
+
+[Symfony2 coding standards](http://symfony-reloaded.org/contributing/Code/Standards) favor public and protected access modifiers over private. Blog post by Lukas started hot discussion on this subject in the community (on twitter and blogs):
 
 
 
@@ -42,13 +46,20 @@ While I think that all methods should be as private as possible I can understand
 ## PHP4 is dead (again)
 
 
-![WordPress](/uploads/wp/2010/07/grey-s.png) Over 3 years ago [PHP4 end of life announcement](http://www.php.net/archive/2007.php#2007-07-13-1) was published. Despite its death PHP4 is still hanging around like a zombie. Some of the popular Open Source projects keep supporting it. WordPress is one of the last projects to [announce end of support for PHP4](http://wordpress.org/news/2010/07/eol-for-php4-and-mysql4/). Finally I'd say.
+<div class="pull-left">
+    <img src="/uploads/wp/2010/07/grey-s.png" title="WordPress" alt="WordPress" class="img-responsive" />
+</div>
+ Over 3 years ago [PHP4 end of life announcement](http://www.php.net/archive/2007.php#2007-07-13-1) was published. Despite its death PHP4 is still hanging around like a zombie. Some of the popular Open Source projects keep supporting it. WordPress is one of the last projects to [announce end of support for PHP4](http://wordpress.org/news/2010/07/eol-for-php4-and-mysql4/). Finally I'd say.
 
 
 ## PHP 5.3.3 Was Released
 
 
-![PHP](/uploads/wp/2010/05/php-med-trans-light.gif)Both PHP **5.3.3** and **5.2.14** [were released](http://www.php.net/archive/2010.php#id2010-07-22-2) with many bug and security fixes. I'm really happy to read that [FPM](http://php-fpm.org/) (FastCGI Process Manager) SAPI is now available in the PHP out of the box.
+<div class="pull-right">
+    <img src="/uploads/wp/2010/05/php-med-trans-light.gif" title="PHP" alt="PHP" class="img-responsive" />
+</div>
+
+Both PHP **5.3.3** and **5.2.14** [were released](http://www.php.net/archive/2010.php#id2010-07-22-2) with many bug and security fixes. I'm really happy to read that [FPM](http://php-fpm.org/) (FastCGI Process Manager) SAPI is now available in the PHP out of the box.
 
 
 ## An entirely unscientific look at why people attend conferences
