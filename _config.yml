@@ -8,3 +8,4 @@ url:
 author:
     name: Jakub Zalas
 pygments: true
+exclude: ["vendor"]
