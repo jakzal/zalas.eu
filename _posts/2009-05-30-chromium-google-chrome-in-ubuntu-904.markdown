@@ -20,7 +20,7 @@ tags:
 
 
 <div class="text-center">
-    <a href="/uploads/wp/2009/05/chromium-goyello.png"><img src="/uploads/wp/2009/05/chromium-goyello-400x291.png" title="Chromium" class="img-responsive" /></a>
+    <a href="/uploads/wp/2009/05/chromium-goyello.png"><img src="/uploads/wp/2009/05/chromium-goyello-400x291.png" alt="Chromium" title="Chromium" class="img-responsive" /></a>
 </div>
 
 

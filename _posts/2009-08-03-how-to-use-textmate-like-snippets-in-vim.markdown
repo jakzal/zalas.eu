@@ -56,7 +56,7 @@ Pressing `<TAB>` key continuously moves you to the next defined tab stop. In thi
 SnipMate comes with many predefined snippets but once you start using it, you need more. Fortunately it's easy to extend. Snippets are stored in _~/.vim/snippets_ directory. I started with reviewing the existing ones and adapted them to my coding standards. While doing this I got the idea about the snippets' structure and started with creating my own ones.
 
 <div class="pull-right">
-    <a href="/uploads/wp/2009/08/vim-html-snippets.png"><img src="/uploads/wp/2009/08/vim-html-snippets-400x172.png" title="vim html snippets" class="img-responsive" /></a>
+    <a href="/uploads/wp/2009/08/vim-html-snippets.png"><img src="/uploads/wp/2009/08/vim-html-snippets-400x172.png" alt="vim html snippets" title="vim html snippets" class="img-responsive" /></a>
 </div>
 
 Snippets are grouped by the file type. It is specified by a prefix in the snippet file name or a directory it was placed in (*php.snippets* vs *php/foreach.snippet*). The first version lets you to keep all file type related snippets in one place. The later is used to split your snippets into separate files. Format is slightly different between these two, so to make it simple I'll stick to the first one.
@@ -169,7 +169,7 @@ snippet fore key => value (template)
 Once I run 'fore' trigger vim lets me to choose which version of snippet I would like to use.
 
 <div class="text-center">
-    <a href="/uploads/wp/2009/08/vim-multisnippet.png"><img src="/uploads/wp/2009/08/vim-multisnippet-400x176.png" title="vim multi choice snippet" class="img-responsive" /></a>
+    <a href="/uploads/wp/2009/08/vim-multisnippet.png"><img src="/uploads/wp/2009/08/vim-multisnippet-400x176.png" alt="vim multi choice snippet" title="vim multi choice snippet" class="img-responsive" /></a>
 </div>
 
 

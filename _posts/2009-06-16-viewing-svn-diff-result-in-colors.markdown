@@ -17,13 +17,13 @@ _svn diff_ allows us to see the changes made on the files in the subversion repo
 
 
 <div class="text-center">
-    <a href="/uploads/wp/2009/06/svn-diff-before.png"><img src="/uploads/wp/2009/06/svn-diff-before-399x183.png" title="svn diff in black and white" class="img-responsive" /></a>
+    <a href="/uploads/wp/2009/06/svn-diff-before.png"><img src="/uploads/wp/2009/06/svn-diff-before-399x183.png" alt="svn diff in black and white" title="svn diff in black and white" class="img-responsive" /></a>
 </div>
 
 We can improve our experience a bit by installing [colordiff](http://colordiff.sourceforge.net/). It wraps _diff_ command and produces the same output but coloured.
 
 <div class="text-center">
-    <a href="/uploads/wp/2009/06/svn-diff-after.png"><img src="/uploads/wp/2009/06/svn-diff-after-400x183.png" title="svn diff in colors" class="img-responsive" /></a>
+    <a href="/uploads/wp/2009/06/svn-diff-after.png"><img src="/uploads/wp/2009/06/svn-diff-after-400x183.png" alt="svn diff in colors" title="svn diff in colors" class="img-responsive" /></a>
 </div>
 
 
