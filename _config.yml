@@ -1,12 +1,15 @@
 title: Jakub Zalas
+description: Jakub Zalas Blog
 permalink: /:title
 paginate: 10
 paginate_path: "blog/page:num"
 url:
     main: http://jakzal.github.io/zalas.eu
+    feed: 'http://www.zalas.eu'
     assets: http://jakzal.github.io/zalas.eu
 author:
     name: Jakub Zalas
+    email: jakub@zalas.pl
 disqus:
     shortname: zalas
     url: 'http://www.zalas.eu'
