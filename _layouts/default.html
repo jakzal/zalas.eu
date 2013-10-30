@@ -4,6 +4,8 @@
         <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="verify-v1" content="{{ site.analytics.verify }}" />
+        <link rel="shortcut icon" href="{{ site.url.assets }}/favicon.ico" />
         <link href="{{ site.url.assets }}/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
         <link href="{{ site.url.assets }}/css/code.css" rel="stylesheet">
         <link href="{{ site.url.assets }}/css/base.css" rel="stylesheet">
@@ -21,5 +23,6 @@
             </div>
         </div>
         {% include footer.html %}
+        <script type="text/javascript">var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));</script><script type="text/javascript">try { var pageTracker = _gat._getTracker("{{ site.analytics.google }}"); pageTracker._trackPageview(); } catch(err) { }</script>
     </body>
 </html>
