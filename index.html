@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Blog
-hideNavigation: yes
+hideNavigation: no
 ---
 
 <div class="posts list-group">
@@ -15,9 +15,9 @@ hideNavigation: yes
         {% if paginator.previous_page %}
             <li class="previous">
                 {% if paginator.previous_page == 1 %}
-                    <a href="/">Previous</a>
+                    <a href="{{ site.url.main }}/">Previous</a>
                 {% else %}
-                    <a href="{{ paginator.previous_page_path }}">Previous</a>
+                    <a href="{{ site.url.main }}{{ paginator.previous_page_path }}">Previous</a>
                 {% endif %}
             </li>
         {% else %}
@@ -27,7 +27,7 @@ hideNavigation: yes
         {% endif %}
         {% if paginator.next_page %}
             <li class="next">
-                <a href="{{ paginator.next_page_path }}">Next</a>
+                <a href="{{ site.url.main }}{{ paginator.next_page_path }}">Next</a>
             </li>
         {% else %}
             <li class="next disabled">
