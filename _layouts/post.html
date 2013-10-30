@@ -14,11 +14,9 @@ layout: default
         </li>
     {% endfor %}
 </ul>
-{% if page.image %}
-{% assign image = page.image %}
-{% include image.html %}
-{% endif %}
+
 {{ content }}
+
 <div id="disqus_thread"></div>
 <script type="text/javascript">
     var disqus_shortname = '{{ site.disqus.shortname }}';

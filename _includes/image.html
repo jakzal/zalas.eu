@@ -1,9 +1,0 @@
-{% if image.target %}<a href="{{ image.target }}">{% endif %}
-    <img src="{{ site.url.assets }}{{ image.src }}"
-        {% if image.class %}class="{{ image.class }}"{% endif %}
-        {% if image.title %}title="{{ image.title }}"{% endif %}
-        {% if image.alt %}alt="{{ image.title }}"{% endif %}
-        {% if image.width %}width="{{ image.width }}"{% endif %}
-        {% if image.height %}height="{{ image.height }}"{% endif %}
-    />
-{% if image.target %}</a>{% endif %}
