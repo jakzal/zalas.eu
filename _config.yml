@@ -7,5 +7,8 @@ url:
     assets: http://jakzal.github.io/zalas.eu
 author:
     name: Jakub Zalas
+disqus:
+    shortname: zalas
+    url: 'http://www.zalas.eu'
 pygments: true
 exclude: ["vendor"]
