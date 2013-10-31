@@ -2,13 +2,18 @@
 layout: default
 ---
 
-<h1>{{ page.title }}</h1>
+<section class="posts tag-posts">
+    <h1>{{ page.title }}</h1>
 
-<div class="posts list-group">
-    {% for post in site.tags[page.tag] %}
-    <a href="{{ site.url.main }}{{ post.url }}" class="list-group-item">
-        <span class="pull-right post-date">{% include postDate.html %}</span>
-        <h2 class="list-group-item-heading">{{ post.title }}</h2>
-    </a>
-    {% endfor %}
-</div>
+    <ul class="list-unstyled">
+        {% for post in site.tags[page.tag] %}
+        <li>
+            <a href="{{ site.url.main }}{{ post.url }}"><h2>{{ post.title }}</h2></a>
+            <span class="post-date">{% include postDate.html %}</span>
+        </li>
+        {% endfor %}
+    </ul>
+    <ul class="pager">
+        <li><a href="{{ site.url.main }}/tag/" title="Labels">All labels</a></li>
+    </ul>
+</section>

@@ -1,4 +1,2 @@
 {% unless post %}{% assign post = page %}{% endunless %}
-<time datetime="{{ post.date | date: "%Y-%m-%d" }}">
-    {{ post.date | date_to_string }}
-</time>
+<time datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date_to_string }}</time>

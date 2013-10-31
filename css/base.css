@@ -1,5 +1,9 @@
 a, a:hover, a:visited {
     color: rgb(45, 49, 51);
+    text-decoration: none;
+}
+
+a:hover {
     text-decoration: underline;
 }
 
@@ -29,13 +33,31 @@ h4 {
     text-align: justify;
 }
 
+.navbar-default {
+    background-color: transparent;
+}
+
 .content .img-responsive {
     display: inline;
     margin: 3px;
 }
 
+.posts ul {
+    text-align: center;
+}
+
+.posts ul h2 {
+    margin-bottom: 1px;
+}
+
+.tag-posts h1 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
 .post-date {
     color: #999;
+    font-style: italic;
 }
 
 #license {
