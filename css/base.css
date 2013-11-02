@@ -42,9 +42,13 @@ h4 {
     background-color: transparent;
 }
 
-.content p {
+.content {
     font-size: 16px;
     text-align: justify;
+}
+
+.alert {
+    font-size: 14px;
 }
 
 .content .img-responsive {
