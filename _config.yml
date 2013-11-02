@@ -5,7 +5,7 @@ paginate: 5
 paginate_path: "blog/page:num"
 url:
     main: ''
-    feed: 'http://www.zalas.eu'
+    feed: 'http://zalas.eu'
     assets: ''
 author:
     name: Jakub Zalas
