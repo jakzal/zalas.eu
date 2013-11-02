@@ -9,6 +9,10 @@ a:hover {
     text-decoration: underline;
 }
 
+body {
+    padding-top: 70px;
+}
+
 body, p {
     font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,Verdana,"Droid Sans",sans-serif;
 }
@@ -39,7 +43,7 @@ h4 {
 }
 
 .navbar-default {
-    background-color: transparent;
+    background-color: #fff;
 }
 
 .content {
