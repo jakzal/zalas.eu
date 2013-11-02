@@ -36,13 +36,8 @@ Better solution would be to explicitly close the connections.
 
 Also, we have to remember that there are two types of connections:
 
-
-
-	
-  * connections created by Behat to build schema or load fixtures (Behat boots its own Symfony kernel)
-
-	
-  * connections created by the SymfonyDriver (client connections).
+* connections created by Behat to build schema or load fixtures (Behat boots its own Symfony kernel)
+* connections created by the SymfonyDriver (client connections).
 
 
 <div class="alert alert-warning" markdown="1">**Note**: Using other drivers (like Goutte) might limit total number of created connections as client would use a separate process. Unfortunately it's not enough in some cases (as Behat would still create its connections).</div>
