@@ -110,19 +110,10 @@ cap production deploy
 
 Of course we can do much more than just changing the configuration options. It is also possible to:
 
-
-
-	
-  * add hooks to alter the deployment procedure for a specific stage
-
-	
-  * change the behavior of existing tasks
-
-	
-  * extend existing namespace with new tasks
-
-	
-  * create a new namespace with custom tasks
+* add hooks to alter the deployment procedure for a specific stage
+* change the behavior of existing tasks
+* extend existing namespace with new tasks
+* create a new namespace with custom tasks
 
 
 In practice tasks or namespaces hardly vary between stages. In most cases we'll need to have different configuration or hooks.
