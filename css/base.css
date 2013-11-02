@@ -9,12 +9,8 @@ a:hover {
     text-decoration: underline;
 }
 
-body {
+body, p {
     font-family: "Open Sans", "Arial Black", Verdana, "Droid Sans", sans-serif;
-}
-
-.content p {
-    font-size: 16px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -26,15 +22,15 @@ h1 {
 }
 
 h2 {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 h3 {
-    font-size: 16px;
+    font-size: 18px;
 }
 
 h4 {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .container {
@@ -42,12 +38,13 @@ h4 {
     max-width: 1200px;
 }
 
-.content p {
-    text-align: justify;
-}
-
 .navbar-default {
     background-color: transparent;
+}
+
+.content p {
+    font-size: 16px;
+    text-align: justify;
 }
 
 .content .img-responsive {
@@ -105,4 +102,8 @@ ul.post-tag-cloud {
     margin-bottom: 25px;
     font-size: 12px;
     color: #666;
+}
+
+.author .avatar {
+    margin-bottom: 5px;
 }
