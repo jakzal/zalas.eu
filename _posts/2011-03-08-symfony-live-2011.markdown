@@ -28,22 +28,11 @@ During the two main sessions and one unconference track we could listen to an ex
 
 I won't dig into the details as [Christian](http://twitter.com/caefer) and [Tom](http://twitter.com/boutell) already did it:
 
-
-
-	
-  * [My resume of Symfony Live Paris 2011 (including slides)](http://test.ical.ly/2011/03/07/my-resume-of-symfony-live-paris-2011-including-slides/comment-page-1/)
-
-	
-  * [Symfony Live 2011 in Paris – Day 1 – (almost) live](http://test.ical.ly/2011/03/03/symfony-live-2011-in-paris-day-1-almost-live/)
-
-	
-  * [Symfony Live 2011 in Paris – Day 2 – (almost) live](http://test.ical.ly/2011/03/04/symfony-live-2011-in-paris-%E2%80%93-day-2-%E2%80%93-almost-live/)
-
-	
-  * [Liveblogging Symfony Live Paris](http://window.punkave.com/2011/03/03/liveblogging-symfony-live-paris/)
-
-	
-  * [Liveblogging Symfony Live Paris: Unconference Day](http://window.punkave.com/2011/03/04/liveblogging-symfony-live-paris-unconference-day/)
+* [My resume of Symfony Live Paris 2011 (including slides)](http://test.ical.ly/2011/03/07/my-resume-of-symfony-live-paris-2011-including-slides/comment-page-1/)
+* [Symfony Live 2011 in Paris – Day 1 – (almost) live](http://test.ical.ly/2011/03/03/symfony-live-2011-in-paris-day-1-almost-live/)
+* [Symfony Live 2011 in Paris – Day 2 – (almost) live](http://test.ical.ly/2011/03/04/symfony-live-2011-in-paris-%E2%80%93-day-2-%E2%80%93-almost-live/)
+* [Liveblogging Symfony Live Paris](http://window.punkave.com/2011/03/03/liveblogging-symfony-live-paris/)
+* [Liveblogging Symfony Live Paris: Unconference Day](http://window.punkave.com/2011/03/04/liveblogging-symfony-live-paris-unconference-day/)
 
 
 It's worth to take a look at [attendee's feedback](http://joind.in/event/view/561) as well (leave your comments if you attended the conference!).

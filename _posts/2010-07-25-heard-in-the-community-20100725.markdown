@@ -28,16 +28,9 @@ Here's the first post.
 
 [Symfony2 coding standards](http://symfony-reloaded.org/contributing/Code/Standards) favor public and protected access modifiers over private. Blog post by Lukas started hot discussion on this subject in the community (on twitter and blogs):
 
-
-
-	
-  * [Red tape and the art of ripping through it](http://pooteeweet.org/blog/1799/1799#m1799) by [Lukas Smith](http://twitter.com/dybvandal)
-
-	
-  * [My privates are not public, they are protected](http://www.leftontheweb.com/message/My_privates_are_not_public_they_are_protected) by [Stefan Koopmanschap](http://twitter.com/skoop)
-
-	
-  * [Good use of public, private and protected in OO class design](http://www.jansch.nl/2010/07/19/good-use-of-public-private-and-protected-in-oo-class-design/) by [Ivo Jansch](http://twitter.com/ijansch)
+* [Red tape and the art of ripping through it](http://pooteeweet.org/blog/1799/1799#m1799) by [Lukas Smith](http://twitter.com/dybvandal)
+* [My privates are not public, they are protected](http://www.leftontheweb.com/message/My_privates_are_not_public_they_are_protected) by [Stefan Koopmanschap](http://twitter.com/skoop)
+* [Good use of public, private and protected in OO class design](http://www.jansch.nl/2010/07/19/good-use-of-public-private-and-protected-in-oo-class-design/) by [Ivo Jansch](http://twitter.com/ijansch)
 
 
 While I think that all methods should be as private as possible I can understand points made in the listed blog posts. I guess coding an Open Source framework might need different approach. In everyday work, however, I believe it's a good practice to make the **main responsibility of a class public** and its **internals private or protected**.

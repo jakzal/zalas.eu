@@ -53,13 +53,8 @@ ctags -R --languages=php .
 
 Basic usage boils down to the two commands:
 
-
-
-	
-  * **ctrl-]** takes you to the declaration of a keyword your cursor is currently over. Jump is made so it doesn't matter in which file it is defined. Keyword is put on the tag stack.
-
-	
-  * **ctrl-t** takes you a step back in the tag stack.
+* **ctrl-]** takes you to the declaration of a keyword your cursor is currently over. Jump is made so it doesn't matter in which file it is defined. Keyword is put on the tag stack.
+* **ctrl-t** takes you a step back in the tag stack.
 
 
 Notice that you can precede the command with a number to invoke it several times. It's useful when you have several definitions of the same tag and you don't want to jump to the first one      (**2ctrl-]**). From time to time you'll also need to jump back several tags (**4ctrl-t**).
@@ -79,44 +74,23 @@ vim -t sfGuardUser
 
 Some of the **tag stack** commands:
 
-
-
-	
-  * **pop** jumps backward in the tag stack
-
-	
-  * **tag** jumps forward in the tag stack
-
-	
-  * **tags** displays a tag stack
+* **pop** jumps backward in the tag stack
+* **tag** jumps forward in the tag stack
+* **tags** displays a tag stack
 
 
 Some of the **tag match list** commands:
 
-
-
-	
-  * **tselelect** lists the tags that match its argument or keyword under the cursor
-
-	
-  * **g]** works like the **ctrl-]** but lets you to choose the tag occurrence
-
-	
-  * **:tnext**, **:tprevious**, **:tfirst** and **:tlast** jump through the tag occurrences
+* **tselelect** lists the tags that match its argument or keyword under the cursor
+* **g]** works like the **ctrl-]** but lets you to choose the tag occurrence
+* **:tnext**, **:tprevious**, **:tfirst** and **:tlast** jump through the tag occurrences
 
 
 Some of the **search** commands:
 
-
-
-	
-  * **\[i** and **]i** display the first line containing the keyword under and after the cursor
-
-	
-  * **\[I** and **]I** display all lines containing the keyword under and after the cursor
-
-	
-  * **\[ ctrl-i** and **] ctr-i** jumps to the first line that contains the keyword under and after the cursor
+* **\[i** and **]i** display the first line containing the keyword under and after the cursor
+* **\[I** and **]I** display all lines containing the keyword under and after the cursor
+* **\[ ctrl-i** and **] ctr-i** jumps to the first line that contains the keyword under and after the cursor
 
 
 <div class="alert alert-warning" markdown="1">**Note**: Write **:help tags-and-searches** in vim to get total overview of features offered by tags.</div>
@@ -124,15 +98,8 @@ Some of the **search** commands:
 
 ## Useful links
 
-
-
-
-
-	
-  * [Patching exuberant-ctags for better PHP5 support in vim](http://www.jejik.com/articles/2008/11/patching_exuberant-ctags_for_better_php5_support_in_vim/)
-
-	
-  * [exuberant ctags with PHP in Vim](http://weierophinney.net/matthew/archives/134-exuberant-ctags-with-PHP-in-Vim.html)[](http://www.jejik.com/articles/2008/11/patching_exuberant-ctags_for_better_php5_support_in_vim/)
+* [Patching exuberant-ctags for better PHP5 support in vim](http://www.jejik.com/articles/2008/11/patching_exuberant-ctags_for_better_php5_support_in_vim/)
+* [exuberant ctags with PHP in Vim](http://weierophinney.net/matthew/archives/134-exuberant-ctags-with-PHP-in-Vim.html)[](http://www.jejik.com/articles/2008/11/patching_exuberant-ctags_for_better_php5_support_in_vim/)
 
 
 

@@ -24,25 +24,12 @@ Exploring, opening, switching, renaming, moving files and directories are common
 
 **NERD tree** enables you to:
 
-
-
-	
-  * **Navigate** and **jump** through the directory tree
-
-	
-  * **Open** files in the current window, tab, split view (horizontal and vertical)
-
-	
-  * **Change** the current working directory
-
-	
-  * **Add**, **move**, **copy** and **remove** files and directories
-
-	
-  * **Filter** the tree
-
-	
-  * **Create the bookmarks**
+* **Navigate** and **jump** through the directory tree
+* **Open** files in the current window, tab, split view (horizontal and vertical)
+* **Change** the current working directory
+* **Add**, **move**, **copy** and **remove** files and directories
+* **Filter** the tree
+* **Create the bookmarks**
 
 
 

@@ -51,18 +51,9 @@ There are plans to [build phpBB4 based on Symfony 2](http://area51.phpbb.com/php
 
 However, there are some frameworks which will support PHP 5.3+ only:
 
-
-
-	
-  * [Symfony 2](http://symfony-reloaded.org/)
-
-	
-  * [Doctrine 2](http://www.doctrine-project.org/)
-
-	
-  * [Zend 2](http://framework.zend.com/wiki/display/ZFDEV2/Zend+Framework+2.0+Roadmap)
-
-	
-  * [Lithium](http://rad-dev.org/lithium)
+* [Symfony 2](http://symfony-reloaded.org/)
+* [Doctrine 2](http://www.doctrine-project.org/)
+* [Zend 2](http://framework.zend.com/wiki/display/ZFDEV2/Zend+Framework+2.0+Roadmap)
+* [Lithium](http://rad-dev.org/lithium)
 
 

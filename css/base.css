@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans&subset=latin,latin-ext);
 
 a, a:hover, a:visited {
     color: rgb(45, 49, 51);
@@ -10,11 +10,11 @@ a:hover {
 }
 
 body, p {
-    font-family: "Open Sans", "Arial Black", Verdana, "Droid Sans", sans-serif;
+    font-family: "Open Sans", "Arial", Verdana, "Droid Sans", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: "Open Sans", "Arial Black", Verdana, "Droid Sans", sans-serif;
+    font-family: "Open Sans", "Arial", Verdana, "Droid Sans", sans-serif;
 }
 
 h1 {

@@ -21,16 +21,9 @@ I also want to know all those nitty-gritty details. Therefore I didn't go for sa
 
 There are already several articles describing the process using the [symfony-bootstrapper](https://github.com/symfony/symfony-bootstrapper):
 
-
-
-	
-  * [Make your own Symfony2 sandbox (the easy way)](http://www.webpragmatist.com/2010/11/make-your-own-symfony2-sandbox.html) (by [@webPragmatist](http://twitter.com/webPragmatist))
-
-	
-  * [Symfony2 project initialization](http://blog.bearwoods.dk/symfony2-project-initilization) (by [@henrikbjorn](http://twitter.com/henrikbjorn))
-
-	
-  * [Symfony2 project from scratch](http://www.fizyk.net.pl/blog/symony2-project-from-scratch)
+* [Make your own Symfony2 sandbox (the easy way)](http://www.webpragmatist.com/2010/11/make-your-own-symfony2-sandbox.html) (by [@webPragmatist](http://twitter.com/webPragmatist))
+* [Symfony2 project initialization](http://blog.bearwoods.dk/symfony2-project-initilization) (by [@henrikbjorn](http://twitter.com/henrikbjorn))
+* [Symfony2 project from scratch](http://www.fizyk.net.pl/blog/symony2-project-from-scratch)
 
 
 Symfony2 internals are being changed every day. For someone who wants to be always up to date I think it's better to utilize [git submodules](http://progit.org/book/ch6-6.html) for vendor libraries. Here is slightly modified process of generating your own Symfony2 project.

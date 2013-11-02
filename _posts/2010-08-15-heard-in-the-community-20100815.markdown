@@ -25,13 +25,9 @@ Up to now three articles were published:
 
 
 	
-  * [Munchkin a.k.a. learn greenfield TDD with PHP](http://alternateillusion.com/2010/07/22/munchkin-a-k-a-learn-greenfield-tdd-with-php/)
-
-	
-  * [Munchkin – Planning – User types](http://alternateillusion.com/2010/07/26/munchkin-planning-user-types/)
-
-	
-  * [Munchkin – Walking Skeleton and the initial stories](http://alternateillusion.com/2010/08/10/munchkin-walking-skeleton-and-the-initial-stories/)
+* [Munchkin a.k.a. learn greenfield TDD with PHP](http://alternateillusion.com/2010/07/22/munchkin-a-k-a-learn-greenfield-tdd-with-php/)
+* [Munchkin – Planning – User types](http://alternateillusion.com/2010/07/26/munchkin-planning-user-types/)
+* [Munchkin – Walking Skeleton and the initial stories](http://alternateillusion.com/2010/08/10/munchkin-walking-skeleton-and-the-initial-stories/)
 
 
 

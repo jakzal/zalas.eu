@@ -16,14 +16,9 @@ Up to now I spread my focus to the three blogs:
 
 
 
-	
-  * [private blog in English](http://www.zalas.eu)
-
-	
-  * [](http://www.zalas.eu)[private blog in Polish](http://www.zalas.pl)
-
-	
-  * [](http://www.zalas.pl)[GOYELLO blog](http://blog.goyello.com)
+* [private blog in English](http://www.zalas.eu)
+* [](http://www.zalas.eu)[private blog in Polish](http://www.zalas.pl)
+* [](http://www.zalas.pl)[GOYELLO blog](http://blog.goyello.com)
 
 
 This is the thing I'm going to change. From now on my **main focus** is collaborative writing on [GOYELLO blog](http://blog.goyello.com).
@@ -37,45 +32,18 @@ Below is the list of my 2009 blog posts.
 ## My private blog in English (zalas.eu)
 
 
-
-
-
-
-	
-  * [Viewing svn diff result in vim](http://www.zalas.eu/viewing-svn-diff-result-in-vim)
-
-	
-  * [Frets on Fire - Guitar Hero in Ubuntu 9.10 (Karmic Koala)](http://www.zalas.eu/frets-on-fire-guitar-hero-in-ubuntu-910-karmic-koala)
-
-	
-  * [Chromium - Google Chrome in Ubuntu 9.10 (Karmic Koala)](http://www.zalas.eu/chromium-google-chrome-in-ubuntu-910-karmic-koala)
-
-	
-  * [How to use TextMate like snippets in vim?](http://www.zalas.eu/how-to-use-textmate-like-snippets-in-vim)
-
-	
-  * [How to record a macro in vim?](http://www.zalas.eu/how-to-record-a-macro-in-vim)
-
-	
-  * [Symphony CMS on nginx](http://www.zalas.eu/symphony-cms-on-nginx)
-
-	
-  * [Caching the websites with bash script and apache's .htaccess file](http://www.zalas.eu/caching-the-websites-with-bash-script-and-apaches-htaccess-file)
-
-	
-  * [Viewing svn diff result in colors](http://www.zalas.eu/viewing-svn-diff-result-in-colors)
-
-	
-  * [Chromium - Google Chrome in Ubuntu 9.04](http://www.zalas.eu/chromium-google-chrome-in-ubuntu-904)
-
-	
-  * [Using SimpleXML with sfWebBrowser to parse html documents](http://www.zalas.eu/using-simplexml-with-sfwebbrowser-to-parse-html-documents)
-
-	
-  * [Put your stylesheets at the top and your scripts at the bottom](http://www.zalas.eu/put-your-stylesheets-at-the-top-and-your-scripts-at-the-bottom)
-
-	
-  * [Looking at the website's source code](http://www.zalas.eu/looking-at-the-websites-source-code)
+* [Viewing svn diff result in vim](http://www.zalas.eu/viewing-svn-diff-result-in-vim)
+* [Frets on Fire - Guitar Hero in Ubuntu 9.10 (Karmic Koala)](http://www.zalas.eu/frets-on-fire-guitar-hero-in-ubuntu-910-karmic-koala)
+* [Chromium - Google Chrome in Ubuntu 9.10 (Karmic Koala)](http://www.zalas.eu/chromium-google-chrome-in-ubuntu-910-karmic-koala)
+* [How to use TextMate like snippets in vim?](http://www.zalas.eu/how-to-use-textmate-like-snippets-in-vim)
+* [How to record a macro in vim?](http://www.zalas.eu/how-to-record-a-macro-in-vim)
+* [Symphony CMS on nginx](http://www.zalas.eu/symphony-cms-on-nginx)
+* [Caching the websites with bash script and apache's .htaccess file](http://www.zalas.eu/caching-the-websites-with-bash-script-and-apaches-htaccess-file)
+* [Viewing svn diff result in colors](http://www.zalas.eu/viewing-svn-diff-result-in-colors)
+* [Chromium - Google Chrome in Ubuntu 9.04](http://www.zalas.eu/chromium-google-chrome-in-ubuntu-904)
+* [Using SimpleXML with sfWebBrowser to parse html documents](http://www.zalas.eu/using-simplexml-with-sfwebbrowser-to-parse-html-documents)
+* [Put your stylesheets at the top and your scripts at the bottom](http://www.zalas.eu/put-your-stylesheets-at-the-top-and-your-scripts-at-the-bottom)
+* [Looking at the website's source code](http://www.zalas.eu/looking-at-the-websites-source-code)
 
 
 
@@ -83,43 +51,17 @@ Below is the list of my 2009 blog posts.
 
 ## GOYELLO blog (blog.goyello.com)
 
-
-
-
-
-
-	
-  * [How to become a Zend Certified Engineer?](http://blog.goyello.com/2009/12/31/how-to-become-a-zend-certified-engineer/)
-
-	
-  * [How to install Redmine with nginx and Mongrel Cluster on Gentoo Linux?](http://blog.goyello.com/2009/12/18/how-to-install-redmine-with-nginx-and-mongrel-cluster-on-gentoo-linux/)
-
-	
-  * [Why do we need Open Source frameworks?](http://blog.goyello.com/2009/11/17/why-do-we-need-open-source-frameworks/)
-
-	
-  * [New Ubuntu Karmic Koala: The 6 features I was waiting for](http://blog.goyello.com/2009/10/29/new-ubuntu-karmic-koala-the-6-feateres-i-was-waiting-for/)
-
-	
-  * [PHP North West 2009 Conference](http://blog.goyello.com/2009/10/17/php-north-west-2009-conference/)
-
-	
-  * [How social networks changed application development](http://blog.goyello.com/2009/08/07/how-social-networks-changed-application-development/)
-
-	
-  * [Today showed the sensitivity of our social network environment. Can we prevent it?](http://blog.goyello.com/2009/08/06/today-showed-the-sensitivity-of-our-social-network-environment/)
-
-	
-  * [PHP 5.3 finally released](http://blog.goyello.com/2009/07/03/php-5-3-was-released/)
-
-	
-  * [PHP Standards Initiative](http://blog.goyello.com/2009/06/19/php-standards-initiative/)
-
-	
-  * [Book review: php|architect’s Guide to PHP Design Patterns](http://blog.goyello.com/2009/05/29/book-review-phparchitects-guide-to-php-design-patterns/)
-
-	
-  * [One more look at the first 4developers conference](http://blog.goyello.com/2009/03/08/one-more-look-at-the-first-4developers-conference/)
+* [How to become a Zend Certified Engineer?](http://blog.goyello.com/2009/12/31/how-to-become-a-zend-certified-engineer/)
+* [How to install Redmine with nginx and Mongrel Cluster on Gentoo Linux?](http://blog.goyello.com/2009/12/18/how-to-install-redmine-with-nginx-and-mongrel-cluster-on-gentoo-linux/)
+* [Why do we need Open Source frameworks?](http://blog.goyello.com/2009/11/17/why-do-we-need-open-source-frameworks/)
+* [New Ubuntu Karmic Koala: The 6 features I was waiting for](http://blog.goyello.com/2009/10/29/new-ubuntu-karmic-koala-the-6-feateres-i-was-waiting-for/)
+* [PHP North West 2009 Conference](http://blog.goyello.com/2009/10/17/php-north-west-2009-conference/)
+* [How social networks changed application development](http://blog.goyello.com/2009/08/07/how-social-networks-changed-application-development/)
+* [Today showed the sensitivity of our social network environment. Can we prevent it?](http://blog.goyello.com/2009/08/06/today-showed-the-sensitivity-of-our-social-network-environment/)
+* [PHP 5.3 finally released](http://blog.goyello.com/2009/07/03/php-5-3-was-released/)
+* [PHP Standards Initiative](http://blog.goyello.com/2009/06/19/php-standards-initiative/)
+* [Book review: php|architect’s Guide to PHP Design Patterns](http://blog.goyello.com/2009/05/29/book-review-phparchitects-guide-to-php-design-patterns/)
+* [One more look at the first 4developers conference](http://blog.goyello.com/2009/03/08/one-more-look-at-the-first-4developers-conference/)
 
 
 
@@ -129,58 +71,21 @@ Below is the list of my 2009 blog posts.
 
 
 
-
-
-
-	
-  * [Kolorowe svn diff w edytorze vim](http://www.zalas.pl/kolorowe-svn-diff-w-edytorze-vim)
-
-	
-  * [Frets on Fire, czyli Guitar Hero w Ubuntu 9.10 (Karmic Koala)](http://www.zalas.pl/frets-on-fire-czyli-guitar-hero-w-ubuntu-910-karmic-koala)
-
-	
-  * [Chromium, czyli Google Chrome w Ubuntu 9.10 (Karmic Koala)](http://www.zalas.pl/chromium-czyli-google-chrome-w-ubuntu-910-karmic-koala)
-
-	
-  * [Ubuntu 9.10 Karmic Koala już jest!](http://www.zalas.pl/ubuntu-910-karmic-koala-juz-jest)
-
-	
-  * [Konferencja PHP North West 2009](http://www.zalas.pl/konferencja-php-north-west-2009)
-
-	
-  * [Wyjątek 'The "default" context does not exist.' w linii poleceń symfony](http://www.zalas.pl/wyjatek-the-default-context-does-not-exist-w-linii-polecen-symfony)
-
-	
-  * [Jak nagrać makro w edytorze vim?](http://www.zalas.pl/jak-nagrac-makro-w-edytorze-vim)
-
-	
-  * [Symphony CMS na nginx](http://www.zalas.pl/symphony-cms-na-nginx)
-
-	
-  * [Cachowanie stron internetowych za pomocą skryptu bash i pliku .htaccess](http://www.zalas.pl/cachowanie-stron-internetowych-za-pomoca-skryptu-bash-i-pliku-htaccess)
-
-	
-  * [PHP 5.3 zostało wydane](http://www.zalas.pl/php-53-zostalo-wydane)
-
-	
-  * [Kolorowanie wyniku svn diff](http://www.zalas.pl/kolorowanie-wyniku-svn-diff)
-
-	
-  * [CSS przodem, JavaScript tyłem](http://www.zalas.pl/css-przodem-javascript-tylem)
-
-	
-  * [Inicjatywa na rzecz standardów PHP (PHP Standards Initiative)](http://www.zalas.pl/php-standards-initiative)
-
-	
-  * [Chromium, czyli Google Chrome w Ubuntu 9.04](http://www.zalas.pl/chromium-czyli-google-chrome-w-ubuntu-904)
-
-	
-  * [Recenzja: php|architect's Guide to PHP Design Patterns](http://www.zalas.pl/recenzja-phparchitects-guide-to-php-design-patterns)
-
-	
-  * [Parsowanie stron internetowych z użyciem sfWebBrowser i SimpleXML](http://www.zalas.pl/parsowanie-stron-internetowych-z-uzyciem-sfwebbrowser-i-simplexml)
-
-	
-  * [Tworzenie szkiców interfejsu użytkownika (UI mockups)](http://www.zalas.pl/tworzenie-szkicow-interfejsu-uzytkownika-ui-balsamiq-mockups)
-
+* [Kolorowe svn diff w edytorze vim](http://www.zalas.pl/kolorowe-svn-diff-w-edytorze-vim)
+* [Frets on Fire, czyli Guitar Hero w Ubuntu 9.10 (Karmic Koala)](http://www.zalas.pl/frets-on-fire-czyli-guitar-hero-w-ubuntu-910-karmic-koala)
+* [Chromium, czyli Google Chrome w Ubuntu 9.10 (Karmic Koala)](http://www.zalas.pl/chromium-czyli-google-chrome-w-ubuntu-910-karmic-koala)
+* [Ubuntu 9.10 Karmic Koala już jest!](http://www.zalas.pl/ubuntu-910-karmic-koala-juz-jest)
+* [Konferencja PHP North West 2009](http://www.zalas.pl/konferencja-php-north-west-2009)
+* [Wyjątek 'The "default" context does not exist.' w linii poleceń symfony](http://www.zalas.pl/wyjatek-the-default-context-does-not-exist-w-linii-polecen-symfony)
+* [Jak nagrać makro w edytorze vim?](http://www.zalas.pl/jak-nagrac-makro-w-edytorze-vim)
+* [Symphony CMS na nginx](http://www.zalas.pl/symphony-cms-na-nginx)
+* [Cachowanie stron internetowych za pomocą skryptu bash i pliku .htaccess](http://www.zalas.pl/cachowanie-stron-internetowych-za-pomoca-skryptu-bash-i-pliku-htaccess)
+* [PHP 5.3 zostało wydane](http://www.zalas.pl/php-53-zostalo-wydane)
+* [Kolorowanie wyniku svn diff](http://www.zalas.pl/kolorowanie-wyniku-svn-diff)
+* [CSS przodem, JavaScript tyłem](http://www.zalas.pl/css-przodem-javascript-tylem)
+* [Inicjatywa na rzecz standardów PHP (PHP Standards Initiative)](http://www.zalas.pl/php-standards-initiative)
+* [Chromium, czyli Google Chrome w Ubuntu 9.04](http://www.zalas.pl/chromium-czyli-google-chrome-w-ubuntu-904)
+* [Recenzja: php|architect's Guide to PHP Design Patterns](http://www.zalas.pl/recenzja-phparchitects-guide-to-php-design-patterns)
+* [Parsowanie stron internetowych z użyciem sfWebBrowser i SimpleXML](http://www.zalas.pl/parsowanie-stron-internetowych-z-uzyciem-sfwebbrowser-i-simplexml)
+* [Tworzenie szkiców interfejsu użytkownika (UI mockups)](http://www.zalas.pl/tworzenie-szkicow-interfejsu-uzytkownika-ui-balsamiq-mockups)
 
