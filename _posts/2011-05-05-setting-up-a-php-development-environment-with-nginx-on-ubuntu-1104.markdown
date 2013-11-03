@@ -17,7 +17,7 @@ tags:
 <div class="pull-left">
     <img src="/uploads/wp/2011/05/nginx-php.png" title="Nginx and PHP logo" alt="Nginx and PHP logo" class="img-responsive" />
 </div>
-I already described [how to prepare a PHP development environment with Nginx on Ubuntu 10.04](/setting-up-a-php-development-environment-with-nginx-on-ubuntu-1004).
+I already described [how to prepare a PHP development environment with Nginx on Ubuntu 10.04](/setting-up-a-php-development-environment-with-nginx-on-ubuntu-1004/).
 
 Ubuntu 11.04 (Natty Narwhal) simplifies the procedure a lot since **php-fpm** is available in the **PHP 5.3** core.
 
@@ -100,7 +100,7 @@ sudo ln -s /etc/nginx/sites-available/dev /etc/nginx/sites-enabled/dev
 {% endhighlight %}
 
 
-<div class="alert alert-warning" markdown="1">**Note**: I explained the Nginx directives and options in my another blog post ["Nginx configuration for Symfony projects](http://www.zalas.eu/nginx-configuration-for-symfony-projects)".</div>
+<div class="alert alert-warning" markdown="1">**Note**: I explained the Nginx directives and options in my another blog post ["Nginx configuration for Symfony projects](http://zalas.eu/nginx-configuration-for-symfony-projects/)".</div>
 
 
 ## System configuration

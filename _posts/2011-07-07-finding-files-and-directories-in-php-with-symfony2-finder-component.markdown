@@ -32,7 +32,7 @@ git clone https://github.com/symfony/Finder.git vendor/Symfony/Component/Finder
 {% endhighlight %}
 
 
-We'll let Symfony ClassLoader component to take care of the class autoloading. Read more about it in the "[Autoloading classes in an any PHP project with Symfony2 ClassLoader component](http://www.zalas.eu/autoloading-classes-in-any-php-project-with-symfony2-classloader-component)".
+We'll let Symfony ClassLoader component to take care of the class autoloading. Read more about it in the "[Autoloading classes in an any PHP project with Symfony2 ClassLoader component](http://zalas.eu/autoloading-classes-in-any-php-project-with-symfony2-classloader-component/)".
 
 Following code is sufficient to load classes from any Symfony component (assuming components are put into the _vendor/Symfony/Component_ directory):
 

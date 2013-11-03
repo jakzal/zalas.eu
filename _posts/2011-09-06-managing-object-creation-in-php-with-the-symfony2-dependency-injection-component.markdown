@@ -45,7 +45,7 @@ git clone https://github.com/kriswallsmith/Buzz.git vendor/Buzz
 {% endhighlight %}
 
 
-Symfony _ClassLoader_ component will take care of the class autoloading (*read more about it in the* "[Autoloading classes in an any PHP project with Symfony2 ClassLoader component](http://www.zalas.eu/autoloading-classes-in-any-php-project-with-symfony2-classloader-component)").
+Symfony _ClassLoader_ component will take care of the class autoloading (*read more about it in the* "[Autoloading classes in an any PHP project with Symfony2 ClassLoader component](http://zalas.eu/autoloading-classes-in-any-php-project-with-symfony2-classloader-component/)").
 
 Following code is sufficient to load classes from an any Symfony component (assuming components are put into the _vendor/Symfony/Component_ directory):
 

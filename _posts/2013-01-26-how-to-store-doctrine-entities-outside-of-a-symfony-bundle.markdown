@@ -16,7 +16,7 @@ The [DoctrineBundle](https://github.com/doctrine/DoctrineBundle) and [Doctrine b
 As long as we follow conventions, like putting entities into the _Entity_ folder or mappings into the _Resources/config/doctrine_ folder, mappings will be configured for us. In the Symfony Standard Edition this behaviour is enabled by default, thanks to the [auto mapping](http://symfony.com/doc/current/reference/configuration/doctrine.html#configuration-overview) configuration option.
 
 <div class="text-center">
-    <a href="http://www.zalas.eu/uploads/wp/2013/01/entities.png"><img src="/uploads/wp/2013/01/entities.png" title="Entities" alt="Entities" class="img-responsive" /></a>
+    <a href="http://zalas.eu/uploads/wp/2013/01/entities.png"><img src="/uploads/wp/2013/01/entities.png" title="Entities" alt="Entities" class="img-responsive" /></a>
 </div>
 
 It's convenient, since we don't have to do much to start working with the ORM.

@@ -39,4 +39,4 @@ There is a similar tool for database creation called createdb:
     createdb mydatabase
 
 
-<div class="alert alert-warning" markdown="1">**Note**: Read about MySQL in my another post: [MySQL installation in Ubuntu 10.04](/mysql-installation-in-ubuntu-1004).</div>
+<div class="alert alert-warning" markdown="1">**Note**: Read about MySQL in my another post: [MySQL installation in Ubuntu 10.04](/mysql-installation-in-ubuntu-1004/).</div>

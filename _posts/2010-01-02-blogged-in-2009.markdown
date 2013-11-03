@@ -16,9 +16,9 @@ Up to now I spread my focus to the three blogs:
 
 
 
-* [private blog in English](http://www.zalas.eu)
-* [](http://www.zalas.eu)[private blog in Polish](http://www.zalas.pl)
-* [](http://www.zalas.pl)[GOYELLO blog](http://blog.goyello.com)
+* [private blog in English](http://zalas.eu)
+* [private blog in Polish](http://www.zalas.pl)
+* [GOYELLO blog](http://blog.goyello.com)
 
 
 This is the thing I'm going to change. From now on my **main focus** is collaborative writing on [GOYELLO blog](http://blog.goyello.com).
@@ -32,18 +32,18 @@ Below is the list of my 2009 blog posts.
 ## My private blog in English (zalas.eu)
 
 
-* [Viewing svn diff result in vim](http://www.zalas.eu/viewing-svn-diff-result-in-vim)
-* [Frets on Fire - Guitar Hero in Ubuntu 9.10 (Karmic Koala)](http://www.zalas.eu/frets-on-fire-guitar-hero-in-ubuntu-910-karmic-koala)
-* [Chromium - Google Chrome in Ubuntu 9.10 (Karmic Koala)](http://www.zalas.eu/chromium-google-chrome-in-ubuntu-910-karmic-koala)
-* [How to use TextMate like snippets in vim?](http://www.zalas.eu/how-to-use-textmate-like-snippets-in-vim)
-* [How to record a macro in vim?](http://www.zalas.eu/how-to-record-a-macro-in-vim)
-* [Symphony CMS on nginx](http://www.zalas.eu/symphony-cms-on-nginx)
-* [Caching the websites with bash script and apache's .htaccess file](http://www.zalas.eu/caching-the-websites-with-bash-script-and-apaches-htaccess-file)
-* [Viewing svn diff result in colors](http://www.zalas.eu/viewing-svn-diff-result-in-colors)
-* [Chromium - Google Chrome in Ubuntu 9.04](http://www.zalas.eu/chromium-google-chrome-in-ubuntu-904)
-* [Using SimpleXML with sfWebBrowser to parse html documents](http://www.zalas.eu/using-simplexml-with-sfwebbrowser-to-parse-html-documents)
-* [Put your stylesheets at the top and your scripts at the bottom](http://www.zalas.eu/put-your-stylesheets-at-the-top-and-your-scripts-at-the-bottom)
-* [Looking at the website's source code](http://www.zalas.eu/looking-at-the-websites-source-code)
+* [Viewing svn diff result in vim](http://zalas.eu/viewing-svn-diff-result-in-vim/)
+* [Frets on Fire - Guitar Hero in Ubuntu 9.10 (Karmic Koala)](http://zalas.eu/frets-on-fire-guitar-hero-in-ubuntu-910-karmic-koala/)
+* [Chromium - Google Chrome in Ubuntu 9.10 (Karmic Koala)](http://zalas.eu/chromium-google-chrome-in-ubuntu-910-karmic-koala/)
+* [How to use TextMate like snippets in vim?](http://zalas.eu/how-to-use-textmate-like-snippets-in-vim/)
+* [How to record a macro in vim?](http://zalas.eu/how-to-record-a-macro-in-vim/)
+* [Symphony CMS on nginx](http://zalas.eu/symphony-cms-on-nginx/)
+* [Caching the websites with bash script and apache's .htaccess file](http://zalas.eu/caching-the-websites-with-bash-script-and-apaches-htaccess-file/)
+* [Viewing svn diff result in colors](http://zalas.eu/viewing-svn-diff-result-in-colors/)
+* [Chromium - Google Chrome in Ubuntu 9.04](http://zalas.eu/chromium-google-chrome-in-ubuntu-904/)
+* [Using SimpleXML with sfWebBrowser to parse html documents](http://zalas.eu/using-simplexml-with-sfwebbrowser-to-parse-html-documents/)
+* [Put your stylesheets at the top and your scripts at the bottom](http://zalas.eu/put-your-stylesheets-at-the-top-and-your-scripts-at-the-bottom/)
+* [Looking at the website's source code](http://zalas.eu/looking-at-the-websites-source-code/)
 
 
 

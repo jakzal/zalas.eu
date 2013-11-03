@@ -59,4 +59,4 @@ svndiff plugins/zMobyPicturePlugin/lib/zMobyPictureClient.class.php
 {% endhighlight %}
 
 
-<div class="alert alert-warning" markdown="1">**Note**: You can achieve pretty much the same with vim. To learn about it read: "[Viewing svn diff result in vim](/viewing-svn-diff-result-in-vim)".</div>
+<div class="alert alert-warning" markdown="1">**Note**: You can achieve pretty much the same with vim. To learn about it read: "[Viewing svn diff result in vim](/viewing-svn-diff-result-in-vim/)".</div>

@@ -19,7 +19,7 @@ tags:
 </div>
 Recent release of Nginx 1.0.0 triggered me to refresh my knowledge about its configuration options. There were quite some additions since I looked in the docs for the last time. New variables and directives let me to simplify my configuration for Symfony projects (both 1.x and 2).
 
-<div class="alert alert-warning" markdown="1">**Warning:** Configurations published on the Internet usually suffer from the vulnerability which allows to run a non-PHP file as a PHP. More about the problem here: "[Setting up PHP-FastCGI and nginx? Don’t trust the tutorials: check your configuration!](https://nealpoole.com/blog/2011/04/setting-up-php-fastcgi-and-nginx-dont-trust-the-tutorials-check-your-configuration/)". For Nginx+PHP installation read "[Setting up a PHP development environment with Nginx on Ubuntu 11.04](http://www.zalas.eu/setting-up-a-php-development-environment-with-nginx-on-ubuntu-1104)".</div>
+<div class="alert alert-warning" markdown="1">**Warning:** Configurations published on the Internet usually suffer from the vulnerability which allows to run a non-PHP file as a PHP. More about the problem here: "[Setting up PHP-FastCGI and nginx? Don’t trust the tutorials: check your configuration!](https://nealpoole.com/blog/2011/04/setting-up-php-fastcgi-and-nginx-dont-trust-the-tutorials-check-your-configuration/)". For Nginx+PHP installation read "[Setting up a PHP development environment with Nginx on Ubuntu 11.04](http://zalas.eu/setting-up-a-php-development-environment-with-nginx-on-ubuntu-1104/)".</div>
 
 
 ## Configuration

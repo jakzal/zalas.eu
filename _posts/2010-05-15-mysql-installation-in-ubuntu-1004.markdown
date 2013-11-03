@@ -48,4 +48,4 @@ Now you can create MySQL databases without the need of using root account:
     mysqladmin -p create wordpress
 
 
-<div class="alert alert-warning" markdown="1">**Note**: Read about PostgreSQL in my another post: [PostgreSQL installation in Ubuntu 10.04](/postgresql-installation-in-ubuntu-1004).</div>
+<div class="alert alert-warning" markdown="1">**Note**: Read about PostgreSQL in my another post: [PostgreSQL installation in Ubuntu 10.04](/postgresql-installation-in-ubuntu-1004/).</div>

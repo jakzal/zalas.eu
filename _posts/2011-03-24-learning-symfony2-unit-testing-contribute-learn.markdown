@@ -21,7 +21,7 @@ tags:
 
 
 
-During the Hacking Day on the [Symfony Live conference](http://www.zalas.eu/symfony-live-2011) I decided to give it a try and write some unit tests for [Symfony2](http://symfony.com). I'm a big fan of TDD for quite some time already and I recently became really interested in BDD. For sure I'm not new to unit testing. Still, **I didn't expect that writing tests for an existing piece of software can be so much fun**.
+During the Hacking Day on the [Symfony Live conference](http://zalas.eu/symfony-live-2011/) I decided to give it a try and write some unit tests for [Symfony2](http://symfony.com). I'm a big fan of TDD for quite some time already and I recently became really interested in BDD. For sure I'm not new to unit testing. Still, **I didn't expect that writing tests for an existing piece of software can be so much fun**.
 
 
 What I also discovered is that writing unit tests for Symfony is a great way to learn its internals.

@@ -15,7 +15,7 @@ tags:
     <img src="/uploads/wp/2010/05/ubuntulogo-circle.png" title="Ubuntu Logo" alt="Ubuntu Logo" class="img-responsive" />
 </div>
 
-Ubuntu 10.04 Lucid Lynx was released two days ago. Yesterday I've installed it on my laptop. As [I used beta](/ubuntu-1004-lucid-lynx-is-just-around-the-corner) before I wasn't surprised with a stable release. I'm also not disappointed. It's just great!
+Ubuntu 10.04 Lucid Lynx was released two days ago. Yesterday I've installed it on my laptop. As [I used beta](/ubuntu-1004-lucid-lynx-is-just-around-the-corner/) before I wasn't surprised with a stable release. I'm also not disappointed. It's just great!
 
 
 ## Look and Feel
@@ -33,7 +33,7 @@ One of the most noticeably improved things is usability. I really like the whole
 ## Ubuntu One Music Store
 
 
-[I already wrote about Ubuntu One Music Store](/ubuntu-one-music-store-is-now-public) while testing beta release. Once I installed stable release, in my music player I directly got songs bought in the store some time ago. Of course I needed to sign into the Ubuntu One in the first place. By default all music you buy is stored on your Ubuntu One disk.
+[I already wrote about Ubuntu One Music Store](/ubuntu-one-music-store-is-now-public/) while testing beta release. Once I installed stable release, in my music player I directly got songs bought in the store some time ago. Of course I needed to sign into the Ubuntu One in the first place. By default all music you buy is stored on your Ubuntu One disk.
 
 
 ## Chromium on Board
@@ -48,7 +48,7 @@ I got surprised by the fact that Chromium is from now on available in the main U
 * [Download Ubuntu](http://www.ubuntu.com/getubuntu/download)
 
 
-If it happens that you're a PHP programmer you might be interested in reading: [Setting up a PHP development environment with nginx on Ubuntu 10.04](/setting-up-a-php-development-environment-with-nginx-on-ubuntu-1004).
+If it happens that you're a PHP programmer you might be interested in reading: [Setting up a PHP development environment with nginx on Ubuntu 10.04](/setting-up-a-php-development-environment-with-nginx-on-ubuntu-1004/).
 
 <div class="text-center">
     <a href="/uploads/wp/2010/05/ubuntu1004-02.png"><img src="/uploads/wp/2010/05/ubuntu1004-02-400x250.png" title="Ubuntu 10.04 Lucid Lynx" alt="Ubuntu 10.04 Lucid Lynx" class="img-responsive" /></a>
