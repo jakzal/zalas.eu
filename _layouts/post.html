@@ -8,7 +8,7 @@ layout: default
     {% for tag in page.tags %}
         <li>
             <span class="glyphicon glyphicon-tag"></span>
-            <a href="{{ site.url.main }}/tag/{{ tag | slugize }}">
+            <a href="{{ site.url.main }}/tag/{{ tag | slugize }}/">
                 <span class="list-group-item-heading">{{ tag }}</span>
             </a>
         </li>

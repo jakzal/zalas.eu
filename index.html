@@ -8,7 +8,7 @@ hideNavigation: no
     <ul class="posts list-unstyled">
         {% for post in paginator.posts %}
         <li>
-            <a href="{{ site.url.main }}{{ post.url }}"><h2>{{ post.title }}</h2></a>
+            <a href="{{ site.url.main }}{{ post.url }}/"><h2>{{ post.title }}</h2></a>
             <span class="post-date">{% include postDate.html %}</span>
         </li>
         {% endfor %}
@@ -19,7 +19,7 @@ hideNavigation: no
                 {% if paginator.previous_page == 1 %}
                     <a href="{{ site.url.main }}/">Previous</a>
                 {% else %}
-                    <a href="{{ site.url.main }}{{ paginator.previous_page_path }}">Previous</a>
+                    <a href="{{ site.url.main }}{{ paginator.previous_page_path }}/">Previous</a>
                 {% endif %}
             </li>
         {% else %}
@@ -29,7 +29,7 @@ hideNavigation: no
         {% endif %}
         {% if paginator.next_page %}
             <li class="next">
-                <a href="{{ site.url.main }}{{ paginator.next_page_path }}">Next</a>
+                <a href="{{ site.url.main }}{{ paginator.next_page_path }}/">Next</a>
             </li>
         {% else %}
             <li class="next disabled">

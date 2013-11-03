@@ -27,7 +27,7 @@ title: Blog post labels
                 {% endif %}
                 <li class="col-md-3 col-sm-4 col-xs-12">
                     <span class="glyphicon glyphicon-tag"></span>
-                    <a href="{{ site.url.main }}/tag/{{ tag | first | slugize }}">
+                    <a href="{{ site.url.main }}/tag/{{ tag | first | slugize }}/">
                         <span>{{ tag | first }}</span>
                         {% if style != '' %}
                             <span class="label{{ style }} pull-right">{{ tag | last | size }}</span>
