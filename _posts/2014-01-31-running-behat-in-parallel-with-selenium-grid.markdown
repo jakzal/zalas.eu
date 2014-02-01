@@ -53,6 +53,10 @@ Selenium grid
 [Selenium grid](http://docs.seleniumhq.org/docs/07_selenium_grid.jsp) can be used to run tests against multiple
 browsers or to distribute the runs to multiple machines.
 
+<div class="text-center">
+    <a href="/uploads/wp/2014/01/selenium-grid.png"><img src="/uploads/wp/2014/01/selenium-grid.png" title="Selenium Grid" alt="Selenium Grid" class="img-responsive" /></a>
+</div>
+
 Usage is very simple. Instead of running a single selenium server, we first start a hub:
 
 {% highlight bash %}
