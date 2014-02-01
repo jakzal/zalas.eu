@@ -1,6 +1,6 @@
 ---
 author: Jakub Zalas
-comments: false
+comments: true
 date: 2014-01-31 23:59
 layout: post
 slug: running-behat-in-parallel-with-selenium-grid
