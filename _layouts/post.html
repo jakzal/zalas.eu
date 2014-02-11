@@ -2,7 +2,7 @@
 layout: default
 ---
 
-<h1>{{ page.title }}</h1>
+<h1 itemprop="name">{{ page.title }}</h1>
 <div class="post-date pull-right">{% include postDate.html %}</div>
 <ul class="list-unstyled list-inline post-tag-cloud">
     {% for tag in page.tags %}
@@ -15,6 +15,6 @@ layout: default
     {% endfor %}
 </ul>
 
-<section class="content" itemscope itemtype="http://schema.org/BlogPosting">{{ content }}</section>
+<section class="content" itemprop="articleBody" itemscope itemtype="http://schema.org/BlogPosting">{{ content }}</section>
 
 {% include comments.html %}

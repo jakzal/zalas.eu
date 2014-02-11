@@ -1,2 +1,2 @@
 {% unless post %}{% assign post = page %}{% endunless %}
-<time datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date_to_string }}</time>
+<time itemprop="datePublished" content="{{ post.date | date: "%Y-%m-%d" }}" datetime="{{ post.date | date: "%Y-%m-%d" }}">{{ post.date | date_to_string }}</time>
