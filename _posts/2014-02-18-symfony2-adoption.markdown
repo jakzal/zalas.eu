@@ -39,8 +39,9 @@ There's also **112** packages depending on both Symfony and Zend.
 | Depends on Zend | 1356 |
 | Other packages | 18079 |
 
-The chart below shows the adoption of components alone. Although, for some reason, many bundles indicate components
-as their dependency, even though they depend on the whole framework.
+The chart below shows the adoption of components alone. I only included direct dependencies as given in composer.json.
+The numbers don't include indirect dependencies. For example, Laravel depends on Symfony, but a package which depends
+on Laravel won't be accounted here unless it also indicated a dependency on one of the Symfony components.
 
 <div class="text-center">
     <a href="/uploads/wp/2014/02/symfony-components-adoption.png"><img src="/uploads/wp/2014/02/symfony-components-adoption.png" title="Symfony components adoption" alt="Symfony components adoption" class="img-responsive" /></a>
