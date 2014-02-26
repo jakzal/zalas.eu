@@ -23,20 +23,20 @@ The table bellow shows a total number of projects found on packagist.org, which 
 on either one of the components or the whole framework. I looked for dependencies in the *require*, *require-dev* and *suggest*
 sections.
 
-Zend is included for comparision, as it's the only other framework I could think of,
+Zend Framework is included for comparision, as it's the only other framework I could think of,
 which is also built in a modular way (kind of).
 
 Out of **4994** packages that depend on Symfony,
 there's **1911** that depend on the *symfony/framework-bundle* and **1098** that depend on *symfony/symfony*.
 The rest depends on components.
 
-There's also **112** packages depending on both Symfony and Zend.
+There's also **112** packages depending on both Symfony and Zend Framework.
 
 {:.table .table-striped .table-hover .table-condensed}
 | Total number of packages on packagist.org | 24317 |
 | ----- | ----- |
 | Depends on Symfony | 4994 |
-| Depends on Zend | 1356 |
+| Depends on Zend Framework | 1356 |
 | Other packages | 18079 |
 
 The chart below shows the adoption of components alone. I only included direct dependencies as given in composer.json.
