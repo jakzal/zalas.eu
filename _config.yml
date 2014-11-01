@@ -13,7 +13,7 @@ author:
 disqus:
     shortname: zalas
 analytics:
-    google: UA-607315-8
-    verify: PBznb5+bhxbUdD7HvioYYudpqitFdLDgjQTv8SwALq4=
+    google: 'UA-607315-8'
+    verify: 'PBznb5+bhxbUdD7HvioYYudpqitFdLDgjQTv8SwALq4='
 pygments: true
 exclude: ["vendor"]
