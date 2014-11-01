@@ -21,7 +21,9 @@ tags:
 
 **Capifony** is a collection of **Capistrano** deployment recipes for both **symfony** and **Symfony2** applications. **Multistage** is an extension for Capistrano which enables deployments to multiple servers with varying configurations or deployment procedures.
 
-<div class="alert alert-warning" markdown="1">**Note**: If you're new to [capistrano](https://github.com/capistrano/capistrano/wiki) or [capifony](http://capifony.org/) visit the project webistes to learn more about the automated deployment.</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: If you're new to [capistrano](https://github.com/capistrano/capistrano/wiki) or [capifony](http://capifony.org/) visit the project webistes to learn more about the automated deployment.
+</div>
 
 
 ## Why multistage?

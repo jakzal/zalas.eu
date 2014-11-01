@@ -182,4 +182,6 @@ Here's an example of twig template taken from the [Symfony documentation](http:/
 {% endraw %}
 {% endhighlight %}
 
-<div class="alert alert-warning" markdown="1">**Edit** (*30.03.2011*): changed validation into assert as @[webmozart](http://twitter.com/webmozart) suggested. Added examples of validation messages.</div>
+<div class="alert alert-warning" markdown="1">
+**Edit** (*30.03.2011*): changed validation into assert as @[webmozart](http://twitter.com/webmozart) suggested. Added examples of validation messages.
+</div>
