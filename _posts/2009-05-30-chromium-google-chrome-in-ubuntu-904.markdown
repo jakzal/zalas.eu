@@ -16,7 +16,9 @@ tags:
 
 [Chromium](http://chromium.org/) is a project aiming to run Google Chrome web browser on Linux. [Launchpad](https://launchpad.net/chromium-project) repositories deliver [apt sources list](https://launchpad.net/~chromium-daily/+archive/ppa) for Ubuntu which enables us with an easy installation process like usual: add sources and authorization key, update package database and install the application.
 
-<div class="alert alert-warning" markdown="1">**Note**: For simpler installation instructions on Ubuntu 9.10 (Karmic Koala) read my new blog post "[Chromium - Google Chrome in Ubuntu 9.10 (Karmic Koala)](/chromium-google-chrome-in-ubuntu-910-karmic-koala/)".</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: For simpler installation instructions on Ubuntu 9.10 (Karmic Koala) read my new blog post "[Chromium - Google Chrome in Ubuntu 9.10 (Karmic Koala)](/chromium-google-chrome-in-ubuntu-910-karmic-koala/)".
+</div>
 
 
 <div class="text-center">

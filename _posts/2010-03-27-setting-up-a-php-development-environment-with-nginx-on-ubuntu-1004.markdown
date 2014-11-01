@@ -21,7 +21,9 @@ tags:
 
 Here's a guide how to quickly prepare **PHP development environment** with **nginx** on **Ubuntu** 10.04 (Lucid Lynx).
 
-<div class="alert alert-warning" markdown="1">**Note:** I updated this article for Ubuntu 11.04. Read "[Setting up a PHP development environment with Nginx on Ubuntu 11.04](../../../setting-up-a-php-development-environment-with-nginx-on-ubuntu-1104)" if you're using a new release of Ubuntu.</div>
+<div class="alert alert-warning" markdown="1">
+**Note:** I updated this article for Ubuntu 11.04. Read "[Setting up a PHP development environment with Nginx on Ubuntu 11.04](../../../setting-up-a-php-development-environment-with-nginx-on-ubuntu-1104)" if you're using a new release of Ubuntu.
+</div>
 
 
 ## PHP
@@ -143,7 +145,9 @@ FCGI_CHILDREN=0
 {% endhighlight %}
 
 
-<div class="alert alert-warning" markdown="1">**Note**: You will find most recent version of my init scripts on github: [http://github.com/jakzal/php-cgi](http://github.com/jakzal/php-cgi).</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: You will find most recent version of my init scripts on github: [http://github.com/jakzal/php-cgi](http://github.com/jakzal/php-cgi).
+</div>
 
 
 ## Nginx

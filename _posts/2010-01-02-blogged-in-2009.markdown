@@ -60,7 +60,7 @@ Below is the list of my 2009 blog posts.
 * [Today showed the sensitivity of our social network environment. Can we prevent it?](http://blog.goyello.com/2009/08/06/today-showed-the-sensitivity-of-our-social-network-environment/)
 * [PHP 5.3 finally released](http://blog.goyello.com/2009/07/03/php-5-3-was-released/)
 * [PHP Standards Initiative](http://blog.goyello.com/2009/06/19/php-standards-initiative/)
-* [Book review: php|architect’s Guide to PHP Design Patterns](http://blog.goyello.com/2009/05/29/book-review-phparchitects-guide-to-php-design-patterns/)
+* [Book review: php architect’s Guide to PHP Design Patterns](http://blog.goyello.com/2009/05/29/book-review-phparchitects-guide-to-php-design-patterns/)
 * [One more look at the first 4developers conference](http://blog.goyello.com/2009/03/08/one-more-look-at-the-first-4developers-conference/)
 
 
@@ -85,7 +85,7 @@ Below is the list of my 2009 blog posts.
 * [CSS przodem, JavaScript tyłem](http://www.zalas.pl/css-przodem-javascript-tylem)
 * [Inicjatywa na rzecz standardów PHP (PHP Standards Initiative)](http://www.zalas.pl/php-standards-initiative)
 * [Chromium, czyli Google Chrome w Ubuntu 9.04](http://www.zalas.pl/chromium-czyli-google-chrome-w-ubuntu-904)
-* [Recenzja: php|architect's Guide to PHP Design Patterns](http://www.zalas.pl/recenzja-phparchitects-guide-to-php-design-patterns)
+* [Recenzja: php architect's Guide to PHP Design Patterns](http://www.zalas.pl/recenzja-phparchitects-guide-to-php-design-patterns)
 * [Parsowanie stron internetowych z użyciem sfWebBrowser i SimpleXML](http://www.zalas.pl/parsowanie-stron-internetowych-z-uzyciem-sfwebbrowser-i-simplexml)
 * [Tworzenie szkiców interfejsu użytkownika (UI mockups)](http://www.zalas.pl/tworzenie-szkicow-interfejsu-uzytkownika-ui-balsamiq-mockups)
 
