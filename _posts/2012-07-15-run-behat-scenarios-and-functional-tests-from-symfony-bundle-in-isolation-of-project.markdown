@@ -140,10 +140,10 @@ Once we prepared the _AppKernel_ and set up the autoloading we can move to Behat
     
 {% highlight yaml %}
 default:
+  formatters:
+    progress: true
   suites:
     demo:
-      formatter:
-        name: progress
       paths:
         features: Features
       contexts: [Zalas\Bundle\DemoBundle\Features\Context\FeatureContext]
