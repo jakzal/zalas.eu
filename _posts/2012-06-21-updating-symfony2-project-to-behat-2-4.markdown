@@ -19,7 +19,9 @@ Recent release of **Behat 2.4** brings a lot of extensibility for a price of sma
 
 **Note**: Read more on Behat 2.4 on [@everzet](https://twitter.com/#!/everzet)'s blog: [Behat 2.4: The most extendable testing framework](http://everzet.com/post/22899229502/behat-240).
 
-<div class="alert alert-success" markdown="1">**Update**: This blog post is now part of an official documenation for the Symfony2 Extension: [Migrating from Behat 2.3 to 2.4](http://extensions.behat.org/symfony2/migrating_from_2.3_to_2.4.html).</div>
+<div class="alert alert-success" markdown="1">
+**Update**: This blog post is now part of an official documenation for the Symfony2 Extension: [Migrating from Behat 2.3 to 2.4](http://extensions.behat.org/symfony2/migrating_from_2.3_to_2.4.html).
+</div>
 
 
 ## There's no BehatBundle nor MinkBundle anymore
@@ -45,7 +47,9 @@ Here's an example _composer.json_ snippet taken from my Symfony project using bo
 {% endhighlight %}
 
 
-<div class="alert alert-warning" markdown="1">**Note**: Naturally initialization of Behat and Mink bundles has to be removed from the _AppKernel_.</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Naturally initialization of Behat and Mink bundles has to be removed from the _AppKernel_.
+</div>
 
 
 ## Accessing the Symfony kernel
@@ -83,7 +87,9 @@ class AcmeContext extends BehatContext implements KernelAwareInterface
 {% endhighlight %}
 
 
-<div class="alert alert-warning" markdown="1">**Note**: Read more on [Symfony2Extension on github](https://github.com/Behat/Symfony2Extension).</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Read more on [Symfony2Extension on github](https://github.com/Behat/Symfony2Extension).
+</div>
 
 
 ## Accessing Mink session
@@ -135,7 +141,9 @@ class FeatureContext extends BehatContext
 {% endhighlight %}
 
 
-<div class="alert alert-warning" markdown="1">**Note**: Read more on [MinkExtension on github](https://github.com/Behat/MinkExtension).</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Read more on [MinkExtension on github](https://github.com/Behat/MinkExtension).
+</div>
 
 
 ## Behat configuration is now separated from Symfony
@@ -166,7 +174,9 @@ default:
 
 You'll have to remove your previous configuration (typically placed in *app/config/config_test.yml*). Otherwise dependency injection container will complain on unrecognised parameters.
 
-<div class="alert alert-warning" markdown="1">**Note**: Read more on _behat.yml_ in [the configuration section](http://docs.behat.org/guides/7.config.html) of the official documentation.</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Read more on _behat.yml_ in [the configuration section](http://docs.behat.org/guides/7.config.html) of the official documentation.
+</div>
 
 
 ## There's no Symfony command anymore
