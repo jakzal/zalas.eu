@@ -37,7 +37,9 @@ sudo apt-get install php5-fpm php5-cli php5-common php5-curl php5-gd \
 {% endhighlight %}
 
 
-<div class="alert alert-warning" markdown="1">**Note**: Standard configuration is just fine to start with. In case you want to tweak it - all the PHP and php-fpm configuration files are located in the _/etc/php5/fpm_ directory.</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Standard configuration is just fine to start with. In case you want to tweak it - all the PHP and php-fpm configuration files are located in the _/etc/php5/fpm_ directory.
+</div>
 
 
 ## Nginx
@@ -100,7 +102,9 @@ sudo ln -s /etc/nginx/sites-available/dev /etc/nginx/sites-enabled/dev
 {% endhighlight %}
 
 
-<div class="alert alert-warning" markdown="1">**Note**: I explained the Nginx directives and options in my another blog post ["Nginx configuration for Symfony projects](http://zalas.eu/nginx-configuration-for-symfony-projects/)".</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: I explained the Nginx directives and options in my another blog post ["Nginx configuration for Symfony projects](http://zalas.eu/nginx-configuration-for-symfony-projects/)".
+</div>
 
 
 ## System configuration

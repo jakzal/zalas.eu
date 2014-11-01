@@ -21,7 +21,9 @@ Fortunately Doctrine comes with a special task which merges all its classes into
 
 [sfTaskExtraPlugin](http://www.symfony-project.org/plugins/sfTaskExtraPlugin) comes with _doctrine:compile_ task for symfony (which is really a wrapper for doctrine script).
 
-<div class="alert alert-warning" markdown="1">**Note**: mentioned application was deployed to the server suffering from several issues (i.e. invalid APC configuration). Those issues made class loading problem more visible. Nevertheless compilation played a role in improving overall performance.</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: mentioned application was deployed to the server suffering from several issues (i.e. invalid APC configuration). Those issues made class loading problem more visible. Nevertheless compilation played a role in improving overall performance.
+</div>
 
 
 ## sfTaskExtraPlugin installation
