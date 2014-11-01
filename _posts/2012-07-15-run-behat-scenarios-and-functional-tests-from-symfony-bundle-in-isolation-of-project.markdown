@@ -129,10 +129,11 @@ AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 </div>
 
 Once we prepared the _AppKernel_ and set up the autoloading we can move to Behat configuration. In particular, we need to define:
-* path to the Features folder
-* list of contexts we need to use
-* path to the *AppKernel* (*kernel.path* for the Symfony2 extension)
-* path to the bootstrap file for the Symfony2 extension (*kernel.bootsrap* for the Symfony2 extension)
+
+ * path to the Features folder
+ * list of contexts we need to use
+ * path to the *AppKernel* (*kernel.path* for the Symfony2 extension)
+ * path to the bootstrap file for the Symfony2 extension (*kernel.bootsrap* for the Symfony2 extension)
 
 
 
@@ -277,6 +278,7 @@ To demonstrate this approach I prepared a [DemoBundle](https://github.com/jakzal
 
 <div class="alert alert-warning" markdown="1">
 **Changes**:
+
  * 1st Nov 2014 - Update autoloader configuration to use PSR-4
  * 1st Nov 2014 - Update behat to version 3
 </div>
