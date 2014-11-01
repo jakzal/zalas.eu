@@ -49,7 +49,9 @@ It was an amazing 20 minutes presenting how to drive an implementation of a new 
 
 Hopefully, I got your interest here and you're eager to learn more. Continue with reading [an excellent wrap up](http://everzet.com/post/31581124270/fullstack-bdd-2012-wrapup) by Konstantin, see the process working in [a special repo](https://github.com/everzet/fullstack-bdd-sflive2012) and finally follow the development of [PHPSpec2](https://github.com/phpspec/phpspec2) (which is still a work in progress).
 
-<div class="alert alert-warning" markdown="1">**Note**: Since the terminology is important, we should actually avoid the word "test". This (dirty) word is the main source of confusion. By talking about tests we give an impression we mean testing or checking something. Methodologies like TDD and BDD are actually not about testing. TDD is more of a design activity then a testing activity. Its main purpose is to drive the development with tests. Because of the confusion, BDD redefines the "tests" as "specs" (specs as in specifications).</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Since the terminology is important, we should actually avoid the word "test". This (dirty) word is the main source of confusion. By talking about tests we give an impression we mean testing or checking something. Methodologies like TDD and BDD are actually not about testing. TDD is more of a design activity then a testing activity. Its main purpose is to drive the development with tests. Because of the confusion, BDD redefines the "tests" as "specs" (specs as in specifications).
+</div>
 
 
 ## More about the conference
@@ -58,6 +60,7 @@ Hopefully, I got your interest here and you're eager to learn more. Continue wit
 As always, read the feedback and download the slides from [joind.in](https://joind.in/event/view/1000).
 
 Read what others think about Symfony Live in their blog posts:
+
 * [Symfony2 Live! London – aftermatch](http://criticallog.thornet.net/2012/09/14/symfony2-live-london-aftermatch/)
 * [Symfony Live London 2012 recap](http://xlab.pl/symfony-live-london-2012-recap/)
 * [Symfony Live London – A Huge Success](http://www.sensiolabs.co.uk/blog/symfony-live-london-a-huge-success/)
