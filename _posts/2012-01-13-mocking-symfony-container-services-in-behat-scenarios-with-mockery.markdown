@@ -73,7 +73,9 @@ That's what mocks were invented for.
 
 I came up with a simple bundle that allows service mocking with [Mockery](https://github.com/padraic/mockery). It's called [PSSMockeryBundle](https://github.com/PolishSymfonyCommunity/PSSMockeryBundle) and you can download it from [github](https://github.com/PolishSymfonyCommunity/PSSMockeryBundle).
 
-<div class="alert alert-warning" markdown="1">**Note**: PSSMockeryBundle works with Behat &lt;= 2.3. Use [Symfony2MockerExtension](https://github.com/PolishSymfonyCommunity/Symfony2MockerExtension) with Behat &gt;= 2.4.</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: PSSMockeryBundle works with Behat &lt;= 2.3. Use [Symfony2MockerExtension](https://github.com/PolishSymfonyCommunity/Symfony2MockerExtension) with Behat &gt;= 2.4.
+</div>
 
 At the moment bundle provides _MockerContainer_ and _MockerContainerContext_. _MockerContainer_ is a container class which enables service mocking. _MockerContainerContext_ is a Behat context with generic step for expectation verification and a handy _mockService()_ method.
 
@@ -97,7 +99,9 @@ The step "*CRM API is available*" defines our expectations on the state of CRM s
 {% endhighlight %}
 
 
-<div class="alert alert-warning" markdown="1">**Note**: Container won't return the mock unless we first ask it to do so. In other words, it works as a regular container by default.</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Container won't return the mock unless we first ask it to do so. In other words, it works as a regular container by default.
+</div>
 
 All the expectations are automatically checked after the scenario is executed (*@afterScenario* hook).
 
@@ -117,7 +121,9 @@ We can also do it manually which in some cases makes the scenario more readable:
 {% endhighlight %}
 
 
-<div class="alert alert-warning" markdown="1">**Note**: The *the "&amp;lt;serviceId>" service should meet my expectations* step is provided by *MockerContainerContext*.</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: The *the "&lt;serviceId&gt;" service should meet my expectations* step is provided by *MockerContainerContext*.
+</div>
 
 
 ## Feedback much appreciated
