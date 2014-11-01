@@ -19,7 +19,9 @@ tags:
 </div>
 Symfony [Console component](https://github.com/symfony/Console) enables us to create commands in PHP. It does all the nasty work of handling input and output.
 
-<div class="alert alert-warning" markdown="1">**Note**: Code used in this post is available on github: [https://github.com/jakzal/SymfonyComponentsExamples](https://github.com/jakzal/SymfonyComponentsExamples)</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Code used in this post is available on github: [https://github.com/jakzal/SymfonyComponentsExamples](https://github.com/jakzal/SymfonyComponentsExamples)
+</div>
 
 
 ## Installation
@@ -196,7 +198,9 @@ php console.php help hello-world
 {% endhighlight %}
 
 
-<div class="alert alert-warning" markdown="1">**Note**: Built in help command is responsible for printing out the message.</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Built in help command is responsible for printing out the message.
+</div>
 
 <div class="text-center">
     <a href="/uploads/wp/2011/06/console-help.png"><img src="/uploads/wp/2011/06/console-help-400x158.png" title="Symfony Console help" alt="Symfony Console help" class="img-responsive" /></a>
