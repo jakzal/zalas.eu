@@ -18,7 +18,9 @@ tags:
 </div>
 Symfony [Finder component](https://github.com/symfony/Finder) makes the task of finding files and directories less tedious. It supports filtering by name, pattern, size, date of modification and few other criteria. As a result we get objects of class [SplFileInfo](http://php.net/splfileinfo) which offers convenient way of retrieving file and directory details.
 
-<div class="alert alert-warning" markdown="1">**Note**: Code used in this post is available on github: [https://github.com/jakzal/SymfonyComponentsExamples](https://github.com/jakzal/SymfonyComponentsExamples)</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Code used in this post is available on github: [https://github.com/jakzal/SymfonyComponentsExamples](https://github.com/jakzal/SymfonyComponentsExamples)
+</div>
 
 
 ## Installation
