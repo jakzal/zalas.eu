@@ -40,7 +40,9 @@ Also, we have to remember that there are two types of connections:
 * connections created by the SymfonyDriver (client connections).
 
 
-<div class="alert alert-warning" markdown="1">**Note**: Using other drivers (like Goutte) might limit total number of created connections as client would use a separate process. Unfortunately it's not enough in some cases (as Behat would still create its connections).</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Using other drivers (like Goutte) might limit total number of created connections as client would use a separate process. Unfortunately it's not enough in some cases (as Behat would still create its connections).
+</div>
 
 We might use AfterScenario hook to close all client connections (put it into subcontext):
 
@@ -80,7 +82,9 @@ protected function getClientConnections()
 
 I tried doing the same with Behat connections but they're not being closed. Luckily, the number of active connections decreased enough to make my scenarios pass again.
 
-<div class="alert alert-warning" markdown="1">**Note**: If you're using [CommonContexts](https://github.com/Behat/CommonContexts) (and you should!) than this fix is now included in the [SymfonyDoctrineContext](https://github.com/Behat/CommonContexts/blob/master/Behat/CommonContext/SymfonyDoctrineContext.php).</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: If you're using [CommonContexts](https://github.com/Behat/CommonContexts) (and you should!) than this fix is now included in the [SymfonyDoctrineContext](https://github.com/Behat/CommonContexts/blob/master/Behat/CommonContext/SymfonyDoctrineContext.php).
+</div>
 
 To improve the situation even better I limited amount of time MySQL waits before it closes connections automatically (*[wait_timeout](http://dev.mysql.com/doc/refman/5.5/en/server-system-variables.html#sysvar_wait_timeout)* configuration option). I didn't want to do it in the server configuration as I'd have to propagate it to all the machines scenarios are run on. Therefore I used _PDO::MYSQL_ATTR_INIT_COMMAND_ attribute available in [MySQL's PDO driver](http://php.net/manual/en/ref.pdo-mysql.php) to set a session variable in the test environment.
 
