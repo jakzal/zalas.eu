@@ -65,7 +65,7 @@ I wouldn't use it instead of my yml fixtures yet but phactory is a definitely in
 ## HTML Sanitisation: The Devil's In The Details (And The Vulnerabilities)
 
 
-HTML Sanitisation is definitely not an easy subject. I remember that before reading "[php|architect's Guide to PHP Security](http://www.goodreads.com/book/show/515875.php_architect_s_Guide_to_PHP_Security_)" I didn't even realize how hard a proper filtering of input might be. It's not something worth doing on your own.
+HTML Sanitisation is definitely not an easy subject. I remember that before reading "[php architect's Guide to PHP Security](http://www.goodreads.com/book/show/515875.php_architect_s_Guide_to_PHP_Security_)" I didn't even realize how hard a proper filtering of input might be. It's not something worth doing on your own.
 
 Fortunately, there are quite a few PHP libraries doing just that. Pádraic Brady tested several still maintained projects and published the results on his blog: [HTML Sanitisation: The Devil's In The Details (And The Vulnerabilities)](http://blog.astrumfutura.com/archives/431-HTML-Sanitisation-The-Devils-In-The-Details-And-The-Vulnerabilities.html).
 

@@ -17,7 +17,9 @@ tags:
 
 I also want to know all those nitty-gritty details. Therefore I didn't go for sandbox and decided to generate a fresh project.
 
-<div class="alert alert-warning" markdown="1">**Warning:** symfony-bootstrapper described in this article is deprecated and not mainained anymore.</div>
+<div class="alert alert-warning" markdown="1">
+**Warning:** symfony-bootstrapper described in this article is deprecated and not mainained anymore.
+</div>
 
 There are already several articles describing the process using the [symfony-bootstrapper](https://github.com/symfony/symfony-bootstrapper):
 
@@ -68,4 +70,6 @@ git commit -m 'Added vendor submodules.'
 {% endhighlight %}
 
 
-<div class="alert alert-warning" markdown="1">**Note**: At the moment of writing this there's a [small bug in the bootstrapper](https://github.com/symfony/symfony-bootstrapper/issues#issue/10).  Recently the [UniversalClassLoader was moved to its own component](https://github.com/symfony/symfony/commit/42f9c556a35af616d3239df64f42c15b98602472) and it's not yet changed in the bootstrapper (both in the source code and the phar archive). I committed [a fix](https://github.com/jakzal/symfony-bootstrapper/commit/61abd3eb571b238783218b6f675f4baf59cbcf66) but my [pull request](https://github.com/symfony/symfony-bootstrapper/pull/10) is not yet merged. By the time it happens you can simply modify a path in the _src/autoload.php_ of generated project (replace _HttpFoundation _with _ClassLoader_ in a path to UniversalClassLoader.php).</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: At the moment of writing this there's a [small bug in the bootstrapper](https://github.com/symfony/symfony-bootstrapper/issues#issue/10).  Recently the [UniversalClassLoader was moved to its own component](https://github.com/symfony/symfony/commit/42f9c556a35af616d3239df64f42c15b98602472) and it's not yet changed in the bootstrapper (both in the source code and the phar archive). I committed [a fix](https://github.com/jakzal/symfony-bootstrapper/commit/61abd3eb571b238783218b6f675f4baf59cbcf66) but my [pull request](https://github.com/symfony/symfony-bootstrapper/pull/10) is not yet merged. By the time it happens you can simply modify a path in the _src/autoload.php_ of generated project (replace _HttpFoundation _with _ClassLoader_ in a path to UniversalClassLoader.php).
+</div>

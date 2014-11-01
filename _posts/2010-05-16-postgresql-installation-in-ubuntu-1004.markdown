@@ -31,7 +31,9 @@ Database users can be created in command line with _createuser_ tool.        Run
     sudo su postgres -c 'createuser -S -d -R -E -P kuba'
 
 
-<div class="alert alert-warning" markdown="1">**Note**: Run _createuser_ with _--help_ switch to get an overview of available options.</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Run _createuser_ with _--help_ switch to get an overview of available options.
+</div>
 
 There is a similar tool for database creation called createdb:
 
@@ -39,4 +41,6 @@ There is a similar tool for database creation called createdb:
     createdb mydatabase
 
 
-<div class="alert alert-warning" markdown="1">**Note**: Read about MySQL in my another post: [MySQL installation in Ubuntu 10.04](/mysql-installation-in-ubuntu-1004/).</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Read about MySQL in my another post: [MySQL installation in Ubuntu 10.04](/mysql-installation-in-ubuntu-1004/).
+</div>

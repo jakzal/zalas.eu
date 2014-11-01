@@ -43,9 +43,13 @@ ctags -R --languages=php .
 {% endhighlight %}
 
 
-<div class="alert alert-warning" markdown="1">**Note**: Read '*man ctags*' for more options.</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Read '*man ctags*' for more options.
+</div>
 
-<div class="alert alert-warning" markdown="1">**Note**: Long time ago [Matthew Weier O'Phinney](http://twitter.com/weierophinney) wrote a blog post about [exuberant ctags with PHP in vim](http://weierophinney.net/matthew/archives/134-exuberant-ctags-with-PHP-in-Vim.html). He used several options which look like no longer needed. I think ctags support for PHP has been improved over the time.</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Long time ago [Matthew Weier O'Phinney](http://twitter.com/weierophinney) wrote a blog post about [exuberant ctags with PHP in vim](http://weierophinney.net/matthew/archives/134-exuberant-ctags-with-PHP-in-Vim.html). He used several options which look like no longer needed. I think ctags support for PHP has been improved over the time.
+</div>
 
 
 ## Basic Usage
@@ -93,13 +97,15 @@ Some of the **search** commands:
 * **\[ ctrl-i** and **] ctr-i** jumps to the first line that contains the keyword under and after the cursor
 
 
-<div class="alert alert-warning" markdown="1">**Note**: Write **:help tags-and-searches** in vim to get total overview of features offered by tags.</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Write **:help tags-and-searches** in vim to get total overview of features offered by tags.
+</div>
 
 
 ## Useful links
 
 * [Patching exuberant-ctags for better PHP5 support in vim](http://www.jejik.com/articles/2008/11/patching_exuberant-ctags_for_better_php5_support_in_vim/)
-* [exuberant ctags with PHP in Vim](http://weierophinney.net/matthew/archives/134-exuberant-ctags-with-PHP-in-Vim.html)[](http://www.jejik.com/articles/2008/11/patching_exuberant-ctags_for_better_php5_support_in_vim/)
+* [exuberant ctags with PHP in Vim](http://weierophinney.net/matthew/archives/134-exuberant-ctags-with-PHP-in-Vim.html)
 
 
 
