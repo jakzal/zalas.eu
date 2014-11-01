@@ -92,9 +92,8 @@ Using [composer](http://getcomposer.org/) solves most of our autoloading problem
 {% highlight json %}
 {
     "autoload": {
-        "psr-0": { "Zalas\\Bundle\\DemoBundle": "" }
-    },
-    "target-dir": "Zalas/Bundle/DemoBundle"
+        "psr-4": { "Zalas\\Bundle\\DemoBundle\\": "" }
+    }
 }
 {% endhighlight %}
 
@@ -130,8 +129,8 @@ AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
 </div>
 
 Once we prepared the _AppKernel_ and set up the autoloading we can move to Behat configuration. In particular, we need to define:
-* paths to features and bootstrap (*default.paths.features* and *default.paths.bootstrap*)
-* the location of a context class (*default.context.class*)
+* path to the Features folder
+* list of contexts we need to use
 * path to the *AppKernel* (*kernel.path* for the Symfony2 extension)
 * path to the bootstrap file for the Symfony2 extension (*kernel.bootsrap* for the Symfony2 extension)
 
@@ -140,24 +139,25 @@ Once we prepared the _AppKernel_ and set up the autoloading we can move to Behat
     
 {% highlight yaml %}
 default:
-  formatter:
-    name: progress
-  paths:
-    features: Features
-    bootstrap: %behat.paths.features%/Context
-  context:
-    class: Zalas\Bundle\DemoBundle\Features\Context\FeatureContext
+  suites:
+    demo:
+      formatter:
+        name: progress
+      paths:
+        features: Features
+      contexts: [Zalas\Bundle\DemoBundle\Features\Context\FeatureContext]
   extensions:
-    Behat\Symfony2Extension\Extension:
-      mink_driver: true
+    Behat\Symfony2Extension:
       kernel:
         env: test
         debug: true
         path: Features/Fixtures/Project/app/AppKernel.php
         bootstrap: Features/Fixtures/Project/app/bootstrap.php
-    Behat\MinkExtension\Extension:
+    Behat\MinkExtension:
       base_url: 'http://www.acme.dev/app_test.php/'
-      default_session: symfony2
+      sessions:
+        default:
+          symfony2: ~
 {% endhighlight %}
 
 
@@ -274,3 +274,9 @@ after_script:
 
 
 To demonstrate this approach I prepared a [DemoBundle](https://github.com/jakzal/DemoBundle). You can clone it from github and test how it works yourself, or you can see how it's run on [Travis](http://travis-ci.org/#!/jakzal/DemoBundle).
+
+<div class="alert alert-warning" markdown="1">
+**Changes**:
+ * 1st Nov 2014 - Update autoloader configuration to use PSR-4
+ * 1st Nov 2014 - Update behat to version 3
+</div>
