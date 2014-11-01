@@ -19,14 +19,16 @@ Symfony's [DependencyInjection component](https://github.com/symfony/DependencyI
 The component also provides useful tools for handling service definitions, like XML loaders or dumpers.
 
 
-<div class="text-center" markdown="1">
+<div class="text-center">
     <img src="/uploads/wp/2011/09/injection.png" title="Injection - image credits: http://www.flickr.com/photos/alexnormand/3132689510/" alt="Injection - image credits: http://www.flickr.com/photos/alexnormand/3132689510/" class="img-responsive" />
 </div>
 
 
 If you want to learn more about the dependency injection or the dependency injection container, read an excellent series of articles on the subject by Fabien Potencier: [What is Dependency Injection?](http://fabien.potencier.org/article/11/what-is-dependency-injection)
 
-<div class="alert alert-warning" markdown="1">**Note**: Code used in this post is available on github: [https://github.com/jakzal/SymfonyComponentsExamples](https://github.com/jakzal/SymfonyComponentsExamples)</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Code used in this post is available on github: [https://github.com/jakzal/SymfonyComponentsExamples](https://github.com/jakzal/SymfonyComponentsExamples)
+</div>
 
 
 ## Installation
@@ -108,7 +110,9 @@ We might create factory for the Browser. However, writing factories for all our 
 
 One of the solutions is to **centralize the object creation**. Dependency Injection Container (DIC) does just that.
 
-<div class="alert alert-warning" markdown="1">**Note**: Dependency Injection Container is also called a **Service Container**. Thinking about objects managed by the container as services, better reflects the purpose of the container.</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: Dependency Injection Container is also called a **Service Container**. Thinking about objects managed by the container as services, better reflects the purpose of the container.
+</div>
 
 
 ## Creating objects with DIC
@@ -257,7 +261,9 @@ echo $dumper->dump();
 {% endhighlight %}
 
 
-<div class="alert alert-warning" markdown="1">**Note**: In a real life scenario we'd probably maintain our service definitions in XML or YML file(s) but dump them to PHP with _PhpDumper_ for **performance** reasons.</div>
+<div class="alert alert-warning" markdown="1">
+**Note**: In a real life scenario we'd probably maintain our service definitions in XML or YML file(s) but dump them to PHP with _PhpDumper_ for **performance** reasons.
+</div>
 
 
 ## Visualizing the services
