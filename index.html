@@ -8,7 +8,7 @@ hideNavigation: no
     <ul class="posts list-unstyled" itemscope itemtype="http://schema.org/Blog">
         {% for post in paginator.posts %}
         <li itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-            <a href="{{ site.url.main }}{{ post.url }}/"><h2 itemprop="name">{{ post.title }}</h2></a>
+            <a href="{{ site.url.main }}{{ post.url }}/" itemprop="url"><h2 itemprop="name">{{ post.title }}</h2></a>
             <span class="post-date">{% include postDate.html %}</span>
         </li>
         {% endfor %}
