@@ -2,19 +2,21 @@
 layout: default
 ---
 
-<h1 itemprop="name">{{ page.title }}</h1>
-<div class="post-date pull-right">{% include postDate.html %}</div>
-<ul class="list-unstyled list-inline post-tag-cloud">
-    {% for tag in page.tags %}
-        <li>
-            <span class="glyphicon glyphicon-tag"></span>
-            <a href="{{ site.url.main }}/tag/{{ tag | slugize }}/">
-                <span class="list-group-item-heading">{{ tag }}</span>
-            </a>
-        </li>
-    {% endfor %}
-</ul>
+<section itemscope itemtype="http://schema.org/BlogPosting">
+    <h1 itemprop="name">{{ page.title }}</h1>
+    <div class="post-date pull-right">{% include postDate.html %}</div>
+    <ul class="list-unstyled list-inline post-tag-cloud">
+        {% for tag in page.tags %}
+            <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="{{ site.url.main }}/tag/{{ tag | slugize }}/">
+                    <span class="list-group-item-heading">{{ tag }}</span>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
 
-<section class="content" itemprop="articleBody" itemscope itemtype="http://schema.org/BlogPosting">{{ content }}</section>
+    <section class="content" itemprop="articleBody">{{ content }}</section>
+</section>
 
 {% include comments.html %}
