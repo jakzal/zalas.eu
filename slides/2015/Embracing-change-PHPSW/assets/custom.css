@@ -1,0 +1,63 @@
+.reveal pre code {
+    max-height: 600px;
+}
+
+.reveal section img {
+    border: none;
+    background: none;
+    max-height: 600px;
+    box-shadow: none;
+}
+
+.reveal .thankyou {
+    color: white;
+}
+
+.reveal .thankyou h1 {
+    background-color: white;
+    opacity: 0.5;
+    font-size: 1em;
+    width: 25%;
+    padding: 10px;
+    text-align: center;
+}
+
+.reveal .thankyou .social {
+    background-color: white;
+    opacity: 0.5;
+    margin-top: 450px;
+    float: right;
+    padding: 10px;
+}
+
+.reveal .thankyou .social a {
+    color: black;
+}
+
+.reveal .social {
+    margin-top: 220px;
+}
+
+.reveal .twitter {
+    padding-left: 45px;
+    vertical-align: top;
+    background-image: url(TwitterLogo.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: 50px;
+}
+
+.reveal .github {
+    padding-left: 40px;
+    margin-left: 5px;
+    vertical-align: top;
+    background-image: url(GitHub-Mark-120px-plus.png);
+    background-position: left;
+    background-repeat: no-repeat;
+    background-size: 35px;
+}
+
+.reveal .github a, .reveal .twitter a {
+    color: dimgrey;
+}
+
