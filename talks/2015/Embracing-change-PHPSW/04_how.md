@@ -27,15 +27,11 @@ class PackageCrawler
 
 ^
 
-<!-- .slide: data-transition="fade" -->
-
 ### High-level modules should not depend on low-level modules. 
 
 ![Crawler](assets/crawler01.png)
 
 ^
-
-<!-- .slide: data-transition="fade" -->
 
 ### Both should depend on abstractions. 
 
@@ -80,8 +76,6 @@ class PackageCrawler
 
 ^
 
-<!-- .slide: data-transition="fade" -->
-
 ### Both should depend on abstractions. 
 
 ![Crawler](assets/crawler06.png)
@@ -115,15 +109,11 @@ class BuzzHttpClient implements HttpClient
 
 ^
 
-<!-- .slide: data-transition="fade" -->
-
 ### Abstractions should not depend upon details.
 
 ![Crawler](assets/crawler06.png)
 
 ^
-
-<!-- .slide: data-transition="fade" -->
 
 ### Details should depend upon abstractions.
 
@@ -156,7 +146,7 @@ class PackageCrawler
 
    public function crawl()
    {
-       $response = $this->contentProvider->fetch('/');
+       $content = $this->contentProvider->fetch('/');
 
        // @todo parse
    }

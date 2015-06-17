@@ -11,10 +11,10 @@
 ```php
 class PackageCrawler
 {
-    public function crawl($resource)
+    public function crawl()
     {
         $ch = curl_init(); 
-        curl_setopt($ch, CURLOPT_URL, $resource); 
+        curl_setopt($ch, CURLOPT_URL, 'http://acme.com/'); 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
         $response = curl_exec($ch); 
         curl_close($ch);  
@@ -48,8 +48,6 @@ Low cohesion make a module:
 <small>http://blog.8thlight.com/uncle-bob/2014/05/08/SingleReponsibilityPrinciple.html</small>
 
 ^
-
-<!-- .slide: data-background="white" data-transition="fade" -->
 
 ![Crawler](assets/crawler-curl.png)
 
@@ -198,8 +196,6 @@ Note:
 
 ^
 
-<!-- .slide: data-background="white" data-transition="fade" -->
-
 ![Crawler](assets/crawler01.png)
 
 Note:
@@ -207,16 +203,12 @@ http://yuml.me/edit/862c6708
 
 ^
 
-<!-- .slide: data-background="white" data-transition="fade" -->
-
 ![Crawler](assets/crawler02.png)
 
 Note:
 http://yuml.me/edit/8cede4c8
 
 ^
-
-<!-- .slide: data-background="white" data-transition="fade" -->
 
 ![Crawler](assets/crawler03.png)
 
