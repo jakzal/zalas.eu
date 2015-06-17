@@ -31,6 +31,7 @@ Commiting to decisions made early in the project is the root of all evil.
  * Beginning of a project is the point in time when we know the least about it.
  * End of a project is when we know the most. Try coding something for a second time.
  * Writing code is not about typing.
+You have to finish things - that's what you learn from, you learn by finishing things. Neil Gaiman
 Since change is inevitable It's better to embrace it rather than try to fight back. 
 Postpone decisions. Defer commitment.
 
