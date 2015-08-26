@@ -81,6 +81,10 @@ git commit -m 'Save progress'
 git checkout workshop/1.1-repository-services
 ```
 
+### Exercise diff
+
+<small>https://github.com/jakzal/symfony-demo/compare/php-summercamp...jakzal:workshop/1.1-repository-services</small>
+
 ^
 
 ## Exercise 1.2
@@ -263,6 +267,10 @@ git commit -m 'Save progress'
 git checkout workshop/1.2-repository-query-methods
 ```
 
+### Exercise diff
+
+<small>https://github.com/jakzal/symfony-demo/compare/workshop/1.1-repository-services...jakzal:workshop/1.2-repository-query-methods</small>
+
 ^
 
 ## Exercise 1.3
@@ -418,6 +426,10 @@ git add -A
 git commit -m 'Save progress'
 git checkout workshop/1.3-repository-update-methods
 ```
+
+### Exercise diff
+
+<small>https://github.com/jakzal/symfony-demo/compare/workshop/1.2-repository-query-methods...jakzal:workshop/1.3-repository-update-methods</small>
 
 ^
 
@@ -582,6 +594,10 @@ git commit -m 'Save progress'
 git checkout workshop/1.4-service-param-converter
 ```
 
+### Exercise diff
+
+<small>https://github.com/jakzal/symfony-demo/compare/workshop/1.3-repository-update-methods...jakzal:workshop/1.4-service-param-converter</small>
+
 ^
 
 ## Exercise 1.5
@@ -744,6 +760,10 @@ git commit -m 'Save progress'
 git checkout workshop/1.5-user-provider
 ```
 
+### Exercise diff
+
+<small>https://github.com/jakzal/symfony-demo/compare/workshop/1.4-service-param-converter...jakzal:workshop/1.5-user-provider</small>
+
 ^
 
 ### Question
@@ -850,3 +870,7 @@ git add -A
 git commit -m 'Save progress'
 git checkout workshop/1.6-repository-methods
 ```
+
+### Exercise diff
+
+<small>https://github.com/jakzal/symfony-demo/compare/workshop/1.5-user-provider...jakzal:workshop/1.6-repository-methods</small>

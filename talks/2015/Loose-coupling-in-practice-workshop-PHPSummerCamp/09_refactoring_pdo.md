@@ -49,6 +49,11 @@ git add -A
 git commit -m 'Save progress'
 git checkout workshop/4.1-repository-aliases
 ```
+
+### Exercise diff
+
+<small>https://github.com/jakzal/symfony-demo/compare/workshop/3.3-repositories-in-infrastructure...jakzal:workshop/4.1-repository-aliases</small>
+
 ^
 
 ## Exercise 4.2
@@ -70,6 +75,10 @@ git add -A
 git commit -m 'Save progress'
 git checkout workshop/4.2-pdo-implementation
 ```
+
+### Exercise diff
+
+<small>https://github.com/jakzal/symfony-demo/compare/workshop/4.1-repository-aliases...jakzal:workshop/4.2-pdo-implementation</small>
 
 ^
 
@@ -103,3 +112,7 @@ git add -A
 git commit -m 'Save progress'
 git checkout workshop/4.3-enable-pdo
 ```
+
+### Exercise diff
+
+<small>https://github.com/jakzal/symfony-demo/compare/workshop/4.2-pdo-implementation...jakzal:workshop/4.3-enable-pdo</small>

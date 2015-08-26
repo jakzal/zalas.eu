@@ -125,6 +125,10 @@ git commit -m 'Save progress'
 git checkout workshop/3.1-repository-interfaces
 ```
 
+### Exercise diff
+
+<small>https://github.com/jakzal/symfony-demo/compare/workshop/2.1-entities...jakzal:workshop/3.1-repository-interfaces</small>
+
 ^
 
 ## Exercise 3.2
@@ -168,6 +172,10 @@ git add -A
 git commit -m 'Save progress'
 git checkout workshop/3.2-repository-type-hints
 ```
+
+### Exercise diff
+
+<small>https://github.com/jakzal/symfony-demo/compare/workshop/3.1-repository-interfaces...jakzal:workshop/3.2-repository-type-hints</small>
 
 ^
 
@@ -223,3 +231,7 @@ git add -A
 git commit -m 'Save progress'
 git checkout workshop/3.3-repositories-in-infrastructure
 ```
+
+### Exercise diff
+
+<small>https://github.com/jakzal/symfony-demo/compare/workshop/3.2-repository-type-hints...jakzal:workshop/3.3-repositories-in-infrastructure</small>

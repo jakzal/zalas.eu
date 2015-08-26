@@ -79,3 +79,7 @@ git add -A
 git commit -m 'Save progress'
 git checkout workshop/2.1-entities
 ```
+
+### Exercise diff
+
+<small>https://github.com/jakzal/symfony-demo/compare/workshop/1.6-repository-methods...jakzal:workshop/2.1-entities</small>
