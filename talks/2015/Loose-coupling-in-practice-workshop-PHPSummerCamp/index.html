@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<title>Loose coupling in pracitce - Workshop - PHP Summer camp, August 2015 - Jakub Zalas</title>
+
+		<meta name="description" content="Loose coupling in pracitce - Workshop - PHP Summer camp, August 2015 - Jakub Zalas">
+		<meta name="author" content="Jakub Zalas">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="../../reveal.js/css/reveal.css">
+		<link rel="stylesheet" href="../../reveal.js/css/theme/white.css" id="theme">
+
+		<link rel="stylesheet" href="../../reveal.js/lib/css/github.css">
+
+        <link rel="stylesheet" href="assets/custom.css">
+
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? '../../reveal.js/css/print/pdf.css' : '../../reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="../../reveal.js/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown="01_title.md"
+                         data-separator="\^\^\n\n"
+                         data-separator-vertical="\^\n\n"
+                         data-separator-notes="^Note:"></section>
+				<section data-markdown="02_coupling_and_cohesion.md"
+						 data-separator="\^\^\n\n"
+						 data-separator-vertical="\^\n\n"
+						 data-separator-notes="^Note:"></section>
+				<section data-markdown="03_single_responsibility_principle.md"
+						 data-separator="\^\^\n\n"
+						 data-separator-vertical="\^\n\n"
+						 data-separator-notes="^Note:"></section>
+				<section data-markdown="04_dependency_inversion_principle.md"
+						 data-separator="\^\^\n\n"
+						 data-separator-vertical="\^\n\n"
+						 data-separator-notes="^Note:"></section>
+				<section data-markdown="05_refactoring.md"
+						 data-separator="\^\^\n\n"
+						 data-separator-vertical="\^\n\n"
+						 data-separator-notes="^Note:"></section>
+				<section data-markdown="06_refactoring_repository_services.md"
+						 data-separator="\^\^\n\n"
+						 data-separator-vertical="\^\n\n"
+						 data-separator-notes="^Note:"></section>
+				<section data-markdown="07_refactoring_entities.md"
+						 data-separator="\^\^\n\n"
+						 data-separator-vertical="\^\n\n"
+						 data-separator-notes="^Note:"></section>
+				<section data-markdown="08_refactoring_repository_interfaces.md"
+						 data-separator="\^\^\n\n"
+						 data-separator-vertical="\^\n\n"
+						 data-separator-notes="^Note:"></section>
+				<section data-markdown="09_refactoring_pdo.md"
+						 data-separator="\^\^\n\n"
+						 data-separator-vertical="\^\n\n"
+						 data-separator-notes="^Note:"></section>
+				<section data-markdown="10_refactoring_cache.md"
+						 data-separator="\^\^\n\n"
+						 data-separator-vertical="\^\n\n"
+						 data-separator-notes="^Note:"></section>
+				<section data-markdown="11_refactoring_summary.md"
+						 data-separator="\^\^\n\n"
+						 data-separator-vertical="\^\n\n"
+						 data-separator-notes="^Note:"></section>
+				<section data-markdown="12_thank_you.md"
+						 data-separator="\^\^\n\n"
+						 data-separator-vertical="\^\n\n"
+						 data-separator-notes="^Note:"></section>
+			</div>
+		</div>
+
+		<script src="../../reveal.js/lib/js/head.min.js"></script>
+		<script src="../../reveal.js/js/reveal.js"></script>
+
+		<script>
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'fade',
+
+				dependencies: [
+					{ src: '../../reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: '../../reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: '../../reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: '../../reveal.js/plugin/zoom-js/zoom.js', async: true },
+					{ src: '../../reveal.js/plugin/notes/notes.js', async: true }
+				]
+			});
+		</script>
+
+	</body>
+</html>
