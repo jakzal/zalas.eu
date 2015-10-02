@@ -83,7 +83,7 @@ git checkout exercise/symfony-demo/1.1-repository-services
 
 ### Exercise diff
 
-<small>https://github.com/jakzal/phpnw15-workshop/compare/master...jakzal:exercise/symfony-demo/1.1-repository-services</small>
+<small>https://github.com/jakzal/phpnw15-workshop/compare/exercise/crawler/1.8-solutions...jakzal:exercise/symfony-demo/1.1-repository-services</small>
 
 ^
 

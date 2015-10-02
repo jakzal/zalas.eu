@@ -45,6 +45,12 @@ git checkout exercise/crawler/1.2-article-list-crawler
 
 ^
 
+### Exercise diff
+
+<small>https://github.com/jakzal/phpnw15-workshop/compare/exercise/crawler/1.1-article...jakzal:exercise/crawler/1.2-article-list-crawler</small>
+
+^
+
 ## Exercise 1.2
 
 Implement the `Crawler\ArticleListCrawler` class by making tests pass one at a time:
@@ -76,6 +82,12 @@ git checkout exercise/crawler/1.3-article-extractor
 
 ^
 
+### Exercise diff
+
+<small>https://github.com/jakzal/phpnw15-workshop/compare/exercise/crawler/1.2-article-list-crawler...jakzal:exercise/crawler/1.3-article-extractor</small>
+
+^
+
 ## Exercise 1.3
 
 Change the `Crawler\ArticleExtractor` interface to a class and implement it.
@@ -101,6 +113,12 @@ git add -A
 git commit -m 'Save progress'
 git checkout exercise/crawler/1.4-file-get-contents-content-provider
 ```
+
+^
+
+### Exercise diff
+
+<small>https://github.com/jakzal/phpnw15-workshop/compare/exercise/crawler/1.3-article-extractor...jakzal:exercise/crawler/1.4-file-get-contents-content-provider</small>
 
 ^
 
@@ -134,6 +152,12 @@ git checkout exercise/crawler/1.5-article-list-crawler-factory
 
 ^
 
+### Exercise diff
+
+<small>https://github.com/jakzal/phpnw15-workshop/compare/exercise/crawler/1.4-file-get-contents-content-provider...jakzal:exercise/crawler/1.5-article-list-crawler-factory</small>
+
+^
+
 ## Exercise 1.5
 
 Create a factory for the `Crawler\ArticleListCrawler`:
@@ -160,6 +184,12 @@ git add -A
 git commit -m 'Save progress'
 git checkout exercise/crawler/1.6-article-list-command
 ```
+
+^
+
+### Exercise diff
+
+<small>https://github.com/jakzal/phpnw15-workshop/compare/exercise/crawler/1.5-article-list-crawler-factory...jakzal:exercise/crawler/1.6-article-list-command</small>
 
 ^
 
@@ -192,6 +222,12 @@ git checkout exercise/crawler/1.7-guzzle-content-provider
 
 ^
 
+### Exercise diff
+
+<small>https://github.com/jakzal/phpnw15-workshop/compare/exercise/crawler/1.6-article-list-command...jakzal:exercise/crawler/1.7-guzzle-content-provider</small>
+
+^
+
 ## Exercise 1.7
 
 Provide a Guzzle implementation of the `Crawler\ContentProvider`.
@@ -215,3 +251,9 @@ git add -A
 git commit -m 'Save progress'
 git checkout exercise/crawler/1.8-solutions
 ```
+
+^
+
+### Exercise diff
+
+<small>https://github.com/jakzal/phpnw15-workshop/compare/exercise/crawler/1.7-guzzle-content-provider...jakzal:exercise/crawler/1.8-solutions</small>
