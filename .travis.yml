@@ -1,0 +1,30 @@
+language: php
+
+php:
+  - 7.0
+
+sudo: false
+
+cache:
+  directories:
+    - "$HOME/.composer/cache"
+
+branches:
+  only:
+    - sculpin
+
+before_install:
+  - echo -e "machine github.com\n  login $GH_TOKEN" >> ~/.netrc
+
+before_script:
+  - composer install --prefer-dist
+
+script:
+  - sh build.sh
+
+after_success:
+  - test $TRAVIS_PULL_REQUEST == "false" && sh publish.sh
+
+env:
+  global:
+    - secure: DpYlvLg4MfFTAlHyOw5GQWgkFjD3lBgCiTGZNeVqfVq5+c4Piz8Ha+tD81tMulUl7/0LmNISmUZiAot+7tAOfRtQORUDbukjlcNWEe/iIQwZkji8hsON6rHKbcBNCKjJBD8iHe8DOsMEokCw4Kz07w1JwQw6VLCY6o0K5H5S9p0=
