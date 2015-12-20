@@ -69,15 +69,14 @@ In other words packages depending on both Doctrine and Symfony
 are included in these numbers twice, so summing them up
 wouldn't make much sense.
 
-<div class="table table-striped table-hover table-condensed" markdown="1">
-| | Feb 2014 | Mar 2015 |
-| ----- | ----- | ----- |
-| Total number of packages on packagist.org | 24317 | 53101 |
-| Depends on Symfony | 4994 | 9265 |
-| Depends on Illuminate | 1355 | 4160 |
-| Depends on Doctrine | - | 3751 |
-| Depends on Zend Framework | 1356 | 2289 |
-</div>
+<table class="table table-striped table-hover table-condensed" markdown="1">
+<tr><th></th><th>Feb 2014</th><th>Mar 2015</th></tr>
+<tr><td>**Total number of packages on packagist.org**</td><td>**24317**</td><td>**53101**</td></tr>
+<tr><td>Depends on Symfony</td><td>4994</td><td>9265</td></tr>
+<tr><td>Depends on Illuminate</td><td>1355</td><td>4160</td></tr>
+<tr><td>Depends on Doctrine</td><td>-</td><td>3751</td></tr>
+<tr><td>Depends on Zend Framework</td><td>1356</td><td>2289</td></tr>
+</table>
 
 ## Symfony Components
 
@@ -98,74 +97,73 @@ and applications.
 
 Detailed numbers can be found in the table below and here are the results of crawling: [results.csv](/uploads/wp/2015/04/results-20150311.csv).
 
-<div class="table table-striped table-hover table-condensed" markdown="1">
-| | <small>Feb 2014</small> | | | Mar 2015 | | |
-| --------- |:-------:|:-----:|:-----:|:-------:|:-----:|:-----:|
-| Component | <small>Bundles</small> | <small>Other</small> | <small>Total</small> | Bundles | Other | Total |
-| console | <small>176</small> | <small>615</small> | <small>791</small> | 303 | 1347 | 1650 |
-| yaml | <small>285</small> | <small>519</small> | <small>804</small> | 435 | 1141 | 1576 |
-| finder | <small>156</small> | <small>317</small> | <small>473</small> | 263 | 633 | 896 |
-| config | <small>129</small> | <small>281</small> | <small>410</small> | 296 | 511 | 807 |
-| http-foundation | <small>83</small> | <small>292</small> | <small>375</small> | 133 | 615 | 748 |
-| form | <small>276</small> | <small>96</small> | <small>372</small> | 462 | 201 | 663 |
-| process | <small>46</small> | <small>266</small> | <small>312</small> | 72 | 587 | 659 |
-| dependency-injection | <small>136</small> | <small>146</small> | <small>282</small> | 342 | 301 | 643 |
-| http-kernel | <small>118</small> | <small>150</small> | <small>268</small> | 298 | 305 | 603 |
-| validator | <small>176</small> | <small>132</small> | <small>308</small> | 299 | 274 | 573 |
-| event-dispatcher | <small>40</small> | <small>233</small> | <small>273</small> | 78 | 468 | 546 |
-| filesystem | <small>25</small> | <small>187</small> | <small>212</small> | 44 | 422 | 466 |
-| browser-kit | <small>119</small> | <small>95</small> | <small>214</small> | 189 | 183 | 372 |
-| class-loader | <small>122</small> | <small>144</small> | <small>266</small> | 159 | 197 | 356 |
-| css-selector | <small>57</small> | <small>92</small> | <small>149</small> | 75 | 206 | 281 |
-| translation | <small>11</small> | <small>103</small> | <small>114</small> | 22 | 205 | 227 |
-| security | <small>58</small> | <small>67</small> | <small>125</small> | 80 | 144 | 224 |
-| security-csrf | <small>-</small> | <small>-</small> | <small>-</small> | 2 | 1 | 3 |
-| security-core | <small>-</small> | <small>-</small> | <small>-</small> | 5 | 24 | 29 |
-| security-http | <small>-</small> | <small>-</small> | <small>-</small> | 3 | 16 | 19 |
-| routing | <small>28</small> | <small>86</small> | <small>114</small> | 45 | 163 | 208 |
-| options-resolver | <small>19</small> | <small>52</small> | <small>71</small> | 38 | 134 | 172 |
-| dom-crawler | <small>12</small> | <small>58</small> | <small>70</small> | 23 | 139 | 162 |
-| property-access | <small>17</small> | <small>53</small> | <small>70</small> | 36 | 125 | 161 |
-| expression-language | <small>15</small> | <small>26</small> | <small>41</small> | 66 | 85 | 151 |
-| serializer | <small>13</small> | <small>47</small> | <small>60</small> | 26 | 77 | 103 |
-| debug | <small>0</small> | <small>26</small> | <small>26</small> | 1 | 85 | 86 |
-| templating | <small>16</small> | <small>17</small> | <small>33</small> | 23 | 53 | 76 |
-| var-dumper | <small>-</small> | <small>-</small> | <small>-</small> | 4 | 48 | 52 |
-| stopwatch | <small>4</small> | <small>22</small> | <small>26</small> | 8 | 43 | 51 |
-| locale | <small>7</small> | <small>22</small> | <small>29</small> | 7 | 38 | 45 |
-| intl | <small>2</small> | <small>11</small> | <small>13</small> | 6 | 30 | 36 |
-| icu | <small>-</small> | <small>-</small> | <small>-</small> | 2 | 18 | 20 |
-| asset | <small>-</small> | <small>-</small> | <small>-</small> | 2 | 3 | 5 |
-</div>
+<table class="table table-striped table-hover table-condensed" markdown="1">
+<tr><th></th><th><small>Feb 2014</small></th><th></th><th></th><th>Mar 2015</th><th></th><th></th></tr>
+<tr><th>Component</th><th><small>Bundles</small></th><th><small>Other</small></th><th><small>Total</small></th><th>Bundles</th><th>Other</th><th>Total</th></tr>
+<tr><td>console</td><td><small>176</small></td><td><small>615</small></td><td><small>791</small></td><td>303</td><td>1347</td><td>1650</td></tr>
+<tr><td>yaml</td><td><small>285</small></td><td><small>519</small></td><td><small>804</small></td><td>435</td><td>1141</td><td>1576</td></tr>
+<tr><td>finder</td><td><small>156</small></td><td><small>317</small></td><td><small>473</small></td><td>263</td><td>633</td><td>896</td></tr>
+<tr><td>config</td><td><small>129</small></td><td><small>281</small></td><td><small>410</small></td><td>296</td><td>511</td><td>807</td></tr>
+<tr><td>http-foundation</td><td><small>83</small></td><td><small>292</small></td><td><small>375</small></td><td>133</td><td>615</td><td>748</td></tr>
+<tr><td>form</td><td><small>276</small></td><td><small>96</small></td><td><small>372</small></td><td>462</td><td>201</td><td>663</td></tr>
+<tr><td>process</td><td><small>46</small></td><td><small>266</small></td><td><small>312</small></td><td>72</td><td>587</td><td>659</td></tr>
+<tr><td>dependency-injection</td><td><small>136</small></td><td><small>146</small></td><td><small>282</small></td><td>342</td><td>301</td><td>643</td></tr>
+<tr><td>http-kernel</td><td><small>118</small></td><td><small>150</small></td><td><small>268</small></td><td>298</td><td>305</td><td>603</td></tr>
+<tr><td>validator</td><td><small>176</small></td><td><small>132</small></td><td><small>308</small></td><td>299</td><td>274</td><td>573</td></tr>
+<tr><td>event-dispatcher</td><td><small>40</small></td><td><small>233</small></td><td><small>273</small></td><td>78</td><td>468</td><td>546</td></tr>
+<tr><td>filesystem</td><td><small>25</small></td><td><small>187</small></td><td><small>212</small></td><td>44</td><td>422</td><td>466</td></tr>
+<tr><td>browser-kit</td><td><small>119</small></td><td><small>95</small></td><td><small>214</small></td><td>189</td><td>183</td><td>372</td></tr>
+<tr><td>class-loader</td><td><small>122</small></td><td><small>144</small></td><td><small>266</small></td><td>159</td><td>197</td><td>356</td></tr>
+<tr><td>css-selector</td><td><small>57</small></td><td><small>92</small></td><td><small>149</small></td><td>75</td><td>206</td><td>281</td></tr>
+<tr><td>translation</td><td><small>11</small></td><td><small>103</small></td><td><small>114</small></td><td>22</td><td>205</td><td>227</td></tr>
+<tr><td>security</td><td><small>58</small></td><td><small>67</small></td><td><small>125</small></td><td>80</td><td>144</td><td>224</td></tr>
+<tr><td>security-csrf</td><td><small>-</small></td><td><small>-</small></td><td><small>-</small></td><td>2</td><td>1</td><td>3</td></tr>
+<tr><td>security-core</td><td><small>-</small></td><td><small>-</small></td><td><small>-</small></td><td>5</td><td>24</td><td>29</td></tr>
+<tr><td>security-http</td><td><small>-</small></td><td><small>-</small></td><td><small>-</small></td><td>3</td><td>16</td><td>19</td></tr>
+<tr><td>routing</td><td><small>28</small></td><td><small>86</small></td><td><small>114</small></td><td>45</td><td>163</td><td>208</td></tr>
+<tr><td>options-resolver</td><td><small>19</small></td><td><small>52</small></td><td><small>71</small></td><td>38</td><td>134</td><td>172</td></tr>
+<tr><td>dom-crawler</td><td><small>12</small></td><td><small>58</small></td><td><small>70</small></td><td>23</td><td>139</td><td>162</td></tr>
+<tr><td>property-access</td><td><small>17</small></td><td><small>53</small></td><td><small>70</small></td><td>36</td><td>125</td><td>161</td></tr>
+<tr><td>expression-language</td><td><small>15</small></td><td><small>26</small></td><td><small>41</small></td><td>66</td><td>85</td><td>151</td></tr>
+<tr><td>serializer</td><td><small>13</small></td><td><small>47</small></td><td><small>60</small></td><td>26</td><td>77</td><td>103</td></tr>
+<tr><td>debug</td><td><small>0</small></td><td><small>26</small></td><td><small>26</small></td><td>1</td><td>85</td><td>86</td></tr>
+<tr><td>templating</td><td><small>16</small></td><td><small>17</small></td><td><small>33</small></td><td>23</td><td>53</td><td>76</td></tr>
+<tr><td>var-dumper</td><td><small>-</small></td><td><small>-</small></td><td><small>-</small></td><td>4</td><td>48</td><td>52</td></tr>
+<tr><td>stopwatch</td><td><small>4</small></td><td><small>22</small></td><td><small>26</small></td><td>8</td><td>43</td><td>51</td></tr>
+<tr><td>locale</td><td><small>7</small></td><td><small>22</small></td><td><small>29</small></td><td>7</td><td>38</td><td>45</td></tr>
+<tr><td>intl</td><td><small>2</small></td><td><small>11</small></td><td><small>13</small></td><td>6</td><td>30</td><td>36</td></tr>
+<tr><td>icu</td><td><small>-</small></td><td><small>-</small></td><td><small>-</small></td><td>2</td><td>18</td><td>20</td></tr>
+<tr><td>asset</td><td><small>-</small></td><td><small>-</small></td><td><small>-</small></td><td>2</td><td>3</td><td>5</td></tr>
+</table>
 
 ## Symfony Bridges
 
 These are numbers of packages depending on bridges from the Symfony organisation.
 
-<div class="table table-striped table-hover table-condensed" markdown="1">
-| twig-bridge | 217 |
-| monolog-bridge | 90 |
-| doctrine-bridge | 72 |
-| phpunit-bridge | 44 |
-| proxy-manager-bridge | 24 |
-| swiftmailer-bridge | 7 |
-| propel1-bridge | 1 |
-</div>
+<table class="table table-striped table-hover table-condensed" markdown="1">
+<tr><td>twig-bridge</td><td>217</td></tr>
+<tr><td>monolog-bridge</td><td>90</td></tr>
+<tr><td>doctrine-bridge</td><td>72</td></tr>
+<tr><td>phpunit-bridge</td><td>44</td></tr>
+<tr><td>proxy-manager-bridge</td><td>24</td></tr>
+<tr><td>swiftmailer-bridge</td><td>7</td></tr>
+<tr><td>propel1-bridge</td><td>1</td></tr>
+</table>
 
 ## Symfony Bundles
 
 Here are numbers of packages depending on bundles from the Symfony organisation.
 
-<div class="table table-striped table-hover table-condensed" markdown="1">
-| framework-bundle | 2942 |
-| monolog-bundle | 535 |
-| assetic-bundle | 439 |
-| swiftmailer-bundle | 385 |
-| twig-bundle | 313 |
-| security-bundle | 219 |
-| web-profiler-bundle | 24 |
-| debug-bundle | 3 |
-</div>
+<table class="table table-striped table-hover table-condensed" markdown="1">
+<tr><td>framework-bundle</td><td>2942</td></tr>
+<tr><td>monolog-bundle</td><td>535</td></tr>
+<tr><td>assetic-bundle</td><td>439</td></tr>
+<tr><td>swiftmailer-bundle</td><td>385</td></tr>
+<tr><td>twig-bundle</td><td>313</td></tr>
+<tr><td>security-bundle</td><td>219</td></tr>
+<tr><td>web-profiler-bundle</td><td>24</td></tr>
+<tr><td>debug-bundle</td><td>3</td></tr>
+</table>
 
 ## Bonus: Testing Tools
 
@@ -174,17 +172,16 @@ As a bonus, I also included some popular testing tools.
 Bare in mind that these are very often not specified in *composer.json*,
 as many projects rely on them being installed globally (especially PHPUnit users).
 
-<div class="table table-striped table-hover table-condensed" markdown="1">
-| |  Mar 2015 |
-| ----- | ----- |
-| Total number of packages on packagist.org | 53101 |
-| PHPUnit |  12259 |
-| PhpSpec | 990 |
-| Behat | 452 |
-| Codeception | 293 |
-| Mink | 149 |
-| SimpleTest | 22 |
-</div>
+<table class="table table-striped table-hover table-condensed" markdown="1">
+<tr><th></th><th>Mar 2015</th></tr>
+<tr><th>Total number of packages on packagist.org</th><th>53101</th></tr>
+<tr><td>PHPUnit</td><td> 12259</td></tr>
+<tr><td>PhpSpec</td><td>990</td></tr>
+<tr><td>Behat</td><td>452</td></tr>
+<tr><td>Codeception</td><td>293</td></tr>
+<tr><td>Mink</td><td>149</td></tr>
+<tr><td>SimpleTest</td><td>22</td></tr>
+</table>
 
 <script type="text/javascript">
     function load() {
