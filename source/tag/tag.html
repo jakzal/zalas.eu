@@ -1,0 +1,34 @@
+---
+layout: default
+title: Tag Archive
+generator: [posts_tag_index, pagination]
+pagination:
+    provider: page.tag_posts
+    max_per_page: 200
+---
+
+{% block head_meta %}
+    <meta name="robots" content="noindex, follow">
+{% endblock %}
+
+{% block title %}Pages labeled with "{{ page.tag }}"{% endblock %}
+
+{% block content %}
+<section class="posts tag-posts">
+    <h1>Pages labeled with "{{ page.tag }}"</h1>
+
+    <ul class="list-unstyled">
+    {% for post in page.pagination.items %}
+        <li>
+            <a href="{{ site.url }}{{ post.url }}/"><h2>{{ post.title }}</h2></a>
+            <span class="post-date">
+                <time itemprop="datePublished" content="{{ post.date | date('Y-m-d') }}" datetime="{{ post.date | date('Y-m-d') }}">{{ post.date | date('d M Y') }}</time>
+            </span>
+        </li>
+    {% endfor %}
+    </ul>
+    <ul class="pager">
+        <li><a href="{{ site.url }}/tag/" title="Labels">All labels</a></li>
+    </ul>
+</section>
+{% endblock content %}

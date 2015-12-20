@@ -1,0 +1,10 @@
+php:
+  extends:
+    file: ./docker/php/php.yml
+    service: php
+  volumes:
+    - ./:/zalas.eu
+  working_dir: /zalas.eu
+  container_name: zalaseu-php
+  ports:
+    - '8000:8000'

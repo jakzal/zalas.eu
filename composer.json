@@ -1,0 +1,17 @@
+{
+    "name": "zalas/zalas.eu",
+    "description": "zalas.eu site",
+    "type": "project",
+    "require": {
+        "sculpin/sculpin": "^2.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jakub Zalas",
+            "email": "jakub@zalas.pl"
+        }
+    ]
+}

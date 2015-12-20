@@ -1,0 +1,54 @@
+---
+layout: default
+title: Blog post labels
+use:
+    - posts_tags
+---
+
+{% block head_meta %}
+<meta name="robots" content="noindex, follow">
+{% endblock %}
+
+{% block title %}Blog post labels{% endblock %}
+
+{% block content %}
+<h1>Blog post labels</h1>
+
+{% set total = data.posts_tags | length %}
+{% set tags_max = 0 %}
+{% for tag,posts in data.posts_tags %}
+    {% set count = posts | length %}
+    {% if count > tags_max %}
+        {% set tags_max = posts|length %}
+    {% endif %}
+{% endfor %}
+
+<ul class="tag-cloud row list-unstyled">
+    {% for i in range(1, tags_max) | reverse %}
+        {% for tag,posts in data.posts_tags %}
+            {% set count = posts | length %}
+            {% if count == i %}
+                {% set weight = count * 100 / total %}
+                {% if weight >= 20 %}
+                    {% set style = ' label-success' %}
+                {% elseif weight >= 10 %}
+                    {% set style = ' label-info' %}
+                {% elseif weight >= 5 %}
+                    {% set style = ' label-warning' %}
+                {% else %}
+                    {% set style = '' %}
+                {% endif %}
+                <li class="col-md-3 col-sm-4 col-xs-12">
+                    <span class="glyphicon glyphicon-tag"></span>
+                    <a href="{{ site.url }}/tag/{{ tag | url_encode(true) }}/">
+                        <span>{{ tag }}</span>
+                        {% if style != '' %}
+                        <span class="label{{ style }} pull-right">{{ count }}</span>
+                        {% endif %}
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+</ul>
+{% endblock content %}
