@@ -11,7 +11,7 @@ cache:
 
 branches:
   only:
-    - sculpin
+    - source
 
 before_install:
   - echo -e "machine github.com\n  login $GH_TOKEN" >> ~/.netrc
