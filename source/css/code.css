@@ -1,0 +1,92 @@
+pre code {
+    display: block; padding: 0.5em;
+    background: #232125; color: #fff;
+}
+
+pre, code {
+    background-color:#232125; color:#fff;
+}
+
+pre .comment,
+pre .phpdoc,
+pre .template_comment,
+pre .diff .header,
+pre .doctype,
+pre .pi,
+pre .lisp .string,
+pre .javadoc {
+    color: #586e75;
+    font-style: italic;
+}
+
+pre .keyword {
+    color: #ff8400;
+}
+
+pre .winutils,
+pre .method,
+pre .addition,
+pre .css .tag,
+pre .request,
+pre .status,
+pre .nginx .title {
+    color: #fff;
+}
+
+pre .number {
+    color: #1299da;
+}
+
+pre .command,
+pre .string,
+pre .tag .value,
+pre .tex .formula,
+pre .regexp,
+pre .hexcolor {
+    color: #56db3a;
+}
+
+pre .title,
+pre .localvars,
+pre .chunk,
+pre .decorator,
+pre .built_in,
+pre .identifier,
+pre .vhdl .literal,
+pre .id {
+    color: #fff;
+}
+
+pre .attribute,
+pre .variable,
+pre .lisp .body,
+pre .smalltalk .number,
+pre .constant,
+pre .class .title,
+pre .parent,
+pre .haskell .type {
+    color: #fff;
+}
+
+pre .preprocessor,
+pre .preprocessor .keyword,
+pre .shebang,
+pre .symbol,
+pre .symbol .string,
+pre .diff .change,
+pre .special,
+pre .attr_selector,
+pre .important,
+pre .subst,
+pre .cdata,
+pre .clojure .title {
+    color: #fff;
+}
+
+pre .deletion {
+    color: #fff;
+}
+
+pre .tex .formula {
+    background: #fff;
+}
