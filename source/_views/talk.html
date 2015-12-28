@@ -1,0 +1,39 @@
+{% extends "default" %}
+
+{% block head_meta %}
+<meta name="robots" content="index, follow">
+{% endblock %}
+
+{% block content_wrapper %}
+<section itemscope itemtype="http://schema.org/Event">
+    <h1 itemprop="name">{{ page.title }}</h1>
+
+    <section>
+        <span itemprop="startDate" content="{{ talk.date | date('Y-m-d\TH:i') }}">{{ page.date | date('d M Y') }}</span>,
+        <a href="{{ page.eventUrl }}" itemscope itemtype="http://schema.org/Event" itemprop="url" title="{{ page.event }}">{{ page.event }}</a>,
+
+        {% if page.city is not empty or page.country is not empty %}
+            <span itemprop="location" itemscope itemtype="http://schema.org/PostalAddress">
+            <span>
+                <span itemprop="addressLocality">{{ page.city }}</span>
+                {%- if page.city is not empty and page.country is not empty%},{% endif %}
+                <span itemprop="addressCountry">{{ page.country}}</span>
+            </span>
+            </span>
+        {% endif %}
+        <ul>
+            {% if page.slides is not empty -%}
+            <li><a href="{{ page.slides }}" title="{{ page.title }} slides">Slides</a></li>
+            {%- endif %}
+            {% if page.joindin is not empty -%}
+            <li><a href="{{ page.joindin }}" title="{{ page.title }} feedback on joind.in">Feedback on joind.in</a></li>
+            {%- endif %}
+            {% if page.video is not empty -%}
+            <li><a href="{{ page.video }}" title="{{ page.title }} video">Video</a></li>
+            {%- endif %}
+        </ul>
+    </section>
+
+    {% block content %}{% endblock %}
+</section>
+{% endblock %}

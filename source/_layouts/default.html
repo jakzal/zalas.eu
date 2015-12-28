@@ -6,6 +6,12 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="verify-v1" content="{{ site.google_verify }}" />
+        {%- if page.meta_keywords %}
+        <meta name="keywords" content="{{ page.meta_keywords }}">
+        {% endif %}
+        {%- if page.meta_description %}
+        <meta name="description" content="{{ page.meta_description }}">
+        {% endif %}
         {% block head_meta %}
         <meta name="robots" content="index, follow">
         {% endblock %}

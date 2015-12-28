@@ -1,0 +1,36 @@
+---
+title: Talks
+use: [talks]
+generator: year_grouped
+layout: default
+---
+<h1>{{ page.title }}</h1>
+
+{% for year, talks in page.year_grouped.items %}
+<h2>{{ year }}</h2>
+<ul class="talks list-unstyled">
+    {% for talk in talks %}
+    <li class="talk" itemscope itemtype="http://schema.org/Event">
+        <span itemprop="startDate"
+              content="{{ talk.date | date('Y-m-d\TH:i') }}"
+              style="color: grey; font-family: Courier;">{{ talk.date | date('d M') }}</span>
+        <a href="{{ talk.url }}" itemprop="url" title="{{ talk.title }}">
+            <span itemprop="name">{{ talk.title }}</span>
+            - <span itemscope itemtype="http://schema.org/Event">{{ talk.event }}</span>
+            {%- if talk.city is not empty or talk.country is not empty %},{% endif %}
+        </a>
+
+        {% if talk.city is not empty or talk.country is not empty %}
+            <span style="color: grey" itemprop="location" itemscope itemtype="http://schema.org/PostalAddress">
+            <span>
+                <span itemprop="addressLocality">{{ talk.city }}</span>
+                {%- if talk.city is not empty and talk.country is not empty%},{% endif %}
+                <span itemprop="addressCountry">{{ talk.country}}</span>
+            </span>
+            </span>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endfor %}
+
