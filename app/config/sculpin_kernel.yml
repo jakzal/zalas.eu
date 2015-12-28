@@ -1,3 +1,8 @@
 sculpin_content_types:
     posts:
         permalink: :slug_title/
+    talks:
+        singular_name: talk
+        type: path
+        permalink: talks/:year/:slug_title/
+        enabled: true
