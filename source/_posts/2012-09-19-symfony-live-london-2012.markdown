@@ -13,6 +13,8 @@ tags:
 - phpspec2
 - sflive2012
 - Symfony2
+meta_keywords: Symfony,SymfonyLive,London,conference
+meta_description: SymfonyLive London was a huge success. Great talks, accessible speakers and amazing community. 
 ---
 
 <div class="pull-left">

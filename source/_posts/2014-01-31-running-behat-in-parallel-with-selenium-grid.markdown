@@ -8,6 +8,8 @@ title: Running Behat in parallel with Selenium grid
 tags:
 - behat
 - selenium
+meta_keywords: behat,parallel,gnu parallel,selenium,grid
+meta_description: Run Behat tests in parallel with GNU parallel and Selenium grid.
 ---
 
 There are few ways to run Behat tests in parallel, including the following Behat extensions:

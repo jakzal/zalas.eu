@@ -12,9 +12,11 @@ tags:
 - Symfony2
 - testing
 - travis
+meta_keywords: Symfony,behat,functional,tests,isolation
+meta_description: When working on a reusable bundle it's beneficial to run its test suite in isolation of a project. This way the test suite is not dependent on project's configuration.
 ---
 
-When working on a reusable bundle it's beneficial to run its test suite in isolation of a project. This way test suite is not dependent on project's configuration or enabled bundles. It is also much easier to run it on a continuos integration server like [Travis](http://travis-ci.org/).
+When working on a reusable bundle it's beneficial to run its test suite in isolation of a project. This way the test suite is not dependent on project's configuration or enabled bundles. It is also much easier to run it on a continuos integration server like [Travis](http://travis-ci.org/).
 
 
 ## AppKernel and configuration

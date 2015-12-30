@@ -9,6 +9,8 @@ wordpress_id: 990
 tags:
 - doctrine2
 - Symfony2
+meta_keywords: Symfony,doctrine,bundle,entity,domain
+meta_description: Learn how to put doctrine entities outside of a bundle to make the model independent of the framework. 
 ---
 
 The [DoctrineBundle](https://github.com/doctrine/DoctrineBundle) and [Doctrine bridge](https://github.com/symfony/symfony/tree/master/src/Symfony/Bridge/Doctrine) are the integration layer between the Doctrine ORM and Symfony. One of features they provide is an automatic registration of entity mappings.

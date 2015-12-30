@@ -12,6 +12,8 @@ tags:
 - DIC
 - php
 - Symfony2
+meta_keywords: Symfony,components,dependency,injection,container,service
+meta_description: Symfony's DependencyInjection component is a PHP implementation of a Service Container (Dependency Injection Container). 
 ---
 
 Symfony's [DependencyInjection component](https://github.com/symfony/DependencyInjection) is a PHP implementation of a **Service Container**, or as others like to call it, a **Dependency Injection Container** (DIC).

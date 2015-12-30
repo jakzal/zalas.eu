@@ -12,6 +12,7 @@ tags:
 - DependencyInjection
 - mockery
 - Symfony2
+meta_keywords: Symfony,container,tests,mocking,stubbing,mockery
 ---
 
 Mocking objects in unit tests is pretty straightforward as every object used in a test case is usually created in a scope of one test class. In functional tests it's a bit harder since we either don't have full control over objects being created or it's simply too laborious to mock half the framework.

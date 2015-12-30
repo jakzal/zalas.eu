@@ -12,6 +12,8 @@ tags:
 - components
 - php
 - Symfony2
+meta_keywords: Symfony,components,autoloader,classloader
+meta_description: Symfony's ClassLoader component is a PSR-0 standard compliant PHP class autoloader. 
 ---
 
 Symfony [ClassLoader component](https://github.com/symfony/ClassLoader) is a [PSR-0 standard](http://groups.google.com/group/php-standards/web/psr-0-final-proposal) compliant PHP class autoloader. It's not only able to load namespaced code but also supports old-school [PEAR standards](http://pear.php.net/manual/en/standards.naming.php) (also used by Zend Framework). It's a perfect class loading tool for most of PHP projects.

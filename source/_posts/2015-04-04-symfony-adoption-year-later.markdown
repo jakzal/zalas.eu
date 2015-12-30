@@ -10,6 +10,8 @@ tags:
 - php
 - Symfony2
 - components
+meta_keywords: Symfony,adoption,statistics,popularity
+meta_description: Symfony adoption among PHP packages found on packagist.org
 ---
 
 Over a year ago [I looked into Symfony2 adoption](/symfony2-adoption/) for the first time.

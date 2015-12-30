@@ -12,6 +12,8 @@ tags:
 - Console
 - php
 - Symfony2
+meta_keywords: Symfony,components,console
+meta_description: Symfony's Console component makes creating commands in PHP fun. 
 ---
 
 <div class="pull-left">

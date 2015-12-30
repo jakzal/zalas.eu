@@ -12,6 +12,7 @@ tags:
 - php
 - symfony
 - Symfony2
+meta_keywords: Symfony,php,nginx,configuration
 ---
 
 <div class="pull-right">

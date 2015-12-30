@@ -11,6 +11,8 @@ tags:
 - Finder
 - php
 - Symfony2
+meta_keywords: Symfony,components,finder
+meta_description: Symfony's Finder component makes the task of finding files and directories less tedious 
 ---
 
 <div class="pull-right">

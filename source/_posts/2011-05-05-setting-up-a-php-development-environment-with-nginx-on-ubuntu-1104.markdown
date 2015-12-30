@@ -12,6 +12,7 @@ tags:
 - nginx
 - php
 - ubuntu
+meta_keywords: php,nginx,configuration
 ---
 
 <div class="pull-left">

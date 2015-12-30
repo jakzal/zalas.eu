@@ -10,6 +10,8 @@ tags:
 - behat
 - mink
 - Symfony2
+meta_keywords: Symfony,behat,upgrade,update
+meta_description: Learn how to migrate your old Behat test suite for Behat 2.4
 ---
 
 <div class="pull-left">

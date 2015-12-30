@@ -9,6 +9,8 @@ tags:
 - php
 - Symfony2
 - components
+meta_keywords: Symfony,adoption,statistics,popularity
+meta_description: Symfony2 adoption among PHP packages found on packagist.org
 ---
 
 While preparing my talk for the SymfonyCon in Warsaw ([Symfony components in the wild](https://speakerdeck.com/jakzal/symfony-components-in-the-wild-symfonycon-2013)),
