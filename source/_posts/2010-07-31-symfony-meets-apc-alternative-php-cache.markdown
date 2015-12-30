@@ -14,6 +14,7 @@ tags:
 - php
 - symfony
 - xcache
+expired: true
 ---
 
 Up to last week I was exclusively an [XCache](http://xcache.lighttpd.net/) user if we talk about PHP accelerators. Recently I needed to use [APC](http://php.net/apc) with a symfony application. As symfony offers nice APC integration it went quite smooth.

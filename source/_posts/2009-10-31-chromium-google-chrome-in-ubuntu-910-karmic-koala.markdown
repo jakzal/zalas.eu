@@ -12,6 +12,7 @@ tags:
 - google
 - installation
 - ubuntu
+expired: true
 ---
 
 [Google Chrome](http://www.google.com/chrome) doesn't support Linux based operating systems yet. However, it is made on [Chromium](http://www.chromium.org/) which works on all major platforms. Chromium is an Open Source web browser with the same feature set as Google Chrome. Actually Google Chrome is based on Chromium. The only difference is the logo.

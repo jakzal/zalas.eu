@@ -12,6 +12,7 @@ tags:
 - symfony
 - Symfony2
 - wrap-up
+expired: true
 ---
 
 ## Symfony2

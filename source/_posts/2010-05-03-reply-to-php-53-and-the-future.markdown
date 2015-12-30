@@ -9,6 +9,7 @@ wordpress_id: 440
 tags:
 - php
 - symfony
+expired: true
 ---
 
 <div class="pull-left">

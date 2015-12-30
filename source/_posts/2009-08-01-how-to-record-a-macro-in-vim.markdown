@@ -10,6 +10,7 @@ tags:
 - best-practices
 - productivity
 - vim
+expired: true
 ---
 
 [Macro](http://en.wikipedia.org/wiki/Macro_%28computer_science%29) is a sequence of instructions performed as a one step. In programming it helps automating the repeatable tasks which makes them less boring and less error-prone. Instead of performing the same actions over and over again, it's better to record them as a macro. Once macro is saved it can be run as many times as needed. [Vim](http://www.vim.org/) as a one of most powerful editors has macro support built in.

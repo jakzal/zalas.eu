@@ -10,6 +10,7 @@ tags:
 - fun
 - installation
 - ubuntu
+expired: true
 ---
 
 I just played [Frets on Fire](http://fretsonfire.sourceforge.net/), an amazing game which managed to absorb me enough to write this blog post. It doesn't happen to often. Frets on Fire is a [Guitar Hero](http://hub.guitarhero.com/) clone for PC (runs on Linux, Mac and Windows).

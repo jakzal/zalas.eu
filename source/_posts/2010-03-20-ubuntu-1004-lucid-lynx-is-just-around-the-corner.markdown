@@ -11,6 +11,7 @@ tags:
 - kde
 - linux
 - ubuntu
+expired: true
 ---
 
 <div class="text-center">

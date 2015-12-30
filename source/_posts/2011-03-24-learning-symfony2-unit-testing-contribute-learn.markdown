@@ -12,6 +12,7 @@ tags:
 - phpunit
 - Symfony2
 - testing
+expired: true
 ---
 
 <div class="text-center">

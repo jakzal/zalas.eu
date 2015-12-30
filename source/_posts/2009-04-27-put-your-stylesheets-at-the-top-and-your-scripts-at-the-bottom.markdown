@@ -11,6 +11,7 @@ tags:
 - filter
 - html
 - symfony
+expired: true
 ---
 
 Putting the CSS stylesheets at the top of your web page and moving the scripts

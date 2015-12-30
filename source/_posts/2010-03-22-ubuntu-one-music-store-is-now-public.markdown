@@ -8,6 +8,7 @@ title: Ubuntu One Music Store is public now
 wordpress_id: 368
 tags:
 - ubuntu
+expired: true
 ---
 
 I'm writing this blog post while listening to the first song I bought just few minutes ago on **Ubuntu One Music Store**. It cost me **79** euro **cents**. Oh yes, [Ubuntu One Music Store is public now](http://voices.canonical.com/ubuntuone/?p=263)!

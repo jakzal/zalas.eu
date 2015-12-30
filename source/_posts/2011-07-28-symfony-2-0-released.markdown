@@ -11,6 +11,7 @@ tags:
 - Symfony2
 meta_keywords: Symfony,release,stable
 meta_description: 28th of July 2011 Symfony2 was announced stable.
+expired: true
 ---
 
 Today, 28th of July 2011, [Symfony 2 was announced stable](http://symfony.com/blog/symfony-2-0). We've been waiting long but it was worth it!

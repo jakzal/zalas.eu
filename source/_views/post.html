@@ -21,6 +21,12 @@
             {% endfor %}
         </ul>
 
+        {% if page.expired %}
+        <div class="alert alert-danger">
+            <strong>Warning</strong>: This blog post was written a long time ago and might be no longer relevant.
+        </div>
+        {% endif %}
+
         <section class="content" itemprop="articleBody">{{ page.blocks.content|raw }}</section>
     </section>
 

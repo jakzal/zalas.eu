@@ -14,6 +14,7 @@ tags:
 - php
 - Symfony2
 meta_keywords: Symfony,behat,tests,doctrine,connection
+expired: true
 ---
 
 <div class="pull-left">

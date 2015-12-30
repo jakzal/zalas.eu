@@ -11,6 +11,7 @@ tags:
 - php
 - tdd
 - wrap-up
+expired: true
 ---
 
 ## Munchkin – Walking Skeleton and the initial stories

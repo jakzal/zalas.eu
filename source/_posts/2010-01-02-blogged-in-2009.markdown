@@ -8,6 +8,7 @@ title: Blogged in 2009
 wordpress_id: 326
 tags:
 - blog
+expired: true
 ---
 
 **2009** is the year I came back to blogging. To be honest I didn't write as much as I could or want to. One of my goals for **2010** is to increase **quantity** and **quality** of my **blog posts**.

@@ -10,6 +10,7 @@ tags:
 - best-practices
 - productivity
 - vim
+expired: true
 ---
 
 Snippet is a piece of text which can be pasted into the document. Parts of it can be parametrized or calculated while pasting. Snippets can increase your productivity by letting you to write common chunks of code faster and without mistakes. One of the most famous snippet implementations is included in [TextMate editor](http://macromates.com/). In vim we have some of TextMate's snippet features bundled in [snipMate script](http://www.vim.org/scripts/script.php?script_id=2540).

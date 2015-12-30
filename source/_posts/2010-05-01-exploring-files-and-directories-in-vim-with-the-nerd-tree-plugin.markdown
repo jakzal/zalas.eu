@@ -10,6 +10,7 @@ tags:
 - nerdtree
 - plugin
 - vim
+expired: true
 ---
 
 Exploring, opening, switching, renaming, moving files and directories are common tasks performed during coding. In IDEs it is usually achieved with some kind of filesystem explorer. In vim I preffer to use the [NERD tree plugin](http://www.vim.org/scripts/script.php?script_id=1658).

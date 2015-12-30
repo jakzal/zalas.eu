@@ -13,6 +13,7 @@ tags:
 - php
 - symfony
 - Symfony2
+expired: true
 ---
 
 <div class="pull-right">

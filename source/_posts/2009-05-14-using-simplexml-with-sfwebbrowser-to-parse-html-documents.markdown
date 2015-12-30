@@ -12,6 +12,7 @@ tags:
 - sfWebBrowser
 - SimpleXML
 - symfony
+expired: true
 ---
 
 [sfWebBrowser](http://www.symfony-project.org/plugins/sfWebBrowserPlugin) is a

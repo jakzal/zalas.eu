@@ -14,6 +14,7 @@ tags:
 - php
 - symfony
 - wrap-up
+expired: true
 ---
 
 ## Doctrine Annotations Library

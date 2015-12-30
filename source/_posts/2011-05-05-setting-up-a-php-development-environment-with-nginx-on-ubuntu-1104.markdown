@@ -13,6 +13,7 @@ tags:
 - php
 - ubuntu
 meta_keywords: php,nginx,configuration
+expired: true
 ---
 
 <div class="pull-left">

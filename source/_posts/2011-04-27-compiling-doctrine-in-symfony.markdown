@@ -10,6 +10,7 @@ tags:
 - doctrine
 - performance
 - symfony
+expired: true
 ---
 
 <div class="pull-left">

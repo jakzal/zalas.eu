@@ -10,6 +10,7 @@ tags:
 - ctags
 - php
 - vim
+expired: true
 ---
 
 [Exuberant ctags](http://ctags.sourceforge.net/) make it possible to jump to the definition of a class, method, variable and any other language object in **vim**. Tool is  able to generate an index file (a.k.a tag file) for one of [41 supported programming languages](http://ctags.sourceforge.net/languages.html). Index can be used by     editors like vim to quickly find related keyword.

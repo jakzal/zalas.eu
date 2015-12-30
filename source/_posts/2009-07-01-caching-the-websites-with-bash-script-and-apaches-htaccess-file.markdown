@@ -13,6 +13,7 @@ tags:
 - cache
 - htaccess
 - script
+expired: true
 ---
 
 Recently I got a task to make a completely inefficient application usable enough to give the development team time for improvements. I didn't know the application and didn't have sufficient time to learn it. In that completely miserable moment I was left alone.

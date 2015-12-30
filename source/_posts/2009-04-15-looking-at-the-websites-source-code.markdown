@@ -11,6 +11,7 @@ tags:
 - filter
 - html
 - symfony
+expired: true
 ---
 
 Most of the web programmers have some kind of deviation that tells them to look

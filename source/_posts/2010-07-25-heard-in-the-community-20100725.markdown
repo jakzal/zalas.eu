@@ -12,6 +12,7 @@ tags:
 - Symfony2
 - WordPress
 - wrap-up
+expired: true
 ---
 
 "Heard in the Community" series aims to wrap up news from the PHP, symfony and other communities I find interesting and follow.

@@ -12,6 +12,7 @@ tags:
 - nginx
 - php
 - ubuntu
+expired: true
 ---
 
 <div class="pull-left">

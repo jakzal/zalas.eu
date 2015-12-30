@@ -11,6 +11,7 @@ tags:
 - nginx
 - php
 - symphony
+expired: true
 ---
 
 I decided to give a [Symphony CMS](http://symphony-cms.com/) a try because of its XSLT templating system and structured approach in creating websites. As most of PHP applications it's running on apache out of the box. Since I preffer using [nginx](http://nginx.net/) I've encountered small problems with the configuration.

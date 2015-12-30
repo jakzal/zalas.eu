@@ -9,6 +9,7 @@ wordpress_id: 405
 tags:
 - linux
 - ubuntu
+expired: true
 ---
 
 <div class="pull-left">

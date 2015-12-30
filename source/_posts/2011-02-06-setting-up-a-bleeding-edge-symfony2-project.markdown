@@ -11,6 +11,7 @@ tags:
 - onTheEdge
 - php
 - Symfony2
+expired: true
 ---
 
 [Symfony2](http://symfony-reloaded.org/) is not ready yet. Since the release is planned for March this year and I just can't wait any longer I started to play with it more seriously.

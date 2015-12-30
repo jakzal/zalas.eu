@@ -11,6 +11,7 @@ tags:
 - linux
 - svn
 - ubuntu
+expired: true
 ---
 
 _svn diff_ allows us to see the changes made on the files in the subversion repository. However, its output  is not always clear. New lines are just marked with '+' and removed ones with '-'.

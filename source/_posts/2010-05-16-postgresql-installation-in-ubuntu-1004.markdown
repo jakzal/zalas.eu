@@ -11,6 +11,7 @@ tags:
 - php
 - postgresql
 - ubuntu
+expired: true
 ---
 
 <div class="pull-left">

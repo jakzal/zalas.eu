@@ -10,6 +10,7 @@ tags:
 - plugin
 - textile
 - vim
+expired: true
 ---
 
 [Textile](http://en.wikipedia.org/wiki/Textile_%28markup_language%29) is a simple markup language. It's used in CMS and wiki implementations (i.e. Redmine). I also like to use it while making notes in a plain text files.

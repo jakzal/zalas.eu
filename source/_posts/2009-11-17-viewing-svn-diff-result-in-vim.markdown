@@ -10,6 +10,7 @@ tags:
 - bash
 - svn
 - vim
+expired: true
 ---
 
 Some time ago I explained [how to use colordiff to display svn diff's result in colors](/viewing-svn-diff-result-in-colors/). You can do pretty the same with **vim**. It is specially useful when you have big amount of code to commit and it needs to be reviewed first. Vim makes navigating through it easier.

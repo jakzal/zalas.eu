@@ -8,6 +8,7 @@ title: Just agile
 wordpress_id: 581
 tags:
 - agile
+expired: true
 ---
 
 Mike Cohn wrote a new blog post on his "[Reflections on the 10 Years Since the Agile Manifesto](http://blog.mountaingoatsoftware.com/reflections-on-the-10-years-since-the-agile-manifesto)". Especially one thing he mentions struck me:

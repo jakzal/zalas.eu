@@ -11,6 +11,7 @@ tags:
 - mysql
 - php
 - ubuntu
+expired: true
 ---
 
 <div class="pull-right">
