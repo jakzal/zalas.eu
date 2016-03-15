@@ -13,6 +13,7 @@ country: United Kingdom
 city: London
 meta_keywords: legacy, migration, Symfony
 meta_description: Learn how to leverage Symfony to move away from an Old School PHP Spaghetti Project to a modern Symfony based application
+promoted: true
 ---
 
 Big-bang migrations hardly ever work and usually take significantly more effort than expected.

@@ -67,11 +67,11 @@ h4 {
     margin: 0 0 0 10px;
 }
 
-.posts ul {
+.posts ul, .posts h2 {
     text-align: center;
 }
 
-.posts ul h2 {
+.posts ul h3 {
     margin-bottom: 1px;
 }
 
@@ -115,4 +115,3 @@ ul.post-tag-cloud {
 .author .avatar {
     margin-bottom: 5px;
 }
-
