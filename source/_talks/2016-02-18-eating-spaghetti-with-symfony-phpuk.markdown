@@ -6,8 +6,8 @@ title: Eating spaghetti with Symfony
 eventType: conference
 eventUrl: 'http://phpconference.co.uk/'
 event: PHP UK
-slides: 
-joindin: 
+slides: https://speakerdeck.com/jakzal/eating-spaghetti-with-symfony
+joindin: https://joind.in/talk/85830
 video:
 country: United Kingdom
 city: London
@@ -24,3 +24,5 @@ Learn how to leverage Symfony to move away from an Old School PHP Spaghetti Proj
 to a modern Symfony based application.
 Release after the first iteration and keep improving the code base,
 delivering value in the same time.
+
+<script async class="speakerdeck-embed" data-id="4bfc4f8de9b643278adaaedc615749d7" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
