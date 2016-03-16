@@ -8,7 +8,7 @@ eventUrl: 'http://phpconference.co.uk/'
 event: PHP UK
 slides: https://speakerdeck.com/jakzal/eating-spaghetti-with-symfony
 joindin: https://joind.in/talk/85830
-video:
+video: https://youtu.be/_h1MJbyGSc8
 country: United Kingdom
 city: London
 meta_keywords: legacy, migration, Symfony
@@ -27,3 +27,5 @@ Release after the first iteration and keep improving the code base,
 delivering value in the same time.
 
 <script async class="speakerdeck-embed" data-id="4bfc4f8de9b643278adaaedc615749d7" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/_h1MJbyGSc8" frameborder="0" allowfullscreen></iframe>
