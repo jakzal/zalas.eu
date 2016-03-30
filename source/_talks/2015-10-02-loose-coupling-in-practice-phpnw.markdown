@@ -1,7 +1,7 @@
 ---
 author: Jakub Zalas
 date: 2015-10-02 09:00:00
-slug: loose-coupling-in-practice-phpsw
+slug: loose-coupling-in-practice-phpnw
 title: Loose coupling in practice
 eventType: workshop
 eventUrl: http://conference.phpnw.org.uk/phpnw15/
