@@ -3,7 +3,7 @@
     "description": "zalas.eu site",
     "type": "project",
     "require": {
-        "php": "^5.6|^7.0",
+        "php": "^7.0",
         "sculpin/sculpin": "^2.0"
     },
     "autoload": {
