@@ -18,3 +18,5 @@ One of the benefits of having an automated test suite is the feedback given when
 Huge part of the problem lies in getting the testing pyramid wrong and putting to much effort into wrong type of testing.
 
 Learn how to structure your project to benefit from lightning fast tests. Apply the right amount of testing on appropriate levels, and run your tests in seconds, not hours.
+
+<script async class="speakerdeck-embed" data-id="1ee77d67089d43e1be51d2024798adfc" data-ratio="1.77777777777778" src="//speakerdeck.com/assets/embed.js"></script>
