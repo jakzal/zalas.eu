@@ -7,7 +7,7 @@ eventType: workshop
 eventUrl: 'http://www.phpconference.nl'
 event: Dutch PHP Conference
 slides:
-joindin:
+joindin: 'https://joind.in/talk/33425'
 video:
 country: Netherlands
 city: Amsterdam

@@ -6,8 +6,8 @@ title: Lightning fast tests
 eventType: conference
 eventUrl: 'http://www.phpconference.nl'
 event: Dutch PHP Conference
-slides:
-joindin:
+slides: 'https://speakerdeck.com/jakzal/lightning-fast-tests-at-dutch-php-conference'
+joindin: 'https://joind.in/talk/998fb'
 video:
 country: Netherlands
 city: Amsterdam
