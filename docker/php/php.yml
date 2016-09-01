@@ -1,6 +1,0 @@
-php:
-  build: .
-  volumes:
-    - ./php.ini:/usr/local/etc/php/php.ini
-    - ./composer-cache:/root/.composer/cache
-  dockerfile: Dockerfile
