@@ -1,13 +1,11 @@
-FROM php:7.0
+FROM php:7.0-alpine
 
-RUN buildDeps="zlib1g-dev" \
-  && apt-get update && apt-get install --no-install-recommends -y git $buildDeps && rm -r /var/lib/apt/lists/* \
-  && docker-php-ext-install mbstring zip \
-  && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false -o APT::AutoRemove::SuggestsImportant=false $buildDeps
+ENV COMPOSER_ALLOW_SUPERUSER 1
 
-RUN php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir=/usr/local/bin --filename=composer
+RUN apk --no-cache add git unzip \
+  && docker-php-ext-install mbstring zip
+RUN curl -Ls https://getcomposer.org/composer.phar > /usr/local/bin/composer && chmod +x /usr/local/bin/composer
 
 EXPOSE 8000
 
 CMD ["./vendor/bin/sculpin", "generate", "--server", "--watch"]
-
