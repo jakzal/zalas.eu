@@ -1,7 +1,7 @@
 ---
 author: Jakub Zalas
-date: 2016-11-29 09:00:00
-slug: lightning-fast-tests-symfonycon-day1
+date: 2016-11-30 09:00:00
+slug: lightning-fast-tests-symfonycon
 title: Lightning fast tests
 eventType: conference
 eventUrl: 'http://training.sensiolabs.com/en/conference/berlincon2016#workshop-labs13'
