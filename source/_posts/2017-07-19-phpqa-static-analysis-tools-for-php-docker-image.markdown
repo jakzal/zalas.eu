@@ -65,7 +65,7 @@ Note that you can choose between Debian and Alpine based images (`latest` and `a
 Now you're ready to run any of the tools included:
 
 ```bash
-docker run -it --rm -v $(pwd):/project -w /project jakzal/phpqa phpstan analyse src
+docker run -it --rm -v $(pwd):/project -w /project jakzal/phpqa:alpine phpstan analyse src
 ```
 
 The command above will run a docker container and mount the current working directory as a `/project`.
