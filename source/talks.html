@@ -16,7 +16,7 @@ layout: default
               style="color: grey; font-family: Courier;">{{ talk.date | date('d M') }}</span>
         <a href="{{ talk.url }}" itemprop="url" title="{{ talk.title }}">
             <span itemprop="name">{{ talk.title }}</span>
-            - <span itemscope itemtype="http://schema.org/Event">{{ talk.event }}</span>
+            {%- if talk.event is not empty %} - <span itemscope itemtype="http://schema.org/Event">{{ talk.event }}</span>{% endif %}
             {%- if talk.city is not empty or talk.country is not empty %},{% endif %}
         </a>
 

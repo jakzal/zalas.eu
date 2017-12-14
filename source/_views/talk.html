@@ -10,7 +10,9 @@
 
     <section>
         <span itemprop="startDate" content="{{ talk.date | date('Y-m-d\TH:i') }}">{{ page.date | date('d M Y') }}</span>,
+        {% if page.event is not empty %}
         <a href="{{ page.eventUrl }}" itemscope itemtype="http://schema.org/Event" itemprop="url" title="{{ page.event }}">{{ page.event }}</a>,
+        {% endif %}
 
         {% if page.city is not empty or page.country is not empty %}
             <span itemprop="location" itemscope itemtype="http://schema.org/PostalAddress">
