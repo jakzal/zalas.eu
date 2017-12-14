@@ -1,0 +1,19 @@
+<form id="contactform" action="//formspree.io/{{ site.contact_email }}" method="POST">
+    <fieldset class="form-group">
+        <label for="name"><span class="label-content">Your name</span></label>
+        <input class="form-control" type="text" name="name" placeholder="Name" id="name" required>
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="_replyto"><span class="label-content">Your email</span></label>
+        <input class="form-control" type="email" name="_replyto" placeholder="example@domain.com" id="_replyto" required>
+    </fieldset>
+    <fieldset class="form-group">
+        <label for="message"><span class="label-content">Your message</span></label>
+        <textarea class="form-control" name="message" rows="4" placeholder="Message" id="message" required></textarea>
+    </fieldset>
+    <input type="text" name="_gotcha" style="display:none">
+    <input type="hidden" name="_subject" value="Message via {{ site.url }}">
+    <fieldset class="form-group">
+        <input class="btn btn-default" type="submit" value="Send">
+    </fieldset>
+</form>
