@@ -6,7 +6,7 @@ title: Symfony 4 (Flex included)
 eventType: meetup
 eventUrl: 'https://www.meetup.com/symfony/events/246743337/'
 event: The UK Symfony meetup
-slides:
+slides: 'https://speakerdeck.com/jakzal/symfony-4-flex-included'
 joindin:
 video:
 country: United Kingdom
