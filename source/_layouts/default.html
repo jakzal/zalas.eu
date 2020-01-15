@@ -33,6 +33,7 @@
         {% endblock %}
     </head>
     <body>
+{#
         <header>
             {% if not page.hideNavigation %}
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -45,11 +46,12 @@
             </nav>
             {% endif %}
         </header>
+#}
         <div class="container">
             <div class="row">
-                <div class="col-md-10 col-sm-12 col-xs-12">
+{#                <div class="col-md-10 col-sm-12 col-xs-12"> #}
                     {% block content_wrapper %}{% block content %}{% endblock %}{% endblock %}
-                </div>
+{#                </div>
                 <div class="col-md-2 col-sm-12 col-xs-12">
                     <div class="row author" itemscope itemtype="http://data-vocabulary.org/Person">
                         <div class="col-md-12 col-sm-2 col-xs-4">
@@ -62,13 +64,16 @@
                         </div>
                     </div>
                 </div>
+#}
             </div>
         </div>
+{#
         <footer>
             <div id="license">
                 <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US"><img alt="Creative Commons License" src="{{ site.url }}/images/cc-by.png" /></a> This work by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Jakub Zalas</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.
             </div>
         </footer>
+#}
         {% block scripts %}
             {% if site.google_analytics_tracking_id %}
             <script>

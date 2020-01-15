@@ -1,15 +1,41 @@
 ---
 layout: default
 title: Home
-generator: pagination
-pagination:
-    max_per_page: 5
-talks:
-    count: 0
-use:
-    - posts
-    - talks
+#generator: pagination
+#pagination:
+#    max_per_page: 5
+#talks:
+#    count: 0
+#use:
+#    - posts
+#    - talks
 ---
+
+<section class="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-sm-12 col-xs-12"></div>
+            <div class="col-md-10 col-sm-12 col-xs-12">
+                <div class="row author" itemscope itemtype="http://data-vocabulary.org/Person">
+                    <div class="col-md-2 col-sm-2 col-xs-4">
+                        <img itemprop="photo" class="avatar img-rounded img-responsive" src="images/jakub-zalas.jpg" alt="Jakub Zalas" title="Jakub Zalas" />
+                    </div>
+                    <div class="col-md-6 col-sm-4 cal-xs-4">
+                        <h1 itemprop="name">Jakub Zalas</h1>
+                        <h2 itemprop="title" style="color:#778492">Software Architect, Developer, Trainer</h2>
+                        <ul class="social list-inline">
+                            <li><a href="https://twitter.com/jakub_zalas" title="Jakub Zalas na twitterze"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://github.com/jakzal" title="Jakub Zalas na githubie"><i class="fa fa-github-alt"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/jakubzalas/" title="Jakub Zalas na linkedin"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{#
 <section class="posts">
     <h2>Recent blog posts</h2>
     <ul class="posts list-unstyled" itemscope itemtype="http://schema.org/Blog">
@@ -70,3 +96,4 @@ use:
   {% endif %}
 </section>
 {% endif %}
+#}
