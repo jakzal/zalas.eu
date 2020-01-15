@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Autoloading classes in an any PHP project with Symfony2 ClassLoader component &mdash; Jakub Zalas &mdash; Agile Software Engineer</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="verify-v1" content="PBznb5+bhxbUdD7HvioYYudpqitFdLDgjQTv8SwALq4=" />        <meta name="keywords" content="Symfony,components,autoloader,classloader">
+                <meta name="description" content="Symfony&#039;s ClassLoader component is a PSR-0 standard compliant PHP class autoloader.">
+                    <meta name="robots" content="index, follow">
+        <link rel="shortcut icon" href="http://zalas.eu/favicon.ico" />
+        <link rel="alternate" type="application/atom+xml" href="http://zalas.eu/atom.xml" title="Jakub Zalas activity feed" />
+        <link href="http://zalas.eu/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/code.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+                                    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                        <section itemscope itemtype="http://schema.org/BlogPosting">
+        <h1 itemprop="name">Autoloading classes in an any PHP project with Symfony2 ClassLoader component</h1>
+        <div class="post-date pull-right">
+            <time itemprop="datePublished" content="2011-06-30" datetime="2011-06-30">30 Jun 2011</time>
+        </div>
+        <ul class="list-unstyled list-inline post-tag-cloud">
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/autoloader/">
+                    <span class="list-group-item-heading">autoloader</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/ClassLoader/">
+                    <span class="list-group-item-heading">ClassLoader</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/components/">
+                    <span class="list-group-item-heading">components</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/php/">
+                    <span class="list-group-item-heading">php</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/Symfony2/">
+                    <span class="list-group-item-heading">Symfony2</span>
+                </a>
+            </li>
+                    </ul>
+
+                <div class="alert alert-danger">
+            <strong>Warning</strong>: This blog post was written a long time ago and might be no longer relevant.
+        </div>
+        
+        <section class="content" itemprop="articleBody"><p>Symfony <a href="https://github.com/symfony/ClassLoader">ClassLoader component</a> is a <a href="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PSR-0 standard</a> compliant PHP class autoloader. It's not only able to load namespaced code but also supports old-school <a href="http://pear.php.net/manual/en/standards.naming.php">PEAR standards</a> (also used by Zend Framework). It's a perfect class loading tool for most of PHP projects.</p>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: Code used in this post is available on github: <a href="https://github.com/jakzal/SymfonyComponentsExamples">https://github.com/jakzal/SymfonyComponentsExamples</a></p>
+
+</div>
+
+<h2 id="installation">Installation</h2>
+
+<p>You can either install it from the <a href="http://pear.symfony.com/">Symfony PEAR channel</a> or grab it <a href="https://github.com/symfony/ClassLoader">directly from github</a>. For the purpose of this article we'll clone the sources to the <em>vendor/</em> directory of the project.</p>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: ClassLoader component uses <em>Symfony\Component\ClassLoader</em> namespace. Therefore we'll put it into <em>Symfony/Component/ClassLoader</em> subdirectory of <em>vendor</em> (see <a href="http://groups.google.com/group/php-standards/web/psr-0-final-proposal">PSR-0 standard</a>).</p>
+
+</div>
+
+<pre><code class="bash">git clone https://github.com/symfony/ClassLoader.git vendor/Symfony/Component/ClassLoader
+</code></pre>
+
+<h2 id="basic-usage">Basic Usage</h2>
+
+<p>Let's say we have two Acme libraries.</p>
+
+<p>First one is located in the  <em>src/Acme/Tools</em>. <em>HelloWorld</em> class uses <em>Acme\Tools _namespace and is declared in the _src/Acme/Tools/HelloWorld.php</em> file:</p>
+
+<pre><code class="php">&lt;?php
+// src/Acme/Tools/HelloWorld.php
+
+namespace Acme\Tools;
+
+class HelloWorld
+{
+    public function __construct()
+    {
+        echo __METHOD__."\n";
+    }
+}
+</code></pre>
+
+<p>Second library is stored in the <em>src/Legacy/Acme/Tools</em>. It follows old but well known PEAR naming standards. <em>Legacy_Acme_Tools_HelloWorld</em> class is defined in the <em>src/Legacy/Acme/Tools/HelloWorld.php</em> file:</p>
+
+<pre><code class="php">&lt;?php
+// src/Legacy/Acme/Tools/HelloWorld.php
+
+class Legacy_Acme_Tools_HelloWorld
+{
+    public function __construct()
+    {
+        echo __METHOD__."\n";
+    }
+}
+</code></pre>
+
+<p>To make that our classes are automatically loaded we have to register <em>Acme</em> namespace and _Legacy__ prefix:</p>
+
+<pre><code class="php">&lt;?php
+// classloader.php
+
+require_once __DIR__.'/vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+$loader = new Symfony\Component\ClassLoader\UniversalClassLoader();
+$loader-&gt;registerNamespaces(array('Acme' =&gt; __DIR__ . '/src'));
+$loader-&gt;registerPrefixes(array('Legacy_' =&gt; __DIR__ . '/src'));
+$loader-&gt;register();
+
+$helloWorld = new Acme\Tools\HelloWorld();
+$legacyHelloWorld = new Legacy_Acme_Tools_HelloWorld();
+</code></pre>
+
+<p>Of course classes are only loaded when needed. Requiring <em>UniversalClassLoader.php</em> file should be the only <em>require</em> statement used in our code. Other classes should be loaded by the class loader.</p>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: There's also a way to define paths with <em>registerNamespaceFallbacks()</em> and <em>registerPrefixFallbacks()</em>. Class loader will use them with namespaces or prefixes which weren't listed explicitly.</p>
+
+</div>
+
+<h2 id="increasing-performance">Increasing performance</h2>
+
+<p>Number of class files in a real-world project is rather big. Class loader might have some impact on performance as it checks for file existence before requiring it. To avoid disk operations we can cache results in APC with <em>ApcUniversalClassLoader</em>:</p>
+
+<pre><code class="php">&lt;?php
+// classloadercached.php
+
+require_once __DIR__.'/vendor/Symfony/Component/ClassLoader/UniversalClassLoader.php';
+require_once __DIR__.'/vendor/Symfony/Component/ClassLoader/ApcUniversalClassLoader.php';
+
+$loader = new Symfony\Component\ClassLoader\ApcUniversalClassLoader('ClassLoader');
+$loader-&gt;registerNamespaces(array('Acme' =&gt; __DIR__ . '/src'));
+$loader-&gt;registerPrefixes(array('Legacy_' =&gt; __DIR__ . '/src'));
+$loader-&gt;register();
+
+$helloWorld = new Acme\Tools\HelloWorld();
+$legacyHelloWorld = new Legacy_Acme_Tools_HelloWorld();
+</code></pre>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: Examples are run in a command line. Therefore there's no performance gain from using APC. In fact it can hurt performance as cache is initialized every time our script is run in cli. This is a limitation of APC.</p>
+
+</div>
+</section>
+    </section>
+
+
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'zalas';
+        var disqus_identifier = 'autoloading-classes-in-any-php-project-with-symfony2-classloader-component';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+            </div>
+        </div>
+                                <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-607315-8', 'auto');
+                ga('send', 'pageview');
+            </script>
+            
+            
+            <script src="http://zalas.eu/components/highlightjs/highlight.pack.js"></script>
+            <script>hljs.initHighlightingOnLoad();</script>
+                    </body>
+</html>

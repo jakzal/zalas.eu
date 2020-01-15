@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Multistage deployment of Symfony applications with capifony &mdash; Jakub Zalas &mdash; Agile Software Engineer</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="verify-v1" content="PBznb5+bhxbUdD7HvioYYudpqitFdLDgjQTv8SwALq4=" />            <meta name="robots" content="index, follow">
+        <link rel="shortcut icon" href="http://zalas.eu/favicon.ico" />
+        <link rel="alternate" type="application/atom+xml" href="http://zalas.eu/atom.xml" title="Jakub Zalas activity feed" />
+        <link href="http://zalas.eu/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/code.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+                                    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                        <section itemscope itemtype="http://schema.org/BlogPosting">
+        <h1 itemprop="name">Multistage deployment of Symfony applications with capifony</h1>
+        <div class="post-date pull-right">
+            <time itemprop="datePublished" content="2011-04-17" datetime="2011-04-17">17 Apr 2011</time>
+        </div>
+        <ul class="list-unstyled list-inline post-tag-cloud">
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/capifony/">
+                    <span class="list-group-item-heading">capifony</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/capistrano/">
+                    <span class="list-group-item-heading">capistrano</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/deployment/">
+                    <span class="list-group-item-heading">deployment</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/php/">
+                    <span class="list-group-item-heading">php</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/symfony/">
+                    <span class="list-group-item-heading">symfony</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/Symfony2/">
+                    <span class="list-group-item-heading">Symfony2</span>
+                </a>
+            </li>
+                    </ul>
+
+                <div class="alert alert-danger">
+            <strong>Warning</strong>: This blog post was written a long time ago and might be no longer relevant.
+        </div>
+        
+        <section class="content" itemprop="articleBody"><div class="pull-right">
+    <a href="/uploads/wp/2011/04/Symfony2-capistrano-multistage-files.png"><img src="/uploads/wp/2011/04/Symfony2-capistrano-multistage-files-227x400.png" title="Capistrano configuration" alt="Capistrano configuration" class="img-responsive" /></a>
+</div>
+
+<p><strong>Capifony</strong> is a collection of <strong>Capistrano</strong> deployment recipes for both <strong>symfony</strong> and <strong>Symfony2</strong> applications. <strong>Multistage</strong> is an extension for Capistrano which enables deployments to multiple servers with varying configurations or deployment procedures.</p>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: If you're new to <a href="https://github.com/capistrano/capistrano/wiki">capistrano</a> or <a href="http://capifony.org/">capifony</a> visit the project webistes to learn more about the automated deployment.</p>
+
+</div>
+
+<h2 id="why-multistage%3F">Why multistage?</h2>
+
+<p><a href="http://en.wikipedia.org/wiki/Staging_%28websites%29">Staging</a> is a popular practice of testing software before it reaches the production environment. It's common to test a web application on a testing server before it's deployed to production. Even before code reaches the testing stage it's often tested by developers on their development machine.</p>
+
+<p>Although all the environments should be similar as much as possible we often need them to vary in some aspects. Most often we want to configure the deployment procedure a little bit different on development, testing and production servers. Running Google Analytics on our test server isn't a good idea but it has to be running on production (<em>varying configuration</em>). Enabling development controllers might be handy on development but we definitely don't want it on production (<em>varying procedure</em>).</p>
+
+<p>All such differences can be easily handled by Capistrano with <a href="https://github.com/capistrano/capistrano/wiki/2.x-Multistage-Extension">multistage extension</a>.</p>
+
+<h2 id="installation">Installation</h2>
+
+<pre><code class="bash">gem install capifony capistrano-ext
+</code></pre>
+
+<h2 id="capifying-a-project">Capifying a project</h2>
+
+<pre><code class="bash">cd /path/to/myproject
+capifony .
+</code></pre>
+
+<h2 id="multistage-example">Multistage example</h2>
+
+<p>To use multistage with Capistrano we need to require the extension and define our stages. We'll replace the contents of <em>app/config/deploy.rb</em> with the following:</p>
+
+<pre><code class="ruby">set :stage_dir, 'app/config/deploy' # needed for Symfony2 only
+require 'capistrano/ext/multistage'
+set :stages, %w(production testing development)
+
+set :application, "MyApp"
+
+set :repository,  "mycompany.com:/var/repos/#{application}.git"
+set :scm,         :git
+
+set  :keep_releases,  3
+</code></pre>
+
+<p><strong>Note</strong>: For symfony 1.x application we need to remove '<em>app/</em>' from the path to the config files used in this article.</p>
+
+<p>Production, testing and development are our deployment stages. For each stage we have to create a separate file in <em>app/config/deploy</em> directory. Here's an example of a production stage (<em>app/config/deploy/production.rb</em>):</p>
+
+<pre><code class="ruby">server 'myapp.com', :app, :web, :primary =&gt; true
+set :deploy_to, "/var/www/myapp.com/"
+
+after 'deploy:finalize_update', 'symfony:project:clear_controllers'
+</code></pre>
+
+<p>Test server settings might be a little different (<em>app/config/deploy/testing.rb</em>):</p>
+
+<pre><code class="ruby">server 'test.myapp.mycompany.com', :app, :web, :primary =&gt; true
+set :deploy_to, "/var/www/test/myapp.mycompany.com/"
+set :symfony_env_prod, "test"
+</code></pre>
+
+<p>While deploying our application we have to specify the target server:</p>
+
+<pre><code class="bash">cap production deploy
+</code></pre>
+
+<p>Of course we can do much more than just changing the configuration options. It is also possible to:</p>
+
+<ul>
+<li>add hooks to alter the deployment procedure for a specific stage</li>
+<li>change the behavior of existing tasks</li>
+<li>extend existing namespace with new tasks</li>
+<li>create a new namespace with custom tasks</li>
+</ul>
+
+<p>In practice tasks or namespaces hardly vary between stages. In most cases we'll need to have different configuration or hooks.</p>
+</section>
+    </section>
+
+
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'zalas';
+        var disqus_identifier = 'multistage-deployment-of-symfony-applications-with-capifony';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+            </div>
+        </div>
+                                <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-607315-8', 'auto');
+                ga('send', 'pageview');
+            </script>
+            
+            
+            <script src="http://zalas.eu/components/highlightjs/highlight.pack.js"></script>
+            <script>hljs.initHighlightingOnLoad();</script>
+                    </body>
+</html>

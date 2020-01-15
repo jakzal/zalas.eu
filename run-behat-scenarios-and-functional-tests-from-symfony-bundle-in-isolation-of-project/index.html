@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>How to run Behat scenarios and functional tests from a Symfony bundle in isolation of a project? &mdash; Jakub Zalas &mdash; Agile Software Engineer</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="verify-v1" content="PBznb5+bhxbUdD7HvioYYudpqitFdLDgjQTv8SwALq4=" />        <meta name="keywords" content="Symfony,behat,functional,tests,isolation">
+                <meta name="description" content="When working on a reusable bundle it&#039;s beneficial to run its test suite in isolation of a project. This way the test suite is not dependent on project&#039;s configuration.">
+                    <meta name="robots" content="index, follow">
+        <link rel="shortcut icon" href="http://zalas.eu/favicon.ico" />
+        <link rel="alternate" type="application/atom+xml" href="http://zalas.eu/atom.xml" title="Jakub Zalas activity feed" />
+        <link href="http://zalas.eu/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/code.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+                                    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                        <section itemscope itemtype="http://schema.org/BlogPosting">
+        <h1 itemprop="name">How to run Behat scenarios and functional tests from a Symfony bundle in isolation of a project?</h1>
+        <div class="post-date pull-right">
+            <time itemprop="datePublished" content="2012-07-15" datetime="2012-07-15">15 Jul 2012</time>
+        </div>
+        <ul class="list-unstyled list-inline post-tag-cloud">
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/behat/">
+                    <span class="list-group-item-heading">behat</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/bundle/">
+                    <span class="list-group-item-heading">bundle</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/Symfony2/">
+                    <span class="list-group-item-heading">Symfony2</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/testing/">
+                    <span class="list-group-item-heading">testing</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/travis/">
+                    <span class="list-group-item-heading">travis</span>
+                </a>
+            </li>
+                    </ul>
+
+        
+        <section class="content" itemprop="articleBody"><p>When working on a reusable bundle it's beneficial to run its test suite in isolation of a project. This way the test suite is not dependent on project's configuration or enabled bundles. It is also much easier to run it on a continuos integration server like <a href="http://travis-ci.org/">Travis</a>.</p>
+
+<h2 id="appkernel-and-configuration">AppKernel and configuration</h2>
+
+<p>Providing an <em>AppKernel</em> is the main task we need to do to run both Behat scenarios and functional tests from our bundle without installing it in a Symfony2 project.</p>
+
+<p>Within an <em>AppKernel</em> we're able to register bundles and container configuration (<em>registerBundles()</em> <em>registerContainerConfiguration()</em> methods). Next to the bundle we're working on, we should enable and configure bundles required for it to work.</p>
+
+<p>Configuration is typically done in <em><a href="https://github.com/jakzal/DemoBundle/blob/master/Features/Fixtures/Project/app/config/config_test.yml">config/config_test.yml</a></em> file (scenarios and tests are usually run in a test environment). Most of the time we'll also need a routing file (typically <em><a href="https://github.com/jakzal/DemoBundle/blob/master/Features/Fixtures/Project/app/config/routing_test.yml">config/routing_test.yml</a></em>).</p>
+
+<p>Last but not least it's good to change the default location of cache and logs to a temporary directory (<em>getCacheDir()</em> and <em>getLogDir()</em> methods).</p>
+
+<pre><code class="php">&lt;?php
+
+use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\Config\Loader\LoaderInterface;
+
+class AppKernel extends Kernel
+{
+    /**
+     * @return array
+     */
+    public function registerBundles()
+    {
+        return array(
+            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new Symfony\Bundle\TwigBundle\TwigBundle(),
+            new Symfony\Bundle\MonologBundle\MonologBundle(),
+            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new Zalas\Bundle\DemoBundle\ZalasDemoBundle()
+        );
+    }
+
+    /**
+     * @return null
+     */
+    public function registerContainerConfiguration(LoaderInterface $loader)
+    {
+        $loader-&gt;load(__DIR__.'/config/config_'.$this-&gt;getEnvironment().'.yml');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCacheDir()
+    {
+        return sys_get_temp_dir().'/ZalasDemoBundle/cache';
+    }
+
+    /**
+     * @return string
+     */
+    public function getLogDir()
+    {
+        return sys_get_temp_dir().'/ZalasDemoBundle/logs';
+    }
+}
+</code></pre>
+
+<p>I usually put the kernel in <em>Features/Fixtures/Project/app/AppKernel.php</em> (for Behat) or <em>Tests/Functional/app/AppKernel.php</em> (for functional tests) but the location doesn't matter.</p>
+
+<p>For more flexibility look at the <a href="https://github.com/symfony/symfony/tree/master/src/Symfony/Bundle/FrameworkBundle/Tests/Functional/app">FrameworkBundle</a> or <a href="https://github.com/schmittjoh/JMSPaymentCoreBundle/tree/master/Tests/Functional">JMSPaymentCoreBundle</a>. Both bundles have good examples of parametrized kernel configurations.</p>
+
+<h2 id="autoloader">Autoloader</h2>
+
+<p>Using <a href="http://getcomposer.org/">composer</a> solves most of our autoloading problems. We only need to remember of setting <em>target-dir</em> in our <em>composer.json</em> (big thanks to <a href="https://twitter.com/AdrienBrault">Adrien Brault</a> for pointing it out):</p>
+
+<pre><code class="json">{
+    "autoload": {
+        "psr-4": { "Zalas\\Bundle\\DemoBundle\\": "" }
+    }
+}
+</code></pre>
+
+<p>We'll also need to register an autoloader for annotations (if we use annotations).</p>
+
+<p>Following example of <em>bootstrap.php</em> is a simple implementation of an autoloader for functional tests. To use it with Behat path to the <em>vendor/autoload.php</em> needs to be updated.</p>
+
+<pre><code class="php">&lt;?php
+
+use Doctrine\Common\Annotations\AnnotationRegistry;
+
+if (!file_exists($file = __DIR__.'/../vendor/autoload.php')) {
+    throw new \RuntimeException('Install the dependencies to run the test suite.');
+}
+
+$loader = require $file;
+AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
+</code></pre>
+
+<h2 id="behat">Behat</h2>
+
+<div class="text-center">
+    <img src="/uploads/wp/2012/07/scenarios.png" title="Behat features folder" alt="Behat features folder" class="img-responsive" />
+</div>
+
+<p>Once we prepared the <em>AppKernel</em> and set up the autoloading we can move to Behat configuration. In particular, we need to define:</p>
+
+<ul>
+<li>path to the Features folder</li>
+<li>list of contexts we need to use</li>
+<li>path to the <em>AppKernel</em> (<em>kernel.path</em> for the Symfony2 extension)</li>
+<li>path to the bootstrap file for the Symfony2 extension (<em>kernel.bootsrap</em> for the Symfony2 extension)</li>
+</ul>
+
+<pre><code class="yaml">default:
+  formatters:
+    progress: true
+  suites:
+    demo:
+      paths:
+        features: Features
+      contexts: [Zalas\Bundle\DemoBundle\Features\Context\FeatureContext]
+  extensions:
+    Behat\Symfony2Extension:
+      kernel:
+        env: test
+        debug: true
+        path: Features/Fixtures/Project/app/AppKernel.php
+        bootstrap: Features/Fixtures/Project/app/bootstrap.php
+    Behat\MinkExtension:
+      base_url: 'http://www.acme.dev/app_test.php/'
+      sessions:
+        default:
+          symfony2: ~
+</code></pre>
+
+<p>Now we can run our Behat scenarios without installing the bundle in a Symfony project:</p>
+
+<pre><code class="bash">./vendor/bin/behat
+</code></pre>
+
+<h2 id="symfony2-functional-tests">Symfony2 functional tests</h2>
+
+<div class="text-center">
+    <img src="/uploads/wp/2012/07/tests.png" title="Functional tests" alt="Functional tests" class="img-responsive" />
+</div>
+
+<p>Configuration for Symfony2 functional tests is done in a standard PHPUnit file (typically <em>phpunit.xml.dist</em>). We need to provide a path to the <em>AppKernel</em> as an environment variable (<em>KERNEL_DIR</em>).</p>
+
+<pre><code class="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;phpunit bootstrap="./Tests/bootstrap.php" color="true"&gt;
+  &lt;testsuites&gt;
+    &lt;testsuite name="ZalasDemoBundle test suite"&gt;
+      &lt;directory suffix="Test.php"&gt;./Tests&lt;/directory&gt;
+    &lt;/testsuite&gt;
+  &lt;/testsuites&gt;
+
+  &lt;php&gt;
+    &lt;strong&gt; &lt;server name="KERNEL_DIR" value="./Tests/Functional/app" /&gt;&lt;/strong&gt;
+  &lt;/php&gt;
+
+  &lt;filter&gt;
+    &lt;whitelist&gt;
+      &lt;directory&gt;./&lt;/directory&gt;
+      &lt;exclude&gt;
+        &lt;directory&gt;./Resources&lt;/directory&gt;
+        &lt;directory&gt;./Tests&lt;/directory&gt;
+        &lt;directory&gt;./vendor&lt;/directory&gt;
+      &lt;/exclude&gt;
+    &lt;/whitelist&gt;
+  &lt;/filter&gt;
+&lt;/phpunit&gt;
+</code></pre>
+
+<p>Now we can run our functional tests without installing the bundle in a Symfony project:</p>
+
+<pre><code class="bash">phpunit
+</code></pre>
+
+<h2 id="travis-ci">Travis CI</h2>
+
+<p>With such a setup running our bundle's test suite on an integration server becomes very simple. Here's an example <em>.travis.yml</em> file:</p>
+
+<pre><code class="yaml">language: php
+
+php:
+  - 5.3
+  - 5.4
+
+before_script:
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar --dev install
+
+script:
+  - 'phpunit --coverage-text &amp;&amp; ./vendor/bin/behat'
+</code></pre>
+
+<p>Need to use a database? Just create it before running the script (don't forget to remove it afterwards):</p>
+
+<pre><code class="yaml">language: php
+
+php:
+  - 5.3
+  - 5.4
+
+before_script:
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar --dev install
+  - mysql -e 'CREATE DATABASE zalas_demo_test;'
+
+script:
+  - 'phpunit --coverage-text &amp;&amp; ./vendor/bin/behat'
+
+after_script:
+  - mysql -e 'DROP DATABASE zalas_demo_test;'
+</code></pre>
+
+<h2 id="demo">Demo</h2>
+
+<p>To demonstrate this approach I prepared a <a href="https://github.com/jakzal/DemoBundle">DemoBundle</a>. You can clone it from github and test how it works yourself, or you can see how it's run on <a href="http://travis-ci.org/#!/jakzal/DemoBundle">Travis</a>.</p>
+
+<div class="alert alert-warning">
+
+<p><strong>Changes</strong>:</p>
+
+<ul>
+<li>1st Nov 2014 - Update autoloader configuration to use PSR-4</li>
+<li>1st Nov 2014 - Update behat to version 3</li>
+</ul>
+
+</div>
+</section>
+    </section>
+
+
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'zalas';
+        var disqus_identifier = 'run-behat-scenarios-and-functional-tests-from-symfony-bundle-in-isolation-of-project';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+            </div>
+        </div>
+                                <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-607315-8', 'auto');
+                ga('send', 'pageview');
+            </script>
+            
+            
+            <script src="http://zalas.eu/components/highlightjs/highlight.pack.js"></script>
+            <script>hljs.initHighlightingOnLoad();</script>
+                    </body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Reply to PHP 5.3 and the Future &mdash; Jakub Zalas &mdash; Agile Software Engineer</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="verify-v1" content="PBznb5+bhxbUdD7HvioYYudpqitFdLDgjQTv8SwALq4=" />            <meta name="robots" content="index, follow">
+        <link rel="shortcut icon" href="http://zalas.eu/favicon.ico" />
+        <link rel="alternate" type="application/atom+xml" href="http://zalas.eu/atom.xml" title="Jakub Zalas activity feed" />
+        <link href="http://zalas.eu/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/code.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+                                    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                        <section itemscope itemtype="http://schema.org/BlogPosting">
+        <h1 itemprop="name">Reply to PHP 5.3 and the Future</h1>
+        <div class="post-date pull-right">
+            <time itemprop="datePublished" content="2010-05-03" datetime="2010-05-03">03 May 2010</time>
+        </div>
+        <ul class="list-unstyled list-inline post-tag-cloud">
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/php/">
+                    <span class="list-group-item-heading">php</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/symfony/">
+                    <span class="list-group-item-heading">symfony</span>
+                </a>
+            </li>
+                    </ul>
+
+                <div class="alert alert-danger">
+            <strong>Warning</strong>: This blog post was written a long time ago and might be no longer relevant.
+        </div>
+        
+        <section class="content" itemprop="articleBody"><div class="pull-left">
+    <a href="/uploads/wp/2010/05/php-med-trans-light.gif"><img src="/uploads/wp/2010/05/php-med-trans-light.gif" title="PHP" alt="PHP" class="img-responsive" /></a>
+</div>
+
+<p>Mark Evans wrote on his blog interesting post about <a href="http://www.freelancephp.co.uk/2010/05/02/php-5-3-and-the-future/">PHP 5.3 and the Future</a>. I guess the main concern   here is similar we used to have with <strong>PHP4</strong> to <strong>PHP5</strong> migration (<a href="http://www.gophp5.org/">GoPHP5 campaign</a>).</p>
+
+<p>Mark raised three questions to the community which I'd like to reply to.</p>
+
+<h2 id="how-can-the-migration-path-for-shared-hosting-companies-be-made-easier%3F">How can the migration path for shared hosting companies be made easier?</h2>
+
+<p>For some time <strong>PHP 5.2</strong> will still be in use. Therefore hosting companies simply cannot afford dropping support for it. There are many popular PHP applications which   are not yet ready for <strong>PHP 5.3</strong> (consider Drupal).</p>
+
+<p>However, it's not a big deal to install both PHP 5.2 and 5.3 on the same server and let the customers choose. I've seen it working with PHP 4 and 5. It's even easier with PHP 5.2 and 5.3. It's possible and it's simple.</p>
+
+<p>Furthermore, migrating <a href="http://www.php.net/manual/en/migration53.php">PHP 5.2 application to 5.3</a> is not as hard as one would think. Most of PHP frameworks are already updated. <strong>In my opinion adaptation will be a lot faster than in case PHP 4 to 5</strong>.</p>
+
+<p>However, you should remember that PHP 5.3 applications will be designed differently. With PHP 5.3 you get a number of <a href="http://php.net/manual/en/migration53.new-features.php">new features</a> which give a lot of power and affect the application's architecture (like <a href="http://php.net/manual/en/language.namespaces.php">namespaces</a>). Even if you can run old applications on PHP 5.3 sooner or later they will become a legacy you want to get rid of.</p>
+
+<h2 id="if-you-were-writing-a-new-open-source-application-would-you-go-purely-5.3%2B%3F">If you were writing a new open-source application would you go purely 5.3+?</h2>
+
+<p>Definitely yes. Starting a new Open Source project in the PHP 5.2 now, when 5.3 release is more than ready, will make the project live shorter. While all the future  applications will head for clear, namespaced structure, yours will still have old-school design.</p>
+
+<p><strong>Someday you'll have to either migrate or rewrite it.</strong></p>
+
+<p>Besides, I don't want to stick to the technology which is headed for extinction. Web development is a very dynamic word. <strong>If you cannot adapt to the new trends you're moving backwards.</strong> Starting a new Open Source project is a great way to learn all the new features of PHP 5.3.</p>
+
+<p>You could be concerned that application written in PHP 5.3 wouldn't gain a lot of users because of slow adaptation of PHP 5.3 by hosting companies. Well, if the            application is good enough users want to have it no matter what. <strong>They will go to the early adapting hosting companies</strong>. Sooner or later others will be forced to       upgrade their servers as well. And as I wrote before it's not a hard task so it should go rather fast.</p>
+
+<h2 id="do-you-know-of-any-other-open-source-applications-requiring-5.3%2B%3F">Do you know of any other open-source applications requiring 5.3+?</h2>
+
+<p>There are plans to <a href="http://area51.phpbb.com/phpBB/viewtopic.php?f=78&amp;t=32433">build phpBB4 based on Symfony 2</a>. This is actually the only application requiring PHP 5.3 I know.</p>
+
+<p>However, there are some frameworks which will support PHP 5.3+ only:</p>
+
+<ul>
+<li><a href="http://symfony-reloaded.org/">Symfony 2</a></li>
+<li><a href="http://www.doctrine-project.org/">Doctrine 2</a></li>
+<li><a href="http://framework.zend.com/wiki/display/ZFDEV2/Zend+Framework+2.0+Roadmap">Zend 2</a></li>
+<li><a href="http://rad-dev.org/lithium">Lithium</a></li>
+</ul>
+</section>
+    </section>
+
+
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'zalas';
+        var disqus_identifier = 'reply-to-php-53-and-the-future';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+            </div>
+        </div>
+                                <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-607315-8', 'auto');
+                ga('send', 'pageview');
+            </script>
+            
+            
+            <script src="http://zalas.eu/components/highlightjs/highlight.pack.js"></script>
+            <script>hljs.initHighlightingOnLoad();</script>
+                    </body>
+</html>

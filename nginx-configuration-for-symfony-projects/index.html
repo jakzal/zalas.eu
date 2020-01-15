@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Nginx configuration for Symfony projects &mdash; Jakub Zalas &mdash; Agile Software Engineer</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="verify-v1" content="PBznb5+bhxbUdD7HvioYYudpqitFdLDgjQTv8SwALq4=" />        <meta name="keywords" content="Symfony,php,nginx,configuration">
+                    <meta name="robots" content="index, follow">
+        <link rel="shortcut icon" href="http://zalas.eu/favicon.ico" />
+        <link rel="alternate" type="application/atom+xml" href="http://zalas.eu/atom.xml" title="Jakub Zalas activity feed" />
+        <link href="http://zalas.eu/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/code.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+                                    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                        <section itemscope itemtype="http://schema.org/BlogPosting">
+        <h1 itemprop="name">Nginx configuration for Symfony projects</h1>
+        <div class="post-date pull-right">
+            <time itemprop="datePublished" content="2011-04-28" datetime="2011-04-28">28 Apr 2011</time>
+        </div>
+        <ul class="list-unstyled list-inline post-tag-cloud">
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/configuration/">
+                    <span class="list-group-item-heading">configuration</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/nginx/">
+                    <span class="list-group-item-heading">nginx</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/php/">
+                    <span class="list-group-item-heading">php</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/symfony/">
+                    <span class="list-group-item-heading">symfony</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/Symfony2/">
+                    <span class="list-group-item-heading">Symfony2</span>
+                </a>
+            </li>
+                    </ul>
+
+                <div class="alert alert-danger">
+            <strong>Warning</strong>: This blog post was written a long time ago and might be no longer relevant.
+        </div>
+        
+        <section class="content" itemprop="articleBody"><div class="pull-right">
+    <img src="/uploads/wp/2011/04/nginx-symfony.png" title="Nginx and Symfony logos" alt="Nginx and Symfony logos" class="img-responsive" />
+</div>
+
+<p>Recent release of Nginx 1.0.0 triggered me to refresh my knowledge about its configuration options. There were quite some additions since I looked in the docs for the last time. New variables and directives let me to simplify my configuration for Symfony projects (both 1.x and 2).</p>
+
+<div class="alert alert-warning">
+
+<p><strong>Warning:</strong> Configurations published on the Internet usually suffer from the vulnerability which allows to run a non-PHP file as a PHP. More about the problem here: "<a href="https://nealpoole.com/blog/2011/04/setting-up-php-fastcgi-and-nginx-dont-trust-the-tutorials-check-your-configuration/">Setting up PHP-FastCGI and nginx? Don’t trust the tutorials: check your configuration!</a>". For Nginx+PHP installation read "<a href="http://zalas.eu/setting-up-a-php-development-environment-with-nginx-on-ubuntu-1104/">Setting up a PHP development environment with Nginx on Ubuntu 11.04</a>".</p>
+
+</div>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>The convention says we should put virtual host configurations into <em>/etc/nginx/sites-available/</em> directory and then link to them in <em>/etc/nginx/sites-enabled/</em>.</p>
+
+<p>Rules below define development virtual hosts. We'll put them into <em>/etc/nginx/sites-available/dev</em> file.</p>
+
+<pre><code class="nginx">server {
+    listen 80 default;
+    server_name *.dev;
+
+    root /var/www/$host/current/web;
+
+    access_log /var/log/nginx/$host-access.log;
+    error_log  /var/log/nginx/dev-error.log error;
+
+    index app.php index.html index.htm;
+
+    try_files $uri $uri/ @rewrite;
+
+    location @rewrite {
+        rewrite ^/(.*)$ /app.php/$1;
+    }
+
+    location ~ \.php {
+        # try_files $uri =404;
+
+        fastcgi_index app.php;
+        fastcgi_pass 127.0.0.1:9000;
+
+        include fastcgi_params;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+
+    location ~ /\.ht {
+        deny all;
+    }
+}
+</code></pre>
+
+<p>Don't forget about the symbolic link (<em>/etc/nginx/sites-enabled/dev</em>).</p>
+
+<h2 id="more-about-the-configuration">More about the configuration</h2>
+
+<pre><code class="nginx">    listen 80 default;
+</code></pre>
+
+<p>Nginx listens on the port 80 by default. What's important in this line is the second parameter - "default". It makes that Nginx treats given host as a default one.</p>
+
+<pre><code class="nginx">    server_name *.dev;
+</code></pre>
+
+<p>Our dynamic virtual host will accept every <em>.dev</em> domain (<em>kuba.dev</em>, <em>myproject.dev</em> etc).</p>
+
+<p>Alternatively we could simply list one ore more domains (i.e. <em>server_name zalas.eu</em>). In such case we'd probably define every domain in a separate <em>server {}</em> section.</p>
+
+<pre><code class="nginx">    root /var/www/$host/current/web;
+</code></pre>
+
+<p>Root directory will be defined dynamically based on the <em>$host</em> variable (<em>/var/www/kuba.dev/current/web</em> for <em>kuba.dev</em> domain).</p>
+
+<pre><code class="nginx">    access_log /var/log/nginx/$host-access.log;
+    error_log  /var/log/nginx/dev-error.log error;
+</code></pre>
+
+<p>Every domain will have its own access log. Unfortunately we cannot use <em>$host</em> variable with error logs. Therefore all the errors will be logged into the same file.</p>
+
+<pre><code class="nginx">    index app.php index.html index.htm;
+</code></pre>
+
+<p>Index files are checked every time URL points to the directory. Nginx will try them one by one until it finds an existing one.</p>
+
+<p><em>app.php</em> is a default controller in Symfony2. For symfony 1.x it's usually <em>index.php</em>.</p>
+
+<pre><code class="nginx">    try_files $uri $uri/ @rewrite;
+</code></pre>
+
+<p>It's a really elegant solution for readable URLs as it lets us to <a href="http://wiki.nginx.org/IfIsEvil">avoid evil if statements</a>.</p>
+
+<p>During the request Nginx will check for an existence of a file first. If the file doesn't exist it will look for a directory. If both checks fail it will rewrite the request to the <em>named location</em>.</p>
+
+<pre><code class="nginx">    location @rewrite {
+        rewrite ^/(.*)$ /app.php/$1;
+    }
+</code></pre>
+
+<p>This named location is reached only if user wasn't requesting an existing file or directory. We want to rewrite such a request to the default controller.</p>
+
+<pre><code class="nginx">    location ~ \.php {
+        fastcgi_index app.php;
+        fastcgi_pass 127.0.0.1:9000;
+
+        include fastcgi_params;
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+</code></pre>
+
+<p>All the PHP requests will be routed to the fastcgi deamon (running locally on port 9000).</p>
+
+<p>Appart from including default fastcgi parameters we make sure that PATH_INFO and SCRIPT_FILENAME variables are set properly. <em>fastcgi_split_path_info</em> says how to split the controller file from the path.</p>
+
+<pre><code class="nginx">    location ~ /\.ht {
+        deny all;
+    }
+</code></pre>
+
+<p>This will forbid access to apache's <em>.htaccess</em> files. These are only simple text files for Nginx and we don't want them to be accessible via the browser.</p>
+</section>
+    </section>
+
+
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'zalas';
+        var disqus_identifier = 'nginx-configuration-for-symfony-projects';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+            </div>
+        </div>
+                                <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-607315-8', 'auto');
+                ga('send', 'pageview');
+            </script>
+            
+            
+            <script src="http://zalas.eu/components/highlightjs/highlight.pack.js"></script>
+            <script>hljs.initHighlightingOnLoad();</script>
+                    </body>
+</html>

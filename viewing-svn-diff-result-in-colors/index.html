@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Viewing svn diff result in colors &mdash; Jakub Zalas &mdash; Agile Software Engineer</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="verify-v1" content="PBznb5+bhxbUdD7HvioYYudpqitFdLDgjQTv8SwALq4=" />            <meta name="robots" content="index, follow">
+        <link rel="shortcut icon" href="http://zalas.eu/favicon.ico" />
+        <link rel="alternate" type="application/atom+xml" href="http://zalas.eu/atom.xml" title="Jakub Zalas activity feed" />
+        <link href="http://zalas.eu/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/code.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+                                    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                        <section itemscope itemtype="http://schema.org/BlogPosting">
+        <h1 itemprop="name">Viewing svn diff result in colors</h1>
+        <div class="post-date pull-right">
+            <time itemprop="datePublished" content="2009-06-16" datetime="2009-06-16">16 Jun 2009</time>
+        </div>
+        <ul class="list-unstyled list-inline post-tag-cloud">
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/installation/">
+                    <span class="list-group-item-heading">installation</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/linux/">
+                    <span class="list-group-item-heading">linux</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/svn/">
+                    <span class="list-group-item-heading">svn</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/ubuntu/">
+                    <span class="list-group-item-heading">ubuntu</span>
+                </a>
+            </li>
+                    </ul>
+
+                <div class="alert alert-danger">
+            <strong>Warning</strong>: This blog post was written a long time ago and might be no longer relevant.
+        </div>
+        
+        <section class="content" itemprop="articleBody"><p><em>svn diff</em> allows us to see the changes made on the files in the subversion repository. However, its output  is not always clear. New lines are just marked with '+' and removed ones with '-'.</p>
+
+<div class="text-center">
+    <a href="/uploads/wp/2009/06/svn-diff-before.png"><img src="/uploads/wp/2009/06/svn-diff-before-399x183.png" alt="svn diff in black and white" title="svn diff in black and white" class="img-responsive" /></a>
+</div>
+
+<p>We can improve our experience a bit by installing <a href="http://colordiff.sourceforge.net/">colordiff</a>. It wraps <em>diff</em> command and produces the same output but coloured.</p>
+
+<div class="text-center">
+    <a href="/uploads/wp/2009/06/svn-diff-after.png"><img src="/uploads/wp/2009/06/svn-diff-after-400x183.png" alt="svn diff in colors" title="svn diff in colors" class="img-responsive" /></a>
+</div>
+
+<p>In ubuntu it's as simple as running:</p>
+
+<pre><code class="bash">sudo aptitude install colordiff
+</code></pre>
+
+<p>Once doing that we should be able to redirect the output of commands like <em>diff</em> and <em>svn diff</em> to colordiff and view it in colors:</p>
+
+<pre><code class="bash">svn diff plugins/zMobyPicturePlugin/lib/zMobyPictureClient.class.php | colordiff
+</code></pre>
+
+<p>To improve it even more we can declare simple function in <em>~/.bashrc</em> file (using it requires re-login):</p>
+
+<pre><code class="bash">svndiff()
+{
+  svn diff "${@}" | colordiff
+}
+</code></pre>
+
+<p>Function will make the command shorter:</p>
+
+<pre><code class="bash">svndiff plugins/zMobyPicturePlugin/lib/zMobyPictureClient.class.php
+</code></pre>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: You can achieve pretty much the same with vim. To learn about it read: "<a href="/viewing-svn-diff-result-in-vim/">Viewing svn diff result in vim</a>".</p>
+
+</div>
+</section>
+    </section>
+
+
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'zalas';
+        var disqus_identifier = 'viewing-svn-diff-result-in-colors';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+            </div>
+        </div>
+                                <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-607315-8', 'auto');
+                ga('send', 'pageview');
+            </script>
+            
+            
+            <script src="http://zalas.eu/components/highlightjs/highlight.pack.js"></script>
+            <script>hljs.initHighlightingOnLoad();</script>
+                    </body>
+</html>

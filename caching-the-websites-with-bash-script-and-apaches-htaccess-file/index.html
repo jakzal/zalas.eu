@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Caching the websites with bash script and apache&#039;s .htaccess file &mdash; Jakub Zalas &mdash; Agile Software Engineer</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="verify-v1" content="PBznb5+bhxbUdD7HvioYYudpqitFdLDgjQTv8SwALq4=" />            <meta name="robots" content="index, follow">
+        <link rel="shortcut icon" href="http://zalas.eu/favicon.ico" />
+        <link rel="alternate" type="application/atom+xml" href="http://zalas.eu/atom.xml" title="Jakub Zalas activity feed" />
+        <link href="http://zalas.eu/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/code.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+                                    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                        <section itemscope itemtype="http://schema.org/BlogPosting">
+        <h1 itemprop="name">Caching the websites with bash script and apache&#039;s .htaccess file</h1>
+        <div class="post-date pull-right">
+            <time itemprop="datePublished" content="2009-07-01" datetime="2009-07-01">01 Jul 2009</time>
+        </div>
+        <ul class="list-unstyled list-inline post-tag-cloud">
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/apache/">
+                    <span class="list-group-item-heading">apache</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/bash/">
+                    <span class="list-group-item-heading">bash</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/best-practices/">
+                    <span class="list-group-item-heading">best-practices</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/cache/">
+                    <span class="list-group-item-heading">cache</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/htaccess/">
+                    <span class="list-group-item-heading">htaccess</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/script/">
+                    <span class="list-group-item-heading">script</span>
+                </a>
+            </li>
+                    </ul>
+
+                <div class="alert alert-danger">
+            <strong>Warning</strong>: This blog post was written a long time ago and might be no longer relevant.
+        </div>
+        
+        <section class="content" itemprop="articleBody"><p>Recently I got a task to make a completely inefficient application usable enough to give the development team time for improvements. I didn't know the application and didn't have sufficient time to learn it. In that completely miserable moment I was left alone.</p>
+
+<p>Main cause of high load on the server was too many additional requests made by already loaded website.  Requests where made for XML files which in most cases where very expensive to create and didn't change to often. Ideal candidates for caching you might think. As my solution was suppose to be only temporary and I had to implement it fast, I came up with simple bash script which did the job flawlessly.</p>
+
+<p>The script analyses webserver's log files (in this case apache) and looks for URLs which are supposed to be cached. Once URL is found it's stored on the disk. Next requests get the file directly without any calculations. Here is the full code:</p>
+
+<pre><code class="bash">#!/bin/bash
+
+# CONFIG
+base_path="/var/www/heavyloadedapp.com/web"
+xml_path="/var/www/heavyloadedapp.com/web/cache-xml"
+url="http://heavyloadedapp.com"
+paths=$(cat /var/log/httpd/heavyloadedapp.com.log | grep XML | less | awk '{print $7}' | sort | uniq)
+user="apache"
+rights="755"
+# CONFIG END
+
+if [ ! -d $xml_path ]; then
+  mkdir $xml_path
+fi
+
+cd $xml_path
+
+for path in $paths; do
+  rel_path=$(echo $path | sed -e 's/^\///' | sed -e 's/^\(.*\)?\(.*\)$/\1/')
+  if [ ! -f $rel_path ]; then
+    if [ $(echo "$rel_path" | grep -E '\/') ]; then
+      dir=$(echo $rel_path | sed -e 's/\(.*\)\/.*/\1/')
+      mkdir -p $dir
+    fi
+    /usr/bin/wget -U "CacheBrowser" -nv $url/$rel_path -O $rel_path
+  fi
+done
+
+chown -R $user $xml_path
+chmod -R $rights $xml_path
+
+cd -
+</code></pre>
+
+<p>At the top of it you can find configuration options. It's needed to set path to the application's code, cache directory and the base URL. <em>$paths</em> variable stores the list of paths found in the log file. I used grep to get all paths with 'XML' in it, then sorted it and filtered to get every path only once. This part has to be adapted to the problem that needs to be solved. Grep should only catch pages or documents you want to be cached.</p>
+
+<p>Later the script loops through found URLs (paths) and checks if they are not yet saved. New documents are stored in the cache directory (<em>cache-xml</em> in this case). It's as simple as that. Second time given URL is requested following rules in <em>.htaccess</em> file are responsible for rewriting the URL to the location of physical file:</p>
+
+<pre><code class="apache">RewriteEngine On
+RewriteBase /
+
+### XML Caching ###
+RewriteCond %{REQUEST_URI} ^(.*XML.*)$
+RewriteCond %{REQUEST_URI} !^.*cache-xml(.*)$
+RewriteCond %{DOCUMENT_ROOT}/cache-xml%1 -f
+RewriteCond %{HTTP_USER_AGENT} !CacheBrowser
+RewriteRule .* cache-xml%1 [L]
+### XML Caching END ###
+</code></pre>
+
+<p>In the script, while using wget, I change the User Agent to <em>CacheBrowser</em>. Thanks to that I can recognize its requests in <em>.htaccess</em> file and treat it in a different way than usual requests.</p>
+
+<p>That's all. First time URL is visited it's made visible in the log file. Script, which runs as a cron job, finds new URLs and stores the documents on filesystem. Next time URL is visited the application is not even run. <strong>Nothing is more efficient than serving static files.</strong></p>
+
+<h2 id="where%27s-the-catch%3F">Where's the catch?</h2>
+
+<p>Solution is simple and works great but there are few drawbacks.</p>
+
+<p>First of all once file is saved it's not refreshed. Cache never expires. Refreshing could be done in two ways. We can either clear the cache automatically (once per time) or clear it in the application (once something cahanges or on demand). While first solution is as easy as adding proper cron job, it's rarely preferred one. User wants to see the results instantly after he changes the content. Unfortunately it's strictly depending on technology being used.</p>
+
+<p>Second problem becomes visible when we have different versions of page for authorized and non-authorized Users. We just cannot cache such documents without checking User's credentials. The line which gets paths from the log file should be modfied in such a way to reject the pages which require User to be logged in.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>To often programmers tend to forget about caching content which is expensive to generate or doesn't change for a while. Furthermore, good practise while creating high demanding websites is limiting the number of http requests. Describing this real life example I hoped to show that efficient caching doesn't have to be a complicated solution. On the other hand trying to cache dynamic pages we face real problems which usually have to be solved independently. <strong>Choosing proper tool is really important.</strong> Mentioned application was not written in technology that delivers tools to implement caching in short time.</p>
+</section>
+    </section>
+
+
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'zalas';
+        var disqus_identifier = 'caching-the-websites-with-bash-script-and-apaches-htaccess-file';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+            </div>
+        </div>
+                                <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-607315-8', 'auto');
+                ga('send', 'pageview');
+            </script>
+            
+            
+            <script src="http://zalas.eu/components/highlightjs/highlight.pack.js"></script>
+            <script>hljs.initHighlightingOnLoad();</script>
+                    </body>
+</html>

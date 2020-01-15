@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>PostgreSQL installation in Ubuntu 10.04 &mdash; Jakub Zalas &mdash; Agile Software Engineer</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="verify-v1" content="PBznb5+bhxbUdD7HvioYYudpqitFdLDgjQTv8SwALq4=" />            <meta name="robots" content="index, follow">
+        <link rel="shortcut icon" href="http://zalas.eu/favicon.ico" />
+        <link rel="alternate" type="application/atom+xml" href="http://zalas.eu/atom.xml" title="Jakub Zalas activity feed" />
+        <link href="http://zalas.eu/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/code.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+                                    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                        <section itemscope itemtype="http://schema.org/BlogPosting">
+        <h1 itemprop="name">PostgreSQL installation in Ubuntu 10.04</h1>
+        <div class="post-date pull-right">
+            <time itemprop="datePublished" content="2010-05-16" datetime="2010-05-16">16 May 2010</time>
+        </div>
+        <ul class="list-unstyled list-inline post-tag-cloud">
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/installation/">
+                    <span class="list-group-item-heading">installation</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/php/">
+                    <span class="list-group-item-heading">php</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/postgresql/">
+                    <span class="list-group-item-heading">postgresql</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/ubuntu/">
+                    <span class="list-group-item-heading">ubuntu</span>
+                </a>
+            </li>
+                    </ul>
+
+                <div class="alert alert-danger">
+            <strong>Warning</strong>: This blog post was written a long time ago and might be no longer relevant.
+        </div>
+        
+        <section class="content" itemprop="articleBody"><div class="pull-left">
+    <img src="/uploads/wp/2010/05/postgresql.png" title="PostgreSQL" alt="PostgreSQL" class="img-responsive" />
+</div>
+
+<p><a href="http://www.postgresql.org/">PostgreSQL</a> is a powerful and reliable object-relational database system. It's a great alternative for MySQL. It is as easy to set up, performs better and offers far more features.</p>
+
+<p>To install PostgreSQL server run:</p>
+
+<pre><code>sudo aptitude install postgresql
+</code></pre>
+
+<p>Database users can be created in command line with <em>createuser</em> tool.        Running the following command will create user 'kuba' who is not a superuser, can  create databases, cannot create new roles and his password is stored encrypted. You will be asked to give new user's password as '-P' option is passed.</p>
+
+<pre><code>sudo su postgres -c 'createuser -S -d -R -E -P kuba'
+</code></pre>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: Run <em>createuser</em> with <em>--help</em> switch to get an overview of available options.</p>
+
+</div>
+
+<p>There is a similar tool for database creation called createdb:</p>
+
+<pre><code>createdb mydatabase
+</code></pre>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: Read about MySQL in my another post: <a href="/mysql-installation-in-ubuntu-1004/">MySQL installation in Ubuntu 10.04</a>.</p>
+
+</div>
+</section>
+    </section>
+
+
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'zalas';
+        var disqus_identifier = 'postgresql-installation-in-ubuntu-1004';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+            </div>
+        </div>
+                                <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-607315-8', 'auto');
+                ga('send', 'pageview');
+            </script>
+            
+            
+            <script src="http://zalas.eu/components/highlightjs/highlight.pack.js"></script>
+            <script>hljs.initHighlightingOnLoad();</script>
+                    </body>
+</html>

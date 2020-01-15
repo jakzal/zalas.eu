@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Doctrine2 and Symfony2 &mdash; Jakub Zalas &mdash; Agile Software Engineer</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="verify-v1" content="PBznb5+bhxbUdD7HvioYYudpqitFdLDgjQTv8SwALq4=" />            <meta name="robots" content="index, follow">
+        <link rel="shortcut icon" href="http://zalas.eu/favicon.ico" />
+        <link rel="alternate" type="application/atom+xml" href="http://zalas.eu/atom.xml" title="Jakub Zalas activity feed" />
+        <link href="http://zalas.eu/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/code.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+                                    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                        <section itemscope itemtype="http://schema.org/BlogPosting">
+        <h1 itemprop="name">Doctrine2 and Symfony2</h1>
+        <div class="post-date pull-right">
+            <time itemprop="datePublished" content="2011-02-19" datetime="2011-02-19">19 Feb 2011</time>
+        </div>
+        <ul class="list-unstyled list-inline post-tag-cloud">
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/doctrine2/">
+                    <span class="list-group-item-heading">doctrine2</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/php/">
+                    <span class="list-group-item-heading">php</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/Symfony2/">
+                    <span class="list-group-item-heading">Symfony2</span>
+                </a>
+            </li>
+                    </ul>
+
+                <div class="alert alert-danger">
+            <strong>Warning</strong>: This blog post was written a long time ago and might be no longer relevant.
+        </div>
+        
+        <section class="content" itemprop="articleBody"><div class="pull-right">
+    <img src="/uploads/wp/2011/02/symfony2-doctrine-logos1.png" title="Symfony2 and Doctrine" alt="Symfony2 and Doctrine" class="img-responsive" />
+</div>
+
+<p>I continue exploring the <a href="http://symfony-reloaded.org/">Symfony2 framework</a>. It's flexible enough to be used with any modern PHP ORM. However, as with everything in Symfony2, there are sensible defaults provided. In case of an ORM it's <a href="http://www.doctrine-project.org">Doctrine2</a> bundle.</p>
+
+<p>One of the first things a newcomer wants to know about a new ORM is how to persist the data. The second is how to get it back.</p>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: It's not a tutorial but a review of Doctrine2 basics. For tutorials visit <a href="http://www.doctrine-project.org/docs/orm/2.0/en/#tutorials">Doctrine2 documentation</a> or <a href="http://docs.symfony-reloaded.org/guides/doctrine/orm/index.html">Symfony2 ORM documentation</a>.</p>
+
+</div>
+
+<h2 id="persisting-the-data">Persisting the data</h2>
+
+<p>In Doctrine1 we have a nice opportunity to define a model in an yml file called schema. Good news is we can still do it in Doctrine2.</p>
+
+<p>But there's a better way.</p>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: my view on annotations has changed since writing this article. I actually think it's better to separate mappings from the model classes.</p>
+
+</div>
+
+<p>What I really like about Doctrine2 is that we can persist object of <strong>any class</strong> by giving a <strong>mapping hints</strong> with <strong>annotations</strong>:</p>
+
+<pre><code class="php">use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="articles")
+ */
+class Article
+{
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     */
+    private $id = null;
+
+    /**
+     * @ORM\Column(type="string", length="255")
+     */
+    private $title = null;
+
+    /**
+     * @ORM\Column(type="boolean", name="is_active")
+     */
+    private $isActive = false;
+}
+</code></pre>
+
+<p>What's great about it is we only need to maintain one class instead of a class and its mapping in separate locations. No need to jump between files. Everything is in <strong>one place</strong>.</p>
+
+<p>I couldn't think of a simpler solution.</p>
+
+<p>Another great thing is we no longer need to extend a <strong>base record class</strong> just to be able to persist our data. Notice that Article class doesn't extend anything. It's an <strong>ordinary class</strong>.</p>
+
+<p>It has quite some impact on <strong>performance</strong> as our objects are <strong>light</strong>. _Side effect is that while debugging we won't dump whole framework when passing a record to <code>print_r()</code> or <code>var_dump()</code>. _</p>
+
+<p>So where's the old good <em>save()</em> method?</p>
+
+<p>Doctrine2 doesn't follow active record pattern. Therefore there's no save, delete or other kind of methods typical to this pattern.</p>
+
+<p>These responsibilities are given to the <strong>Entity Manager</strong>.</p>
+
+<p>In Symfony2 Entity Manager can be retrieved from the <strong>Dependency Injection Container</strong>. Persisting the data in action might look like:</p>
+
+<pre><code class="php">$article = new Article();
+$article-&gt;setTitle('Doctrine2 in Symfony2');
+
+$entityManager = $this-&gt;get('doctrine.orm.entity_manager');
+$entityManager-&gt;persist($article);
+$entityManager-&gt;flush();
+</code></pre>
+
+<p>I really like the fact that we work with <strong>POPO</strong>s (Plain Old PHP Objects). The class itself is free of code which persist its instance.</p>
+
+<h2 id="get-my-data-back%21">Get my data back!</h2>
+
+<p>Now that our data is stored in the database it'd be nice to retrieve it. Doctrine2 continues with an idea of <strong>DQL **and **finder methods</strong>:</p>
+
+<pre><code class="php">$entityManager = $this-&gt;get('doctrine.orm.entity_manager');
+$article = $entityManager-&gt;find('Article', $id);
+</code></pre>
+
+<p>Queries are run with the Entity Manager. It's important to know the Entity Manager proxies the call to the repository object. It works without any additional steps as the call is forwarded to a default implementation of a repository. Of course it can be changed.</p>
+
+<p>As I don't like putting queries into the controller I was looking for the best place for them. The convention is to write a custom repository class for our entity (see <a href="http://www.doctrine-project.org/docs/orm/2.0/en/reference/working-with-objects.html#custom-repositories">Custom Repositories</a> in Doctrine documentation):</p>
+
+<pre><code class="php">class ArticleRepository extends EntityRepository
+{
+    public function getActiveArticles()
+    {
+        return $this-&gt;_em-&gt;createQuery(
+            'SELECT a FROM Article a WHERE a.isActive = ?',
+             true
+        )-&gt;getResult();
+    }
+}
+</code></pre>
+
+<p>In the entity class we need to tell Doctrine to use our repository instead of a generic one:</p>
+
+<pre><code class="php">use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="ArticleRepository")
+ * @ORM\Table(name="articles")
+ */
+class Article
+{
+  // ...
+}
+</code></pre>
+
+<h2 id="where-to-go-next%3F">Where to go next?</h2>
+
+<p>I will continue exploring Doctrine2 while making progress with my Symfony2 project. There's a lot of interesting stuff left to learn: events, validators, inheritance to mention few. Also, there are many more annotations available than I used in the examples (like those describing <a href="http://www.doctrine-project.org/docs/orm/2.0/en/reference/association-mapping.html">associations</a>).</p>
+</section>
+    </section>
+
+
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'zalas';
+        var disqus_identifier = 'doctrine2-and-symfony2';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+            </div>
+        </div>
+                                <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-607315-8', 'auto');
+                ga('send', 'pageview');
+            </script>
+            
+            
+            <script src="http://zalas.eu/components/highlightjs/highlight.pack.js"></script>
+            <script>hljs.initHighlightingOnLoad();</script>
+                    </body>
+</html>

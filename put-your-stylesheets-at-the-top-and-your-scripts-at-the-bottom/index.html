@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Put your stylesheets at the top and your scripts at the bottom &mdash; Jakub Zalas &mdash; Agile Software Engineer</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="verify-v1" content="PBznb5+bhxbUdD7HvioYYudpqitFdLDgjQTv8SwALq4=" />            <meta name="robots" content="index, follow">
+        <link rel="shortcut icon" href="http://zalas.eu/favicon.ico" />
+        <link rel="alternate" type="application/atom+xml" href="http://zalas.eu/atom.xml" title="Jakub Zalas activity feed" />
+        <link href="http://zalas.eu/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/code.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+                                    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                        <section itemscope itemtype="http://schema.org/BlogPosting">
+        <h1 itemprop="name">Put your stylesheets at the top and your scripts at the bottom</h1>
+        <div class="post-date pull-right">
+            <time itemprop="datePublished" content="2009-04-27" datetime="2009-04-27">27 Apr 2009</time>
+        </div>
+        <ul class="list-unstyled list-inline post-tag-cloud">
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/best-practices/">
+                    <span class="list-group-item-heading">best-practices</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/filter/">
+                    <span class="list-group-item-heading">filter</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/html/">
+                    <span class="list-group-item-heading">html</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/symfony/">
+                    <span class="list-group-item-heading">symfony</span>
+                </a>
+            </li>
+                    </ul>
+
+                <div class="alert alert-danger">
+            <strong>Warning</strong>: This blog post was written a long time ago and might be no longer relevant.
+        </div>
+        
+        <section class="content" itemprop="articleBody"><p>Putting the CSS stylesheets at the top of your web page and moving the scripts
+to the bottom are only two of thirty four rules described in
+<a href="http://developer.yahoo.com/performance/rules.html">Best Practices for Speeding Up Your Website</a>
+(by Yahoo).
+Following these two rules, however, can really decrease visible time of page
+rendering. I will present a simple solution to achieve this in
+<a href="http://www.symfony-project.org/">symfony</a> framework.</p>
+
+<p>Whenever you invoke <em>use_javascript</em> and <em>use_stylesheet</em> helpers your
+JavaScripts and stylesheets are not directly put into the content. This task is
+given to <em>sfCommonFilter</em> which is responsible for injecting JavaScript and
+stylesheet includes right before <em></head></em> tag. Thanks to that we can safely
+request inclusion of the same file multiple of times and it's pasted into the
+content only once. It's nice but can be slightly improved by following the
+earlier mentioned Yahoo rules.</p>
+
+<p>Stylesheets are already at the top. The only thing left is to move JavaScripts
+right before the <em></body></em> tag.  To do that we will have to overwrite the
+<em>sfCommonFilter</em> class. Thankfully it's just a matter of small changes in the
+original class. I used the original code and changed the way the scripts are
+injected.</p>
+
+<pre><code class="php">class zCommonFilter extends sfFilter
+{
+  public function execute($filterChain)
+  {
+    $filterChain-&gt;execute();
+
+    $response = $this-&gt;context-&gt;getResponse();
+
+    // include stylesheets
+    $content = $response-&gt;getContent();
+    if (false !== ($pos = strpos($content, '&lt;/head&gt;')))
+    {
+      $this-&gt;context-&gt;getConfiguration()-&gt;loadHelpers(array('Tag', 'Asset'));
+      $html = '';
+      if (!sfConfig::get('symfony.asset.stylesheets_included', false))
+      {
+        $html.= get_stylesheets($response);
+
+        if ($html)
+        {
+          $response-&gt;setContent(substr($content, 0, $pos) . $html . substr($content, $pos));
+        }
+      }
+    }
+
+    // include javascripts
+    $content = $response-&gt;getContent();
+    if (false !== ($pos = strpos($content, '&lt;/body&gt;')))
+    {
+      $this-&gt;context-&gt;getConfiguration()-&gt;loadHelpers(array('Tag', 'Asset'));
+      $html = '';
+      if (!sfConfig::get('symfony.asset.javascripts_included', false))
+      {
+        $html.= get_javascripts($response);
+
+        if ($html)
+        {
+          $response-&gt;setContent(substr($content, 0, $pos) . $html . substr($content, $pos));
+        }
+      }
+    }
+
+    sfConfig::set('symfony.asset.javascripts_included', false);
+    sfConfig::set('symfony.asset.stylesheets_included', false);
+  }
+}
+</code></pre>
+
+<p>Now we just need to tell symfony to use our version of the common filter instead
+of the default one. As always we do it in <em>filters.yml</em> file of chosen
+application:</p>
+
+<pre><code class="yaml">rendering: ~
+security:  ~
+cache:     ~
+
+common:
+  class: zCommonFilter
+
+execution: ~
+</code></pre>
+</section>
+    </section>
+
+
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'zalas';
+        var disqus_identifier = 'put-your-stylesheets-at-the-top-and-your-scripts-at-the-bottom';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+            </div>
+        </div>
+                                <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-607315-8', 'auto');
+                ga('send', 'pageview');
+            </script>
+            
+            
+            <script src="http://zalas.eu/components/highlightjs/highlight.pack.js"></script>
+            <script>hljs.initHighlightingOnLoad();</script>
+                    </body>
+</html>

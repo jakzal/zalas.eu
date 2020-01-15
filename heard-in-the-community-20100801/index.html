@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Heard in the Community (2010.08.01) &mdash; Jakub Zalas &mdash; Agile Software Engineer</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="verify-v1" content="PBznb5+bhxbUdD7HvioYYudpqitFdLDgjQTv8SwALq4=" />            <meta name="robots" content="index, follow">
+        <link rel="shortcut icon" href="http://zalas.eu/favicon.ico" />
+        <link rel="alternate" type="application/atom+xml" href="http://zalas.eu/atom.xml" title="Jakub Zalas activity feed" />
+        <link href="http://zalas.eu/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/code.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+                                    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                        <section itemscope itemtype="http://schema.org/BlogPosting">
+        <h1 itemprop="name">Heard in the Community (2010.08.01)</h1>
+        <div class="post-date pull-right">
+            <time itemprop="datePublished" content="2010-08-01" datetime="2010-08-01">01 Aug 2010</time>
+        </div>
+        <ul class="list-unstyled list-inline post-tag-cloud">
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/oop/">
+                    <span class="list-group-item-heading">oop</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/php/">
+                    <span class="list-group-item-heading">php</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/symfony/">
+                    <span class="list-group-item-heading">symfony</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/Symfony2/">
+                    <span class="list-group-item-heading">Symfony2</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/wrap-up/">
+                    <span class="list-group-item-heading">wrap-up</span>
+                </a>
+            </li>
+                    </ul>
+
+                <div class="alert alert-danger">
+            <strong>Warning</strong>: This blog post was written a long time ago and might be no longer relevant.
+        </div>
+        
+        <section class="content" itemprop="articleBody"><h2 id="symfony2">Symfony2</h2>
+
+<p>Symfony2 development moves forward quickly. Last week the <a href="http://api.symfony-reloaded.org/PR2/">API documentation</a> was generated and put online by <a href="http://twitter.com/fabpot">Fabien Potencier</a>. Also, the <a href="http://docs.symfony-reloaded.org/contributing/documentation/translations.html">translation process</a> is now described so translators can start contributing.</p>
+
+<p><a href="http://twitter.com/kriswallsmith">Kris Wallsmith</a> wrote a short introduction to Symfony2 helpers: <a href="http://kriswallsmith.net/post/878278731/how-to-create-a-symfony2-templating-helper">How to create a Symfony2 templating helper</a>. Finally helpers are implemented as classes!</p>
+
+<h2 id="symfony-application-in-26-minutes">symfony application in 26 minutes</h2>
+
+<p>Want to see an application built in 26 minutes? <a href="http://twitter.com/tommybgoode">Tom Boutell</a> posted <a href="http://window.punkave.com/2010/07/30/symfony-almost-live/">Symfony Almost Live</a> screencast on punk'd avenue window showing just that. It's a good introduction for newbies in a symfony framework.</p>
+
+<h2 id="oop-in-scripting-languages">OOP in scripting languages</h2>
+
+<p>I accidentally came across a blog post titled <a href="http://iamlearningphp.blogspot.com/2010/07/do-web-scripting-languages-really-need.html">Do Web-Scripting Languages Really Need OOP?</a> I also found an answer to that question on <a href="http://giorgiosironi.blogspot.com">Invisible to the eye</a> blog: <a href="http://giorgiosironi.blogspot.com/2010/07/missing-point-oop-in-scripting.html">Missing the point (OOP in scripting languages)</a>. I totally agree with the later.</p>
+
+<h2 id="features-in-php-trunk%3A-array-dereferencing">Features in PHP trunk: Array dereferencing</h2>
+
+<p><a href="http://schlueters.de/blog/archives/138-Features-in-PHP-trunk-Array-dereferencing.html">Array dereferencing </a>is a new feature which just got into the PHP trunk. It allows you to do stuff like:</p>
+
+<pre><code class="php">function getData() {
+  return array(1, 2, 3);
+}
+
+echo getData()[1];
+</code></pre>
+
+<p>Hopefully it'll also work with native PHP functions.</p>
+</section>
+    </section>
+
+
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'zalas';
+        var disqus_identifier = 'heard-in-the-community-20100801';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+            </div>
+        </div>
+                                <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-607315-8', 'auto');
+                ga('send', 'pageview');
+            </script>
+            
+            
+            <script src="http://zalas.eu/components/highlightjs/highlight.pack.js"></script>
+            <script>hljs.initHighlightingOnLoad();</script>
+                    </body>
+</html>

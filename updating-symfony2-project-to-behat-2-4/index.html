@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Updating Symfony2 project to Behat 2.4 &mdash; Jakub Zalas &mdash; Agile Software Engineer</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="verify-v1" content="PBznb5+bhxbUdD7HvioYYudpqitFdLDgjQTv8SwALq4=" />        <meta name="keywords" content="Symfony,behat,upgrade,update">
+                <meta name="description" content="Learn how to migrate your old Behat test suite for Behat 2.4">
+                    <meta name="robots" content="index, follow">
+        <link rel="shortcut icon" href="http://zalas.eu/favicon.ico" />
+        <link rel="alternate" type="application/atom+xml" href="http://zalas.eu/atom.xml" title="Jakub Zalas activity feed" />
+        <link href="http://zalas.eu/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/code.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+                                    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                        <section itemscope itemtype="http://schema.org/BlogPosting">
+        <h1 itemprop="name">Updating Symfony2 project to Behat 2.4</h1>
+        <div class="post-date pull-right">
+            <time itemprop="datePublished" content="2012-06-21" datetime="2012-06-21">21 Jun 2012</time>
+        </div>
+        <ul class="list-unstyled list-inline post-tag-cloud">
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/behat/">
+                    <span class="list-group-item-heading">behat</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/mink/">
+                    <span class="list-group-item-heading">mink</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/Symfony2/">
+                    <span class="list-group-item-heading">Symfony2</span>
+                </a>
+            </li>
+                    </ul>
+
+                <div class="alert alert-danger">
+            <strong>Warning</strong>: This blog post was written a long time ago and might be no longer relevant.
+        </div>
+        
+        <section class="content" itemprop="articleBody"><div class="pull-left">
+    <img src="/uploads/wp/2012/06/behat-sf-logo.png" title="Behat and Symfony2 logo" alt="Behat and Symfony2 logo" class="img-responsive" />
+</div>
+
+<p>Recent release of <strong>Behat 2.4</strong> brings a lot of extensibility for a price of small backward compatibility breaks. Since I just went through an update of Behat in a <strong>Symfony2</strong> project and there's no guide on the subject yet, I thought it's a good idea to share few tips.</p>
+
+<p><strong>Note</strong>: Read more on Behat 2.4 on <a href="https://twitter.com/#!/everzet">@everzet</a>'s blog: <a href="http://everzet.com/post/22899229502/behat-240">Behat 2.4: The most extendable testing framework</a>.</p>
+
+<div class="alert alert-success">
+
+<p><strong>Update</strong>: This blog post is now part of an official documenation for the Symfony2 Extension: <a href="http://extensions.behat.org/symfony2/migrating_from_2.3_to_2.4.html">Migrating from Behat 2.3 to 2.4</a>.</p>
+
+</div>
+
+<h2 id="there%27s-no-behatbundle-nor-minkbundle-anymore">There's no BehatBundle nor MinkBundle anymore</h2>
+
+<p>Most important change for the Symfony users is that Behat integration is no longer done with bundles. Behat got its own extension system and there's simply no need for bundles anymore.</p>
+
+<p>So instead of the BehatBundle you'll need to install the <a href="https://github.com/Behat/Symfony2Extension">Symfony2Extension</a>. MinkBundle was replaced by the <a href="https://github.com/Behat/MinkExtension">MinkExtension</a> and several drivers (i.e. <a href="https://github.com/Behat/MinkSeleniumDriver">MinkSeleniumDriver</a>, <a href="https://github.com/Behat/MinkBrowserkitDriver">MinkBrowserkitDriver</a>).</p>
+
+<p>Here's an example <em>composer.json</em> snippet taken from my Symfony project using both selenium and browserkit drivers:</p>
+
+<pre><code class="json">{
+    "require": {
+        "behat/behat":                  "*",
+        "behat/symfony2-extension":     "*",
+        "behat/mink-extension":         "*",
+        "behat/mink-browserkit-driver": "*",
+        "behat/mink-selenium-driver":   "*"
+    }
+}
+</code></pre>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: Naturally initialization of Behat and Mink bundles has to be removed from the <em>AppKernel</em>.</p>
+
+</div>
+
+<h2 id="accessing-the-symfony-kernel">Accessing the Symfony kernel</h2>
+
+<p>If you've been extending <em>BehatContext</em> from BehatBundle to get access to the Symfony kernel you'll need to alter your code and implement the <em>KernelAwareInterface</em> instead.</p>
+
+<p>The Symfony kernel is injected automatically to every context implementing the <em>KernelAwareInterface</em>:</p>
+
+<pre><code class="php">namespace Acme\Bundle\AcmeBundle\Features\Context;
+
+use Behat\Behat\Context\BehatContext;
+use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
+
+class AcmeContext extends BehatContext implements KernelAwareInterface
+{
+    /**
+     * @var \Symfony\Component\HttpKernel\KernelInterface $kernel
+     */
+    private $kernel = null;
+
+    /**
+     * @param \Symfony\Component\HttpKernel\KernelInterface $kernel
+     *
+     * @return null
+     */
+    public function setKernel(KernelInterface $kernel)
+    {
+        $this-&gt;kernel = $kernel;
+    }
+}
+</code></pre>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: Read more on <a href="https://github.com/Behat/Symfony2Extension">Symfony2Extension on github</a>.</p>
+
+</div>
+
+<h2 id="accessing-mink-session">Accessing Mink session</h2>
+
+<p>It's possible to inject Mink into the context just like it's possible with the Symfony kernel. All you need to do is to implement the <a href="https://github.com/Behat/MinkExtension/blob/master/src/Behat/MinkExtension/Context/MinkAwareInterface.php">MinkAwareInterface</a>.</p>
+
+<p>Alternatively you can extend the <a href="https://github.com/Behat/MinkExtension/blob/master/src/Behat/MinkExtension/Context/RawMinkContext.php">RawMinkContext</a>. It has an additional benefit of gaining access to several handy methods (like <em>getSession()</em>, <em>assertSession()</em>, <em>getMinkParameter()</em>).</p>
+
+<pre><code class="php">namespace Acme\Bundle\AcmeBundle\Features\Context;
+
+use Behat\MinkExtension\Context\RawMinkContext;
+
+class AcmeContext extends RawMinkContext
+{
+    /**
+     * @Given /^I go to (?:|the )homepage$/
+     */
+    public function iGoToHomepage()
+    {
+        $this-&gt;getSession()-&gt;visit('/');
+    }
+}
+</code></pre>
+
+<p><em>RawMinkContext</em> can be safely extended multiple times since it doesn't contain any step definitions (as opposed to <a href="https://github.com/Behat/MinkExtension/blob/master/src/Behat/MinkExtension/Context/MinkContext.php">MinkContext</a>).</p>
+
+<p>To take advantage of steps defined in the <em>MinkContext</em> you can simply add it as a subcontext:</p>
+
+<pre><code class="php">namespace Acme\Bundle\AcmeBundle\Features\Context;
+
+use Acme\Bundle\AcmeBundle\Features\Context\AcmeContext;
+use Behat\Behat\Context\BehatContext;
+use Behat\MinkExtension\Context\MinkContext;
+
+class FeatureContext extends BehatContext
+{
+    public function __construct()
+    {
+        $this-&gt;useContext('acme', new AcmeContext());
+        $this-&gt;useContext('mink', new MinkContext());
+    }
+}
+</code></pre>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: Read more on <a href="https://github.com/Behat/MinkExtension">MinkExtension on github</a>.</p>
+
+</div>
+
+<h2 id="behat-configuration-is-now-separated-from-symfony">Behat configuration is now separated from Symfony</h2>
+
+<p>Instead of configuring Behat in Symfony you'll need to create a new <em>behat.yml</em> file in the top level directory of your project:</p>
+
+<pre><code class="yaml">default:
+  formatter:
+    name: progress
+  extensions:
+    Behat\Symfony2Extension\Extension:
+      mink_driver: true
+      kernel:
+        env: test
+        debug: true
+    Behat\MinkExtension\Extension:
+      base_url: 'http://www.acme.dev/app_test.php/'
+      default_session: symfony2
+      javascript_session: selenium
+      selenium:
+        host: 33.33.33.1
+        port: 4444
+</code></pre>
+
+<p>You'll have to remove your previous configuration (typically placed in <em>app/config/config_test.yml</em>). Otherwise dependency injection container will complain on unrecognised parameters.</p>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: Read more on <em>behat.yml</em> in <a href="http://docs.behat.org/guides/7.config.html">the configuration section</a> of the official documentation.</p>
+
+</div>
+
+<h2 id="there%27s-no-symfony-command-anymore">There's no Symfony command anymore</h2>
+
+<p>As the bundles disappeared and configuration has been separated, we have no Symfony specific command anymore. Behat is now run through its own script.</p>
+
+<p>When using composer it's good to specify the directory you want the commands to be installed in:</p>
+
+<pre><code class="json">{
+    "config": {
+        "bin-dir": "bin"
+    }
+}
+</code></pre>
+
+<p>This way Behat will be accessible via:</p>
+
+<pre><code class="bash">./bin/behat
+</code></pre>
+
+<h2 id="including-autoloader-from-composer">Including autoloader from composer</h2>
+
+<p>If you use composer you'll need to make a small change to the <em>app/autoload.php</em> file. The <em>require_once</em> used to include the autoloader needs to be replaced with <em>require</em>:</p>
+
+<pre><code class="php">$loader = require __DIR__.'/../vendor/autoload.php';
+</code></pre>
+
+<p>I didn't dig into the details but I suspect Behat loads the autoloader first. Symfony tries to include it again and <em>require_once</em> returns false instead of the autoloader object.</p>
+
+<h2 id="assertions">Assertions</h2>
+
+<p>To use PHPUnit's assertions you'll need to include them first (I didn't have to do it before):</p>
+
+<pre><code class="php">require_once 'PHPUnit/Autoload.php';
+require_once 'PHPUnit/Framework/Assert/Functions.php';
+</code></pre>
+
+<p>It's good for a start but later you'd probably prefer to use new <a href="https://github.com/Behat/Mink/blob/master/src/Behat/Mink/WebAssert.php">WebAssert</a> class. Assertions it provides are more suitable for web needs (you should get more meaningful error messages).</p>
+
+<p><em>RawMinkContext</em> provides a way to create <em>WebAssert</em> object with <em>assertSession()</em>:</p>
+
+<pre><code class="php">namespace Acme\Bundle\AcmeBundle\Features\Context;
+
+use Behat\MinkExtension\Context\RawMinkContext;
+
+class AcmeContext extends RawMinkContext
+{
+    /**
+     * @Then /^I should see an error message$/
+     */
+    public function iShouldSeeAnErrorMessage()
+    {
+        $this-&gt;assertSession()-&gt;elementExists('css', '.error');
+    }
+}
+</code></pre>
+
+<h2 id="clearing-doctrine%27s-entity-manager">Clearing Doctrine's entity manager</h2>
+
+<p>When creating database entries with Doctrine in your contexts you might need to clear the entity manager before Symfony tries to retrieve any entities:</p>
+
+<pre><code class="php">$entityManager-&gt;clear();
+</code></pre>
+
+<p>I needed to do it practically in every step which creates entities.</p>
+
+<p>If you store objects in contexts (for future use in other steps) you'll have to register them back in the entity manager before using (since you removed them with <em>clear()</em> call):</p>
+
+<pre><code class="php">$entityManager-&gt;merge($this-&gt;page);
+</code></pre>
+
+<h2 id="running-scenario-suite-for-the-whole-project">Running scenario suite for the whole project</h2>
+
+<p>At the moment there's no way to run a whole project suite. I came up with a simple script solving that problem:</p>
+
+<pre><code class="bash">for feature_path in `find src/ -path '*/Features'`; do
+    bundle=$(echo $feature_path | sed -e 's/^[^\/]\+\/\([^\/]\+\)\/Bundle\/\([^\/]\+\)\/.*/\1\2/');
+    echo "Running suite for $bundle";
+    ./bin/behat "@$bundle";
+done
+</code></pre>
+
+<p>I also created another variation of it to be run on a CI server (generates reports): <a href="https://gist.github.com/2951321">https://gist.github.com/2951321</a></p>
+
+<h2 id="is-it-worth-it%3F">Is it worth it?</h2>
+
+<p>I like to be up to date with libraries I use. Especially if I have to support the project for a long time.</p>
+
+<p>With Behat 2.4 you'll get a bit more than being up to date with the bug fixes. The way it's been refactored enables you to better design your contexts. It's much easier to make them decoupled from each other.</p>
+</section>
+    </section>
+
+
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'zalas';
+        var disqus_identifier = 'updating-symfony2-project-to-behat-2-4';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+            </div>
+        </div>
+                                <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-607315-8', 'auto');
+                ga('send', 'pageview');
+            </script>
+            
+            
+            <script src="http://zalas.eu/components/highlightjs/highlight.pack.js"></script>
+            <script>hljs.initHighlightingOnLoad();</script>
+                    </body>
+</html>

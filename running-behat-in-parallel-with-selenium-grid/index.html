@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Running Behat in parallel with Selenium grid &mdash; Jakub Zalas &mdash; Agile Software Engineer</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="verify-v1" content="PBznb5+bhxbUdD7HvioYYudpqitFdLDgjQTv8SwALq4=" />        <meta name="keywords" content="behat,parallel,gnu parallel,selenium,grid">
+                <meta name="description" content="Run Behat tests in parallel with GNU parallel and Selenium grid.">
+                    <meta name="robots" content="index, follow">
+        <link rel="shortcut icon" href="http://zalas.eu/favicon.ico" />
+        <link rel="alternate" type="application/atom+xml" href="http://zalas.eu/atom.xml" title="Jakub Zalas activity feed" />
+        <link href="http://zalas.eu/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/code.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+                                    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                        <section itemscope itemtype="http://schema.org/BlogPosting">
+        <h1 itemprop="name">Running Behat in parallel with Selenium grid</h1>
+        <div class="post-date pull-right">
+            <time itemprop="datePublished" content="2014-01-31" datetime="2014-01-31">31 Jan 2014</time>
+        </div>
+        <ul class="list-unstyled list-inline post-tag-cloud">
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/behat/">
+                    <span class="list-group-item-heading">behat</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/selenium/">
+                    <span class="list-group-item-heading">selenium</span>
+                </a>
+            </li>
+                    </ul>
+
+        
+        <section class="content" itemprop="articleBody"><p>There are few ways to run Behat tests in parallel, including the following Behat extensions:</p>
+
+<ul>
+<li><a href="http://extensions.behat.org/gearman/">Gaerman</a></li>
+<li><a href="https://github.com/shvetsgroup/ParallelRunner">ParallelRunner</a></li>
+</ul>
+
+<p>However, I found the <a href="http://www.gnu.org/software/parallel/">GNU parallel</a> command to be most flexible,
+since it is an OS level tool.</p>
+
+<h2 id="gnu-parallel">GNU parallel</h2>
+
+<p>GNU parallel is able to run practically anything in parallel. Jobs can be read from a pipe:</p>
+
+<pre><code class="bash">seq 5 1 | parallel --gnu 'sleep {} &amp;&amp; echo "{}";'
+</code></pre>
+
+<p>This means we can write all sorts of bash scripts to "feed" the parallel command.</p>
+
+<p>For example, the following script will run all tests in parallel, grouped by sprints, starting from the latest:</p>
+
+<pre><code class="bash">grep -R '@sprint:' features/ |
+ sed -e 's/.*\(@sprint:[0-9]*\).*/\1/' |
+ sort -ur |
+ parallel --gnu 'bin/behat --tags={}' || exit 1
+</code></pre>
+
+<p>On projects where test execution time varies a lot between scenarios,
+I found it's better to run each feature file separately:</p>
+
+<pre><code class="bash">find features/ -iname '*.feature' | parallel --gnu 'bin/behat {}' || exit 1
+</code></pre>
+
+<p>Nice thing about GNU parallel is that it will (by default) run as many processes as there are CPU cores available.</p>
+
+<h2 id="selenium-grid">Selenium grid</h2>
+
+<p><a href="http://docs.seleniumhq.org/docs/07_selenium_grid.jsp">Selenium grid</a> can be used to run tests against multiple
+browsers or to distribute the runs to multiple machines.</p>
+
+<div class="text-center">
+    <a href="/uploads/wp/2014/01/selenium-grid.png"><img src="/uploads/wp/2014/01/selenium-grid.png" title="Selenium Grid" alt="Selenium Grid" class="img-responsive" /></a>
+</div>
+
+<p>Usage is very simple. Instead of running a single selenium server, we first start a hub:</p>
+
+<pre><code class="bash">java -jar selenium-server-standalone.jar -role hub
+</code></pre>
+
+<p>Next, we run as many nodes as we need. Nodes will connect to the hub, which in turn will forward any requests to
+a node. Node capabilities need to match the ones client requested.</p>
+
+<p>To start a single node run:</p>
+
+<pre><code class="bash">java -jar selenium-server-standalone.jar -role node -hub http://localhost:4444/grid/register
+</code></pre>
+
+<p>More options could be specified to fine tune both nodes and the hub (refer the docs).</p>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: For testing purposes, here's a script which will start a hub with as
+many nodes as there are CPU cores available: <a href="https://gist.github.com/jakzal/8583518">gist:jakzal/8583518</a>.
+However, in most cases it doesn't really make much sense to run all the nodes on the same machine.</p>
+
+</div>
+
+<p>One thing to remember when using the Selenium grid with phantomjs and Behat, is to properly configure
+capabilities. Based on these, the hub will try to find a proper node to run our tests.
+Defaults are not suitable for phantomjs and we'll have to reset the browser version:</p>
+
+<pre><code class="yaml"># behat.yml
+default:
+  extensions:
+    Behat\MinkExtension\Extension:
+      base_url: 'http://localhost/'
+      browser_name: phantomjs
+      selenium2:
+        wd_host: http://127.0.0.1:4444/wd/hub
+        capabilities:
+          version: ''
+</code></pre>
+</section>
+    </section>
+
+
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'zalas';
+        var disqus_identifier = 'running-behat-in-parallel-with-selenium-grid';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+            </div>
+        </div>
+                                <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-607315-8', 'auto');
+                ga('send', 'pageview');
+            </script>
+            
+            
+            <script src="http://zalas.eu/components/highlightjs/highlight.pack.js"></script>
+            <script>hljs.initHighlightingOnLoad();</script>
+                    </body>
+</html>

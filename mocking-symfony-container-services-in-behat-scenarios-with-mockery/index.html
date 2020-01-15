@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Mocking Symfony Container services in Behat scenarios with Mockery &mdash; Jakub Zalas &mdash; Agile Software Engineer</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="verify-v1" content="PBznb5+bhxbUdD7HvioYYudpqitFdLDgjQTv8SwALq4=" />        <meta name="keywords" content="Symfony,container,tests,mocking,stubbing,mockery">
+                    <meta name="robots" content="index, follow">
+        <link rel="shortcut icon" href="http://zalas.eu/favicon.ico" />
+        <link rel="alternate" type="application/atom+xml" href="http://zalas.eu/atom.xml" title="Jakub Zalas activity feed" />
+        <link href="http://zalas.eu/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/code.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+                                    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                        <section itemscope itemtype="http://schema.org/BlogPosting">
+        <h1 itemprop="name">Mocking Symfony Container services in Behat scenarios with Mockery</h1>
+        <div class="post-date pull-right">
+            <time itemprop="datePublished" content="2012-01-13" datetime="2012-01-13">13 Jan 2012</time>
+        </div>
+        <ul class="list-unstyled list-inline post-tag-cloud">
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/bdd/">
+                    <span class="list-group-item-heading">bdd</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/behat/">
+                    <span class="list-group-item-heading">behat</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/DependencyInjection/">
+                    <span class="list-group-item-heading">DependencyInjection</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/mockery/">
+                    <span class="list-group-item-heading">mockery</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/Symfony2/">
+                    <span class="list-group-item-heading">Symfony2</span>
+                </a>
+            </li>
+                    </ul>
+
+                <div class="alert alert-danger">
+            <strong>Warning</strong>: This blog post was written a long time ago and might be no longer relevant.
+        </div>
+        
+        <section class="content" itemprop="articleBody"><p>Mocking objects in unit tests is pretty straightforward as every object used in a test case is usually created in a scope of one test class. In functional tests it's a bit harder since we either don't have full control over objects being created or it's simply too laborious to mock half the framework.</p>
+
+<p>Instead of functional tests I'm using <a href="http://behat.org/">Behat</a>. In the context of this blog post it satisfies the same need - <strong>verifies the external behavior</strong> of an application. It also brings similar problems.</p>
+
+<div class="text-center">
+    <img src="/uploads/wp/2012/01/red-green.png" title="Red Green" alt="Red Green" class="img-responsive" />
+</div>
+
+<h2 id="the-problem">The Problem</h2>
+
+<p>Let's pretend we have to implement a contact form on our website. Information submitted by user should be pushed to an external CRM system as a potential lead. Of course our CRM system has an API which makes the whole thing possible.</p>
+
+<p>As BDD preaches we should start with a scenario:</p>
+
+<pre><code class="gherkin">Feature: Submitting contact form
+  As a Visitor
+  I want to contact sales department
+  In order to receive detailed information on one of the products
+
+  Scenario: Submitting the form
+    When I go to "/contact-us"
+     And I complete the contact form with following information
+       |First name|Last name|Email                |
+       |Jakub     |Zalas    |jzalas+spam@gmail.com|
+     And CRM API is available
+     And I submit the contact form
+    Then a new lead should be sent to the CRM
+</code></pre>
+
+<p>In the controller, next to form handling, we also need code responsible for sending the lead to the CRM:</p>
+
+<pre><code class="php">$crmClient = $this-&gt;get('crm.client');
+$crmClient-&gt;sendLead($form-&gt;getData());
+</code></pre>
+
+<p>We're getting the service from a container and calling a method which should send a lead. The problem is we don't want to actually call an API while executing Behat scenarios. We would quickly end up with a CRM polluted with lots of fake data and scenarios failing ocasionaly when the API is not accessible.</p>
+
+<p>It'd also be hard to set up a scene for a scenario (like simulating a timeout during http request).</p>
+
+<p>The fact is we don't want to test the client of a CRM API (unit tests or <a href="http://www.phpspec.net/">phpspec</a> will do a better job here). We just need to know if the service was called or to simulate a behavior.</p>
+
+<p>That's what mocks were invented for.</p>
+
+<p><strong>We need to mock the service.</strong></p>
+
+<h2 id="the-solution">The Solution</h2>
+
+<p>I came up with a simple bundle that allows service mocking with <a href="https://github.com/padraic/mockery">Mockery</a>. It's called <a href="https://github.com/PolishSymfonyCommunity/PSSMockeryBundle">PSSMockeryBundle</a> and you can download it from <a href="https://github.com/PolishSymfonyCommunity/PSSMockeryBundle">github</a>.</p>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: PSSMockeryBundle works with Behat &lt;= 2.3. Use <a href="https://github.com/PolishSymfonyCommunity/Symfony2MockerExtension">Symfony2MockerExtension</a> with Behat &gt;= 2.4.</p>
+
+</div>
+
+<p>At the moment bundle provides <em>MockerContainer</em> and <em>MockerContainerContext</em>. <em>MockerContainer</em> is a container class which enables service mocking. <em>MockerContainerContext</em> is a Behat context with generic step for expectation verification and a handy <em>mockService()</em> method.</p>
+
+<p>The step "<em>CRM API is available</em>" defines our expectations on the state of CRM service. It says that API should work properly and that's the situation we have to prepare:</p>
+
+<pre><code class="php">/**
+ * @Given /^CRM API is available$/
+ *
+ * @return null
+ */
+ public function crmApiIsAvailable()
+ {
+     $this-&gt;getMainContext()-&gt;getSubContext('container')
+         -&gt;mockService('crm.client', 'PSS\Crm\Client')
+         -&gt;shouldReceive('send')
+         -&gt;once()
+         -&gt;andReturn(true);
+ }
+</code></pre>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: Container won't return the mock unless we first ask it to do so. In other words, it works as a regular container by default.</p>
+
+</div>
+
+<p>All the expectations are automatically checked after the scenario is executed (<em>@afterScenario</em> hook).</p>
+
+<p>We can also do it manually which in some cases makes the scenario more readable:</p>
+
+<pre><code class="php">/**
+ * @Given /^(a )?new lead should be sent to (the )?CRM$/
+ *
+ * @return null
+ */
+ public function aNewLeadShouldBeSentToTheCrm()
+ {
+     return new Then(sprintf('the "%s" service should meet my expectations', 'crm.client'));
+ }
+</code></pre>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: The <em>the "&lt;serviceId&gt;" service should meet my expectations</em> step is provided by <em>MockerContainerContext</em>.</p>
+
+</div>
+
+<h2 id="feedback-much-appreciated">Feedback much appreciated</h2>
+
+<p>This is my second attempt to solve this problem. It's much better than the first one (<em>don't even worth a mention</em>). I'm using this approach in my projects and it already proved to be working (at least so far). But <strong>I'd love to get your feedback</strong>.</p>
+
+<p>Big thanks to <a href="http://www.craftitonline.com/">Luis Cordova</a> who exercised the <em>MockerContainerContext</em> in PHPSpec's WebSpec examples (<a href="http://www.craftitonline.com/2012/01/pssmockerybundle-phpspec-the-automation-of-mocking-services-begins/">read his blog post</a>).</p>
+</section>
+    </section>
+
+
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'zalas';
+        var disqus_identifier = 'mocking-symfony-container-services-in-behat-scenarios-with-mockery';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+            </div>
+        </div>
+                                <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-607315-8', 'auto');
+                ga('send', 'pageview');
+            </script>
+            
+            
+            <script src="http://zalas.eu/components/highlightjs/highlight.pack.js"></script>
+            <script>hljs.initHighlightingOnLoad();</script>
+                    </body>
+</html>

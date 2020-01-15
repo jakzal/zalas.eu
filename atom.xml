@@ -1,0 +1,1392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <title><![CDATA[Jakub Zalas]]></title>
+    <link href="http://zalas.eu/atom.xml" rel="self"/>
+    <link href="http://zalas.eu/"/>
+    <updated>2020-01-15T16:17:05+00:00</updated>
+    <id>http://zalas.eu/</id>
+        <generator uri="http://sculpin.io/">Sculpin</generator>
+            <entry>
+            <title type="html"><![CDATA[Static analysis tools for PHP in a single docker image]]></title>
+            <link href="http://zalas.eu/phpqa-static-analysis-tools-for-php-docker-image/"/>
+            <updated>2017-07-19T15:40:00+00:00</updated>
+            <id>http://zalas.eu/phpqa-static-analysis-tools-for-php-docker-image/</id>
+            <content type="html"><![CDATA[<p>As part of my job I often perform application reviews and code quality analysis for clients who wish to have their
+code base looked at by an independent company. Running static analysis tools is usually a starting point to
+the review as it gives a general overview of a state of the project.
+I also like to run those tools as part of an introduction to an inherited code base.</p>
+
+<p>For an easy access to the most popular static analysis tools for PHP I recently
+created <a href="https://hub.docker.com/r/jakzal/phpqa/">a docker image - phpqa</a>.
+Currently it comes with the following tools:</p>
+
+<ul>
+<li>analyze - <a href="https://github.com/Qafoo/QualityAnalyzer">Visualizes metrics and source code</a></li>
+<li>box - <a href="https://box-project.github.io/box2/">An application for building and managing Phars</a></li>
+<li>composer - <a href="https://getcomposer.org/">Dependency Manager for PHP</a></li>
+<li>dephpend - <a href="https://dephpend.com/">Detect flaws in your architecture</a></li>
+<li>deprecation-detector - <a href="https://github.com/sensiolabs-de/deprecation-detector">Finds usages of deprecated code</a></li>
+<li>deptrac - <a href="https://github.com/sensiolabs-de/deptrac">Enforces dependency rules</a></li>
+<li>design-pattern - <a href="https://github.com/Halleck45/DesignPatternDetector">Dettects design patterns</a></li>
+<li>parallel-lint - <a href="https://github.com/JakubOnderka/PHP-Parallel-Lint">Checks PHP file syntax</a></li>
+<li>pdepend - <a href="https://pdepend.org/">Static Analysis Tool</a></li>
+<li>phan - <a href="https://github.com/etsy/phan">Static Analysis Tool</a></li>
+<li>phpca - <a href="https://github.com/wapmorgan/PhpCodeAnalyzer">Finds usage of non-built-in extensions</a></li>
+<li>phpcf - <a href="http://wapmorgan.github.io/PhpCodeFixer/">Finds usage of deprecated features</a></li>
+<li>php-coupling-detector - <a href="https://akeneo.github.io/php-coupling-detector/">Detects code coupling issues</a></li>
+<li>php-cs-fixer - <a href="http://cs.sensiolabs.org/">PHP Coding Standards Fixer</a></li>
+<li>php-formatter - <a href="https://github.com/mmoreram/php-formatter">Custom coding standards fixer</a></li>
+<li>php-semver-checker - <a href="https://github.com/tomzx/php-semver-checker">Suggests a next version according to semantic versioning </a></li>
+<li>phpDocumentor - <a href="https://www.phpdoc.org/">Documentation generator</a></li>
+<li>phpa - <a href="https://github.com/rskuipers/php-assumptions">Checks for weak assumptions</a></li>
+<li>phpcb - <a href="https://github.com/mayflower/PHP_CodeBrowser">PHP Code Browser</a></li>
+<li>phpcbf - <a href="https://github.com/squizlabs/PHP_CodeSniffer">Automatically corrects coding standard violations</a></li>
+<li>phpcpd - <a href="https://github.com/sebastianbergmann/phpcpd">Copy/Paste Detector</a></li>
+<li>phpcs - <a href="https://github.com/squizlabs/PHP_CodeSniffer">Detects coding standard violations</a></li>
+<li>phpda - <a href="https://mamuz.github.io/PhpDependencyAnalysis/">Generates dependency graphs</a></li>
+<li>phpdoc-to-typehint - <a href="https://github.com/dunglas/phpdoc-to-typehint">Automatically adds type hints and return types based on PHPDocs</a></li>
+<li>phploc - <a href="https://github.com/sebastianbergmann/phploc">A tool for quickly measuring the size of a PHP project</a></li>
+<li>phpmd - <a href="https://phpmd.org/">A tool for finding problems in PHP code</a></li>
+<li>phpmetrics - <a href="http://www.phpmetrics.org/">Static Analysis Tool</a></li>
+<li>phpmnd - <a href="https://github.com/povils/phpmnd">Helps to detect magic numbers</a></li>
+<li>phpstan - <a href="https://github.com/phpstan/phpstan">Static Analysis Tool</a></li>
+<li>psalm - <a href="https://getpsalm.org/">Finds errors in PHP applications</a></li>
+</ul>
+
+<p>To start using the image pull it first:</p>
+
+<pre><code class="bash">docker pull jakzal/phpqa:alpine
+</code></pre>
+
+<p>Note that you can choose between Debian and Alpine based images (<code>latest</code> and <code>alpine</code> tags).</p>
+
+<p>Now you're ready to run any of the tools included:</p>
+
+<pre><code class="bash">docker run -it --rm -v $(pwd):/project -w /project jakzal/phpqa:alpine phpstan analyse src
+</code></pre>
+
+<p>The command above will run a docker container and mount the current working directory as a <code>/project</code>.</p>
+
+<p>In most cases I prefer to use an alias:</p>
+
+<pre><code class="bash">alias phpqa="docker run -it --rm -v $(pwd):/project -w /project jakzal/phpqa:alpine"
+</code></pre>
+
+<p>It simplifies the command:</p>
+
+<pre><code class="bash">phpqa phpstan analyse src
+</code></pre>
+
+<p>Depending on the requirements of the project being reviewed, it's often needed to customise the image further
+with additional PHP extensions or other kinds of dependencies.
+In such scenarios I simply create a new image based off <code>jakzal/phpqa</code>
+(<a href="https://github.com/jakzal/phpqa">see the docs for more</a>).</p>
+
+<p>To learn more about the phpqa image or follow its development, check out the following project pages:</p>
+
+<ul>
+<li><a href="https://hub.docker.com/r/jakzal/phpqa/">https://hub.docker.com/r/jakzal/phpqa/</a></li>
+<li><a href="https://github.com/jakzal/phpqa">https://github.com/jakzal/phpqa</a></li>
+</ul>
+
+<p>Happy analysing!</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Symfony adoption, a year later]]></title>
+            <link href="http://zalas.eu/symfony-adoption-year-later/"/>
+            <updated>2015-04-04T13:18:15+00:00</updated>
+            <id>http://zalas.eu/symfony-adoption-year-later/</id>
+            <content type="html"><![CDATA[<p>Over a year ago <a href="/symfony2-adoption/">I looked into Symfony2 adoption</a> for the first time.
+By gathering statistics from packages found on <a href="https://packagist.org/">packagist.org</a>,
+I tried to provide a less subjective view of framework's popularity.</p>
+
+<p>Results of all kinds of polls organised by various portals
+are only subjective views of their readers.
+Organising a poll on a site mostly read by WordPress users will yield
+different results than a poll popular among Laravel artisans.
+Voting is also limited to readers who actually decided to participate in a poll, 
+so it's hardly a representative view.</p>
+
+<p>Although statistics I gathered here reflect actual choices people made
+when working on open source projects, they need to be put in a context just
+as well as the poll results.</p>
+
+<p>These statistics are by no means an indicator of popularity among the end users.</p>
+
+<p>We can't learn from them how popular a framework is on commercial projects.
+What we can learn, however, is how popular it is among developers
+who create libraries or other frameworks. Especially now,
+when composer is the de facto standard for PHP package management
+(a year ago there were voices it's still not well adopted by some).</p>
+
+<p>Recently I dusted off the old scripts and repeated the experiment.
+This time I also included Doctrine and Laravel (Illuminate) next to Symfony
+and Zend Framework. Just out of curiosity and to put it in a wider context.</p>
+
+<p>As a reminder, I looked for dependencies defined in the <em>require</em>,
+<em>require-dev</em> and <em>suggest</em> sections.</p>
+
+<h2 id="symfony">Symfony</h2>
+
+<div class="pull-right">
+    <div id="stats-chart" style="max-width:400px; width: 35%;"></div>
+</div>
+
+<p>There's over 53000 packages registered on packagist at the moment of writing. This number
+is over twice as big as last year.</p>
+
+<p>Number of packages depending on Symfony has almost doubled too.
+Out of <strong>9265</strong> packages that depend on Symfony, there's <strong>2942</strong> that depend
+on the <em>symfony/framework-bundle</em> and <strong>1857</strong> that depend on <em>symfony/symfony</em>.
+These are most likely bundles or applications.</p>
+
+<p>The chart on the right and the table below present Symfony in a context
+of other popular libraries and frameworks.</p>
+
+<p>However, since a single package might depend on multiple vendors
+these numbers are not exclusive.
+For example, out of <em>3751</em> packages depending on
+Doctrine, <em>2299</em> depends on Symfony, <em>431</em> depends on Zend Framework, and
+<em>68</em> on Illuminate.</p>
+
+<p>In other words packages depending on both Doctrine and Symfony 
+are included in these numbers twice, so summing them up
+wouldn't make much sense.</p>
+
+<table class="table table-striped table-hover table-condensed">
+
+<p><tr><th></th><th>Feb 2014</th><th>Mar 2015</th></tr>
+<tr><td><strong>Total number of packages on packagist.org</strong></td><td><strong>24317</strong></td><td><strong>53101</strong></td></tr>
+<tr><td>Depends on Symfony</td><td>4994</td><td>9265</td></tr>
+<tr><td>Depends on Illuminate</td><td>1355</td><td>4160</td></tr>
+<tr><td>Depends on Doctrine</td><td>-</td><td>3751</td></tr>
+<tr><td>Depends on Zend Framework</td><td>1356</td><td>2289</td></tr></p>
+
+</table>
+
+<h2 id="symfony-components">Symfony Components</h2>
+
+<p>Looking at components alone is less biased.</p>
+
+<p>The chart below shows component adoption alone. These are only direct
+dependencies as given in <em>composer.json</em>.
+Numbers don't include indirect dependencies.
+For example, since Laravel depends on Symfony, a package which depends
+on Laravel won't be included in numbers below.
+Unless it also indicates a dependency on one of the Symfony components.</p>
+
+<div id="components-chart" style="width:100%; height:500px;"></div>
+
+<p>As you can see the <strong>console</strong> component has outrun <strong>yaml</strong> in the past year.
+I'm not surprised, as it saves a lot of effort while building command line tools
+and applications.</p>
+
+<p>Detailed numbers can be found in the table below and here are the results of crawling: <a href="/uploads/wp/2015/04/results-20150311.csv">results.csv</a>.</p>
+
+<table class="table table-striped table-hover table-condensed">
+
+<p><tr><th></th><th><small>Feb 2014</small></th><th></th><th></th><th>Mar 2015</th><th></th><th></th></tr>
+<tr><th>Component</th><th><small>Bundles</small></th><th><small>Other</small></th><th><small>Total</small></th><th>Bundles</th><th>Other</th><th>Total</th></tr>
+<tr><td>console</td><td><small>176</small></td><td><small>615</small></td><td><small>791</small></td><td>303</td><td>1347</td><td>1650</td></tr>
+<tr><td>yaml</td><td><small>285</small></td><td><small>519</small></td><td><small>804</small></td><td>435</td><td>1141</td><td>1576</td></tr>
+<tr><td>finder</td><td><small>156</small></td><td><small>317</small></td><td><small>473</small></td><td>263</td><td>633</td><td>896</td></tr>
+<tr><td>config</td><td><small>129</small></td><td><small>281</small></td><td><small>410</small></td><td>296</td><td>511</td><td>807</td></tr>
+<tr><td>http-foundation</td><td><small>83</small></td><td><small>292</small></td><td><small>375</small></td><td>133</td><td>615</td><td>748</td></tr>
+<tr><td>form</td><td><small>276</small></td><td><small>96</small></td><td><small>372</small></td><td>462</td><td>201</td><td>663</td></tr>
+<tr><td>process</td><td><small>46</small></td><td><small>266</small></td><td><small>312</small></td><td>72</td><td>587</td><td>659</td></tr>
+<tr><td>dependency-injection</td><td><small>136</small></td><td><small>146</small></td><td><small>282</small></td><td>342</td><td>301</td><td>643</td></tr>
+<tr><td>http-kernel</td><td><small>118</small></td><td><small>150</small></td><td><small>268</small></td><td>298</td><td>305</td><td>603</td></tr>
+<tr><td>validator</td><td><small>176</small></td><td><small>132</small></td><td><small>308</small></td><td>299</td><td>274</td><td>573</td></tr>
+<tr><td>event-dispatcher</td><td><small>40</small></td><td><small>233</small></td><td><small>273</small></td><td>78</td><td>468</td><td>546</td></tr>
+<tr><td>filesystem</td><td><small>25</small></td><td><small>187</small></td><td><small>212</small></td><td>44</td><td>422</td><td>466</td></tr>
+<tr><td>browser-kit</td><td><small>119</small></td><td><small>95</small></td><td><small>214</small></td><td>189</td><td>183</td><td>372</td></tr>
+<tr><td>class-loader</td><td><small>122</small></td><td><small>144</small></td><td><small>266</small></td><td>159</td><td>197</td><td>356</td></tr>
+<tr><td>css-selector</td><td><small>57</small></td><td><small>92</small></td><td><small>149</small></td><td>75</td><td>206</td><td>281</td></tr>
+<tr><td>translation</td><td><small>11</small></td><td><small>103</small></td><td><small>114</small></td><td>22</td><td>205</td><td>227</td></tr>
+<tr><td>security</td><td><small>58</small></td><td><small>67</small></td><td><small>125</small></td><td>80</td><td>144</td><td>224</td></tr>
+<tr><td>security-csrf</td><td><small>-</small></td><td><small>-</small></td><td><small>-</small></td><td>2</td><td>1</td><td>3</td></tr>
+<tr><td>security-core</td><td><small>-</small></td><td><small>-</small></td><td><small>-</small></td><td>5</td><td>24</td><td>29</td></tr>
+<tr><td>security-http</td><td><small>-</small></td><td><small>-</small></td><td><small>-</small></td><td>3</td><td>16</td><td>19</td></tr>
+<tr><td>routing</td><td><small>28</small></td><td><small>86</small></td><td><small>114</small></td><td>45</td><td>163</td><td>208</td></tr>
+<tr><td>options-resolver</td><td><small>19</small></td><td><small>52</small></td><td><small>71</small></td><td>38</td><td>134</td><td>172</td></tr>
+<tr><td>dom-crawler</td><td><small>12</small></td><td><small>58</small></td><td><small>70</small></td><td>23</td><td>139</td><td>162</td></tr>
+<tr><td>property-access</td><td><small>17</small></td><td><small>53</small></td><td><small>70</small></td><td>36</td><td>125</td><td>161</td></tr>
+<tr><td>expression-language</td><td><small>15</small></td><td><small>26</small></td><td><small>41</small></td><td>66</td><td>85</td><td>151</td></tr>
+<tr><td>serializer</td><td><small>13</small></td><td><small>47</small></td><td><small>60</small></td><td>26</td><td>77</td><td>103</td></tr>
+<tr><td>debug</td><td><small>0</small></td><td><small>26</small></td><td><small>26</small></td><td>1</td><td>85</td><td>86</td></tr>
+<tr><td>templating</td><td><small>16</small></td><td><small>17</small></td><td><small>33</small></td><td>23</td><td>53</td><td>76</td></tr>
+<tr><td>var-dumper</td><td><small>-</small></td><td><small>-</small></td><td><small>-</small></td><td>4</td><td>48</td><td>52</td></tr>
+<tr><td>stopwatch</td><td><small>4</small></td><td><small>22</small></td><td><small>26</small></td><td>8</td><td>43</td><td>51</td></tr>
+<tr><td>locale</td><td><small>7</small></td><td><small>22</small></td><td><small>29</small></td><td>7</td><td>38</td><td>45</td></tr>
+<tr><td>intl</td><td><small>2</small></td><td><small>11</small></td><td><small>13</small></td><td>6</td><td>30</td><td>36</td></tr>
+<tr><td>icu</td><td><small>-</small></td><td><small>-</small></td><td><small>-</small></td><td>2</td><td>18</td><td>20</td></tr>
+<tr><td>asset</td><td><small>-</small></td><td><small>-</small></td><td><small>-</small></td><td>2</td><td>3</td><td>5</td></tr></p>
+
+</table>
+
+<h2 id="symfony-bridges">Symfony Bridges</h2>
+
+<p>These are numbers of packages depending on bridges from the Symfony organisation.</p>
+
+<table class="table table-striped table-hover table-condensed">
+
+<p><tr><td>twig-bridge</td><td>217</td></tr>
+<tr><td>monolog-bridge</td><td>90</td></tr>
+<tr><td>doctrine-bridge</td><td>72</td></tr>
+<tr><td>phpunit-bridge</td><td>44</td></tr>
+<tr><td>proxy-manager-bridge</td><td>24</td></tr>
+<tr><td>swiftmailer-bridge</td><td>7</td></tr>
+<tr><td>propel1-bridge</td><td>1</td></tr></p>
+
+</table>
+
+<h2 id="symfony-bundles">Symfony Bundles</h2>
+
+<p>Here are numbers of packages depending on bundles from the Symfony organisation.</p>
+
+<table class="table table-striped table-hover table-condensed">
+
+<p><tr><td>framework-bundle</td><td>2942</td></tr>
+<tr><td>monolog-bundle</td><td>535</td></tr>
+<tr><td>assetic-bundle</td><td>439</td></tr>
+<tr><td>swiftmailer-bundle</td><td>385</td></tr>
+<tr><td>twig-bundle</td><td>313</td></tr>
+<tr><td>security-bundle</td><td>219</td></tr>
+<tr><td>web-profiler-bundle</td><td>24</td></tr>
+<tr><td>debug-bundle</td><td>3</td></tr></p>
+
+</table>
+
+<h2 id="bonus%3A-testing-tools">Bonus: Testing Tools</h2>
+
+<p>As a bonus, I also included some popular testing tools.</p>
+
+<p>Bare in mind that these are very often not specified in <em>composer.json</em>,
+as many projects rely on them being installed globally (especially PHPUnit users).</p>
+
+<table class="table table-striped table-hover table-condensed">
+
+<p><tr><th></th><th>Mar 2015</th></tr>
+<tr><th>Total number of packages on packagist.org</th><th>53101</th></tr>
+<tr><td>PHPUnit</td><td> 12259</td></tr>
+<tr><td>PhpSpec</td><td>990</td></tr>
+<tr><td>Behat</td><td>452</td></tr>
+<tr><td>Codeception</td><td>293</td></tr>
+<tr><td>Mink</td><td>149</td></tr>
+<tr><td>SimpleTest</td><td>22</td></tr></p>
+
+</table>
+
+<script type="text/javascript">
+    function load() {
+        renderStatsChart();
+        renderComponentsChart();
+    };
+    function renderStatsChart() {
+        // Radialize the colors
+        Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
+            return {
+                radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+                stops: [
+                    [0, color],
+                    [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+                ]
+            };
+        });
+    
+        // Build the chart
+        $('#stats-chart').highcharts({
+            title: {
+                text: ''
+            },
+            tooltip: {
+                pointFormat: '<b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    dataLabels: {
+                        distance: -30,
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                data: [
+                    ['Other', 61.94],
+                    {
+                        name: 'Symfony',
+                        y: 18.12,
+                        sliced: true,
+                        selected: true
+                    },
+                    ['Illuminate', 8.13],
+                    ['Doctrine', 7.33],
+                    ['Zend Framework', 4.47]
+                ]
+            }],
+            credits: {
+                enabled: false
+            }
+        });
+    };
+    function renderComponentsChart() {
+        var series = [
+            {
+                name: 'Other (2014)',
+                data: [615, 519, 317, 281, 292, 96, 266, 146, 150, 132, 233, 187, 95, 144, 92, 103, 67, 86, 52, 58, 53, 26, 47, 26, 17, 0, 22, 22, 11, 0, 0],
+                stack: '2014'
+            },
+            {
+                name: 'Bundles (2014)',
+                data: [176, 285, 156, 129, 83, 276, 46, 136, 118, 176, 40, 25, 119, 122, 57, 11, 58, 28, 19, 12, 17, 15, 13, 0, 16, 0, 4, 7, 2, 0, 0],
+                stack: '2014'
+            },
+            {
+                name: 'Other (2015)',
+                data: [1347, 1141, 633, 511, 615, 201, 587, 301, 305, 274, 468, 422, 183, 197, 206, 205, 144, 163, 134, 139, 125, 85, 77, 85, 53, 48, 43, 38, 30, 18, 3],
+                stack: '2015'
+            },
+            {
+                name: 'Bundles (2015)',
+                data: [303, 435, 263, 296, 133, 462, 72, 342, 298, 299, 78, 44, 189, 159, 75, 22, 80, 45, 38, 23, 36, 66, 26, 1, 23, 4, 8, 7, 6, 2, 2],
+                stack: '2015'
+            }
+        ];
+        $('#components-chart').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Symfony Components'
+            },
+            xAxis: {
+                categories: [
+                    'console', 'yaml', 'finder', 'config', 'http-foundation', 'form', 'process', 'dependency-injection', 'http-kernel', 'validator', 'event-dispatcher', 'filesystem', 'browser-kit', 'class-loader', 'css-selector', 'translation', 'security', 'routing', 'options-resolver', 'dom-crawler', 'property-access', 'expression-language', 'serializer', 'debug', 'templating', 'var-dumper', 'stopwatch', 'locale', 'intl', 'icu', 'asset'
+                ]
+            },
+            yAxis: {
+                title: {
+                    text: '# of projects'
+                }
+            },
+            tooltip: {
+                formatter: function () {
+                    return '<b>' + this.x + '</b><br/>' +
+                            this.series.name + ': ' + this.y + '<br/>' +
+                            'Total: ' + this.point.stackTotal;
+                }
+            },
+            plotOptions: {
+                column: {
+                    stacking: 'normal'
+                }
+            },
+            series: series,
+            credits: {
+                enabled: false
+            }
+        });
+    }
+</script>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Symfony2 adoption]]></title>
+            <link href="http://zalas.eu/symfony2-adoption/"/>
+            <updated>2014-02-18T23:57:00+00:00</updated>
+            <id>http://zalas.eu/symfony2-adoption/</id>
+            <content type="html"><![CDATA[<p>While preparing my talk for the SymfonyCon in Warsaw (<a href="https://speakerdeck.com/jakzal/symfony-components-in-the-wild-symfonycon-2013">Symfony components in the wild</a>),
+I realised it would be nice to show what's the adoption of Symfony components. So I wrote a crawler to
+gather this kind of data from <a href="https://packagist.org/">packagist.org</a> and shared it on the conference. This article presents my findings.</p>
+
+<div class="pull-left">
+    <a href="/uploads/wp/2014/02/projects-on-packagist.org.png"><img src="/uploads/wp/2014/02/projects-on-packagist.org-350x350.png" title="Projects on packagist.org" alt="Projects on packagist.org" class="img-responsive" /></a>
+</div>
+
+<p>The table bellow shows a total number of projects found on packagist.org, which indicated a dependency
+on either one of the components or the whole framework. I looked for dependencies in the <em>require</em>, <em>require-dev</em> and <em>suggest</em>
+sections.</p>
+
+<p>Zend Framework is included for comparision, as it's the only other framework I could think of,
+which is also built in a modular way (kind of).</p>
+
+<p>Out of <strong>4994</strong> packages that depend on Symfony,
+there's <strong>1911</strong> that depend on the <em>symfony/framework-bundle</em> and <strong>1098</strong> that depend on <em>symfony/symfony</em>.
+The rest depends on components.</p>
+
+<p>There's also <strong>112</strong> packages depending on both Symfony and Zend Framework.</p>
+
+<table class="table table-striped table-hover table-condensed">
+
+<p><tr><th>Total number of packages on packagist.org</th><th>24317</th></tr>
+<tr><td>Depends on Symfony</td><td>4994</td></tr>
+<tr><td>Depends on Zend Framework</td><td>1356</td></tr>
+<tr><td>Other packages</td><td>18079</td></tr></p>
+
+</table>
+
+<p>The chart below shows the adoption of components alone. I only included direct dependencies as given in composer.json.
+The numbers don't include indirect dependencies. For example, Laravel depends on Symfony, but a package which depends
+on Laravel won't be accounted here, unless it also indicated a dependency on one of the Symfony components.</p>
+
+<div class="text-center">
+    <a href="/uploads/wp/2014/02/symfony-components-adoption.png"><img src="/uploads/wp/2014/02/symfony-components-adoption.png" title="Symfony components adoption" alt="Symfony components adoption" class="img-responsive" /></a>
+</div>
+
+<p>As you can notice, the yaml component is the most popular one. I guess it shows that there's a need for
+a natvie yaml support in PHP.</p>
+
+<p>The second place is no surprise either, as the console is one of the most useful
+components that can be leveraged without the rest of the framework.</p>
+
+<p>Detailed numbers can be found in the table below and here are the results of crawling: <a href="/uploads/wp/2014/02/results.csv">results.csv</a>.</p>
+
+<table class="table table-striped table-hover table-condensed">
+
+<p><tr><th>Component</th><th>Bundles</th><th>Other</th><th>Total</th></tr>
+<tr><td>yaml</td><td>285</td><td>519</td><td>804</td></tr>
+<tr><td>console</td><td>176</td><td>615</td><td>791</td></tr>
+<tr><td>finder</td><td>156</td><td>317</td><td>473</td></tr>
+<tr><td>config</td><td>129</td><td>281</td><td>410</td></tr>
+<tr><td>http-foundation</td><td>83</td><td>292</td><td>375</td></tr>
+<tr><td>form</td><td>276</td><td>96</td><td>372</td></tr>
+<tr><td>process</td><td>46</td><td>266</td><td>312</td></tr>
+<tr><td>validator</td><td>176</td><td>132</td><td>308</td></tr>
+<tr><td>dependency-injection</td><td>136</td><td>146</td><td>282</td></tr>
+<tr><td>event-dispatcher</td><td>40</td><td>233</td><td>273</td></tr>
+<tr><td>http-kernel</td><td>118</td><td>150</td><td>268</td></tr>
+<tr><td>class-loader</td><td>122</td><td>144</td><td>266</td></tr>
+<tr><td>browser-kit</td><td>119</td><td>95</td><td>214</td></tr>
+<tr><td>filesystem</td><td>25</td><td>187</td><td>212</td></tr>
+<tr><td>css-selector</td><td>57</td><td>92</td><td>149</td></tr>
+<tr><td>security</td><td>58</td><td>67</td><td>125</td></tr>
+<tr><td>translation</td><td>11</td><td>103</td><td>114</td></tr>
+<tr><td>routing</td><td>28</td><td>86</td><td>114</td></tr>
+<tr><td>options-resolver</td><td>19</td><td>52</td><td>71</td></tr>
+<tr><td>property-access</td><td>17</td><td>53</td><td>70</td></tr>
+<tr><td>dom-crawler</td><td>12</td><td>58</td><td>70</td></tr>
+<tr><td>serializer</td><td>13</td><td>47</td><td>60</td></tr>
+<tr><td>expression-language</td><td>15</td><td>26</td><td>41</td></tr>
+<tr><td>templating</td><td>16</td><td>17</td><td>33</td></tr>
+<tr><td>locale</td><td>7</td><td>22</td><td>29</td></tr>
+<tr><td>stopwatch</td><td>4</td><td>22</td><td>26</td></tr>
+<tr><td>debug</td><td>0</td><td>26</td><td>26</td></tr>
+<tr><td>intl</td><td>2</td><td>11</td><td>13</td></tr></p>
+
+</table>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Running Behat in parallel with Selenium grid]]></title>
+            <link href="http://zalas.eu/running-behat-in-parallel-with-selenium-grid/"/>
+            <updated>2014-01-31T23:59:00+00:00</updated>
+            <id>http://zalas.eu/running-behat-in-parallel-with-selenium-grid/</id>
+            <content type="html"><![CDATA[<p>There are few ways to run Behat tests in parallel, including the following Behat extensions:</p>
+
+<ul>
+<li><a href="http://extensions.behat.org/gearman/">Gaerman</a></li>
+<li><a href="https://github.com/shvetsgroup/ParallelRunner">ParallelRunner</a></li>
+</ul>
+
+<p>However, I found the <a href="http://www.gnu.org/software/parallel/">GNU parallel</a> command to be most flexible,
+since it is an OS level tool.</p>
+
+<h2 id="gnu-parallel">GNU parallel</h2>
+
+<p>GNU parallel is able to run practically anything in parallel. Jobs can be read from a pipe:</p>
+
+<pre><code class="bash">seq 5 1 | parallel --gnu 'sleep {} &amp;&amp; echo "{}";'
+</code></pre>
+
+<p>This means we can write all sorts of bash scripts to "feed" the parallel command.</p>
+
+<p>For example, the following script will run all tests in parallel, grouped by sprints, starting from the latest:</p>
+
+<pre><code class="bash">grep -R '@sprint:' features/ |
+ sed -e 's/.*\(@sprint:[0-9]*\).*/\1/' |
+ sort -ur |
+ parallel --gnu 'bin/behat --tags={}' || exit 1
+</code></pre>
+
+<p>On projects where test execution time varies a lot between scenarios,
+I found it's better to run each feature file separately:</p>
+
+<pre><code class="bash">find features/ -iname '*.feature' | parallel --gnu 'bin/behat {}' || exit 1
+</code></pre>
+
+<p>Nice thing about GNU parallel is that it will (by default) run as many processes as there are CPU cores available.</p>
+
+<h2 id="selenium-grid">Selenium grid</h2>
+
+<p><a href="http://docs.seleniumhq.org/docs/07_selenium_grid.jsp">Selenium grid</a> can be used to run tests against multiple
+browsers or to distribute the runs to multiple machines.</p>
+
+<div class="text-center">
+    <a href="/uploads/wp/2014/01/selenium-grid.png"><img src="/uploads/wp/2014/01/selenium-grid.png" title="Selenium Grid" alt="Selenium Grid" class="img-responsive" /></a>
+</div>
+
+<p>Usage is very simple. Instead of running a single selenium server, we first start a hub:</p>
+
+<pre><code class="bash">java -jar selenium-server-standalone.jar -role hub
+</code></pre>
+
+<p>Next, we run as many nodes as we need. Nodes will connect to the hub, which in turn will forward any requests to
+a node. Node capabilities need to match the ones client requested.</p>
+
+<p>To start a single node run:</p>
+
+<pre><code class="bash">java -jar selenium-server-standalone.jar -role node -hub http://localhost:4444/grid/register
+</code></pre>
+
+<p>More options could be specified to fine tune both nodes and the hub (refer the docs).</p>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: For testing purposes, here's a script which will start a hub with as
+many nodes as there are CPU cores available: <a href="https://gist.github.com/jakzal/8583518">gist:jakzal/8583518</a>.
+However, in most cases it doesn't really make much sense to run all the nodes on the same machine.</p>
+
+</div>
+
+<p>One thing to remember when using the Selenium grid with phantomjs and Behat, is to properly configure
+capabilities. Based on these, the hub will try to find a proper node to run our tests.
+Defaults are not suitable for phantomjs and we'll have to reset the browser version:</p>
+
+<pre><code class="yaml"># behat.yml
+default:
+  extensions:
+    Behat\MinkExtension\Extension:
+      base_url: 'http://localhost/'
+      browser_name: phantomjs
+      selenium2:
+        wd_host: http://127.0.0.1:4444/wd/hub
+        capabilities:
+          version: ''
+</code></pre>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[How to store Doctrine entities outside of a Symfony bundle?]]></title>
+            <link href="http://zalas.eu/how-to-store-doctrine-entities-outside-of-a-symfony-bundle/"/>
+            <updated>2013-01-26T23:32:17+00:00</updated>
+            <id>http://zalas.eu/how-to-store-doctrine-entities-outside-of-a-symfony-bundle/</id>
+            <content type="html"><![CDATA[<p>The <a href="https://github.com/doctrine/DoctrineBundle">DoctrineBundle</a> and <a href="https://github.com/symfony/symfony/tree/master/src/Symfony/Bridge/Doctrine">Doctrine bridge</a> are the integration layer between the Doctrine ORM and Symfony. One of features they provide is an automatic registration of entity mappings.</p>
+
+<p>As long as we follow conventions, like putting entities into the <em>Entity</em> folder or mappings into the <em>Resources/config/doctrine</em> folder, mappings will be configured for us. In the Symfony Standard Edition this behaviour is enabled by default, thanks to the <a href="http://symfony.com/doc/current/reference/configuration/doctrine.html#configuration-overview">auto mapping</a> configuration option.</p>
+
+<div class="text-center">
+    <a href="http://zalas.eu/uploads/wp/2013/01/entities.png"><img src="/uploads/wp/2013/01/entities.png" title="Entities" alt="Entities" class="img-responsive" /></a>
+</div>
+
+<p>It's convenient, since we don't have to do much to start working with the ORM.</p>
+
+<p>However, in some situations I found it better to put the entities in a more general namespace to separate them from the bundle. This way it's possible to share the entities between multiple bundles or projects in a clean way.</p>
+
+<p>Best place to define the <a href="http://symfony.com/doc/current/reference/configuration/doctrine.html#mapping-configuration">mapping configuration</a> is the <em>app/config/config.yml</em> file:</p>
+
+<pre><code class="yaml">doctrine:
+    orm:
+        # ...
+        mappings:
+            Acme:
+                type: annotation
+                is_bundle: false
+                dir: %kernel.root_dir%/../src/Acme/Entity
+                prefix: Acme\Entity
+                alias: Acme
+</code></pre>
+
+<p>Our example uses the annotation driver and therefore the <em>dir</em> option is a path to our entities. If we used <em>xml</em> or <em>yml</em> drivers this would need to be changed to the path where mapping files are stored.</p>
+
+<p><em>Prefix</em> is a part of the namespace our entities belong to and should be unique between all the mappings.</p>
+
+<p>With <em>alias</em> we can refer to the entities with a shorter syntax, so instead of:</p>
+
+<pre><code class="php">$entityManager-&gt;getRepository('Acme\Entity\Invoice');
+</code></pre>
+
+<p>we'll be able to use:</p>
+
+<pre><code class="php">$entityManager-&gt;getRepository('Acme:Invoice');
+</code></pre>
+
+<p>Finally, we can define as many mappings as we need, so it's still possible to group entities in separate namespaces:</p>
+
+<pre><code class="yaml">doctrine:
+    orm:
+        # ...
+        mappings:
+            AcmeCustomer:
+                type: annotation
+                is_bundle: false
+                dir: %kernel.root_dir%/../src/Acme/Customer/Entity
+                prefix: Acme\Customer\Entity
+                alias: Customer
+            AcmeCms:
+                type: yml
+                is_bundle: false
+                dir: %kernel.root_dir%/../src/Acme/Cms/Entity/config
+                prefix: Acme\Cms\Entity
+                alias: CMS
+</code></pre>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Symfony Live London 2012, entering the BDD era]]></title>
+            <link href="http://zalas.eu/symfony-live-london-2012/"/>
+            <updated>2012-09-19T08:35:08+00:00</updated>
+            <id>http://zalas.eu/symfony-live-london-2012/</id>
+            <content type="html"><![CDATA[<div class="pull-left">
+    <img src="/uploads/wp/2012/09/sflive-london-2012.png" title="Symfony Live London 2012" alt="Symfony Live London 2012" class="img-responsive" />
+</div>
+
+<p>Great talks, accessible speakers and amazing community. The first <a href="http://london2012.live.symfony.com/"><strong>Symfony Live</strong> conference in <strong>London</strong></a> was a great success. It makes me double happy since I recently joined <strong><a href="http://www.sensiolabs.co.uk/">Sensio Labs UK</a></strong>, the company which organized the event ;)</p>
+
+<p>There were many exciting presentations, given by the best speakers you could get. It was really visible we're getting closer to the Drupal community, exchanging both hugs and code. From the Drupal project lead himself, we heard some of the secrets on how the Drupal community evolved. It made me realize that while Symfony community is amazing, we still have lots to learn from Drupal.</p>
+
+<p>However, the most important highlight of the conference was a talk given by <a href="https://twitter.com/_md">Marcello</a> and <a href="https://twitter.com/everzet">Konstantin</a>, the "<em>Full Stack BDD in Symfony2</em>", and that's what my summary focuses on. If you're not interested in BDD than go and read something else...</p>
+
+<p>or actually read this and finally get interested, 'cause it's a high time you start looking into it!</p>
+
+<div class="pull-right">
+    <a href="http://instagram.com/p/Pj6SettmxK/"><img src="/uploads/wp/2012/09/konstantin-and-marcello-400x400.jpg" title="Konstantin and Marcello" alt="Konstantin and Marcello" class="img-responsive" /></a>
+</div>
+
+<p>Guys kicked off with an energetic introduction to Behavior Driven Development (BDD), explaining <strong>why</strong> it's worth doing, discussing some of the benefits of this <strong>outside-in</strong> methodology and proving that the best way to get a <strong>quality</strong> into your project is to build it in (so to follow the test-first approach).</p>
+
+<p>They very well reminded us why <strong>naming</strong> things matters. Terminology is the main cause of problems and confusion related to xUnit family of tools. Therefore it's really important what words we use and how we communicate through tests.</p>
+
+<p>Yes, <strong>communicate!</strong></p>
+
+<p>Tests are the documentation of our code and therefore should be readable. Are your PHPUnit tests readable? Once you get through long lines of mocked objects, can you see the purpose behind the test you wrote a week ago?</p>
+
+<p>Probably not.</p>
+
+<p>The thing is, Behat does a great job on a story level (StoryBDD) but up to now we didn't have a decent tool to use on a class level (SpecBDD). I often find myself thrown out of rhythm while using Behat with PHPUnit. At the point of switching from Behat to PHPunit I'm forced to change a context, which makes it hard to keep writing code in a stable pace. I simply lose focus. I didn't understand why, until just recently, when I realized that PHPUnit is actually not the right tool for the job (reading the <a href="http://pragprog.com/book/achbd/the-rspec-book">RSpec book</a> helped me here).</p>
+
+<p>Marcello and Konstantin were ahead of me, since they already implemented a tool to solve those issues. The tool they presented for the first time publicly on the Symfony Live in London, <a href="https://github.com/phpspec/phpspec2">PHPSpec2</a>.</p>
+
+<p>For the first time guys showed us how the full BDD cycle should look like in a Symfony2 project. While the first part of the talk explained <strong>why</strong> we should do BDD, second part focused on <strong>how</strong> to do it with <strong>Behat</strong> and <strong>PHPSpec2</strong>.</p>
+
+<p>It was an amazing 20 minutes presenting how to drive an implementation of a new feature with scenarios and specs, moving from the story level to spec and back, repeating the cycle in a steady flow until the feature was ready. Behat and PHPSpec2 output was basically suggesting the next development steps. I'm pretty sure that showing this live, on stage, convinced any skeptic that the usual "<em>test-first approach takes a lot of time</em>" excuse is just a myth, repeated by people who never tried it. Guys actually managed to prove it's faster to work this way, than doing the "conventional" cowboy-style in-browser development.</p>
+
+<p>Hopefully, I got your interest here and you're eager to learn more. Continue with reading <a href="http://everzet.com/post/31581124270/fullstack-bdd-2012-wrapup">an excellent wrap up</a> by Konstantin, see the process working in <a href="https://github.com/everzet/fullstack-bdd-sflive2012">a special repo</a> and finally follow the development of <a href="https://github.com/phpspec/phpspec2">PHPSpec2</a> (which is still a work in progress).</p>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: Since the terminology is important, we should actually avoid the word "test". This (dirty) word is the main source of confusion. By talking about tests we give an impression we mean testing or checking something. Methodologies like TDD and BDD are actually not about testing. TDD is more of a design activity then a testing activity. Its main purpose is to drive the development with tests. Because of the confusion, BDD redefines the "tests" as "specs" (specs as in specifications).</p>
+
+</div>
+
+<h2 id="more-about-the-conference">More about the conference</h2>
+
+<p>As always, read the feedback and download the slides from <a href="https://joind.in/event/view/1000">joind.in</a>.</p>
+
+<p>Read what others think about Symfony Live in their blog posts:</p>
+
+<ul>
+<li><a href="http://criticallog.thornet.net/2012/09/14/symfony2-live-london-aftermatch/">Symfony2 Live! London – aftermatch</a></li>
+<li><a href="http://xlab.pl/symfony-live-london-2012-recap/">Symfony Live London 2012 recap</a></li>
+<li><a href="http://www.sensiolabs.co.uk/blog/symfony-live-london-a-huge-success/">Symfony Live London – A Huge Success</a></li>
+<li><a href="http://everzet.com/post/31581124270/fullstack-bdd-2012-wrapup">Fullstack BDD wrap up</a></li>
+</ul>
+
+<p>Finally, find some of the photos <a href="http://www.flickr.com/photos/sensiolabsuk/sets/72157631558775580/">on flickr</a>.</p>
+
+<p>See you <a href="http://berlin2012.live.symfony.com/en/index.html">in Berlin</a>!</p>
+
+<div class="text-center">
+    <a href="/uploads/wp/2012/09/polish-symfony-community-london-2012.jpg"><img src="/uploads/wp/2012/09/polish-symfony-community-london-2012-400x300.jpg" title="Polish Symfony Team" alt="Polish Symfony Team" class="img-responsive" /></a>
+</div>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[How to run Behat scenarios and functional tests from a Symfony bundle in isolation of a project?]]></title>
+            <link href="http://zalas.eu/run-behat-scenarios-and-functional-tests-from-symfony-bundle-in-isolation-of-project/"/>
+            <updated>2012-07-15T14:47:49+00:00</updated>
+            <id>http://zalas.eu/run-behat-scenarios-and-functional-tests-from-symfony-bundle-in-isolation-of-project/</id>
+            <content type="html"><![CDATA[<p>When working on a reusable bundle it's beneficial to run its test suite in isolation of a project. This way the test suite is not dependent on project's configuration or enabled bundles. It is also much easier to run it on a continuos integration server like <a href="http://travis-ci.org/">Travis</a>.</p>
+
+<h2 id="appkernel-and-configuration">AppKernel and configuration</h2>
+
+<p>Providing an <em>AppKernel</em> is the main task we need to do to run both Behat scenarios and functional tests from our bundle without installing it in a Symfony2 project.</p>
+
+<p>Within an <em>AppKernel</em> we're able to register bundles and container configuration (<em>registerBundles()</em> <em>registerContainerConfiguration()</em> methods). Next to the bundle we're working on, we should enable and configure bundles required for it to work.</p>
+
+<p>Configuration is typically done in <em><a href="https://github.com/jakzal/DemoBundle/blob/master/Features/Fixtures/Project/app/config/config_test.yml">config/config_test.yml</a></em> file (scenarios and tests are usually run in a test environment). Most of the time we'll also need a routing file (typically <em><a href="https://github.com/jakzal/DemoBundle/blob/master/Features/Fixtures/Project/app/config/routing_test.yml">config/routing_test.yml</a></em>).</p>
+
+<p>Last but not least it's good to change the default location of cache and logs to a temporary directory (<em>getCacheDir()</em> and <em>getLogDir()</em> methods).</p>
+
+<pre><code class="php">&lt;?php
+
+use Symfony\Component\HttpKernel\Kernel;
+use Symfony\Component\Config\Loader\LoaderInterface;
+
+class AppKernel extends Kernel
+{
+    /**
+     * @return array
+     */
+    public function registerBundles()
+    {
+        return array(
+            new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
+            new Symfony\Bundle\TwigBundle\TwigBundle(),
+            new Symfony\Bundle\MonologBundle\MonologBundle(),
+            new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new Zalas\Bundle\DemoBundle\ZalasDemoBundle()
+        );
+    }
+
+    /**
+     * @return null
+     */
+    public function registerContainerConfiguration(LoaderInterface $loader)
+    {
+        $loader-&gt;load(__DIR__.'/config/config_'.$this-&gt;getEnvironment().'.yml');
+    }
+
+    /**
+     * @return string
+     */
+    public function getCacheDir()
+    {
+        return sys_get_temp_dir().'/ZalasDemoBundle/cache';
+    }
+
+    /**
+     * @return string
+     */
+    public function getLogDir()
+    {
+        return sys_get_temp_dir().'/ZalasDemoBundle/logs';
+    }
+}
+</code></pre>
+
+<p>I usually put the kernel in <em>Features/Fixtures/Project/app/AppKernel.php</em> (for Behat) or <em>Tests/Functional/app/AppKernel.php</em> (for functional tests) but the location doesn't matter.</p>
+
+<p>For more flexibility look at the <a href="https://github.com/symfony/symfony/tree/master/src/Symfony/Bundle/FrameworkBundle/Tests/Functional/app">FrameworkBundle</a> or <a href="https://github.com/schmittjoh/JMSPaymentCoreBundle/tree/master/Tests/Functional">JMSPaymentCoreBundle</a>. Both bundles have good examples of parametrized kernel configurations.</p>
+
+<h2 id="autoloader">Autoloader</h2>
+
+<p>Using <a href="http://getcomposer.org/">composer</a> solves most of our autoloading problems. We only need to remember of setting <em>target-dir</em> in our <em>composer.json</em> (big thanks to <a href="https://twitter.com/AdrienBrault">Adrien Brault</a> for pointing it out):</p>
+
+<pre><code class="json">{
+    "autoload": {
+        "psr-4": { "Zalas\\Bundle\\DemoBundle\\": "" }
+    }
+}
+</code></pre>
+
+<p>We'll also need to register an autoloader for annotations (if we use annotations).</p>
+
+<p>Following example of <em>bootstrap.php</em> is a simple implementation of an autoloader for functional tests. To use it with Behat path to the <em>vendor/autoload.php</em> needs to be updated.</p>
+
+<pre><code class="php">&lt;?php
+
+use Doctrine\Common\Annotations\AnnotationRegistry;
+
+if (!file_exists($file = __DIR__.'/../vendor/autoload.php')) {
+    throw new \RuntimeException('Install the dependencies to run the test suite.');
+}
+
+$loader = require $file;
+AnnotationRegistry::registerLoader(array($loader, 'loadClass'));
+</code></pre>
+
+<h2 id="behat">Behat</h2>
+
+<div class="text-center">
+    <img src="/uploads/wp/2012/07/scenarios.png" title="Behat features folder" alt="Behat features folder" class="img-responsive" />
+</div>
+
+<p>Once we prepared the <em>AppKernel</em> and set up the autoloading we can move to Behat configuration. In particular, we need to define:</p>
+
+<ul>
+<li>path to the Features folder</li>
+<li>list of contexts we need to use</li>
+<li>path to the <em>AppKernel</em> (<em>kernel.path</em> for the Symfony2 extension)</li>
+<li>path to the bootstrap file for the Symfony2 extension (<em>kernel.bootsrap</em> for the Symfony2 extension)</li>
+</ul>
+
+<pre><code class="yaml">default:
+  formatters:
+    progress: true
+  suites:
+    demo:
+      paths:
+        features: Features
+      contexts: [Zalas\Bundle\DemoBundle\Features\Context\FeatureContext]
+  extensions:
+    Behat\Symfony2Extension:
+      kernel:
+        env: test
+        debug: true
+        path: Features/Fixtures/Project/app/AppKernel.php
+        bootstrap: Features/Fixtures/Project/app/bootstrap.php
+    Behat\MinkExtension:
+      base_url: 'http://www.acme.dev/app_test.php/'
+      sessions:
+        default:
+          symfony2: ~
+</code></pre>
+
+<p>Now we can run our Behat scenarios without installing the bundle in a Symfony project:</p>
+
+<pre><code class="bash">./vendor/bin/behat
+</code></pre>
+
+<h2 id="symfony2-functional-tests">Symfony2 functional tests</h2>
+
+<div class="text-center">
+    <img src="/uploads/wp/2012/07/tests.png" title="Functional tests" alt="Functional tests" class="img-responsive" />
+</div>
+
+<p>Configuration for Symfony2 functional tests is done in a standard PHPUnit file (typically <em>phpunit.xml.dist</em>). We need to provide a path to the <em>AppKernel</em> as an environment variable (<em>KERNEL_DIR</em>).</p>
+
+<pre><code class="xml">&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+
+&lt;phpunit bootstrap="./Tests/bootstrap.php" color="true"&gt;
+  &lt;testsuites&gt;
+    &lt;testsuite name="ZalasDemoBundle test suite"&gt;
+      &lt;directory suffix="Test.php"&gt;./Tests&lt;/directory&gt;
+    &lt;/testsuite&gt;
+  &lt;/testsuites&gt;
+
+  &lt;php&gt;
+    &lt;strong&gt; &lt;server name="KERNEL_DIR" value="./Tests/Functional/app" /&gt;&lt;/strong&gt;
+  &lt;/php&gt;
+
+  &lt;filter&gt;
+    &lt;whitelist&gt;
+      &lt;directory&gt;./&lt;/directory&gt;
+      &lt;exclude&gt;
+        &lt;directory&gt;./Resources&lt;/directory&gt;
+        &lt;directory&gt;./Tests&lt;/directory&gt;
+        &lt;directory&gt;./vendor&lt;/directory&gt;
+      &lt;/exclude&gt;
+    &lt;/whitelist&gt;
+  &lt;/filter&gt;
+&lt;/phpunit&gt;
+</code></pre>
+
+<p>Now we can run our functional tests without installing the bundle in a Symfony project:</p>
+
+<pre><code class="bash">phpunit
+</code></pre>
+
+<h2 id="travis-ci">Travis CI</h2>
+
+<p>With such a setup running our bundle's test suite on an integration server becomes very simple. Here's an example <em>.travis.yml</em> file:</p>
+
+<pre><code class="yaml">language: php
+
+php:
+  - 5.3
+  - 5.4
+
+before_script:
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar --dev install
+
+script:
+  - 'phpunit --coverage-text &amp;&amp; ./vendor/bin/behat'
+</code></pre>
+
+<p>Need to use a database? Just create it before running the script (don't forget to remove it afterwards):</p>
+
+<pre><code class="yaml">language: php
+
+php:
+  - 5.3
+  - 5.4
+
+before_script:
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar --dev install
+  - mysql -e 'CREATE DATABASE zalas_demo_test;'
+
+script:
+  - 'phpunit --coverage-text &amp;&amp; ./vendor/bin/behat'
+
+after_script:
+  - mysql -e 'DROP DATABASE zalas_demo_test;'
+</code></pre>
+
+<h2 id="demo">Demo</h2>
+
+<p>To demonstrate this approach I prepared a <a href="https://github.com/jakzal/DemoBundle">DemoBundle</a>. You can clone it from github and test how it works yourself, or you can see how it's run on <a href="http://travis-ci.org/#!/jakzal/DemoBundle">Travis</a>.</p>
+
+<div class="alert alert-warning">
+
+<p><strong>Changes</strong>:</p>
+
+<ul>
+<li>1st Nov 2014 - Update autoloader configuration to use PSR-4</li>
+<li>1st Nov 2014 - Update behat to version 3</li>
+</ul>
+
+</div>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Updating Symfony2 project to Behat 2.4]]></title>
+            <link href="http://zalas.eu/updating-symfony2-project-to-behat-2-4/"/>
+            <updated>2012-06-21T10:39:50+00:00</updated>
+            <id>http://zalas.eu/updating-symfony2-project-to-behat-2-4/</id>
+            <content type="html"><![CDATA[<div class="pull-left">
+    <img src="/uploads/wp/2012/06/behat-sf-logo.png" title="Behat and Symfony2 logo" alt="Behat and Symfony2 logo" class="img-responsive" />
+</div>
+
+<p>Recent release of <strong>Behat 2.4</strong> brings a lot of extensibility for a price of small backward compatibility breaks. Since I just went through an update of Behat in a <strong>Symfony2</strong> project and there's no guide on the subject yet, I thought it's a good idea to share few tips.</p>
+
+<p><strong>Note</strong>: Read more on Behat 2.4 on <a href="https://twitter.com/#!/everzet">@everzet</a>'s blog: <a href="http://everzet.com/post/22899229502/behat-240">Behat 2.4: The most extendable testing framework</a>.</p>
+
+<div class="alert alert-success">
+
+<p><strong>Update</strong>: This blog post is now part of an official documenation for the Symfony2 Extension: <a href="http://extensions.behat.org/symfony2/migrating_from_2.3_to_2.4.html">Migrating from Behat 2.3 to 2.4</a>.</p>
+
+</div>
+
+<h2 id="there%27s-no-behatbundle-nor-minkbundle-anymore">There's no BehatBundle nor MinkBundle anymore</h2>
+
+<p>Most important change for the Symfony users is that Behat integration is no longer done with bundles. Behat got its own extension system and there's simply no need for bundles anymore.</p>
+
+<p>So instead of the BehatBundle you'll need to install the <a href="https://github.com/Behat/Symfony2Extension">Symfony2Extension</a>. MinkBundle was replaced by the <a href="https://github.com/Behat/MinkExtension">MinkExtension</a> and several drivers (i.e. <a href="https://github.com/Behat/MinkSeleniumDriver">MinkSeleniumDriver</a>, <a href="https://github.com/Behat/MinkBrowserkitDriver">MinkBrowserkitDriver</a>).</p>
+
+<p>Here's an example <em>composer.json</em> snippet taken from my Symfony project using both selenium and browserkit drivers:</p>
+
+<pre><code class="json">{
+    "require": {
+        "behat/behat":                  "*",
+        "behat/symfony2-extension":     "*",
+        "behat/mink-extension":         "*",
+        "behat/mink-browserkit-driver": "*",
+        "behat/mink-selenium-driver":   "*"
+    }
+}
+</code></pre>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: Naturally initialization of Behat and Mink bundles has to be removed from the <em>AppKernel</em>.</p>
+
+</div>
+
+<h2 id="accessing-the-symfony-kernel">Accessing the Symfony kernel</h2>
+
+<p>If you've been extending <em>BehatContext</em> from BehatBundle to get access to the Symfony kernel you'll need to alter your code and implement the <em>KernelAwareInterface</em> instead.</p>
+
+<p>The Symfony kernel is injected automatically to every context implementing the <em>KernelAwareInterface</em>:</p>
+
+<pre><code class="php">namespace Acme\Bundle\AcmeBundle\Features\Context;
+
+use Behat\Behat\Context\BehatContext;
+use Behat\Symfony2Extension\Context\KernelAwareInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
+
+class AcmeContext extends BehatContext implements KernelAwareInterface
+{
+    /**
+     * @var \Symfony\Component\HttpKernel\KernelInterface $kernel
+     */
+    private $kernel = null;
+
+    /**
+     * @param \Symfony\Component\HttpKernel\KernelInterface $kernel
+     *
+     * @return null
+     */
+    public function setKernel(KernelInterface $kernel)
+    {
+        $this-&gt;kernel = $kernel;
+    }
+}
+</code></pre>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: Read more on <a href="https://github.com/Behat/Symfony2Extension">Symfony2Extension on github</a>.</p>
+
+</div>
+
+<h2 id="accessing-mink-session">Accessing Mink session</h2>
+
+<p>It's possible to inject Mink into the context just like it's possible with the Symfony kernel. All you need to do is to implement the <a href="https://github.com/Behat/MinkExtension/blob/master/src/Behat/MinkExtension/Context/MinkAwareInterface.php">MinkAwareInterface</a>.</p>
+
+<p>Alternatively you can extend the <a href="https://github.com/Behat/MinkExtension/blob/master/src/Behat/MinkExtension/Context/RawMinkContext.php">RawMinkContext</a>. It has an additional benefit of gaining access to several handy methods (like <em>getSession()</em>, <em>assertSession()</em>, <em>getMinkParameter()</em>).</p>
+
+<pre><code class="php">namespace Acme\Bundle\AcmeBundle\Features\Context;
+
+use Behat\MinkExtension\Context\RawMinkContext;
+
+class AcmeContext extends RawMinkContext
+{
+    /**
+     * @Given /^I go to (?:|the )homepage$/
+     */
+    public function iGoToHomepage()
+    {
+        $this-&gt;getSession()-&gt;visit('/');
+    }
+}
+</code></pre>
+
+<p><em>RawMinkContext</em> can be safely extended multiple times since it doesn't contain any step definitions (as opposed to <a href="https://github.com/Behat/MinkExtension/blob/master/src/Behat/MinkExtension/Context/MinkContext.php">MinkContext</a>).</p>
+
+<p>To take advantage of steps defined in the <em>MinkContext</em> you can simply add it as a subcontext:</p>
+
+<pre><code class="php">namespace Acme\Bundle\AcmeBundle\Features\Context;
+
+use Acme\Bundle\AcmeBundle\Features\Context\AcmeContext;
+use Behat\Behat\Context\BehatContext;
+use Behat\MinkExtension\Context\MinkContext;
+
+class FeatureContext extends BehatContext
+{
+    public function __construct()
+    {
+        $this-&gt;useContext('acme', new AcmeContext());
+        $this-&gt;useContext('mink', new MinkContext());
+    }
+}
+</code></pre>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: Read more on <a href="https://github.com/Behat/MinkExtension">MinkExtension on github</a>.</p>
+
+</div>
+
+<h2 id="behat-configuration-is-now-separated-from-symfony">Behat configuration is now separated from Symfony</h2>
+
+<p>Instead of configuring Behat in Symfony you'll need to create a new <em>behat.yml</em> file in the top level directory of your project:</p>
+
+<pre><code class="yaml">default:
+  formatter:
+    name: progress
+  extensions:
+    Behat\Symfony2Extension\Extension:
+      mink_driver: true
+      kernel:
+        env: test
+        debug: true
+    Behat\MinkExtension\Extension:
+      base_url: 'http://www.acme.dev/app_test.php/'
+      default_session: symfony2
+      javascript_session: selenium
+      selenium:
+        host: 33.33.33.1
+        port: 4444
+</code></pre>
+
+<p>You'll have to remove your previous configuration (typically placed in <em>app/config/config_test.yml</em>). Otherwise dependency injection container will complain on unrecognised parameters.</p>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: Read more on <em>behat.yml</em> in <a href="http://docs.behat.org/guides/7.config.html">the configuration section</a> of the official documentation.</p>
+
+</div>
+
+<h2 id="there%27s-no-symfony-command-anymore">There's no Symfony command anymore</h2>
+
+<p>As the bundles disappeared and configuration has been separated, we have no Symfony specific command anymore. Behat is now run through its own script.</p>
+
+<p>When using composer it's good to specify the directory you want the commands to be installed in:</p>
+
+<pre><code class="json">{
+    "config": {
+        "bin-dir": "bin"
+    }
+}
+</code></pre>
+
+<p>This way Behat will be accessible via:</p>
+
+<pre><code class="bash">./bin/behat
+</code></pre>
+
+<h2 id="including-autoloader-from-composer">Including autoloader from composer</h2>
+
+<p>If you use composer you'll need to make a small change to the <em>app/autoload.php</em> file. The <em>require_once</em> used to include the autoloader needs to be replaced with <em>require</em>:</p>
+
+<pre><code class="php">$loader = require __DIR__.'/../vendor/autoload.php';
+</code></pre>
+
+<p>I didn't dig into the details but I suspect Behat loads the autoloader first. Symfony tries to include it again and <em>require_once</em> returns false instead of the autoloader object.</p>
+
+<h2 id="assertions">Assertions</h2>
+
+<p>To use PHPUnit's assertions you'll need to include them first (I didn't have to do it before):</p>
+
+<pre><code class="php">require_once 'PHPUnit/Autoload.php';
+require_once 'PHPUnit/Framework/Assert/Functions.php';
+</code></pre>
+
+<p>It's good for a start but later you'd probably prefer to use new <a href="https://github.com/Behat/Mink/blob/master/src/Behat/Mink/WebAssert.php">WebAssert</a> class. Assertions it provides are more suitable for web needs (you should get more meaningful error messages).</p>
+
+<p><em>RawMinkContext</em> provides a way to create <em>WebAssert</em> object with <em>assertSession()</em>:</p>
+
+<pre><code class="php">namespace Acme\Bundle\AcmeBundle\Features\Context;
+
+use Behat\MinkExtension\Context\RawMinkContext;
+
+class AcmeContext extends RawMinkContext
+{
+    /**
+     * @Then /^I should see an error message$/
+     */
+    public function iShouldSeeAnErrorMessage()
+    {
+        $this-&gt;assertSession()-&gt;elementExists('css', '.error');
+    }
+}
+</code></pre>
+
+<h2 id="clearing-doctrine%27s-entity-manager">Clearing Doctrine's entity manager</h2>
+
+<p>When creating database entries with Doctrine in your contexts you might need to clear the entity manager before Symfony tries to retrieve any entities:</p>
+
+<pre><code class="php">$entityManager-&gt;clear();
+</code></pre>
+
+<p>I needed to do it practically in every step which creates entities.</p>
+
+<p>If you store objects in contexts (for future use in other steps) you'll have to register them back in the entity manager before using (since you removed them with <em>clear()</em> call):</p>
+
+<pre><code class="php">$entityManager-&gt;merge($this-&gt;page);
+</code></pre>
+
+<h2 id="running-scenario-suite-for-the-whole-project">Running scenario suite for the whole project</h2>
+
+<p>At the moment there's no way to run a whole project suite. I came up with a simple script solving that problem:</p>
+
+<pre><code class="bash">for feature_path in `find src/ -path '*/Features'`; do
+    bundle=$(echo $feature_path | sed -e 's/^[^\/]\+\/\([^\/]\+\)\/Bundle\/\([^\/]\+\)\/.*/\1\2/');
+    echo "Running suite for $bundle";
+    ./bin/behat "@$bundle";
+done
+</code></pre>
+
+<p>I also created another variation of it to be run on a CI server (generates reports): <a href="https://gist.github.com/2951321">https://gist.github.com/2951321</a></p>
+
+<h2 id="is-it-worth-it%3F">Is it worth it?</h2>
+
+<p>I like to be up to date with libraries I use. Especially if I have to support the project for a long time.</p>
+
+<p>With Behat 2.4 you'll get a bit more than being up to date with the bug fixes. The way it's been refactored enables you to better design your contexts. It's much easier to make them decoupled from each other.</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Mocking Symfony Container services in Behat scenarios with Mockery]]></title>
+            <link href="http://zalas.eu/mocking-symfony-container-services-in-behat-scenarios-with-mockery/"/>
+            <updated>2012-01-13T02:19:37+00:00</updated>
+            <id>http://zalas.eu/mocking-symfony-container-services-in-behat-scenarios-with-mockery/</id>
+            <content type="html"><![CDATA[<p>Mocking objects in unit tests is pretty straightforward as every object used in a test case is usually created in a scope of one test class. In functional tests it's a bit harder since we either don't have full control over objects being created or it's simply too laborious to mock half the framework.</p>
+
+<p>Instead of functional tests I'm using <a href="http://behat.org/">Behat</a>. In the context of this blog post it satisfies the same need - <strong>verifies the external behavior</strong> of an application. It also brings similar problems.</p>
+
+<div class="text-center">
+    <img src="/uploads/wp/2012/01/red-green.png" title="Red Green" alt="Red Green" class="img-responsive" />
+</div>
+
+<h2 id="the-problem">The Problem</h2>
+
+<p>Let's pretend we have to implement a contact form on our website. Information submitted by user should be pushed to an external CRM system as a potential lead. Of course our CRM system has an API which makes the whole thing possible.</p>
+
+<p>As BDD preaches we should start with a scenario:</p>
+
+<pre><code class="gherkin">Feature: Submitting contact form
+  As a Visitor
+  I want to contact sales department
+  In order to receive detailed information on one of the products
+
+  Scenario: Submitting the form
+    When I go to "/contact-us"
+     And I complete the contact form with following information
+       |First name|Last name|Email                |
+       |Jakub     |Zalas    |jzalas+spam@gmail.com|
+     And CRM API is available
+     And I submit the contact form
+    Then a new lead should be sent to the CRM
+</code></pre>
+
+<p>In the controller, next to form handling, we also need code responsible for sending the lead to the CRM:</p>
+
+<pre><code class="php">$crmClient = $this-&gt;get('crm.client');
+$crmClient-&gt;sendLead($form-&gt;getData());
+</code></pre>
+
+<p>We're getting the service from a container and calling a method which should send a lead. The problem is we don't want to actually call an API while executing Behat scenarios. We would quickly end up with a CRM polluted with lots of fake data and scenarios failing ocasionaly when the API is not accessible.</p>
+
+<p>It'd also be hard to set up a scene for a scenario (like simulating a timeout during http request).</p>
+
+<p>The fact is we don't want to test the client of a CRM API (unit tests or <a href="http://www.phpspec.net/">phpspec</a> will do a better job here). We just need to know if the service was called or to simulate a behavior.</p>
+
+<p>That's what mocks were invented for.</p>
+
+<p><strong>We need to mock the service.</strong></p>
+
+<h2 id="the-solution">The Solution</h2>
+
+<p>I came up with a simple bundle that allows service mocking with <a href="https://github.com/padraic/mockery">Mockery</a>. It's called <a href="https://github.com/PolishSymfonyCommunity/PSSMockeryBundle">PSSMockeryBundle</a> and you can download it from <a href="https://github.com/PolishSymfonyCommunity/PSSMockeryBundle">github</a>.</p>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: PSSMockeryBundle works with Behat &lt;= 2.3. Use <a href="https://github.com/PolishSymfonyCommunity/Symfony2MockerExtension">Symfony2MockerExtension</a> with Behat &gt;= 2.4.</p>
+
+</div>
+
+<p>At the moment bundle provides <em>MockerContainer</em> and <em>MockerContainerContext</em>. <em>MockerContainer</em> is a container class which enables service mocking. <em>MockerContainerContext</em> is a Behat context with generic step for expectation verification and a handy <em>mockService()</em> method.</p>
+
+<p>The step "<em>CRM API is available</em>" defines our expectations on the state of CRM service. It says that API should work properly and that's the situation we have to prepare:</p>
+
+<pre><code class="php">/**
+ * @Given /^CRM API is available$/
+ *
+ * @return null
+ */
+ public function crmApiIsAvailable()
+ {
+     $this-&gt;getMainContext()-&gt;getSubContext('container')
+         -&gt;mockService('crm.client', 'PSS\Crm\Client')
+         -&gt;shouldReceive('send')
+         -&gt;once()
+         -&gt;andReturn(true);
+ }
+</code></pre>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: Container won't return the mock unless we first ask it to do so. In other words, it works as a regular container by default.</p>
+
+</div>
+
+<p>All the expectations are automatically checked after the scenario is executed (<em>@afterScenario</em> hook).</p>
+
+<p>We can also do it manually which in some cases makes the scenario more readable:</p>
+
+<pre><code class="php">/**
+ * @Given /^(a )?new lead should be sent to (the )?CRM$/
+ *
+ * @return null
+ */
+ public function aNewLeadShouldBeSentToTheCrm()
+ {
+     return new Then(sprintf('the "%s" service should meet my expectations', 'crm.client'));
+ }
+</code></pre>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: The <em>the "&lt;serviceId&gt;" service should meet my expectations</em> step is provided by <em>MockerContainerContext</em>.</p>
+
+</div>
+
+<h2 id="feedback-much-appreciated">Feedback much appreciated</h2>
+
+<p>This is my second attempt to solve this problem. It's much better than the first one (<em>don't even worth a mention</em>). I'm using this approach in my projects and it already proved to be working (at least so far). But <strong>I'd love to get your feedback</strong>.</p>
+
+<p>Big thanks to <a href="http://www.craftitonline.com/">Luis Cordova</a> who exercised the <em>MockerContainerContext</em> in PHPSpec's WebSpec examples (<a href="http://www.craftitonline.com/2012/01/pssmockerybundle-phpspec-the-automation-of-mocking-services-begins/">read his blog post</a>).</p>
+]]></content>
+        </entry>
+            <entry>
+            <title type="html"><![CDATA[Fixing failing Behat scenarios in large suites]]></title>
+            <link href="http://zalas.eu/fixing-failing-behat-scenarios-in-large-suites/"/>
+            <updated>2011-12-28T10:10:33+00:00</updated>
+            <id>http://zalas.eu/fixing-failing-behat-scenarios-in-large-suites/</id>
+            <content type="html"><![CDATA[<div class="pull-left">
+    <img src="/uploads/wp/2011/12/behat-logo.png" title="Behat Logo" alt="Behat Logo" class="img-responsive" />
+</div>
+
+<p>In projects I currently work on I'm taking the <strong>BDD</strong> approach really seriously. In one of my <strong>Symfony2</strong> projects I ended up with quite a lot of <strong>Behat</strong> features and scenarios which one day started failing on the integration server.</p>
+
+<p>The problem was in MySQL returning "<em>too many connections</em>" response. To investigate it I logged into the MySQL console and checked running connections with <em>show full processlist</em> command.</p>
+
+<div class="text-center">
+    <a href="/uploads/wp/2011/12/mysql-processlist.png"><img src="/uploads/wp/2011/12/mysql-processlist-400x97.png" title="Mysql process list" alt="Mysql process list" class="img-responsive" /></a>
+</div>
+
+<p>I noticed more and more connections being <strong>created</strong> and <strong>left in a sleep state</strong> while the scenarios are executed. At some point the number of connections reached the <strong>MySQL limit</strong> which was rejecting any new attempts to connect.</p>
+
+<p>My first idea was to increase the limit (<em><a href="http://dev.mysql.com/doc/refman/5.5/en/server-system-variables.html#sysvar_max_connections">max_connections</a></em> configuration option). Unfortunately it'd only hide the issue. In future it could come back as I'm constantly working on the project and still adding new scenarios.</p>
+
+<p>Better solution would be to explicitly close the connections.</p>
+
+<p><strong>Doctrine2</strong> ORM uses PDO and <a href="http://php.net/manual/en/pdo.connections.php">PDO connections</a> are closed when last reference to the object is destroyed. Since Behat scenarios are all run in one process the destruction is postponed till all scenarios are executed.</p>
+
+<p>Also, we have to remember that there are two types of connections:</p>
+
+<ul>
+<li>connections created by Behat to build schema or load fixtures (Behat boots its own Symfony kernel)</li>
+<li>connections created by the SymfonyDriver (client connections).</li>
+</ul>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: Using other drivers (like Goutte) might limit total number of created connections as client would use a separate process. Unfortunately it's not enough in some cases (as Behat would still create its connections).</p>
+
+</div>
+
+<p>We might use AfterScenario hook to close all client connections (put it into subcontext):</p>
+
+<pre><code class="php">/**
+ * @param \Behat\Behat\Event\ScenarioEvent|\Behat\Behat\Event\OutlineExampleEvent $event
+ *
+ * @AfterScenario
+ *
+ * @return null
+ */
+public function closeDBALConnections($event)
+{
+    $this-&gt;getEntityManager()-&gt;clear();
+
+    foreach ($this-&gt;getClientConnections() as $connection) {
+        $connection-&gt;close();
+    }
+}
+
+/**
+ * @return array
+ */
+protected function getClientConnections()
+{
+    $driver = $this-&gt;getMainContext()-&gt;getSession()-&gt;getDriver();
+
+    if ($driver instanceof \Behat\MinkBundle\Driver\SymfonyDriver) {
+        return $driver-&gt;getClient()-&gt;getContainer()-&gt;get('doctrine')-&gt;getConnections();
+    }
+
+    return array();
+}
+</code></pre>
+
+<p>I tried doing the same with Behat connections but they're not being closed. Luckily, the number of active connections decreased enough to make my scenarios pass again.</p>
+
+<div class="alert alert-warning">
+
+<p><strong>Note</strong>: If you're using <a href="https://github.com/Behat/CommonContexts">CommonContexts</a> (and you should!) than this fix is now included in the <a href="https://github.com/Behat/CommonContexts/blob/master/Behat/CommonContext/SymfonyDoctrineContext.php">SymfonyDoctrineContext</a>.</p>
+
+</div>
+
+<p>To improve the situation even better I limited amount of time MySQL waits before it closes connections automatically (<em><a href="http://dev.mysql.com/doc/refman/5.5/en/server-system-variables.html#sysvar_wait_timeout">wait_timeout</a></em> configuration option). I didn't want to do it in the server configuration as I'd have to propagate it to all the machines scenarios are run on. Therefore I used <em>PDO::MYSQL_ATTR_INIT_COMMAND</em> attribute available in <a href="http://php.net/manual/en/ref.pdo-mysql.php">MySQL's PDO driver</a> to set a session variable in the test environment.</p>
+
+<p>In Symfony it can be easily done on a configuration level:</p>
+
+<pre><code class="yaml"># app/config/config_test.yml
+doctrine:
+    dbal:
+        dbname: testdb
+        options:
+            # 1002 == PDO::MYSQL_ATTR_INIT_COMMAND
+            1002: 'SET SESSION wait_timeout=30;'
+</code></pre>
+
+<p>In combination with closing client connections this gave me the best results.</p>
+
+<p>The only trick is to choose the timeout properly. We have to close the connections <strong>early enough</strong> to prevent exceeding the limit but <strong>late enough</strong> to make them available to the client for its whole execution time.</p>
+]]></content>
+        </entry>
+    </feed>

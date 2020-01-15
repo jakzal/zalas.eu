@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>How to use TextMate like snippets in vim? &mdash; Jakub Zalas &mdash; Agile Software Engineer</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="verify-v1" content="PBznb5+bhxbUdD7HvioYYudpqitFdLDgjQTv8SwALq4=" />            <meta name="robots" content="index, follow">
+        <link rel="shortcut icon" href="http://zalas.eu/favicon.ico" />
+        <link rel="alternate" type="application/atom+xml" href="http://zalas.eu/atom.xml" title="Jakub Zalas activity feed" />
+        <link href="http://zalas.eu/components/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/base.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/css/code.css" rel="stylesheet" type="text/css" />
+        <link href="http://zalas.eu/components/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+                                    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                        <section itemscope itemtype="http://schema.org/BlogPosting">
+        <h1 itemprop="name">How to use TextMate like snippets in vim?</h1>
+        <div class="post-date pull-right">
+            <time itemprop="datePublished" content="2009-08-03" datetime="2009-08-03">03 Aug 2009</time>
+        </div>
+        <ul class="list-unstyled list-inline post-tag-cloud">
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/best-practices/">
+                    <span class="list-group-item-heading">best-practices</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/productivity/">
+                    <span class="list-group-item-heading">productivity</span>
+                </a>
+            </li>
+                        <li>
+                <span class="glyphicon glyphicon-tag"></span>
+                <a href="http://zalas.eu/tag/vim/">
+                    <span class="list-group-item-heading">vim</span>
+                </a>
+            </li>
+                    </ul>
+
+                <div class="alert alert-danger">
+            <strong>Warning</strong>: This blog post was written a long time ago and might be no longer relevant.
+        </div>
+        
+        <section class="content" itemprop="articleBody"><p>Snippet is a piece of text which can be pasted into the document. Parts of it can be parametrized or calculated while pasting. Snippets can increase your productivity by letting you to write common chunks of code faster and without mistakes. One of the most famous snippet implementations is included in <a href="http://macromates.com/">TextMate editor</a>. In vim we have some of TextMate's snippet features bundled in <a href="http://www.vim.org/scripts/script.php?script_id=2540">snipMate script</a>.</p>
+
+<div class="text-center">
+    <object width="425" height="344" data="http://www.youtube.com/v/gsMjQP4yxYw&amp;hl=pl&amp;fs=1&amp;" type="application/x-shockwave-flash">
+        <param name="allowFullScreen" value="true" />
+        <param name="allowscriptaccess" value="always" />
+        <param name="src" value="http://www.youtube.com/v/gsMjQP4yxYw&amp;hl=pl&amp;fs=1&amp;" />
+        <param name="allowfullscreen" value="true" />
+    </object>
+</div>
+
+<h2 id="installation">Installation</h2>
+
+<p>Get snipMate from <a href="http://www.vim.org/scripts/script.php?script_id=2540">vim website</a> and unpack it to your <em>~/.vim</em> directory.</p>
+
+<h2 id="how-does-it-work%3F">How does it work?</h2>
+
+<p>Basically you need to write a keyword (called trigger) and press the <code>&lt;TAB&gt;</code> key to replace it with full snippet. For example typing '<em>for</em>' and pressing <code>&lt;TAB&gt;</code> while editing a PHP file:</p>
+
+<pre><code>for&lt;TAB&gt;
+</code></pre>
+
+<p>expands to:</p>
+
+<pre><code>for ($i=0; $i &lt; count; $i++)
+{
+}
+</code></pre>
+
+<p>Pressing <code>&lt;TAB&gt;</code> key continuously moves you to the next defined tab stop. In this case you are able to adapt all expressions in 'for' loop and the last <code>&lt;TAB&gt;</code> moves you to the position inside it.</p>
+
+<h2 id="creating-custom-snippets">Creating custom snippets</h2>
+
+<p>SnipMate comes with many predefined snippets but once you start using it, you need more. Fortunately it's easy to extend. Snippets are stored in <em>~/.vim/snippets</em> directory. I started with reviewing the existing ones and adapted them to my coding standards. While doing this I got the idea about the snippets' structure and started with creating my own ones.</p>
+
+<div class="pull-right">
+    <a href="/uploads/wp/2009/08/vim-html-snippets.png"><img src="/uploads/wp/2009/08/vim-html-snippets-400x172.png" alt="vim html snippets" title="vim html snippets" class="img-responsive" /></a>
+</div>
+
+<p>Snippets are grouped by the file type. It is specified by a prefix in the snippet file name or a directory it was placed in (<em>php.snippets</em> vs <em>php/foreach.snippet</em>). The first version lets you to keep all file type related snippets in one place. The later is used to split your snippets into separate files. Format is slightly different between these two, so to make it simple I'll stick to the first one.</p>
+
+<p>To define a new PHP snippet which expands 'get' keyword into a getter method put the code below into your <em>~/.vim/snippets/php.snippets</em> file:</p>
+
+<pre><code>snippet get
+  $this-&gt;get${1}();${2}
+</code></pre>
+
+<p><strong>Note</strong>: Snippets are indented with hard tabs. First tab is not expanded in the actual snippet.</p>
+
+<p>Our snippet is run by '<em>get</em>' trigger and has two tab stops defined. Firstly cursor is placed after '$this->get' to let you fill the getter's name. Second tab moves the cursor after the completed statement.</p>
+
+<h2 id="tab-stops-and-placeholders">Tab stops and placeholders</h2>
+
+<p>Tab stop is a place where cursor goes next after pressing <code>&lt;TAB&gt;</code> key. The format is:</p>
+
+<pre><code>${1}
+</code></pre>
+
+<p>The number defines the order of navigation through the snippet.</p>
+
+<p><strong>Note</strong>: It's possible to go back to the previous position with <code>&lt;Shift&gt;+&lt;TAB&gt;</code>.</p>
+
+<p>Tab stop can have a placeholder with default value:</p>
+
+<pre><code>${2:default}
+</code></pre>
+
+<p>Default value is pasted into the snippet. You can either change it or leave it by moving to the next position.</p>
+
+<p>Placeholder's value can be copied throughout the snippet:</p>
+
+<pre><code>Value of ${1:value} is copied here: $1 and here: $1 and snippet ends here: ${2}
+</code></pre>
+
+<p>All occurrences of  the <em>$1</em> variable will be replaced by the provided value. It's also possible to use a variable in an another variable:</p>
+
+<pre><code>&lt;div id="${1:id}" name="${2:$1}"&gt;${3}&lt;/div&gt;
+</code></pre>
+
+<p>Once you fill in the <em>id</em> value, it is copied to the <em>name</em> attribute. However, you can still change it if you want.</p>
+
+<h2 id="multiple-matches">Multiple matches</h2>
+
+<p>Sometimes its needed to have few versions of the snippet. Good example here is the PHP's foreach statement which I use at least in two variations:</p>
+
+<ul>
+<li><p>in regular PHP code:</p>
+
+<pre><code class="php">foreach ($values as $key =&gt; $value)
+{
+// code here
+}
+</code></pre></li>
+<li><p>in templates:</p>
+
+<pre><code class="php">&lt;?php foreach ($values as $key =&gt; $value): ?&gt;
+// code here
+&lt;?php endforeach ?&gt;
+</code></pre></li>
+</ul>
+
+<p>Taking into account that <em>$key</em> variable can be omitted, in fact I use four different variations of foreach statement. So I defined all four of them:</p>
+
+<pre><code class="php">snippet fore value
+  foreach ($${1:variable} as $${2:value})
+  {
+    ${3}
+  }
+
+snippet fore key =&gt; value
+  foreach ($${1:variable} as $${2:key} =&gt; $${3:value})
+  {
+    ${4}
+  }
+
+snippet fore value (template)
+  &lt;?php foreach ($${1:variable} as $${2:value}): ?&gt;
+    ${3}
+  &lt;?php endforeach ?&gt;
+
+snippet fore key =&gt; value (template)
+  &lt;?php foreach ($${1:variable} as $${2:key} =&gt; $${3:value}): ?&gt;
+    ${4}
+  &lt;?php endforeach ?&gt;
+</code></pre>
+
+<p>Once I run 'fore' trigger vim lets me to choose which version of snippet I would like to use.</p>
+
+<div class="text-center">
+    <a href="/uploads/wp/2009/08/vim-multisnippet.png"><img src="/uploads/wp/2009/08/vim-multisnippet-400x176.png" alt="vim multi choice snippet" title="vim multi choice snippet" class="img-responsive" /></a>
+</div>
+
+<h2 id="learn-it">Learn it</h2>
+
+<p>There are some things about snipMate I didn't mention. For more knowledge visit its <a href="http://www.vim.org/scripts/script.php?script_id=2540">homepage</a> and read the documentation in <em>~/.vim/doc/snipMate.txt</em>. There are also many snippets available on the Internet which are a good reference.</p>
+
+<h2 id="make-it-your-habit">Make it your habit</h2>
+
+<p>Making usage of snippets a habit for sure will boost your productivity. To take full advantage of it you need to extend your snippet library. I think it's best to create a new snippet once you feel one is missing and directly start using it. Waiting till "next time" lasts through the eternity.</p>
+</section>
+    </section>
+
+
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'zalas';
+        var disqus_identifier = 'how-to-use-textmate-like-snippets-in-vim';
+
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    
+            </div>
+        </div>
+                                <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                ga('create', 'UA-607315-8', 'auto');
+                ga('send', 'pageview');
+            </script>
+            
+            
+            <script src="http://zalas.eu/components/highlightjs/highlight.pack.js"></script>
+            <script>hljs.initHighlightingOnLoad();</script>
+                    </body>
+</html>
