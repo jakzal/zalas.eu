@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title><![CDATA[Jakub Zalas]]></title>
-    <link href="http://zalas.eu/atom.xml" rel="self"/>
-    <link href="http://zalas.eu/"/>
+    <link href="//zalas.eu/atom.xml" rel="self"/>
+    <link href="//zalas.eu/"/>
     <updated>2020-01-15T16:17:05+00:00</updated>
-    <id>http://zalas.eu/</id>
+    <id>//zalas.eu/</id>
         <generator uri="http://sculpin.io/">Sculpin</generator>
             <entry>
             <title type="html"><![CDATA[Static analysis tools for PHP in a single docker image]]></title>
-            <link href="http://zalas.eu/phpqa-static-analysis-tools-for-php-docker-image/"/>
+            <link href="//zalas.eu/phpqa-static-analysis-tools-for-php-docker-image/"/>
             <updated>2017-07-19T15:40:00+00:00</updated>
-            <id>http://zalas.eu/phpqa-static-analysis-tools-for-php-docker-image/</id>
+            <id>//zalas.eu/phpqa-static-analysis-tools-for-php-docker-image/</id>
             <content type="html"><![CDATA[<p>As part of my job I often perform application reviews and code quality analysis for clients who wish to have their
 code base looked at by an independent company. Running static analysis tools is usually a starting point to
 the review as it gives a general overview of a state of the project.
@@ -94,9 +94,9 @@ In such scenarios I simply create a new image based off <code>jakzal/phpqa</code
         </entry>
             <entry>
             <title type="html"><![CDATA[Symfony adoption, a year later]]></title>
-            <link href="http://zalas.eu/symfony-adoption-year-later/"/>
+            <link href="//zalas.eu/symfony-adoption-year-later/"/>
             <updated>2015-04-04T13:18:15+00:00</updated>
-            <id>http://zalas.eu/symfony-adoption-year-later/</id>
+            <id>//zalas.eu/symfony-adoption-year-later/</id>
             <content type="html"><![CDATA[<p>Over a year ago <a href="/symfony2-adoption/">I looked into Symfony2 adoption</a> for the first time.
 By gathering statistics from packages found on <a href="https://packagist.org/">packagist.org</a>,
 I tried to provide a less subjective view of framework's popularity.</p>
@@ -393,9 +393,9 @@ as many projects rely on them being installed globally (especially PHPUnit users
         </entry>
             <entry>
             <title type="html"><![CDATA[Symfony2 adoption]]></title>
-            <link href="http://zalas.eu/symfony2-adoption/"/>
+            <link href="//zalas.eu/symfony2-adoption/"/>
             <updated>2014-02-18T23:57:00+00:00</updated>
-            <id>http://zalas.eu/symfony2-adoption/</id>
+            <id>//zalas.eu/symfony2-adoption/</id>
             <content type="html"><![CDATA[<p>While preparing my talk for the SymfonyCon in Warsaw (<a href="https://speakerdeck.com/jakzal/symfony-components-in-the-wild-symfonycon-2013">Symfony components in the wild</a>),
 I realised it would be nice to show what's the adoption of Symfony components. So I wrote a crawler to
 gather this kind of data from <a href="https://packagist.org/">packagist.org</a> and shared it on the conference. This article presents my findings.</p>
@@ -479,9 +479,9 @@ components that can be leveraged without the rest of the framework.</p>
         </entry>
             <entry>
             <title type="html"><![CDATA[Running Behat in parallel with Selenium grid]]></title>
-            <link href="http://zalas.eu/running-behat-in-parallel-with-selenium-grid/"/>
+            <link href="//zalas.eu/running-behat-in-parallel-with-selenium-grid/"/>
             <updated>2014-01-31T23:59:00+00:00</updated>
-            <id>http://zalas.eu/running-behat-in-parallel-with-selenium-grid/</id>
+            <id>//zalas.eu/running-behat-in-parallel-with-selenium-grid/</id>
             <content type="html"><![CDATA[<p>There are few ways to run Behat tests in parallel, including the following Behat extensions:</p>
 
 <ul>
@@ -568,15 +568,15 @@ default:
         </entry>
             <entry>
             <title type="html"><![CDATA[How to store Doctrine entities outside of a Symfony bundle?]]></title>
-            <link href="http://zalas.eu/how-to-store-doctrine-entities-outside-of-a-symfony-bundle/"/>
+            <link href="//zalas.eu/how-to-store-doctrine-entities-outside-of-a-symfony-bundle/"/>
             <updated>2013-01-26T23:32:17+00:00</updated>
-            <id>http://zalas.eu/how-to-store-doctrine-entities-outside-of-a-symfony-bundle/</id>
+            <id>//zalas.eu/how-to-store-doctrine-entities-outside-of-a-symfony-bundle/</id>
             <content type="html"><![CDATA[<p>The <a href="https://github.com/doctrine/DoctrineBundle">DoctrineBundle</a> and <a href="https://github.com/symfony/symfony/tree/master/src/Symfony/Bridge/Doctrine">Doctrine bridge</a> are the integration layer between the Doctrine ORM and Symfony. One of features they provide is an automatic registration of entity mappings.</p>
 
 <p>As long as we follow conventions, like putting entities into the <em>Entity</em> folder or mappings into the <em>Resources/config/doctrine</em> folder, mappings will be configured for us. In the Symfony Standard Edition this behaviour is enabled by default, thanks to the <a href="http://symfony.com/doc/current/reference/configuration/doctrine.html#configuration-overview">auto mapping</a> configuration option.</p>
 
 <div class="text-center">
-    <a href="http://zalas.eu/uploads/wp/2013/01/entities.png"><img src="/uploads/wp/2013/01/entities.png" title="Entities" alt="Entities" class="img-responsive" /></a>
+    <a href="//zalas.eu/uploads/wp/2013/01/entities.png"><img src="/uploads/wp/2013/01/entities.png" title="Entities" alt="Entities" class="img-responsive" /></a>
 </div>
 
 <p>It's convenient, since we don't have to do much to start working with the ORM.</p>
@@ -634,9 +634,9 @@ default:
         </entry>
             <entry>
             <title type="html"><![CDATA[Symfony Live London 2012, entering the BDD era]]></title>
-            <link href="http://zalas.eu/symfony-live-london-2012/"/>
+            <link href="//zalas.eu/symfony-live-london-2012/"/>
             <updated>2012-09-19T08:35:08+00:00</updated>
-            <id>http://zalas.eu/symfony-live-london-2012/</id>
+            <id>//zalas.eu/symfony-live-london-2012/</id>
             <content type="html"><![CDATA[<div class="pull-left">
     <img src="/uploads/wp/2012/09/sflive-london-2012.png" title="Symfony Live London 2012" alt="Symfony Live London 2012" class="img-responsive" />
 </div>
@@ -703,9 +703,9 @@ default:
         </entry>
             <entry>
             <title type="html"><![CDATA[How to run Behat scenarios and functional tests from a Symfony bundle in isolation of a project?]]></title>
-            <link href="http://zalas.eu/run-behat-scenarios-and-functional-tests-from-symfony-bundle-in-isolation-of-project/"/>
+            <link href="//zalas.eu/run-behat-scenarios-and-functional-tests-from-symfony-bundle-in-isolation-of-project/"/>
             <updated>2012-07-15T14:47:49+00:00</updated>
-            <id>http://zalas.eu/run-behat-scenarios-and-functional-tests-from-symfony-bundle-in-isolation-of-project/</id>
+            <id>//zalas.eu/run-behat-scenarios-and-functional-tests-from-symfony-bundle-in-isolation-of-project/</id>
             <content type="html"><![CDATA[<p>When working on a reusable bundle it's beneficial to run its test suite in isolation of a project. This way the test suite is not dependent on project's configuration or enabled bundles. It is also much easier to run it on a continuos integration server like <a href="http://travis-ci.org/">Travis</a>.</p>
 
 <h2 id="appkernel-and-configuration">AppKernel and configuration</h2>
@@ -933,9 +933,9 @@ after_script:
         </entry>
             <entry>
             <title type="html"><![CDATA[Updating Symfony2 project to Behat 2.4]]></title>
-            <link href="http://zalas.eu/updating-symfony2-project-to-behat-2-4/"/>
+            <link href="//zalas.eu/updating-symfony2-project-to-behat-2-4/"/>
             <updated>2012-06-21T10:39:50+00:00</updated>
-            <id>http://zalas.eu/updating-symfony2-project-to-behat-2-4/</id>
+            <id>//zalas.eu/updating-symfony2-project-to-behat-2-4/</id>
             <content type="html"><![CDATA[<div class="pull-left">
     <img src="/uploads/wp/2012/06/behat-sf-logo.png" title="Behat and Symfony2 logo" alt="Behat and Symfony2 logo" class="img-responsive" />
 </div>
@@ -1181,9 +1181,9 @@ done
         </entry>
             <entry>
             <title type="html"><![CDATA[Mocking Symfony Container services in Behat scenarios with Mockery]]></title>
-            <link href="http://zalas.eu/mocking-symfony-container-services-in-behat-scenarios-with-mockery/"/>
+            <link href="//zalas.eu/mocking-symfony-container-services-in-behat-scenarios-with-mockery/"/>
             <updated>2012-01-13T02:19:37+00:00</updated>
-            <id>http://zalas.eu/mocking-symfony-container-services-in-behat-scenarios-with-mockery/</id>
+            <id>//zalas.eu/mocking-symfony-container-services-in-behat-scenarios-with-mockery/</id>
             <content type="html"><![CDATA[<p>Mocking objects in unit tests is pretty straightforward as every object used in a test case is usually created in a scope of one test class. In functional tests it's a bit harder since we either don't have full control over objects being created or it's simply too laborious to mock half the framework.</p>
 
 <p>Instead of functional tests I'm using <a href="http://behat.org/">Behat</a>. In the context of this blog post it satisfies the same need - <strong>verifies the external behavior</strong> of an application. It also brings similar problems.</p>
@@ -1294,9 +1294,9 @@ $crmClient-&gt;sendLead($form-&gt;getData());
         </entry>
             <entry>
             <title type="html"><![CDATA[Fixing failing Behat scenarios in large suites]]></title>
-            <link href="http://zalas.eu/fixing-failing-behat-scenarios-in-large-suites/"/>
+            <link href="//zalas.eu/fixing-failing-behat-scenarios-in-large-suites/"/>
             <updated>2011-12-28T10:10:33+00:00</updated>
-            <id>http://zalas.eu/fixing-failing-behat-scenarios-in-large-suites/</id>
+            <id>//zalas.eu/fixing-failing-behat-scenarios-in-large-suites/</id>
             <content type="html"><![CDATA[<div class="pull-left">
     <img src="/uploads/wp/2011/12/behat-logo.png" title="Behat Logo" alt="Behat Logo" class="img-responsive" />
 </div>
